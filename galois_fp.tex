@@ -161,7 +161,7 @@ The prime \(q=p\) can never serve: \(\Frob_p\) is an even \(p\)-cycle, equivalen
 \[
 f_p\equiv(x^q-x)^{\lfloor p/q\rfloor}\prod_{k<p\bmod q}(x-k)+1\pmod q,
 \]
-and \(\disc f_p\bmod q\) is the discriminant of this reduction; the symbol is its quadratic character. A search over odd primes \(q<p\) finds a witness \(q\le47\) for every prime \(7\le p<10^5\) (largest witness \(q=47\) at \(p=31511\); \(q=3\) succeeds for \(50.2\%\) of \(9589\) primes, matching the density \(\tfrac12\) of the classes in Proposition~\ref{prop:q3}). For \(p=5\) the only candidate is \(q=3\), and \(\bigl(38569/3\bigr)=+1\), so the certificate has no witness; \(S_5\) is settled instead by the type-\((2,3)\) Frobenius at \(q=19\). For \(p=3\), \(\disc f_3=-23\) is not a square, so \(G=S_3\).\footnote{The complete witness list for \(7\le p<10^5\), the \(p\le97\) discriminant data, the \(q=3\) and \(q=5\) class tables of \S\ref{sec:period}, and the verification programs are included with this note (\texttt{ancillary/} for data, \texttt{tools/} for the checkers, one per computational claim). Each row \((p,q)\) of the witness list is verifiable independently of the search that produced it, by one resultant and one Legendre symbol over \(\F_q\).}
+and \(\disc f_p\bmod q\) is the discriminant of this reduction; the symbol is its quadratic character. A search over odd primes \(q<p\) finds a witness \(q\le47\) for every prime \(7\le p<10^5\) (largest witness \(q=47\) at \(p=31511\); \(q=3\) succeeds for \(50.2\%\) of \(9589\) primes, matching the density \(\tfrac12\) of the classes in Proposition~\ref{prop:q3}). For \(p=5\) the only candidate is \(q=3\), and \(\bigl(38569/3\bigr)=+1\), so the certificate has no witness; \(S_5\) is settled instead by the type-\((2,3)\) Frobenius at \(q=19\). For \(p=3\), \(\disc f_3=-23\) is not a square, so \(G=S_3\).\footnote{The complete witness list for \(7\le p<10^5\), the \(p\le97\) discriminant data, the \(q=3\) and \(q=5\) class tables of \S\ref{sec:period}, the measured \(\varepsilon_q\) for odd \(q\le199\), and the verification programs are included with this note (\texttt{ancillary/} for data, \texttt{tools/} for the checkers, one per computational claim). Each row \((p,q)\) of the witness list is verifiable independently of the search that produced it, by one resultant and one Legendre symbol over \(\F_q\).}
 
 \section{Closed routes}
 
@@ -204,39 +204,44 @@ The arithmetic Morse criterion of \cite[Remark~2, pp.~42--43]{SerreTopics} (at m
 \section{Periodicity of the discriminant}
 \label{sec:period}
 
-The same identity that makes \(\Frob_q\) fixed-point-free computes the Stickelberger symbol at a fixed odd prime \(q<p\). Write \(p=mq+r\) with \(0<r<q\), and set \(g=x^q-x\), \(B_r=(x)_r\). Then \(\varphi\equiv g^m B_r\pmod q\). Differentiating and using \(g'\equiv-1\) gives
+The same identity that makes \(\Frob_q\) fixed-point-free computes the Stickelberger symbol at a fixed odd prime \(q<p\). Write \(p=mq+r\) with \(0<r<q\), and set \(g=x^q-x\), \(B_r=(x)_r\). Then \(\varphi\equiv g^m B_r\pmod q\). Since \(r<q\), the factor \(B_r\) divides \(g\); write \(g=B_r C_r\) with \(C_r=\prod_{a=r}^{q-1}(x-a)\), and set
 \[
-\varphi'\equiv g^{m-1}\psi\pmod q,\qquad\psi=g B_r'-m B_r.
+u_r:=C_r B_r',
 \]
-The polynomial \(\psi\) has degree at most \(q+r-1\le 2q-2\) and depends on \(p\) only through \(r\) and \(m\bmod q\). Multiplicativity of the resultant together with Proposition~\ref{prop:noroots} yields \(\Res(g,f_p)=\prod_{a\in\F_q}f_p(a)=1\), so the factor \(g^{m-1}\) contributes \(1^{m-1}\) and
+a polynomial of degree \(q-1\) depending only on \(r\). (In particular \(u_1=x^{q-1}-1\).) Differentiating and using \(g'\equiv-1\) gives
+\[
+\psi:=g B_r'-m B_r=B_r(u_r-m).
+\]
+The roots of \(B_r\) lie in \(\F_q\), so by Proposition~\ref{prop:noroots} they contribute \(1\) to the resultant. Multiplicativity together with \(\Res(g,f_p)=\prod_{a\in\F_q}f_p(a)=1\) yields
 \begin{equation}
 \label{eq:res}
-\disc f_p\equiv(-1)^{(p-1)/2}\Res(\psi,\,g^m B_r+1)\pmod q.
+\disc f_p\equiv(-1)^{(p-1)/2}\,r^p\prod_{u_r(\beta)=m}\bigl(g(\beta)^m B_r(\beta)+1\bigr)^{\mu_\beta}\pmod q,
 \end{equation}
-The unbounded part of the discriminant has disappeared. What remains is periodic.
+the product over the fibre \(u_r^{-1}(m)\) in an algebraic closure, with multiplicity. (The leading coefficient of \(u_r\) is \(r\), since \(B_r\) is monic of degree \(r<q\).) The unbounded part of the discriminant has disappeared. What remains is periodic, and depends on \(p\) only through \(r\), \(m\bmod q\), and the values \(g(\beta)^m\) at finitely many \(\beta\) of degree at most \(q-1\).
 
 \begin{lemma}[Periodicity]
 \label{lem:period}
 Let \(q\) be an odd prime and
 \[
-\Pi(q)=\mathrm{lcm}\Bigl(4,\,q^2,\,\mathrm{lcm}_{1\le d\le 2q-2}(q^d-1)\Bigr).
+\Pi(q)=\mathrm{lcm}\Bigl(4,\,q^2,\,\mathrm{lcm}_{1\le d\le q-1}(q^d-1)\Bigr).
 \]
 For odd primes \(p,p'>q\), if \(p\equiv p'\pmod{\Pi(q)}\) then \(\disc f_p\equiv\disc f_{p'}\pmod q\), and in particular \(\bigl(\disc f_p/q\bigr)=\bigl(\disc f_{p'}/q\bigr)\).
 \end{lemma}
 
 \begin{proof}
-The right-hand side of~\eqref{eq:res} is defined for any odd integer \(n=mq+r>q\) not divisible by \(q\), via \(f_n=(x)_n+1\). Writing \(\mathrm{lc}(\psi)\) for the leading coefficient of \(\psi\),
-\[
-\Res(\psi,f_n)=\mathrm{lc}(\psi)^n\prod_{\psi(\beta)=0}f_n(\beta)^{m_\beta},
-\]
-the product over roots in an algebraic closure, with multiplicity. The sign \((-1)^{(n-1)/2}\) has period \(4\). The polynomial \(\psi\) itself is determined by \(r\) and \(m\bmod q\), hence by \(n\bmod q^2\); this is the only source of the factor \(q^2\) in \(\Pi(q)\). The power \(\mathrm{lc}(\psi)^n\) depends on \(n\bmod(q-1)\), and \(q-1\) divides the \(d=1\) term of the inner lcm.
+The right-hand side of~\eqref{eq:res} is defined for any odd integer \(n=mq+r>q\) not divisible by \(q\), via \(f_n=(x)_n+1\). The sign \((-1)^{(n-1)/2}\) has period \(4\). The fibre polynomial \(u_r-m\) is determined by \(r\) and \(m\bmod q\), hence by \(n\bmod q^2\); this is the only source of the factor \(q^2\) in \(\Pi(q)\). The power \(r^n\) depends on \(n\bmod(q-1)\), and \(q-1\) divides the \(d=1\) term of the inner lcm.
 
-Each factor \(f_n(\beta)=g(\beta)^m B_r(\beta)+1\) is an evaluation in a field. If \(\beta\in\F_q\) then \(g(\beta)=0\), so \(f_n(\beta)=1\). If \(\beta\notin\F_q\) then \(g(\beta)\ne0\), because every root of \(g\) lies in \(\F_q\), and \(g(\beta)^m\) has period \(\operatorname{ord}\bigl(g(\beta)\bigr)\) dividing \(q^d-1\) where \(d=[\F_q(\beta):\F_q]\le 2q-2\).
+Each factor \(g(\beta)^m B_r(\beta)+1\) is an evaluation in a field. If \(\beta\in\F_q\) then \(g(\beta)=0\), so the factor is \(1\). If \(\beta\notin\F_q\) then \(g(\beta)\ne0\), because every root of \(g\) lies in \(\F_q\), and \(g(\beta)^m\) has period \(\operatorname{ord}\bigl(g(\beta)\bigr)\) dividing \(q^d-1\) where \(d=[\F_q(\beta):\F_q]\le q-1\).
 
 If \(n\equiv n'\pmod{\Pi(q)}\), these data agree. (For the multiplicative orders: \(\gcd(q,q^d-1)=1\), so \(n\equiv n'\) modulo \(q^2\) and modulo \(\mathrm{lcm}_d(q^d-1)\) implies \(m\equiv m'\) modulo that lcm.) Restricting to primes yields the lemma.
 \end{proof}
 
-The bound is not always sharp: \(\Pi(3)=9360\) while the actual period is \(36\), and \(\Pi(5)\) is enormous while the period is \(600=\mathrm{lcm}(4,5^2,5^2-1)\). The inner lcm cannot be dropped in general, because \(\psi\) can have complementary factors of degree greater than \(1\). For \(q=3\) the six polynomials \(\psi\) can be read off by hand, and among odd \(p\) the residue \(\Res(\psi,f_p)\) is constant on each class modulo \(9\).
+\begin{remark}
+\label{rem:d2}
+The quadratic fibres are more rigid. Always \(g(\beta)=\beta^q-\beta\) lies in \(\ker\operatorname{Tr}_{\F_{q^d}/\F_q}\). For \(d=2\) the trace-zero hyperplane coincides with a multiplicative coset: \(\operatorname{Tr}(x)=x+x^q=0\) if and only if \(x^{q-1}=-1\) for \(x\ne0\). Thus if \(\beta\in\F_{q^2}\setminus\F_q\) and \(\gamma=g(\beta)\), then \(\gamma^q=-\gamma\), so \(\gamma^{q-1}=-1\). In particular \(\operatorname{ord}(\gamma)\) divides \(2(q-1)\) and does not divide \(q-1\). (For \(d\ge3\) the trace-zero set is a plain additive hyperplane of size \(q^{d-1}\), with no multiplicative structure, and nothing of this kind carries over.) The factor \(q^2-1\) in \(\Pi(q)\) may therefore be replaced by \(2(q-1)\).
+\end{remark}
+
+The bound is not always sharp: \(\Pi(3)=72\) while the actual period is \(36\). For \(q=3\) the fibres of \(u_1=x^2-1\) and \(u_2=2(x+1)^2\) can be read off by hand, and among odd \(p\) the value \(\Res(\psi,f_p)\) is constant on each class modulo \(9\).
 
 \begin{proposition}
 \label{prop:q3}
@@ -247,7 +252,7 @@ p\equiv 7,13,17,19,23,29\pmod{36}.
 \end{proposition}
 
 \begin{proof}
-Write \(p=3m+r\) with \(r\in\{1,2\}\) and \(g=x^3-x\). The six values of \(\psi\) as \(r\in\{1,2\}\) and \(m\bmod 3\) are as follows. In each case \(\Res(\psi,f_p)\) is a constant \(R\in\{1,2\}\) on odd \(p\), recorded with the corresponding class \(p\bmod 9\).
+Write \(p=3m+r\) with \(r\in\{1,2\}\) and \(g=x^3-x\). These are the fibres of \(u_1=x^2-1\) and \(u_2=2(x+1)^2\). The six values of \(\psi=B_r(u_r-m)\) as \(r\in\{1,2\}\) and \(m\bmod 3\) are as follows. In each case \(\Res(\psi,f_p)\) is a constant \(R\in\{1,2\}\) on odd \(p\), recorded with the corresponding class \(p\bmod 9\).
 
 \textit{\(r=1\).} Here \(B_1=x\), so \(\psi=g-mx=x\bigl(x^2-(m+1)\bigr)\).
 \begin{itemize}
@@ -282,7 +287,11 @@ There are infinitely many primes \(p\) with \(\Gal(f_p/\Q)=S_p\).
 
 This theorem is computer-free: it uses only Theorem~\ref{thm:cert} with Lemma~\ref{lem:contain} (the two finite checks in that proof are hand-verifiable), Proposition~\ref{prop:q3}, and Dirichlet's theorem.
 
-Each further prime \(q\) contributes its own periodic good set. For \(q=5\), an inspection of the twenty polynomials \(\psi\) shows that the part coprime to \(g\) has degree \(0\), \(2\), or \(4\), so Lemma~\ref{lem:period} applies with the inner lcm restricted to \(d\in\{1,2,4\}\) and yields period dividing \(15600=\mathrm{lcm}(4,5^2,5^4-1)\). Evaluating~\eqref{eq:res} at one representative of each odd class modulo \(15600\) shows that the period divides \(600\), and no proper even divisor of \(600\) works. Among the \(160\) units of \(\Z/600\Z\), \(88\) have symbol \(-1\). Combining with Proposition~\ref{prop:q3}: of the \(480\) units of \(\Z/1800\Z\), \(372=240+264-132\) are good for \(q=3\) or \(q=5\) — the six classes modulo \(36\) lift to \(240\) units modulo \(1800\), the \(88\) classes modulo \(600\) lift to \(264\), and the intersection has \(132\) units. As \(132=480\cdot\tfrac12\cdot\tfrac{11}{20}\), the two good sets are exactly independent on the units modulo \(1800\), which is not automatic since \(\gcd(36,600)=12\).
+Each further prime \(q\) contributes its own periodic good set, of some Dirichlet density \(\varepsilon_q\). The first three values are exact:
+\[
+\varepsilon_3=\tfrac12,\qquad\varepsilon_5=\tfrac{11}{20},\qquad\varepsilon_7=\tfrac{323}{648}.
+\]
+(The last is \(18088\) of the \(36288\) units modulo \(134064\).) For \(q=5\), an inspection of the twenty fibres of \(u_r\) shows that the part coprime to \(g\) has degree \(0\), \(2\), or \(4\). Lemma~\ref{lem:period} with \(d\le4\), using Remark~\ref{rem:d2} for \(d=2\), yields period dividing \(15600=\mathrm{lcm}(4,5^2,5^4-1)\). Evaluating~\eqref{eq:res} at one representative of each odd class modulo \(15600\) shows that the period divides \(600\), and no proper even divisor of \(600\) works. Among the \(160\) units of \(\Z/600\Z\), \(88\) have symbol \(-1\), hence \(\varepsilon_5=\tfrac{11}{20}\). Combining with Proposition~\ref{prop:q3}: of the \(480\) units of \(\Z/1800\Z\), \(372=240+264-132\) are good for \(q=3\) or \(q=5\) — the six classes modulo \(36\) lift to \(240\) units modulo \(1800\), the \(88\) classes modulo \(600\) lift to \(264\), and the intersection has \(132\) units. As \(132=480\cdot\tfrac12\cdot\tfrac{11}{20}\), the two good sets are exactly independent on the units modulo \(1800\), which is not automatic since \(\gcd(36,600)=12\).
 
 \begin{theorem}
 \label{thm:dens}
@@ -299,9 +308,11 @@ Write \(\disc f_p=(-1)^{(p-1)/2}\Res(\varphi',\varphi+1)\). Reducing modulo \(p\
 \]
 always a quadratic residue, as forced by the even \(p\)-cycle \(\Frob_p\). This is a consistency check, not a constraint on witnesses \(q<p\).
 
-The identification \(\Gal(f_p/\Q)=S_p\) for every odd prime \(p\) is now a covering question. A finite list of \(q\) would finish all large \(p\), but the data already refutes covering by \(q\le43\): the prime \(p=31511\equiv11\pmod{36}\) has least witness \(47\). The least witness appears unbounded, so all-\(p\) is unlikely to fall to a fixed finite set of congruences. What remains is to show that no prime survives in the (explicit, shrinking) bad classes at every level \(q<p\).
+The identification \(\Gal(f_p/\Q)=S_p\) for every odd prime \(p\) is a covering question, of two different kinds. For a \emph{fixed} finite set of \(q\), periodicity plus Dirichlet makes the covered set a union of arithmetic progressions, of density \(1-\prod(1-\varepsilon_q)\) if the symbols were independent. A finite list cannot cover every prime: the data already refutes covering by \(q\le43\), since \(p=31511\equiv11\pmod{36}\) has least witness \(47\). The least witness appears unbounded, so all-\(p\) is unlikely to fall to a fixed finite set of congruences.
 
-Two features make this sharper than asking for the square class of an unstructured discriminant. The good sets are explicit congruence classes, computed once per \(q\). (The \(q=3\) symmetry \(p\mapsto-p\) already fails for \(q=5\), so there is no functional equation of that form across \(q\).) Any analytic argument that \(\disc f_p\) is a nonresidue at some \(q<p\) need only treat primes in the complementary classes \(1,5,11,25,31,35\pmod{36}\), a density-\(\tfrac12\) family, rather than all \(p\). (The cases \(p=3,5\) are settled by other witnesses, as above.) The covering, and the identification for every \(p\), have been verified for all odd primes \(p<10^5\).
+Density \(1\) is a class-density statement: \(\prod_{q\le Q}(1-\varepsilon_q)\to0\) as \(Q\to\infty\) if and only if \(\sum\varepsilon_q=\infty\), and for each fixed \(Q\) this is rigorous given periodicity and Dirichlet. The three exact values above, and the proportion of primes \(p<10^5\) with \(\bigl(\disc f_p/q\bigr)=-1\) for each odd \(q\le199\), are consistent with \(\varepsilon_q=\tfrac12\) except for the isolated \(\varepsilon_5=\tfrac{11}{20}\). That is far more than \(\varepsilon_q\gg1/q\). What is missing for density \(1\) is a uniform lower bound \(\varepsilon_q\ge c>0\) on these exact rationals. (Remark~\ref{rem:d2} shows that a character-sum bound over \(\langle g(\beta)\rangle\) cannot supply it: already for \(d=2\) one has \(\lvert\langle\gamma\rangle\rvert\le 2(q-1)\), which is not large in \(\F_{q^2}\).) Density \(1\) does not imply that every prime is covered. For a given \(p\) the available witnesses are the \(q<p\), so \(Q\sim p\) and the modulus \(\Pi\) up to that \(Q\) is far larger than \(p\); equidistribution modulo that \(\Pi\) has no bearing on whether that particular \(p\) sits in a bad class.
+
+The good sets are explicit congruence classes, computed once per \(q\). (The \(q=3\) symmetry \(p\mapsto-p\) already fails for \(q=5\), so there is no functional equation of that form across \(q\).) Any analytic argument that \(\disc f_p\) is a nonresidue at some \(q<p\) need only treat primes in the complementary classes \(1,5,11,25,31,35\pmod{36}\), a density-\(\tfrac12\) family, rather than all \(p\). (The cases \(p=3,5\) are settled by other witnesses, as above.) The covering, and the identification for every \(p\), have been verified for all odd primes \(p<10^5\).
 
 \begin{thebibliography}{11}
 \bibitem{ConradSign}

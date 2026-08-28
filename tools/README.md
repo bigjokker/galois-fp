@@ -12,6 +12,13 @@ on success. Data files live in `../ancillary/`.
 | `verify_classes.py` | §6: q = 3 period 36 with good units {7,13,17,19,23,29} (Proposition); q = 5 — coprime-to-g degrees of the twenty ψ lie in {0,2,4}, period 600 and its minimality, 88 good units of 160; lifts mod 1800: 240 + 264 − 132 = 372 of 480 (densities 1/2 and 31/40). | ≈ 5 s; `--full` runs the complete 15600-class certification quoted in the note (≈ 1 min) |
 | `verify_group_facts.py` | Lemma 3 + Lemma (PGL₂(11)): irreducible counts over F₂ of degree 1,2,4,8 (parities for the Fermat sign); sign of x→x² on P¹(F_{2^e}), e = 2,4,8,16; PGL₂(11) has 1320 elements, no F₂₀, involution centralizers ≤ 24. | seconds |
 | `verify_disc_p97.py` | §5: disc f_p is exactly computed (CRT) and non-square for every odd p ≤ 97; every ramified ℓ ≤ 10⁶ has v_ℓ = 1 and gcd(f_p, f_p′) of degree 1 mod ℓ; complete factorisations for p ≤ 7. Reproduces `ancillary/disc_data_p97.txt`. | ≈ 1 min |
+| `verify_periodicity.py` | §6: `psi = B_r(u_r - m)` with `deg u_r = q-1`, leading coefficient `r`, `u_1 = x^(q-1)-1`; the quadratic-fibre remark `gamma^(q-1) = -1` (1050 fibres, all odd `q <= 29`); the period bounds `Pi(3) = 72` and `Pi(5) = 15600`; and the exact density `eps_7 = 18088/36288 = 323/648`. | ~2 min |
+| `sweep_eps.py` | §6/§7: `eps_q`, the proportion of primes `p < 10^5` with `(disc f_p / q) = -1`, for odd `q <= 199` — the data in `ancillary/sweep_results.txt`. `--check` re-verifies the stored table; `--full` regenerates it. | ~1 min; `--full` ~18 min |
+
+`reduced.py` implements the Section 6 evaluation of the symbol via
+`Res(u_r - m, f_p)`, at cost `O(q^2 log p)` instead of the `O(p^2)` of a
+direct resultant; it is validated against `fpcore.symbol` inside the tools
+that use it.
 
 `fpcore.py` is the shared library: polynomial arithmetic over F_q, the
 closed-form reduction f_p ≡ (x^q−x)^⌊p/q⌋ · ∏_{k<p mod q}(x−k) + 1, the

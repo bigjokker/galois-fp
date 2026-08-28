@@ -45,6 +45,8 @@ python verify_group_facts.py          # finite group facts        (seconds)
 python verify_disc_p97.py             # discriminants, p ≤ 97     (~15 s)
 python verify_classes.py              # periodicity, q = 3 and 5  (seconds)
 python verify_classes.py --full       # full 15600-class check    (~1 min)
+python verify_periodicity.py          # section 6 structure       (~2 min)
+python sweep_eps.py --check           # stored eps_q table        (~30 s)
 python verify_witnesses.py            # witness sample            (seconds)
 python verify_witnesses.py --all      # all 9,590 rows            (~6 min)
 ```
