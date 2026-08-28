@@ -1,0 +1,37 @@
+p=  3 disc:     2 digits square=False  ramified<=1e6: [l=23(v=1,deg_gcd=1)]  cofactor=1  (0.0s)
+p=  5 disc:     5 digits square=False  ramified<=1e6: [l=38569(v=1,deg_gcd=1)]  cofactor=1  (0.0s)
+p=  7 disc:    15 digits square=False  ramified<=1e6: [l=17(v=1,deg_gcd=1), l=3457(v=1,deg_gcd=1), l=15601(v=1,deg_gcd=1), l=669577(v=1,deg_gcd=1)]  cofactor=1  (0.0s)
+p= 11 disc:    56 digits square=False  ramified<=1e6: [l=137(v=1,deg_gcd=1)]  cofactor=C54  (0.0s)
+p= 13 disc:    89 digits square=False  ramified<=1e6: [l=139409(v=1,deg_gcd=1)]  cofactor=C84  (0.0s)
+p= 17 disc:   181 digits square=False  ramified<=1e6: [l=2617(v=1,deg_gcd=1)]  cofactor=C178  (0.0s)
+p= 19 disc:   242 digits square=False  ramified<=1e6: [l=83(v=1,deg_gcd=1), l=7699(v=1,deg_gcd=1)]  cofactor=C236  (0.0s)
+p= 23 disc:   394 digits square=False  ramified<=1e6: [none visible]  cofactor=C394  (0.1s)
+p= 29 disc:   705 digits square=False  ramified<=1e6: [l=97(v=1,deg_gcd=1), l=5309(v=1,deg_gcd=1), l=38711(v=1,deg_gcd=1)]  cofactor=C695  (0.1s)
+p= 31 disc:   832 digits square=False  ramified<=1e6: [none visible]  cofactor=C832  (0.1s)
+p= 37 disc:  1285 digits square=False  ramified<=1e6: [l=397(v=1,deg_gcd=1), l=2803(v=1,deg_gcd=1), l=114221(v=1,deg_gcd=1)]  cofactor=C1274  (0.2s)
+p= 41 disc:  1649 digits square=False  ramified<=1e6: [none visible]  cofactor=C1649  (0.2s)
+p= 43 disc:  1850 digits square=False  ramified<=1e6: [none visible]  cofactor=C1850  (0.3s)
+p= 47 disc:  2292 digits square=False  ramified<=1e6: [l=797(v=1,deg_gcd=1)]  cofactor=C2289  (0.3s)
+p= 53 disc:  3056 digits square=False  ramified<=1e6: [l=62233(v=1,deg_gcd=1), l=443869(v=1,deg_gcd=1)]  cofactor=C3046  (0.5s)
+p= 59 disc:  3944 digits square=False  ramified<=1e6: [l=577(v=1,deg_gcd=1), l=27481(v=1,deg_gcd=1), l=72341(v=1,deg_gcd=1), l=388237(v=1,deg_gcd=1), l=738379(v=1,deg_gcd=1)]  cofactor=C3920  (0.6s)
+p= 61 disc:  4268 digits square=False  ramified<=1e6: [l=200437(v=1,deg_gcd=1)]  cofactor=C4263  (0.7s)
+p= 67 disc:  5326 digits square=False  ramified<=1e6: [none visible]  cofactor=C5326  (0.9s)
+p= 71 disc:  6105 digits square=False  ramified<=1e6: [l=4993(v=1,deg_gcd=1)]  cofactor=C6101  (1.1s)
+p= 73 disc:  6516 digits square=False  ramified<=1e6: [l=1321(v=1,deg_gcd=1)]  cofactor=C6513  (1.2s)
+p= 79 disc:  7841 digits square=False  ramified<=1e6: [l=5009(v=1,deg_gcd=1)]  cofactor=C7837  (1.5s)
+p= 83 disc:  8799 digits square=False  ramified<=1e6: [l=419(v=1,deg_gcd=1), l=3517(v=1,deg_gcd=1)]  cofactor=C8793  (1.8s)
+p= 89 disc: 10352 digits square=False  ramified<=1e6: [none visible]  cofactor=C10352  (2.3s)
+p= 97 disc: 12642 digits square=False  ramified<=1e6: [l=84967(v=1,deg_gcd=1)]  cofactor=C12637  (3.0s)
+
+max deg gcd(f_p, f_p') mod ell over all visible ramified ell: 1
+violations of 'deg <= 1' among visible ell: NONE
+p=3: 1 of 3 roots real
+p=5: 5 of 5 roots real
+p=7: 7 of 7 roots real
+p=11: 11 of 11 roots real
+p=13: 13 of 13 roots real
+p=17: 17 of 17 roots real
+p=19: 19 of 19 roots real
+p=23: 23 of 23 roots real
+
+[exited with code 0]
