@@ -8,6 +8,7 @@
 \newcommand{\PGammaL}{\mathrm{P}\Gamma\mathrm{L}}
 \newcommand{\AGL}{\mathrm{AGL}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Gal}{\mathrm{Gal}}
@@ -36,7 +37,9 @@ Let \(p\) be an odd prime and \(f_p(x)=x(x-1)\cdots(x-p+1)+1\).
 We prove a general certificate: a monic irreducible of prime degree \(p\) whose Frobenius at an odd unramified prime \(q\) is both odd (Stickelberger) and fixed-point-free has Galois group \(S_p\).
 The group-theoretic input is that every transitive nonsolvable subgroup of \(S_p\) is \(S_p\) or lies in \(A_p\) (CFSG only through Guralnick).
 For \(f_p\) the fixed-point-free condition is automatic at every \(q\le p\), so a single Kronecker symbol \(\bigl(\disc f_p/q\bigr)=-1\) with \(q<p\) yields \(\Gal(f_p/\Q)=S_p\).
-This verifies the identification for every odd prime \(p<10^5\), and for all primes in six residue classes modulo \(36\) (Dirichlet density \(\tfrac12\)).
+This verifies the identification for every odd prime \(p<10^7\), and for all primes in six residue classes modulo \(36\) (Dirichlet density \(\tfrac12\)).
+A second certificate uses no classification at all: if \(f\bmod q\) has an isolated irreducible factor of prime degree \(\ell\in[3,p-3]\) and \(\Frob_q\) is odd, then Dedekind and Jordan alone give \(S_p\). A witness \(q\le61\) exists for every prime \(p<1500\).
+For the two-parameter family \((x)_p+c\) both certificates persist, and a critical-window theorem identifies \(S_p\) for every \(p\) and every \(c\) with \(\mu_{m-1}<\lvert c\rvert<\mu_{m-2}\), by complex conjugation alone; \(c=1\) is the hard case precisely because it lies below every critical magnitude.
 The polynomial is totally real for \(p\ge5\), so conjugation is not a transposition; Newton polygons are flat; \(\varphi\) is Morse in the sense of Serre and \(\Gal(\varphi-t/\Q(t))=S_p\).
 The remaining obstruction to a proof for every \(p\) is whether the periodic good classes of \(\bigl(\disc f_p/q\bigr)\), as \(q\) varies, cover every prime.
 \end{abstract}
@@ -51,6 +54,8 @@ f_p(x)=\varphi(x)+1\in\Z[x].
 \]
 Reduction modulo \(p\) gives \(f_p\equiv x^p-x+1\pmod p\), which is irreducible over \(\F_p\) (Artin--Schreier). Hence \(f_p\) is irreducible over \(\Q\), and \(G=\Gal(f_p/\Q)\le S_p\) is transitive of prime degree.
 
+The polynomial belongs to the family raised by Schur in 1908 \cite{Schur1908}: is \((x-a_1)\cdots(x-a_n)\pm1\) irreducible for distinct integers \(a_i\)? Westlund and Fl\"ugel answered it the following year \cite{Westlund}: the \(-1\) form is always irreducible, and the \(+1\) form is irreducible unless it is, after a translation, \(x(x-2)+1\) or \(x(x-1)(x-2)(x-3)+1\). For the consecutive family this says that \((x)_n+1\) is irreducible for every \(n\ne4\); see \cite{GyoryHajduTijdeman} for a modern account and the later generalisations. Irreducibility is therefore classical in every degree, and the Artin--Schreier argument above is quoted only to keep the prime-degree case self-contained. What is at issue here is the Galois group.
+
 \begin{proposition}
 \label{prop:noroots}
 If \(q\le p\) is prime and \(a\in\F_q\), then \(f_p(a)=1\). In particular \(f_p\) has no root in \(\F_q\).
@@ -63,6 +68,7 @@ The \(p\ge q\) consecutive factors of \(\varphi(a)\) cover every residue in \(\F
 Thus \(\Frob_q\), for any prime \(q\le p\) not dividing \(\disc f_p\), is fixed-point-free (Dedekind). At \(q=p\) the reduction \(f_p\bmod p\) is irreducible, hence separable, so \(p\nmid\disc f_p\), and \(\Frob_p\) is a \(p\)-cycle.
 
 \section{A general certificate}
+\label{sec:cert}
 
 \begin{theorem}
 \label{thm:cert}
@@ -86,6 +92,18 @@ Equivalently, the only transitive subgroups of \(S_p\) containing an odd permuta
 \begin{proof}[Proof of Theorem~\ref{thm:cert}, given Lemma~\ref{lem:contain}]
 Let \(G=\Gal(f/\Q)\le S_p\), transitive, and \(\sigma=\Frob_q\). By Dedekind, \(\sigma\) has no fixed point; by Stickelberger, \(\sigma\) is odd. If \(G\) were solvable, Galois's theorem would embed it in \(\AGL(1,p)=\{x\mapsto ax+b\}\). An affine map with \(a\ne1\) fixes \(b/(1-a)\), so the only fixed-point-free non-identity elements are translations, i.e.\ \(p\)-cycles, which are even (\(p\) odd). This contradicts \(\sigma\). Thus \(G\) is nonsolvable, so Lemma~\ref{lem:contain} gives \(G=S_p\) or \(G\le A_p\); oddness of \(\sigma\) excludes the latter.
 \end{proof}
+
+\begin{remark}[Hypothesis (1) can be weakened]
+\label{rem:weaken}
+Only the fixed-point \emph{count} matters, and only through its being \(\ne1\). A non-identity element \(x\mapsto ax+b\) of \(\AGL(1,p)\) with \(a\ne1\) of order \(d\) has type \((1,d^{(p-1)/d})\) and sign \((-1)^{(d-1)(p-1)/d}\), so it is odd exactly when \(d\) is even and \((p-1)/d\) is odd --- and then it fixes exactly one point.
+
+For the certificate one needs less than this. The elements with \(a=1\) are the translations, whose order divides \(p\) and is therefore \(1\) or \(p\); both are odd, so a translation is an even permutation, no sign formula required. Hence an odd element must have \(a\ne1\), and then it fixes exactly the point \(b/(1-a)\). So every odd element of \(\AGL(1,p)\) has precisely one fixed point, and hypothesis (1) of Theorem~\ref{thm:cert} may be replaced by: \emph{\(f\) has a number of roots in \(\F_q\) different from \(1\).} For a polynomial with Galois group \(S_p\) this raises the density of usable \(q\) from \(\approx e^{-1}\) to \(\approx1-e^{-1}\). It changes nothing for \(f_p\), where Proposition~\ref{prop:noroots} already gives zero roots at every \(q\le p\).
+\end{remark}
+
+\begin{remark}[Prime degree is essential]
+\label{rem:composite}
+Not merely convenient: \(C_4=\langle(1234)\rangle\le S_4\) is transitive and its generator is an odd derangement, so the conclusion of Theorem~\ref{thm:cert} fails at the first composite degree. The proof uses primality twice --- Galois's theorem for the solvable case, and Burnside's for the rest --- and both fail for composite \(n\). By Westlund--Fl\"ugel the polynomials \((x)_n+1\) are irreducible for every \(n\ne4\), so irreducibility is no longer the obstacle to a composite-degree statement; transitivity is not enough, and primitivity would have to be established separately.
+\end{remark}
 
 \begin{remark}[Sharpness]
 Neither hypothesis on \(\sigma\) can be dropped. A primitive root in \(\AGL(1,p)\) gives type \((1,p-1)\), sign \((-1)^{p-2}=-1\); translations are fixed-point-free and even. Likewise \(A_p\) contains \(p\)-cycles. Only the conjunction ``odd and fixed-point-free'' is impossible outside \(S_p\).
@@ -144,6 +162,11 @@ Thus \(n_1=1\) and \(n_2=3\) are odd, while \(n_i\) is even for \(i\ge3\). For \
 In all cases \(G=S_p\) or \(G\le A_p\).
 \end{proof}
 
+\begin{remark}[Which \(p\) need the classification at all]
+\label{rem:projprime}
+Case (2) of the proof occurs only when \(p=(q_0^d-1)/(q_0-1)\) for some prime power \(q_0\) and prime \(d\) --- a \emph{projective prime} in the terminology of Jones and Zvonkin \cite{JonesZvonkin}, who observe that the classification of transitive groups of prime degree is complete except for the open question of which integers of this shape are prime, and give evidence that infinitely many are. If \(p\) is not a projective prime and \(p\notin\{11,23\}\), the only transitive subgroups of \(S_p\) are the subgroups of \(\AGL(1,p)\), \(A_p\) and \(S_p\). For such \(p\), Lemma~\ref{lem:contain} needs only Burnside and the affine cycle-type computation, and neither Guralnick nor Lemma~\ref{lem:pgl11} is used. The projective primes below \(100\) are \(3,5,7,13,17,31\) and \(73\) (those with \(d=2\) are exactly the Fermat primes, as in the proof above); together with \(11\) and \(23\) they are the only \(p<100\) for which the classification is invoked.
+\end{remark}
+
 CFSG enters only through Guralnick's theorem. The facts \(\Out(M_{11})=\Out(M_{23})=1\) and non-conjugacy of the two parabolic classes for \(d\ge3\) are in \cite{WilsonFSG}; maximality of \(A_5\) in \(\PSL_2(11)\) is in Dickson's list \cite[Hauptsatz~II.8.27]{Huppert}. The involution-centralizer bound and the absence of \(F_{20}\) in \(\PGL_2(11)\), and the signs of \(\varphi_2\) on \(\mathbb P^1(\F_{2^e})\) for \(e=2,4,8,16\), are finite checks. (If an order-\(4\) element conjugated an element of order \(5\) to its cube, its inverse would conjugate it to its square, so testing \(bab^{-1}=a^2\) over all order-\(4\) elements covers both generators of \(\Aut(C_5)\).)
 
 \section{The certificate for \(f_p\)}
@@ -161,9 +184,52 @@ The prime \(q=p\) can never serve: \(\Frob_p\) is an even \(p\)-cycle, equivalen
 \[
 f_p\equiv(x^q-x)^{\lfloor p/q\rfloor}\prod_{k<p\bmod q}(x-k)+1\pmod q,
 \]
-and \(\disc f_p\bmod q\) is the discriminant of this reduction; the symbol is its quadratic character. A search over odd primes \(q<p\) finds a witness \(q\le47\) for every prime \(7\le p<10^5\) (largest witness \(q=47\) at \(p=31511\); \(q=3\) succeeds for \(50.2\%\) of \(9589\) primes, matching the density \(\tfrac12\) of the classes in Proposition~\ref{prop:q3}). For \(p=5\) the only candidate is \(q=3\), and \(\bigl(38569/3\bigr)=+1\), so the certificate has no witness; \(S_5\) is settled instead by the type-\((2,3)\) Frobenius at \(q=19\). For \(p=3\), \(\disc f_3=-23\) is not a square, so \(G=S_3\).\footnote{The complete witness list for \(7\le p<10^5\), the \(p\le97\) discriminant data, the \(q=3\) and \(q=5\) class tables of \S\ref{sec:period}, the measured \(\varepsilon_q\) for odd \(q\le199\), and the verification programs are included with this note (\texttt{ancillary/} for data, \texttt{tools/} for the checkers, one per computational claim). Each row \((p,q)\) of the witness list is verifiable independently of the search that produced it, by one resultant and one Legendre symbol over \(\F_q\).}
+and \(\disc f_p\bmod q\) is the discriminant of this reduction; the symbol is its quadratic character. A search over odd primes \(q<p\) finds a witness \(q\le73\) for every prime \(7\le p<10^7\) (largest witness \(q=73\) at \(p=9683099\); \(q=3\) succeeds for \(50.003\%\) of the \(664577\) primes, matching the density \(\tfrac12\) of the classes in Proposition~\ref{prop:q3} to five significant figures). For \(p=5\) the only candidate is \(q=3\), and \(\bigl(38569/3\bigr)=+1\), so the certificate has no witness; \(S_5\) is settled instead by the type-\((2,3)\) Frobenius at \(q=19\). For \(p=3\), \(\disc f_3=-23\) is not a square, so \(G=S_3\).\footnote{The complete witness list for \(7\le p<10^7\), the \(p\le97\) discriminant data, the \(q=3\) and \(q=5\) class tables of \S\ref{sec:period}, the measured \(\varepsilon_q\) for odd \(q\le199\), and the verification programs are included with this note (\texttt{ancillary/} for data, \texttt{tools/} for the checkers, one per computational claim). Each row \((p,q)\) of the witness list is verifiable independently of the search that produced it, by one resultant and one Legendre symbol over \(\F_q\).}
+
+\section{A CFSG-free certificate}
+\label{sec:jordan}
+
+Theorem~\ref{thm:cert} buys its conclusion with Guralnick's theorem. For \(f_p\) there is a second, entirely classical certificate, which uses no classification at all. It is the standard Jordan--Dedekind test of computational Galois theory \cite{Unger,JonesCycle,Hulpke}; what is new here is only that it fires for this family, and that recording the witness makes the identification independent of \S\ref{sec:period} and of CFSG.
+
+\begin{theorem}
+\label{thm:jordan}
+Let \(f\in\Z[x]\) be monic irreducible of prime degree \(p\ge7\), and let \(q\) be a prime such that \(f\bmod q\) is separable, with irreducible factors of degrees \(\ell_1,\dots,\ell_k\). Suppose
+\begin{enumerate}
+\item some \emph{prime} \(\ell\in[3,p-3]\) occurs exactly once among the \(\ell_i\) and is coprime to every other \(\ell_j\), and
+\item \(p-k\) is odd.
+\end{enumerate}
+Then \(\Gal(f/\Q)=S_p\).
+\end{theorem}
+
+\begin{lemma}[Isolation; {\cite[Comments 1]{JonesCycle}}]
+\label{lem:isolate}
+Let \(\sigma\) have cycle type \((\ell_1,\dots,\ell_k)\) and suppose \(\ell=\ell_i\) is coprime to \(N=\mathrm{lcm}_{j\ne i}\ell_j\). Then \(\sigma^{N}\) is an \(\ell\)-cycle.
+\end{lemma}
+
+\begin{proof}
+Raising to the power \(N\) kills every cycle of length \(\ell_j\), \(j\ne i\). On the remaining cycle, \(\gcd(\ell,N)=1\), so \(\sigma^N\) restricts to a generator of that cycle's cyclic group; it is an \(\ell\)-cycle with \(p-\ell\) fixed points.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:jordan}]
+Let \(G=\Gal(f/\Q)\le S_p\), transitive because \(f\) is irreducible, hence primitive: a block system has blocks of size dividing \(p\). Separability of \(f\bmod q\) gives \(q\nmid\disc f\), so \(q\) does not divide the index \([\mathcal O_K:\Z[\alpha]]\) and Dedekind's theorem \cite{ConradFactor} applies: \(\sigma=\Frob_q\) has cycle type \((\ell_1,\dots,\ell_k)\). By Lemma~\ref{lem:isolate}, \(\sigma^N\) is an \(\ell\)-cycle with \(\ell\) prime and \(3\le\ell\le p-3\), so Jordan's theorem \cite[Thm.~13.9]{Wielandt} gives \(A_p\le G\). Finally \(\sgn\sigma=\prod_i(-1)^{\ell_i-1}=(-1)^{p-k}=-1\), so \(G\not\le A_p\) and \(G=S_p\).
+\end{proof}
+
+The two certificates are complementary, and they use disjoint hypotheses on \(\Frob_q\). Theorem~\ref{thm:cert} needs \(\sigma\) to have no fixed point, which for \(f_p\) is automatic at every \(q\le p\) but says nothing about the rest of the cycle type; Theorem~\ref{thm:jordan} needs an isolated cycle of prime length \(\le p-3\), a condition on the cycle type that is unrelated to the fixed-point count, and the two are met together only by accident. Both require \(\sigma\) odd, and neither can be replaced by the other.
+
+\begin{remark}[Affine types never certify]
+\label{rem:affine-jordan}
+A non-identity element of \(\AGL(1,p)\) is a \(p\)-cycle or has type \((1,d^{(p-1)/d})\) with \(d=\mathrm{ord}(a)>1\). In the first case \(\ell=p>p-3\); in the second, a cycle of length \(d\) is isolated only if \((p-1)/d=1\), i.e.\ \(d=p-1\), which is even and exceeds \(p-3\). So no affine element satisfies hypothesis (1), consistently with Jordan's theorem.
+\end{remark}
+
+\begin{remark}[Why this does not settle every \(p\)]
+\label{rem:jordan-open}
+Whether a witness exists for every \(p\) is the same kind of question as the covering problem of \S\ref{sec:open}, and it is circular in the same way: Chebotarev predicts the density of good \(q\) only once \(G\) is known. What can be said is that the prediction is favourable. By Unger \cite[Thm.~5]{Unger}, the proportion of elements of \(S_n\) that do not power to a cycle of prime length is \(O(\log\log n/\log n)\); so if \(G=S_p\), the density of usable \(q\) tends to \(1\), against the density \(\varepsilon_q\approx\tfrac12\) per prime available to Corollary~\ref{cor:fp}. Per prime tried, the Jordan test is the better instrument, and provably so.
+\end{remark}
+
+Hypothesis (1) is checked by a distinct-degree factorisation of \(f_p\bmod q\), which returns the multiset \(\{\ell_i\}\) without producing the factors. For every prime \(7\le p<1500\) a witness exists with \(q\le61\); the largest least-witness is \(q=61\), attained at \(p=1301\), and \(q=3\) already succeeds for \(80\) of the \(236\) primes in the range, \(q\le7\) for \(169\) of them. The witnesses are listed in \texttt{ancillary/jordan\_witnesses.txt}, one row \((p,q,\ell,\{\ell_i\})\) per prime, and each row is re-derived from \((p,q)\) alone by \texttt{tools/verify\_jordan.py}. For those \(p\), the identification \(\Gal(f_p/\Q)=S_p\) rests on Dedekind and Jordan alone.
 
 \section{Closed routes}
+\label{sec:closed}
 
 \begin{proposition}[Totally real]
 \label{prop:real}
@@ -197,9 +263,97 @@ Write \(\mu_k=\max_{(k,k+1)}|\varphi|\) and \(m=(p-1)/2\). For \(x\in(k,k+1)\) o
 
 (The specialisation \(t=-1\) can still be exceptional: \((x)_4+1=(x^2-3x+1)^2\). Hilbert irreducibility of the family does not decide this single value.)
 
-Newton polygons of \(f_p\) are flat: \(f_p(0)=\cdots=f_p(p-1)=1\). The same holds for every translate \(f_p(x+a)\) with \(0\le a<p\), which is what excludes the method. Hilbert--Grunwald and effective HIT prescribe or bound \emph{some} specialisation of \(\varphi-t\), never the fixed \(t=-1\).
+Newton polygons of \(f_p\) are flat: \(f_p(0)=\cdots=f_p(p-1)=1\). The same holds for every translate \(f_p(x+a)\) with \(0\le a<p\), which is what excludes the method. Flatness is precisely the obstruction to the Coleman--Hajir criterion \cite{Hajir}, which reads a cycle of prime-power length off a Newton slope and then applies Jordan's theorem; that is how the Galois groups of the generalized Laguerre polynomials are shown to contain \(A_n\). Theorem~\ref{thm:jordan} reaches the same conclusion for \(f_p\) by reading cycle types off Dedekind instead. Hilbert--Grunwald and effective HIT prescribe or bound \emph{some} specialisation of \(\varphi-t\), never the fixed \(t=-1\).
 
 The arithmetic Morse criterion of \cite[Remark~2, pp.~42--43]{SerreTopics} (at most one double root modulo every prime; inertia generates \(\Gal\) by Minkowski; the worked example \(x^n-x-1\), following Nart--Vila \cite{NartVila} and Osada \cite{Osada}) applies to \(f_p\) itself once \(\disc f_p\) is squarefree. Direct factorisation gives this for \(p\le7\); already at \(p=97\) the discriminant has \(12642\) digits. Among \(p\le97\), every ramified prime \(\ell\le10^6\) has \(v_\ell(\disc f_p)=1\). A single such \(\ell\) produces an inertia transposition and, with the mod-\(p\) \(p\)-cycle, yields \(S_p\); this fires for \(18\) of the \(24\) primes \(p\le97\).
+
+\section{The family \((x)_p+c\)}
+\label{sec:family}
+
+Nothing in \S\S\ref{sec:cert}--\ref{sec:jordan} uses the constant \(1\). Writing
+\[
+f_{p,c}(x)=\varphi(x)+c=x(x-1)\cdots(x-p+1)+c,\qquad c\in\Z\setminus\{0\},
+\]
+the certificates apply verbatim, and the two-parameter family shows what is special about \(c=1\): it is the only regime in which the polynomial is totally real, and total reality is exactly what closes the elementary route.
+
+\begin{proposition}
+\label{prop:fpc}
+Let \(p\) be an odd prime and \(c\in\Z\) with \(p\nmid c\).
+\begin{enumerate}
+\item \(f_{p,c}\) is irreducible over \(\Q\), and \(\Frob_p\) is a \(p\)-cycle.
+\item If \(q\le p\) is prime and \(q\nmid c\), then \(f_{p,c}\) has no root in \(\F_q\).
+\end{enumerate}
+Consequently, if some odd prime \(q<p\) with \(q\nmid c\) satisfies \(\bigl(\frac{\disc f_{p,c}}{q}\bigr)=-1\), then \(\Gal(f_{p,c}/\Q)=S_p\).
+\end{proposition}
+
+\begin{proof}
+(1) In \(\F_p[x]\) one has \(\varphi=\prod_{k\in\F_p}(x-k)=x^p-x\), so \(f_{p,c}\equiv x^p-x+c\pmod p\). By Artin--Schreier, \(x^p-x-a\) is irreducible over \(\F_p\) exactly when \(a\notin\wp(\F_p)=\{0\}\); here \(a=-c\ne0\). The reduction is irreducible, hence separable, so \(p\nmid\disc f_{p,c}\) and \(\Frob_p\) is a \(p\)-cycle.
+(2) The \(p\ge q\) consecutive factors of \(\varphi(a)\) run over every residue in \(\F_q\), so \(\varphi(a)=0\) and \(f_{p,c}(a)=c\ne0\) in \(\F_q\).
+The last statement is Theorem~\ref{thm:cert} applied with hypothesis (1) supplied by (2).
+\end{proof}
+
+The periodicity calculus of \S\ref{sec:period} also carries over: in \eqref{eq:res} each factor \(g(\beta)^mB_r(\beta)+1\) becomes \(g(\beta)^mB_r(\beta)+c\), and the period bound \(\Pi(q)\) is unchanged, since it depends only on \(m\bmod q\) and on the multiplicative orders of the \(g(\beta)\). Only the good classes move with \(c\).
+
+We now show that for \(\lvert c\rvert\) in one explicit window the identification is elementary --- no Frobenius, no classification, no computation.
+
+\begin{lemma}[Root count]
+\label{lem:count}
+Let \(p\ge5\) be prime, let \(c_0<\cdots<c_{p-2}\) be the critical points of \(\varphi\) from Proposition~\ref{prop:morse}, and put \(\mu_k=\lvert\varphi(c_k)\rvert\). For every integer \(c\ne0\) whose absolute value is not a critical magnitude,
+\[
+\#\{x\in\R:f_{p,c}(x)=0\}\;=\;1+2\,\#\{k\ \text{odd}:\ \lvert c\rvert<\mu_k\}.
+\]
+\end{lemma}
+
+\begin{proof}
+On \((k,k+1)\) exactly \(k+1\) of the factors of \(\varphi\) are positive and \(p-1-k\) are negative, so \(\varphi\) has sign \((-1)^{p-1-k}=(-1)^{k}\) there, \(p\) being odd; thus \(v_k:=\varphi(c_k)\) has sign \((-1)^k\), and consecutive critical values have opposite signs. By Proposition~\ref{prop:morse} the \(c_k\) are the only critical points, so \(\varphi\) is strictly monotone on each of the \(p\) intervals \((-\infty,c_0),(c_0,c_1),\dots,(c_{p-2},\infty)\), with \(\varphi(x)\to\pm\infty\) as \(x\to\pm\infty\). A level \(L\) is attained exactly once on each such interval on which it lies strictly between the endpoint values, and not at all otherwise.
+
+Take first \(c>0\), so \(L=-c<0\). The leftmost interval always contributes, since \(v_0>0>L\). For \(1\le j\le p-2\) the interval \((c_{j-1},c_j)\) contributes iff \(L\) lies strictly between \(v_{j-1}\) and \(v_j\); these have opposite signs, so the span is \((v_{o},v_{e})\) with \(o\) the odd and \(e\) the even index in \(\{j-1,j\}\), and \(L<0<v_e\) reduces the condition to \(L>v_o\), i.e.\ \(c<\mu_o\). The rightmost interval contributes iff \(L>v_{p-2}\), i.e.\ \(c<\mu_{p-2}\), and \(p-2\) is odd. Now count. There are \(p\) monotonicity intervals: the leftmost, which always contributes; the rightmost; and the \(p-2\) bounded ones. The leftmost is unconditional, and the remaining \(p-1\) each carry the condition \(\lvert c\rvert<\mu_{k}\) for one odd index \(k\). Each odd \(k\) occurs for exactly two of them, namely \((c_{k-1},c_k)\) and \((c_k,c_{k+1})\), the second of these being the rightmost interval when \(k=p-2\). As there are \((p-1)/2\) odd indices in \(\{0,\dots,p-2\}\), this accounts for \(2\cdot(p-1)/2=p-1\) intervals, and \(p=1+2\cdot\frac{p-1}{2}\) in total. The count follows.
+
+For \(c<0\), the involution \(x\mapsto(p-1)-x\) sends \(\varphi\) to \(-\varphi\), hence \(f_{p,c}\bigl((p-1)-x\bigr)=-f_{p,-c}(x)\); the two polynomials have the same number of real roots, so the count depends only on \(\lvert c\rvert\).
+\end{proof}
+
+\begin{theorem}[Critical window]
+\label{thm:window}
+Let \(p\ge5\) be prime, \(m=(p-1)/2\), and let \(c\in\Z\) satisfy \(p\nmid c\) and
+\[
+\mu_{m-1}\;<\;\lvert c\rvert\;<\;\mu_{m-2}.
+\]
+Then \(f_{p,c}\) has exactly two non-real roots, and \(\Gal(f_{p,c}/\Q)=S_p\).
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:real} gives \(\mu_k=\mu_{p-2-k}\) and \(\mu_0>\mu_1>\cdots>\mu_{m-1}=\mu_m\). Since \(p-2\) is odd, the involution \(k\mapsto p-2-k\) reverses parity, so it matches each odd index with an even one; the odd indices therefore meet each mirror pair exactly once, and
+\[
+\{\mu_k:k\ \text{odd}\}=\{\mu_{m-1}<\mu_{m-2}<\cdots<\mu_0\}
+\]
+with each value occurring once. By Lemma~\ref{lem:count}, \(f_{p,c}\) has \(p-2j\) real roots, where \(j=\#\{k\ \text{odd}:\mu_k<\lvert c\rvert\}\); the stated window is precisely the condition \(j=1\). So \(f_{p,c}\) has \(p-2\) real roots and one pair of complex conjugate roots.
+
+By Proposition~\ref{prop:fpc}, \(f_{p,c}\) is irreducible of prime degree \(p\), so \(G=\Gal(f_{p,c}/\Q)\) is transitive and \(p\mid\lvert G\rvert\); by Cauchy, \(G\) contains a \(p\)-cycle (or take \(\Frob_p\)). Complex conjugation fixes the \(p-2\) real roots and swaps the remaining pair, so \(G\) contains a transposition. Since \(p\) is prime, \(G\) is moreover primitive, and a primitive group containing a transposition is the full symmetric group; equivalently, a \(p\)-cycle together with a transposition generates \(S_p\) \cite[Thm.~3.2]{ConradPerm}. Primality is used here as well: in composite degree a transitive group with a transposition need not be \(S_n\) \cite[Rem.~3.3]{ConradPerm}.
+\end{proof}
+
+\begin{remark}[Why \(c=1\) is the hard case]
+\label{rem:c1}
+The window is never reached by \(c=\pm1\). Indeed \(\mu_k\ge\lvert\varphi(k+\tfrac12)\rvert\ge\min_j\lvert\varphi(j-\tfrac12)\rvert=(2m-1)!!\,(2m+1)!!/2^{p}\), which is \(45/32>1\) at \(p=5\) and increases thereafter (Proposition~\ref{prop:real}); so \(\lvert c\rvert=1<\mu_{m-1}\), \(j=0\), and \(f_p\) is totally real. That is Proposition~\ref{prop:real} again, read off Lemma~\ref{lem:count}. The content of Theorem~\ref{thm:window} is that the obstruction is quantitative and narrow: the conjugation route is closed for \(c=1\) only because \(1\) lies below every critical magnitude, and it reopens as soon as \(\lvert c\rvert\) crosses the smallest of them. The whole apparatus of \S\S\ref{sec:cert}--\ref{sec:period} is the price of the single value \(c=1\).
+\end{remark}
+
+\begin{remark}[Only the first window]
+\label{rem:firstwindow}
+Larger \(\lvert c\rvert\) does not help. If \(j\) odd indices lie below \(\lvert c\rvert\), complex conjugation is a product of \(j\) disjoint transpositions, of sign \((-1)^j\); Conrad's criterion needs \(j=1\). At the top, \(\lvert c\rvert>\mu_0\) leaves one real root and \((p-1)/2\) transpositions, an even permutation when \(p\equiv1\pmod4\), which does not even exclude \(A_p\). Theorem~\ref{thm:window} is therefore sharp: the first window is the only one in which conjugation alone identifies the group. Outside it one falls back on Proposition~\ref{prop:fpc}.
+\end{remark}
+
+The windows are wide. Writing \(N_p\) for the number of \emph{positive} integers \(c\) in the window with \(p\nmid c\) --- each of which is matched by \(-c\), since Lemma~\ref{lem:count} depends only on \(\lvert c\rvert\):
+\[
+\begin{array}{r|llr}
+p & \mu_{m-1} & \mu_{m-2} & N_p\\\hline
+5 & 1.4187 & 3.6314 & 2\\
+7 & 12.359 & 23.149 & 9\\
+11 & 4804.9 & 7042.3 & 2034\\
+13 & 171688 & 236529 & 59854\\
+17 & 5.3330\cdot10^{8} & 6.7948\cdot10^{8} & 137\,582\,410\\
+19 & 4.3057\cdot10^{10} & 5.3437\cdot10^{10} & 9\,833\,286\,697
+\end{array}
+\]
+The window narrows --- its ratio \(\mu_{m-2}/\mu_{m-1}\) falls from \(2.56\) at \(p=5\) to \(1.24\) at \(p=19\) --- but \(\mu_{m-1}\) itself grows like \(p!/2^p\), so \(N_p\) grows superexponentially all the same: already at \(p=19\) there are some \(9.8\times10^{9}\) admissible \(c>0\), and as many negative ones. For every prime \(p\) and every one of them, \(\Gal(f_{p,c}/\Q)=S_p\) is settled unconditionally, with no appeal to \S\ref{sec:period}. The case \(p=5\) is worth recording: the certificate of Corollary~\ref{cor:fp} has no witness there, since \(q=3\) is the only candidate and \(\bigl(38569/3\bigr)=+1\); but \(c=2\) and \(c=3\) lie in the window, so \(\Gal((x)_5+2)=\Gal((x)_5+3)=S_5\) by Theorem~\ref{thm:window} alone. The claims in the table, the root counts of Lemma~\ref{lem:count}, and the irreducibility of the corresponding \(f_{p,c}\) are checked in \texttt{tools/verify\_window.py}.
 
 \section{Periodicity of the discriminant}
 \label{sec:period}
@@ -239,6 +393,19 @@ If \(n\equiv n'\pmod{\Pi(q)}\), these data agree. (For the multiplicative orders
 \begin{remark}
 \label{rem:d2}
 The quadratic fibres are more rigid. Always \(g(\beta)=\beta^q-\beta\) lies in \(\ker\operatorname{Tr}_{\F_{q^d}/\F_q}\). For \(d=2\) the trace-zero hyperplane coincides with a multiplicative coset: \(\operatorname{Tr}(x)=x+x^q=0\) if and only if \(x^{q-1}=-1\) for \(x\ne0\). Thus if \(\beta\in\F_{q^2}\setminus\F_q\) and \(\gamma=g(\beta)\), then \(\gamma^q=-\gamma\), so \(\gamma^{q-1}=-1\). In particular \(\operatorname{ord}(\gamma)\) divides \(2(q-1)\) and does not divide \(q-1\). (For \(d\ge3\) the trace-zero set is a plain additive hyperplane of size \(q^{d-1}\), with no multiplicative structure, and nothing of this kind carries over.) The factor \(q^2-1\) in \(\Pi(q)\) may therefore be replaced by \(2(q-1)\).
+\end{remark}
+
+\begin{remark}[The period bound is sharp from \(q=7\) on]
+\label{rem:periodgrow}
+The collapses at \(q=3\) and \(q=5\) are accidents. At \(q=7\) the minimal period is exactly \(\Pi(7)=134064\): no even divisor of it is a period. What controls the sharp modulus is not the degrees of the fibres --- those are already maximal, the part of \(u_r-m\) coprime to \(g\) reaching degree \(q-1\) for every \(q\ge5\) tested --- but the exponent
+\[
+E_q=\mathrm{lcm}_{\beta}\ \mathrm{ord}\bigl(g(\beta)\bigr),
+\]
+the lcm being over all fibres. Measured,
+\[
+E_3=4,\quad E_5=48,\quad E_7=5472,\quad E_{11}=6.3\times10^{10},\quad E_{13}=5.1\times10^{13},
+\]
+and the sharp period divides \(\mathrm{lcm}(4,q^2,E_q)\): with equality at \(q=3\), and with index \(2\) at \(q=5\) and \(q=7\), the factor \(2\) coming from the parity coupling of \(m\) and \(r\) for odd \(p\). Enumerating classes modulo such a modulus is therefore infeasible beyond \(q=7\), and \(\varepsilon_3,\varepsilon_5,\varepsilon_7\) are the only exact values this method will ever produce.
 \end{remark}
 
 The bound is not always sharp: \(\Pi(3)=72\) while the actual period is \(36\). For \(q=3\) the fibres of \(u_1=x^2-1\) and \(u_2=2(x+1)^2\) can be read off by hand, and among odd \(p\) the value \(\Res(\psi,f_p)\) is constant on each class modulo \(9\).
@@ -293,14 +460,55 @@ Each further prime \(q\) contributes its own periodic good set, of some Dirichle
 \]
 (The last is \(18088\) of the \(36288\) units modulo \(134064\).) For \(q=5\), an inspection of the twenty fibres of \(u_r\) shows that the part coprime to \(g\) has degree \(0\), \(2\), or \(4\). Lemma~\ref{lem:period} with \(d\le4\), using Remark~\ref{rem:d2} for \(d=2\), yields period dividing \(15600=\mathrm{lcm}(4,5^2,5^4-1)\). Evaluating~\eqref{eq:res} at one representative of each odd class modulo \(15600\) shows that the period divides \(600\), and no proper even divisor of \(600\) works. Among the \(160\) units of \(\Z/600\Z\), \(88\) have symbol \(-1\), hence \(\varepsilon_5=\tfrac{11}{20}\). Combining with Proposition~\ref{prop:q3}: of the \(480\) units of \(\Z/1800\Z\), \(372=240+264-132\) are good for \(q=3\) or \(q=5\) --- the six classes modulo \(36\) lift to \(240\) units modulo \(1800\), the \(88\) classes modulo \(600\) lift to \(264\), and the intersection has \(132\) units. As \(132=480\cdot\tfrac12\cdot\tfrac{11}{20}\), the two good sets are exactly independent on the units modulo \(1800\), which is not automatic since \(\gcd(36,600)=12\).
 
+The pattern does not continue. Evaluating~\eqref{eq:res} at every one of the \(725{,}760\) odd unit classes modulo \(\mathrm{lcm}(36,600,134064)=3{,}351{,}600\) gives the exact joint law of the three symbols. The marginals come out at \(\tfrac12\), \(\tfrac{11}{20}\), \(\tfrac{323}{648}\), reproducing the values above on a modulus \(25\) times larger; the pair \(\{3,5\}\) is again exactly independent; but \(\{3,7\}\) is not. One has
+\[
+\Pr\bigl[s_3=-1,\ s_7=-1\bigr]=\tfrac{787}{3024}=0.26025\ldots,
+\qquad
+\varepsilon_3\varepsilon_7=\tfrac{323}{1296}=0.24922\ldots,
+\]
+so the good sets at \(q=3\) and \(q=7\) are positively correlated and the product formula \(1-\prod(1-\varepsilon_q)=\tfrac{511}{576}\) is wrong.
+
 \begin{theorem}
 \label{thm:dens}
-The set of primes \(p\) with \(\bigl(\disc f_p/3\bigr)=-1\) has Dirichlet density \(\tfrac12\). The set of primes with \(\bigl(\disc f_p/3\bigr)=-1\) or \(\bigl(\disc f_p/5\bigr)=-1\) has Dirichlet density \(\tfrac{31}{40}\). On both sets, \(\Gal(f_p/\Q)=S_p\).
+The set of primes \(p\) with \(\bigl(\disc f_p/3\bigr)=-1\) has Dirichlet density \(\tfrac12\); adjoining \(q=5\) gives \(\tfrac{31}{40}\); adjoining \(q=7\) gives
+\[
+\tfrac{7117}{8064}=0.88256\ldots
+\]
+On each of these sets, \(\Gal(f_p/\Q)=S_p\).
 \end{theorem}
 
-The second density uses the \(q=5\) representative evaluation; the first does not. Both match the least-witness counts below \(10^5\): \(q=3\) succeeds for \(50.2\%\) of \(9589\) primes, and \(\min(q)\le5\) for \(77.6\%\).
+The last of these is also the last one obtainable this way, for the reason given in Remark~\ref{rem:periodgrow}.
+
+The least-witness statistics over the \(664577\) primes \(5\le p<10^7\) exhibit the joint law rather than merely the marginals. For \(q\in\{3,5,7\}\) the least witness is a function of \(p\) modulo \(3351600\), and it is the same function that the class enumeration tabulates; so what follows is not a second evaluation of the symbols but a check that the primes sample that class function faithfully, and a demonstration that the correlation can be read off the witness list given only \(\varepsilon_3,\varepsilon_5,\varepsilon_7\). Writing \(P_q\) for the proportion of primes whose least witness is \(q\):
+\[
+\begin{array}{r|lll}
+ & q=3 & q=5 & q=7\\\hline
+\text{observed} & 0.50003 & 0.27483 & 0.10767\\
+\text{joint law} & \tfrac12=0.50000 & \tfrac{11}{40}=0.27500 & \tfrac{4337}{40320}=0.10756\\
+\text{discrepancy} & 0.05\,\sigma & 0.31\,\sigma & 0.27\,\sigma
+\end{array}
+\]
+Had the three symbols been independent, \(P_7\) would be \((1-\varepsilon_3)(1-\varepsilon_5)\varepsilon_7=0.11215\), which the sample excludes at \(11.8\,\sigma\). That the symbols are correlated is not news --- Theorem~\ref{thm:dens} proves it --- but the exclusion shows the correlation is legible in the witness list itself, at a sample size where the two models are far apart; below \(10^5\) they differ by only about \(1.5\,\sigma\). Likewise \(P_3+P_5+P_7=0.882525\) against the predicted \(\tfrac{7117}{8064}=0.882564\), a discrepancy of \(0.1\,\sigma\).
+
+\begin{remark}[Ramification is rare, and computable]
+\label{rem:s7zero}
+The same computation exhibits a set of unit classes of density \(\tfrac1{324}\) on which \(s_7\equiv0\): every prime in them has \(7\mid\disc f_p\). No such classes occur at \(q=3\) or \(q=5\). Ramification of a fixed \(\ell\) is therefore periodic in \(p\) like the symbol itself, and --- unlike the symbol --- its density can be computed without knowing the period. Write \(\delta_\ell\) for the density, among odd integers \(n\) coprime to \(\ell\), of those with \(\ell\mid\disc f_n\); this is the quantity the fibres compute. It majorises the density among primes, which is smaller because primes avoid the classes divisible by the other prime factors of the period: at \(\ell=7\) the prime density is \(\tfrac1{324}\) against \(\delta_7=\tfrac{50}{3591}\). It is in turn larger than the density of the simple ramification \(v_\ell=1\) that the transposition certificate needs. For the negative conclusion below that is the favourable direction.
+
+A factor of the product in~\eqref{eq:res} vanishes exactly when \(g(\beta)^m=-1/B_r(\beta)\), and only \(\beta\) of degree \(\ge2\) can contribute, since \(\beta\in\F_\ell\) gives \(g(\beta)=0\) and a factor \(1\), while \(B_r(\beta)\ne0\) because \(B_r\) splits over \(\F_\ell\). The exponent is not free: it is pinned modulo \(\ell\) by the fibre \(u_r(\beta)=m\) and modulo \(2\) by \(p\) odd, so \(m\) runs over a single class \(M\) modulo \(2\ell\) and \(g(\beta)^m\) over the coset \(\gamma^M\langle\gamma^{2\ell}\rangle\), \(\gamma=g(\beta)\). Writing \(o=\mathrm{ord}\,\gamma\) and \(e=\gcd(o,2\ell)\), the group \(\langle\gamma\rangle\) is the unique subgroup of its order in the cyclic group \(\F_{\ell^d}^\times\), so \(\langle\gamma^{2\ell}\rangle=\langle\gamma^{e}\rangle\) and membership is the single test \(x^{o/e}=1\). The vanishing class then has conditional density \(e/o\), whence
+\[
+\delta_\ell\;\le\;\frac1{\ell(\ell-1)}\sum\frac{e}{o},
+\]
+a density over odd \(n\) coprime to \(\ell\), the sum running over those \(r\), \(m_0\) and irreducible factors of \(u_r-m_0\) of degree \(\ge2\) for which \(\bigl(-B_r(\beta)^{-1}\gamma^{-M}\bigr)^{o/e}=1\). This is a finite computation for each \(\ell\), independent of the period --- which matters, since by Remark~\ref{rem:periodgrow} the period is out of reach for \(\ell\ge11\).
+
+The inequality is the honest statement, because ramification is the event that \emph{some} factor vanishes while the right-hand side adds one term per factor. Distinct fibres never overlap: two of them differ either in \(r=p\bmod\ell\) or in \(m\bmod\ell\). So the only possible overcount is between two factors of one fibre \((r,m_0)\), and equality holds as soon as each fibre contributes at most one passing factor. That is the case for \(\ell=7\) and \(\ell=11\), where the passing factors lie in \(12\) and \(32\) distinct fibres respectively; from \(\ell=13\) on some fibres carry two or three, and the displayed sum is then an upper bound, overshooting by \(O(\delta_\ell^2)\).
+
+At \(\ell=7\), where equality holds, the formula gives \(\delta_7=\tfrac{50}{3591}\), agreeing exactly with an enumeration over the full period \(134064\). At \(\ell=3\) and \(\ell=5\) the sum is empty, so \emph{\(3\) and \(5\) never divide \(\disc f_p\), for any \(p\)}; for \(\ell=3\) that is already visible in Proposition~\ref{prop:q3}, where \(R\in\{1,2\}\).
+
+These densities are small. Only \(\ell=3\) and \(\ell=5\) are excluded outright, by the empty sum; at \(\ell=11,13,19,31\) and \(43\) the density is merely small --- of order \(10^{-3}\) --- and no prime below \(10^5\) happens to be ramified there, which is a statement about that range and not about all \(p\). Summed over odd \(\ell\le199\), the densities come to \(0.007\). The cause is the same smallness of \(\langle g(\beta)\rangle\) as in Remark~\ref{rem:d2}: a factor vanishes only when a prescribed target lands in a coset of that subgroup. In particular the ramification classes do not cover: the transposition certificate of \S\ref{sec:closed} fires through ramified primes as large as \(669577\), not through small \(\ell\), and such primes are not found by trial division once \(\disc f_p\) has \(\asymp p^2\log p\) digits.
+\end{remark}
 
 \section{What remains}
+\label{sec:open}
 
 Write \(\disc f_p=(-1)^{(p-1)/2}\Res(\varphi',\varphi+1)\). Reducing modulo \(p\) (where \(\varphi'\equiv-1\)) gives the congruence
 \[
@@ -308,13 +516,28 @@ Write \(\disc f_p=(-1)^{(p-1)/2}\Res(\varphi',\varphi+1)\). Reducing modulo \(p\
 \]
 always a quadratic residue, as forced by the even \(p\)-cycle \(\Frob_p\). This is a consistency check, not a constraint on witnesses \(q<p\).
 
-The identification \(\Gal(f_p/\Q)=S_p\) for every odd prime \(p\) is a covering question, of two different kinds. For a \emph{fixed} finite set of \(q\), periodicity plus Dirichlet makes the covered set a union of arithmetic progressions, of density \(1-\prod(1-\varepsilon_q)\) if the symbols were independent. A finite list cannot cover every prime: the data already refutes covering by \(q\le43\), since \(p=31511\equiv11\pmod{36}\) has least witness \(47\). The least witness appears unbounded, so all-\(p\) is unlikely to fall to a fixed finite set of congruences.
+The identification \(\Gal(f_p/\Q)=S_p\) for every odd prime \(p\) is a covering question, of two different kinds. For a \emph{fixed} finite set of \(q\), periodicity plus Dirichlet makes the covered set a union of arithmetic progressions, of a density given by the joint law of the symbols (Theorem~\ref{thm:dens}; not the product \(1-\prod(1-\varepsilon_q)\), which already fails for \(\{3,7\}\)). A finite list cannot cover every prime: the data already refutes covering by \(q\le71\), since \(p=9683099\) has least witness \(73\). The least witness appears unbounded, so all-\(p\) is unlikely to fall to a fixed finite set of congruences.
 
-Density \(1\) is a class-density statement: \(\prod_{q\le Q}(1-\varepsilon_q)\to0\) as \(Q\to\infty\) if and only if \(\sum\varepsilon_q=\infty\), and for each fixed \(Q\) this is rigorous given periodicity and Dirichlet. The three exact values above, and the proportion of primes \(p<10^5\) with \(\bigl(\disc f_p/q\bigr)=-1\) for each odd \(q\le199\), are consistent with \(\varepsilon_q=\tfrac12\) except for the isolated \(\varepsilon_5=\tfrac{11}{20}\). That is far more than \(\varepsilon_q\gg1/q\). What is missing for density \(1\) is a uniform lower bound \(\varepsilon_q\ge c>0\) on these exact rationals. (Remark~\ref{rem:d2} shows that a character-sum bound over \(\langle g(\beta)\rangle\) cannot supply it: already for \(d=2\) one has \(\lvert\langle\gamma\rangle\rvert\le 2(q-1)\), which is not large in \(\F_{q^2}\).) Density \(1\) does not imply that every prime is covered. For a given \(p\) the available witnesses are the \(q<p\), so \(Q\sim p\) and the modulus \(\Pi\) up to that \(Q\) is far larger than \(p\); equidistribution modulo that \(\Pi\) has no bearing on whether that particular \(p\) sits in a bad class.
+Density \(1\) is a class-density statement: if \(\varepsilon_q\ge c>0\) then \(\sum\varepsilon_q=\infty\), and the uncovered density tends to \(0\) as more \(q\) are adjoined. For each fixed \(Q\) this is rigorous given periodicity and Dirichlet, once the joint law is computed. It does not imply that every prime is covered. For a given \(p\) the available witnesses are the \(q<p\), so \(Q\sim p\) and the modulus \(\Pi\) up to that \(Q\) is far larger than \(p\); equidistribution modulo that \(\Pi\) has no bearing on whether that particular \(p\) sits in a bad class.
 
-The good sets are explicit congruence classes, computed once per \(q\). (The \(q=3\) symmetry \(p\mapsto-p\) already fails for \(q=5\), so there is no functional equation of that form across \(q\).) Any analytic argument that \(\disc f_p\) is a nonresidue at some \(q<p\) need only treat primes in the complementary classes \(1,5,11,25,31,35\pmod{36}\), a density-\(\tfrac12\) family, rather than all \(p\). (The cases \(p=3,5\) are settled by other witnesses, as above.) The covering, and the identification for every \(p\), have been verified for all odd primes \(p<10^5\).
+The barrier is therefore a uniform lower bound \(\varepsilon_q\ge c>0\) on the exact rationals of \S\ref{sec:period}. Each \(q\) has \(q(q-1)\) fibres \((r,m_0)\). On a fibre the residual \(R\) of~\eqref{eq:res} may be constant in \(m\). The symbol is \(\chi_q\bigl((-1)^{(p-1)/2}R\bigr)\), so a constant-\(R\) fibre is constant as a symbol if and only if \(\chi_q(-1)=+1\) (equivalently \(q\equiv1\pmod4\)); if \(\chi_q(-1)=-1\) the sign still flips it. This is exact at the three \(q\) whose periods can be enumerated:
+\begin{itemize}
+\item \(q=3\): all \(6\) fibres have constant \(R\), none have constant symbol, and \(\varepsilon_3=\tfrac12\).
+\item \(q=5\): of \(20\) fibres, \(10\) have constant \(R\) and all \(10\) have constant symbol. Six are always \(-1\) and four always \(+1\); the remaining ten are balanced. Hence \(\varepsilon_5=(6+5)/20=\tfrac{11}{20}\). Six of the ten constants are the fibres on which \(u_r-m_0\) splits over \(\F_5\), and the symbol is then \(\chi_5(r)\): \((r,m_0)=(1,0),(1,4),(4,0),(4,4)\) with \(\chi_5(r)=+1\), and \((2,0),(3,4)\) with \(\chi_5(r)=-1\). The excess of two always-\(-1\) fibres in twenty is the \(+\tfrac1{20}\).
+\item \(q=7\): of \(42\) fibres, \(14\) have constant \(R\) and none have constant symbol. Among unramified unit classes one has exactly \(\tfrac12\); among all unit classes, \(\varepsilon_7=\tfrac{323}{648}\), the deficit \(\tfrac1{648}\) being ramification (Remark~\ref{rem:s7zero}).
+\end{itemize}
+A character-sum bound over \(\langle g(\beta)\rangle\) cannot supply \(\varepsilon_q\ge c\): already for quadratic fibres Remark~\ref{rem:d2} gives \(\lvert\langle\gamma\rangle\rvert\le 2(q-1)\), and a fibre whose symbol is identically \(+1\) is not cancelled by mixing on other coordinates. What would suffice is coarser: writing, at these three \(q\),
+\[
+\varepsilon_q=\frac{\#\{\text{always }{-}\}+\tfrac12\,\#\{\text{balanced}\}}{q(q-1)}
+\]
+up to ramification, a uniform \(c>0\) follows as soon as a positive proportion of the \(q(q-1)\) fibres are non-degenerate. That is a statement about the maps \(u_r\), exact at \(q=3,5,7\). We do not claim the trichotomy \(\{0,\tfrac12,1\}\) beyond those \(q\).
+
+The good sets are explicit congruence classes, computed once per \(q\). (The \(q=3\) symmetry \(p\mapsto-p\) already fails for \(q=5\), so there is no functional equation of that form across \(q\).) Any analytic argument that \(\disc f_p\) is a nonresidue at some \(q<p\) need only treat primes in the complementary classes \(1,5,11,25,31,35\pmod{36}\), a density-\(\tfrac12\) family, rather than all \(p\). (The cases \(p=3,5\) are settled by other witnesses, as above.) The covering, and the identification for every \(p\), have been verified for all odd primes \(p<10^7\): \(664577\) rows. Each row is independently checkable by one resultant \(\Res(f_p',f_p)\) and one Legendre symbol over \(\F_q\), and that is how a sample of them is audited; a full audit of the list instead uses the \(O(q^2\log p)\) evaluation of \S\ref{sec:period}, the two having been compared at every scale up to \(10^7\).
 
 \begin{thebibliography}{11}
+\bibitem{ConradPerm}
+K.~Conrad, \emph{Galois groups as permutation groups}, expository note. (Thm.~3.2: irreducible of prime degree with exactly two non-real roots has Galois group \(S_p\).)
+
 \bibitem{ConradSign}
 K.~Conrad, \emph{The sign of permutations}, expository note.
 
@@ -341,6 +564,36 @@ J.-P.~Serre, \emph{Topics in Galois Theory}, 2nd ed., A~K Peters, 2008.
 
 \bibitem{WilsonFSG}
 R.~A.~Wilson, \emph{The Finite Simple Groups}, Springer, 2009.
+\bibitem{Schur1908}
+I.~Schur, Problem 226, \emph{Arch.\ Math.\ Phys.} (3) \textbf{13} (1908), 367.
+
+\bibitem{ConradFactor}
+K.~Conrad, \emph{Factoring after Dedekind}, expository note.
+
+\bibitem{GyoryHajduTijdeman}
+K.~Gy\H{o}ry, L.~Hajdu and R.~Tijdeman, Irreducibility criteria of Schur-type and P\'olya-type, \emph{Monatsh.\ Math.} \textbf{163} (2011), 415--443.
+
+\bibitem{Hajir}
+F.~Hajir, On the Galois group of generalized Laguerre polynomials, \emph{J.\ Th\'eor.\ Nombres Bordeaux} \textbf{17} (2005), 517--525.
+
+\bibitem{JonesCycle}
+G.~A.~Jones, Primitive permutation groups containing a cycle, \emph{Bull.\ Aust.\ Math.\ Soc.} \textbf{89} (2014), 159--165; arXiv:1209.5169.
+
+\bibitem{JonesZvonkin}
+G.~A.~Jones and A.~K.~Zvonkin, Primes in geometric series and finite permutation groups, arXiv:2010.08023.
+
+\bibitem{Hulpke}
+A.~Hulpke, Techniques for the computation of Galois groups, in \emph{Algorithmic Algebra and Number Theory}, Springer, 1999, 65--77.
+
+\bibitem{Unger}
+W.~R.~Unger, Almost all permutations power to a prime length cycle, arXiv:1905.08936.
+
+\bibitem{Wielandt}
+H.~Wielandt, \emph{Finite Permutation Groups}, Academic Press, 1964. (Jordan's theorem: Thm.~13.9.)
+
+\bibitem{Westlund}
+J.~Westlund, On the irreducibility of certain polynomials, \emph{Amer.\ Math.\ Monthly} \textbf{16} (1909), 66--67; A.~Fl\"ugel, L\"osung zu Aufgabe 226, \emph{Arch.\ Math.\ Phys.} (3) \textbf{15} (1909), 271--272.
+
 \end{thebibliography}
 
 \end{document}

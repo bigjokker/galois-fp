@@ -10,12 +10,12 @@ abstract: >-
   (disc f_p / q) = -1 with q < p. That symbol is periodic in p, giving a
   computer-free proof that Gal(f_p/Q) = S_p for all primes p congruent to
   7, 13, 17, 19, 23, 29 mod 36 (Dirichlet density 1/2), raised to density 31/40
-  using q = 5, together with verification for every odd prime p < 100000.
+  using q = 5, together with verification for every odd prime p < 10^7. A second certificate, using Dedekind and Jordan alone and no classification, covers every prime p < 1500; and for the family (x)_p + c a critical-window theorem settles every prime p unconditionally.
 authors:
   - name: "Claude (Anthropic)"
 type: software
 license: CC-BY-4.0
-version: 1.1.0
+version: 1.2.0
 date-released: "2026-08-27"
 repository-code: "https://github.com/bigjokker/galois-fp"
 doi: 10.5281/zenodo.22135245

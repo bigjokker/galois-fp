@@ -8,11 +8,16 @@ Gal(f_p/Q) = S_p.  The row p=5 (q=19) is a strict witness instead: f_5 mod 19
 factors as (irreducible quadratic)(irreducible cubic).
 
 Usage:
-  python verify_witnesses.py            sample mode (seconds): all rows with
+  python verify_witnesses.py            sample mode (minutes, via the direct
+                                        O(p^2) resultant): all rows with
                                         p < 2000, 100 random rows, the largest
-                                        witness (p=31511), and p=5
-  python verify_witnesses.py --all      full audit of all rows (about 6 min)
-  python verify_witnesses.py --p 31511  one row
+                                        least-witness (q=73 at p=9683099), the
+                                        old record (p=31511), and p=5
+  python verify_witnesses.py --all      full audit of all 664,577 rows via the
+                                        Section 6 evaluation (about a minute)
+  python verify_witnesses.py --all --direct   same, but with the O(p^2)
+                                        resultant; infeasible at 10^7
+  python verify_witnesses.py --p 9683099   one row
 """
 import os
 import random
@@ -46,6 +51,22 @@ def check_row(p, q):
     return symbol(p, q) == -1
 
 
+def check_row_reduced(p, q):
+    """Same test by the Section 6 evaluation, O(q^2 log p) instead of O(p^2).
+
+    `reduced.symbol_reduced` is cross-validated against `fpcore.symbol` by
+    `verify_reduced.py`, at every scale up to 10^7, so this is the same
+    claim by a faster route -- which is what makes a full audit of all
+    664,577 rows feasible at all.  Note that it IS the faster route: the
+    resultant actually evaluated is the Section 6 one, not Res(f_p', f_p).
+    """
+    if p == 5:
+        assert q == 19
+        return check_strict_p5()
+    from reduced import symbol_reduced
+    return symbol_reduced(p, q) == -1
+
+
 def main():
     rows = []
     for line in open(WITNESS):
@@ -65,13 +86,21 @@ def main():
         random.seed(0)
         sel = [r for r in rows if r[0] < 2000]
         sel += random.sample([r for r in rows if r[0] >= 2000], 100)
-        sel += [r for r in rows if r[0] in (5, 31511)]
+        sel += [r for r in rows if r[0] in (5, 31511, 9683099)]
         sel = sorted(set(sel))
+
+    # The direct O(p^2) resultant is the primary check, but at 10^7 it is
+    # about 0.9 s per row, so a full audit needs the reduced evaluation.
+    fast = "--all" in sys.argv and "--direct" not in sys.argv
+    checker = check_row_reduced if fast else check_row
+    if fast:
+        print("full audit via the Section 6 reduced evaluation "
+              "(pass --direct to force the O(p^2) resultant)")
 
     t0 = time.time()
     bad = 0
     for i, (p, q) in enumerate(sel):
-        if not check_row(p, q):
+        if not checker(p, q):
             bad += 1
             print(f"FAILED: p={p} q={q}")
         if (i + 1) % 200 == 0:

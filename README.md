@@ -19,17 +19,36 @@ verification tools for every computational claim in it.
 * The symbol is **periodic in p** for fixed q. For q = 3 the period is 36 and
   the good classes are p ≡ 7, 13, 17, 19, 23, 29 (mod 36): a computer-free
   proof that Gal(f_p/Q) = S_p on a set of primes of Dirichlet density 1/2.
-  Adding q = 5 (period 600) raises the density to 31/40.
-* Gal(f_p/Q) = S_p is verified for **every odd prime p < 100000**, each by a
-  witness q ≤ 47 recorded in `ancillary/witnesses.txt`.
+  Adding q = 5 (period 600) raises the density to 31/40, and q = 7 to
+  **7117/8064**. The symbols are *not* independent — {3,5} is, {3,7} is not —
+  so the covered density is a joint law, not 1 − prod(1 − eps_q).
+* Exact eps_q **stops at q = 7**: the sharp period is governed by
+  E_q = lcm of the orders of g(beta), which is 4, 48, 5472, 6.3e10, 5.1e13
+  for q = 3, 5, 7, 11, 13. Pi(7) = 134064 is exactly minimal.
+* Gal(f_p/Q) = S_p is verified for **every odd prime p < 10^7** (664,577 of
+  them), each by a witness q ≤ 73 recorded in `ancillary/witnesses.txt`.
+  The least-witness statistics test the *joint* law of the symbols, not just
+  the marginals: they match it to 0.3 sigma and exclude the independence
+  model at 11.8 sigma.
+* A **second certificate needs no classification at all**: if f_p mod q has an
+  isolated irreducible factor of prime degree ℓ in [3, p−3] and Frobenius is
+  odd, then Dedekind and Jordan (1873) alone give S_p. A witness q ≤ 61 exists
+  for every prime p < 1500 (`ancillary/jordan_witnesses.txt`, 236 rows; largest least-witness q = 61 at p = 1301). On that range the
+  identification is free of CFSG, Stickelberger and reciprocity.
+* For the family **(x)_p + c** (p not dividing c) both certificates persist,
+  and a **critical-window theorem** settles every prime p unconditionally:
+  if mu_{m-1} < |c| < mu_{m-2}, where mu_k are the critical magnitudes of
+  phi, then f_{p,c} has exactly two non-real roots and complex conjugation
+  alone gives S_p. The number of such c grows superexponentially in p.
+  c = 1 is hard precisely because it lies below every critical magnitude.
 * What remains open for all p is a covering question: do the periodic good
   classes, as q varies, cover every prime?
 
 ## Layout
 
 ```
-galois_fp_ii_.tex / .pdf   the note
-ancillary/                 data: witness list (9,590 rows), exact-discriminant
+galois_fp.tex / .pdf       the note
+ancillary/                 data: witness list (664,577 rows), exact-discriminant
                            data for p ≤ 97, good-class tables for q = 3, 5
 tools/                     one self-contained checker per computational claim
                            (see tools/README.md for the claim ↔ tool map)
@@ -48,7 +67,13 @@ python verify_classes.py --full       # full 15600-class check    (~1 min)
 python verify_periodicity.py          # section 6 structure       (~2 min)
 python sweep_eps.py --check           # stored eps_q table        (~30 s)
 python verify_witnesses.py            # witness sample            (seconds)
-python verify_witnesses.py --all      # all 9,590 rows            (~6 min)
+python verify_witnesses.py --all      # all 664,577 rows          (~1 min)
+python verify_reduced.py              # reduced vs direct resultant (~5 min)
+python verify_jordan.py               # CFSG-free certificate     (~30 s)
+python verify_jordan.py --all         # every Jordan row
+python verify_window.py               # critical windows, p <= 19  (~1 min)
+python verify_joint357.py             # joint law at q=3,5,7      (~4 min)
+python verify_fibre_orders.py         # periods, E_q, fibre sizes (~5 min)
 ```
 
 Every certificate is verifiable row by row, independently of the searches
