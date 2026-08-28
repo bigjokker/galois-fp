@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "The Galois group of x(x-1)...(x-p+1)+1"
+abstract: >-
+  A Frobenius certificate for the symmetric group in odd prime degree: a monic
+  irreducible whose Frobenius at an odd unramified prime q is both odd
+  (Stickelberger) and fixed-point-free has Galois group S_p. For
+  f_p = x(x-1)...(x-p+1)+1 the fixed-point-free condition is automatic at every
+  q <= p, so the question reduces to a single Kronecker symbol
+  (disc f_p / q) = -1 with q < p. That symbol is periodic in p, giving a
+  computer-free proof that Gal(f_p/Q) = S_p for all primes p congruent to
+  7, 13, 17, 19, 23, 29 mod 36 (Dirichlet density 1/2), raised to density 31/40
+  using q = 5, together with verification for every odd prime p < 100000.
+authors:
+  - name: "Claude (Anthropic)"
+type: software
+license: CC-BY-4.0
+version: 1.0.0
+date-released: "2026-08-27"
+repository-code: "https://github.com/bigjokker/galois-fp"
+doi: 10.5281/zenodo.22135245
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22135245
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.22135246
+    description: "Version 1.0.0"
+keywords:
+  - Galois theory
+  - symmetric group
+  - falling factorial
+  - Frobenius element
+  - Stickelberger's theorem
+  - discriminant
+  - permutation groups of prime degree
+  - number theory

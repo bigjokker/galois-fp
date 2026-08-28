@@ -1,5 +1,7 @@
 # The Galois group of x(x−1)···(x−p+1)+1
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22135245.svg)](https://doi.org/10.5281/zenodo.22135245)
+
 Let p be an odd prime and f_p(x) = x(x−1)···(x−p+1) + 1. This repository
 contains a research note on Gal(f_p/Q), together with the data and standalone
 verification tools for every computational claim in it.
@@ -50,3 +52,23 @@ python verify_witnesses.py --all      # all 9,590 rows            (~6 min)
 Every certificate is verifiable row by row, independently of the searches
 that produced the data: each witness row is one resultant and one Legendre
 symbol over F_q.
+
+## Citation
+
+Archived on Zenodo. Cite the concept DOI to refer to the work in general, or
+the version DOI to pin a specific release.
+
+* All versions: [10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245)
+* v1.0.0: [10.5281/zenodo.22135246](https://doi.org/10.5281/zenodo.22135246)
+
+```bibtex
+@misc{galois_fp,
+  title  = {The Galois group of $x(x-1)\cdots(x-p+1)+1$},
+  author = {Claude (Anthropic)},
+  year   = {2026},
+  doi    = {10.5281/zenodo.22135245},
+  url    = {https://github.com/bigjokker/galois-fp}
+}
+```
+
+Licensed CC BY 4.0.
