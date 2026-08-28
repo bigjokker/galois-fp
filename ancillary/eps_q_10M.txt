@@ -1,0 +1,25 @@
+# eps_q over all primes p < 10^7 (664,577 primes), for odd q <= 29.
+#
+# eps_q = proportion of primes p with (disc f_p / q) = -1.  RAMIFIED primes
+# (q | disc f_p) are counted in the DENOMINATOR here, since such a p is not
+# certified by that q; rho is their density.  Standard error 0.00061.
+#
+# "predicted" applies the fibre model: among unramified classes each fibre
+# (r,m0) was conjectured to have density 0, 1/2 or 1, giving
+#     1/2 + (#always-1 - #always+1) / (2 q (q-1)),
+# scaled by (1-rho).  That model is EXACT for q <= 7 and FAILS from q = 11 on
+# (see NOTES.md).  It is recorded here only to document where it breaks.
+#
+# Exact values from the note: eps_3 = 1/2, eps_5 = 11/20, eps_7 = 323/648.
+# Reproduce with tools/sweep_eps_big.py.
+#
+# q  q%4        N     eps_q       SE       rho    nonram  fibres(-,+,mix)  predicted   sigma
+  3    3   664577   0.50003  0.00061  0.000000   0.50003         (3, 3, 0)    0.50000    0.05
+  5    1   664576   0.54997  0.00061  0.000000   0.54997        (6, 4, 10)    0.55000   -0.04
+  7    3   664575   0.49847  0.00061  0.003055   0.49999        (7, 7, 28)    0.49847   -0.01
+ 11    3   664574   0.49320  0.00061  0.000166   0.49328        (6, 6, 98)    0.49992  -10.95
+ 13    1   664573   0.50323  0.00061  0.000000   0.50323     (10, 10, 136)    0.50000    5.27
+ 17    1   664572   0.49119  0.00061  0.000933   0.49165       (4, 8, 260)    0.49219   -1.63
+ 19    3   664571   0.49996  0.00061  0.000041   0.49998       (7, 7, 328)    0.49998   -0.02
+ 23    3   664570   0.50037  0.00061  0.000432   0.50058       (5, 5, 496)    0.49978    0.95
+ 29    1   664569   0.49685  0.00061  0.001261   0.49748       (4, 8, 800)    0.49691   -0.09

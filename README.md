@@ -50,6 +50,8 @@ verification tools for every computational claim in it.
 galois_fp.tex / .pdf       the note
 ancillary/                 data: witness list (664,577 rows), exact-discriminant
                            data for p ≤ 97, good-class tables for q = 3, 5
+NOTES.md                   hypotheses the data suggested that turned out
+                           false, recorded so they are not rediscovered
 tools/                     one self-contained checker per computational claim
                            (see tools/README.md for the claim ↔ tool map)
 ```
