@@ -61,6 +61,7 @@ Archived on Zenodo. Cite the concept DOI to refer to the work in general, or
 the version DOI to pin a specific release.
 
 * All versions: [10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245)
+* v1.1.0: [10.5281/zenodo.22136373](https://doi.org/10.5281/zenodo.22136373)
 * v1.0.0: [10.5281/zenodo.22135246](https://doi.org/10.5281/zenodo.22135246)
 
 ```bibtex
