@@ -1,0 +1,24 @@
+{
+  "title": "The Galois group of x(x-1)...(x-p+1)+1",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [
+    {
+      "name": "Claude",
+      "affiliation": "Anthropic"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "description": "<p>Let <em>p</em> be an odd prime and <em>f<sub>p</sub></em>(x) = x(x&minus;1)&middot;&middot;&middot;(x&minus;p+1) + 1. This record contains a research note on Gal(<em>f<sub>p</sub></em>/<strong>Q</strong>), together with the data and standalone verification tools for every computational claim in it.</p><p><strong>Main results.</strong></p><ul><li>A general certificate: a monic irreducible of odd prime degree <em>p</em> whose Frobenius at an odd unramified prime <em>q</em> is both odd (Stickelberger) and fixed-point-free has Galois group <em>S<sub>p</sub></em>. The group-theoretic input is that every transitive nonsolvable subgroup of <em>S<sub>p</sub></em> is <em>S<sub>p</sub></em> or lies in <em>A<sub>p</sub></em>, with the classification of finite simple groups entering only through Guralnick's theorem on subgroups of prime power index.</li><li>For <em>f<sub>p</sub></em> the fixed-point-free condition is automatic at every <em>q</em> &le; <em>p</em>, because the p consecutive factors cover every residue class. The whole question therefore reduces to a single Kronecker symbol (disc <em>f<sub>p</sub></em> / <em>q</em>) = &minus;1 with <em>q</em> &lt; <em>p</em>.</li><li>That symbol is <em>periodic in p</em> for fixed <em>q</em>. For <em>q</em> = 3 the period is 36 and the good classes are p &equiv; 7, 13, 17, 19, 23, 29 (mod 36), giving a computer-free proof that Gal(<em>f<sub>p</sub></em>/<strong>Q</strong>) = <em>S<sub>p</sub></em> on a set of primes of Dirichlet density 1/2. Adding <em>q</em> = 5 (period 600) raises the density to 31/40.</li><li>Gal(<em>f<sub>p</sub></em>/<strong>Q</strong>) = <em>S<sub>p</sub></em> is verified for every odd prime <em>p</em> &lt; 100000, each by a witness <em>q</em> &le; 47 recorded in the accompanying witness list.</li><li>Several standard approaches are shown to be closed for this family: <em>f<sub>p</sub></em> is totally real for <em>p</em> &ge; 5, so complex conjugation is not a transposition; the Newton polygons of every relevant translate are flat; and while the family &phi;(x) &minus; t is Morse with Galois group <em>S<sub>p</sub></em> over <strong>Q</strong>(t), Hilbert irreducibility does not decide the single specialisation t = &minus;1.</li><li>What remains open for all <em>p</em> is a covering question: do the periodic good classes, as <em>q</em> varies, cover every prime?</li></ul><p>Every certificate is verifiable row by row, independently of the searches that produced the data: each witness row is one resultant and one Legendre symbol over a small finite field. The included tools re-check all of it, including a full audit of the 9,590-row witness list.</p>",
+  "keywords": [
+    "Galois theory",
+    "symmetric group",
+    "falling factorial",
+    "Frobenius element",
+    "Stickelberger's theorem",
+    "discriminant",
+    "permutation groups of prime degree",
+    "number theory"
+  ],
+  "notes": "Companion data and verification tools are included in the ancillary/ and tools/ directories. Related MathOverflow question: https://mathoverflow.net/questions/514611"
+}
