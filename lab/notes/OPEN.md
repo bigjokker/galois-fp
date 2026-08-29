@@ -30,8 +30,14 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
    `s(m) = χ_q(1 − α^ρ)` have an analogue when `h` is not a Kummer equation?
    Cheapest generalisation question available; decides how much (C8) is worth.
    First check: is `φ(u)/u` a scalar in `F_q` for `r=2`? Prediction: no.
-6. **Is any non-split fibre with large `L` identically `+1`?** Witnessed *no*
-   at `q = 19, 23, 29, 37` only (`08_witness.py`). Four primes is not a theorem.
+6. **ANSWERED — YES, and the earlier "no" was measuring classes.** Non-split
+   fibres identically `+1` **among primes** exist: q=37 (1,10), (1,26), (1,9)
+   and q=13 (1,3), (1,9). Confirmed against ground truth — 4000 actual primes
+   in q=37 (1,10), every one `+1`. `08_witness.py` sampled admissible m rather
+   than prime-admissible m, so its −1 witnesses sat in prime-free classes; its
+   2716/2716 result is about integers, not primes. The census "floors"
+   1/9, 1/27, 2/27 are **zeros** over primes. This enlarges the density-0
+   population, which is the direction that hurts ε_q ≥ c.
 7. **Do the density-1 slices generalise?** `q = 113, ρ = 14` sits at density 1
    on 384 points — every point a certificate. First `r = 1` piece that *raises*
    ε_q rather than pinning it at 1/2. One stratum of one fibre is still

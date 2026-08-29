@@ -554,6 +554,30 @@ while **all 37,011 primes p < 10^8 in that fibre have symbol −1** (density 1).
 Use `core.fibre_counts_primes` for anything about primes. It reproduces
 eps_3 = 1/2, eps_5 = 11/20 and eps_7 = 323/648 exactly.
 
+**A HEADLINE FINDING IS REVERSED.** The witness search concluded "no non-split
+fibre is identically +1 at q = 19, 23, 29, 37". It sampled admissible m, i.e.
+**classes**, not prime-admissible classes, so it found its −1 witnesses in
+classes that carry no primes. Over primes the conclusion is false:
+
+    q=37 (1,10)  classes: 1/27   primes: 0   — 4000 actual primes, ALL +1
+    q=37 (1,26)  classes: 1/27   primes: 0
+    q=37 (1, 9)  classes: 2/27   primes: 0
+    q=13 (1, 3)  classes: 1/9    primes: 0
+    q=13 (1, 9)  classes: 1/9    primes: 0
+
+These are **non-split fibres, identically +1 among primes**. So "split is the
+only density-0 family" is false, the census floors (1/9, 1/27, 2/27) are not
+floors but **zeros**, and the density-0 population is larger than reported, not
+smaller. That is the direction that hurts ε_q ≥ c.
+
+**What survives.** The {0, 1/2, 1} trichotomy refutation stands: q = 11, (3,6)
+is 1/4 over classes AND over primes (4000 actual primes, measured 0.2437). The
+published `../NOTES.md` is unaffected.
+
+**And uniformity breaks.** The four q = 11 fibres that all read 7/15 over
+classes split over primes into 13/32 at (3,1) and (8,9) versus 15/32 at (5,9)
+and (6,1). Equal class densities are not equal prime densities.
+
 **Scope of the damage.** Every density reported in this note from
 `fibre_counts` — the census, the j-class tables (16/49, 1/27, 29/54, 43/90,
 681/1330, 7/15, 1/4), the v₂(L) verifications — is a **class** density. As a
