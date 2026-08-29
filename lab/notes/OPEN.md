@@ -112,32 +112,44 @@ needs all roots of one degree d (Kummer). New item:
 
     And the taxonomy is **not exhaustive**, which is the important part:
 
-22. **A THIRD pairing mechanism exists. Confirmed, and not absorbed by item 23.**
-    Exhaustive scan over every fibre-preserving translation at q = 11 (the
-    admissible m form one progression of step 2q and period N = lcm(L,4)/2, so
-    Δm = q·2k is the index shift k; k = 1..N−1 covers all of them), capped at
-    N ≤ 4000:
+22. **The third mechanism, IDENTIFIED.** q = 11, fibres (5,10) and (6,0) — the
+    r <-> q-r copies of one another (5+6 = 11). Structure, all verified:
 
-        40 fibres with v₂(L) ≥ 2 admit a full-period symbol-flipping pairing
-        38 of them at v₂(L) = 2  —  the Step-2 window
-         2 of them at v₂(L) = 4  —  UNCLASSIFIED:
+    The fibre is 1^5 + 4 with multiplicities 1,1,1,1,2,1: four simple linears
+    and one double linear, all with gamma = 0 (invisible to L), plus **one**
+    simple quartic. The double linear enters the residue as a square, so it is
+    invisible to chi_q too. Hence s is a SINGLE character chi_{q^4}(1 + u) on
+    the cyclic C_16 = <gamma>, and a global multiply is well defined — which is
+    exactly why the 2+4+4 fibres (3,6) and (8,4) with the same L = 16 and the
+    same v2 = 4 do NOT pair (three non-split orbits, no single exponent
+    multiplies every coordinate correctly; BAL = 1/4).
 
-        (r,m0)   degrees   mults        L    v₂  L_odd  v₂  BAL   shift
-        (5,10)   1^5+4     1,1,1,1,2,1  16   4    16    4   1/2   k=2
-        (6, 0)   1^5+4     1,1,1,1,2,1  16   4    16    4   1/2   k=2
+    The shift is Δm = 4q = 44, so a = 4 and v2(a) = 2 ≠ 1: **the archimedean
+    factor is FROZEN** (Δ(p−1)/2 = q²a/2 = 242, even). The symbol flips because
+    the CHARACTER flips — the q ≡ 1 shape, occurring at q ≡ 3.
 
-    k = 2 means Δm = 4q = 44, i.e. Δm ≡ 12 (mod L=16) — **neither 0 nor L/2**.
-    So γ_i^{Δm} is neither 1 nor −1: the u_i genuinely MOVE and the symbol flips
-    anyway. Neither known mechanism (character-preserved + sign-flip, or
-    u ↦ −u + Step 2) applies. **Identifying this Δm is the best lead open.**
+    With ord(gamma) = 16: gamma^8 = −1, i := gamma^4 has i² = −1, and
+    gamma^12 = −i, so T is **u ↦ −i·u**. T² is u ↦ −u; T⁴ = id. On the 8 even
+    classes (m ≡ 0,2,...,14 mod 16 — all of them) it is two 4-cycles of
+    alternating sign, so BAL = 1/2. **It is not an involution**; "pairing" is
+    right for the density, T² = id is not.
 
-    **Item 23 does not eat it**: L_odd = L = 16 on both, so even-multiplicity
-    roots do not lower the valuation. The fork was run and came out this way.
+    **The identity, measured on the realized orbit (even exponents only —
+    testing all 16 gives 8 spurious failures):**
 
-    Two scope corrections to the referee's report of this: it is 40 fibres, not
-    two; and the 4+6 fibres are NOT among them. (2,6) admits no pairing — BAL =
-    681/1330 forbids one, since a full-period flipping bijection forces BAL =
-    1/2. (2,7) has N = 15960 and was never tested; its status is unknown.
+        N_{F_{q^4}/F_q}( (1 − i·u)/(1 + u) ) = **−1**, constant, all 8 exponents
+
+    on both fibres, 0 chi-flip failures. And chi_q(−1) = −1 because q ≡ 3
+    (mod 4) — so the flip is supplied by chi_q(−1) acting INSIDE the character
+    term rather than on the archimedean factor.
+
+    Galois-matching is the route to a proof, not 2-adic arithmetic:
+    phi(i) = i^q = i^11 = i^3 = −i is exactly the multiplier (verified).
+
+    Scope: 40 fibres at q = 11 admit a full-period pairing, 38 of them in the
+    v2(L) = 2 Step-2 window (leave those). (2,6) admits none — BAL = 681/1330
+    forbids it. (2,7) has N = 15960, above the scan cap; status unknown, and
+    BAL = 1/2 does not imply a translation of this form exists.
 
 23. **L is the wrong invariant: use odd multiplicity only.** A root of *even*
     multiplicity enters the residue as N(z)^mult, a perfect square, so its
