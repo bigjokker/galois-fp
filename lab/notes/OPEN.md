@@ -61,11 +61,15 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
     3/4 is the density of the whole fibre. The j-half ("j-freeness is
     universal") stands separately, 92 rows.
 
-10. **Characterise the unbalanced lists.** `q = 17, d = 2` freezes at density 0;
-    `q = 113, ρ = 14` at density 1. Any identification of `{α^ρ}` must permit
-    both.
-11. **Is there a `q ≡ 1` analogue of the two-translation proof for general `c`,**
-    or is `ρ` genuinely where that line ends?
+10. **Characterise the unbalanced lists {α^n}.** `q = 17, d = 2` freezes at 0;
+    `q = 113, d = 8` is 1 (the whole fibre, over primes). Any identification of
+    the list must permit both. *(Was written {α^ρ}: over primes ρ = n always,
+    so the list is {α^n} indexed by (q,d).)*
+
+11. **Is there a `q ≡ 1` analogue of the two-translation proof for general `c`?**
+    *(Previously ended "or is ρ where that line ends?" — ρ cannot be where it
+    ends: over primes every stratum but ρ = n is empty, so ρ is not a place a
+    line can stop.)*
 
 ## B5 result (settled) and what it leaves
 
