@@ -1,0 +1,225 @@
+C:\Users\wwwsa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sympy\polys\polytools.py:6282: SymPyDeprecationWarning: 
+
+Ordered comparisons with modular integers are deprecated.
+
+            Use e.g. int(a) < int(b) instead of a < b.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#modularinteger-compare
+for details.
+
+This has been deprecated since SymPy version 1.13. It
+will be removed in a future version of SymPy.
+
+  return sorted(factors, key=key)
+       1    0 split      density 0
+       1    1 L=784     density 1/2
+       1    2 L=784     density 1/2
+       1    3 L=392     density 33/49
+       1    4 L=392     density 33/49
+       1    5 L=392     density 33/49
+       1    6 L=196     density 16/49
+       1    7 L=784     density 1/2
+       1    8 L=392     density 33/49
+       1    9 L=784     density 1/2
+       1   10 L=784     density 1/2
+       1   11 L=112     density 1/2
+       1   12 L=392     density 33/49
+       1   13 L=784     density 1/2
+       1   14 L=784     density 1/2
+       1   15 L=196     density 16/49
+       1   16 L=112     density 1/2
+       1   17 L=784     density 1/2
+       1   18 L=784     density 1/2
+       1   19 L=196     density 16/49
+       1   20 L=784     density 1/2
+       1   21 L=392     density 33/49
+       1   22 L=196     density 16/49
+       1   23 L=196     density 16/49
+       1   24 L=196     density 16/49
+       1   25 L=784     density 1/2
+       1   26 L=784     density 1/2
+       1   27 L=56      density 1
+       1   28 split      density 0
+       2    0 split      density 1
+       2   27 L=56      density 1/2
+       3    0 L=56      density 1/2
+       4    0 split      density 0
+       5    0 split      density 0
+       6    0 L=56      density 3/7
+      10    0 L=560     density 17/35
+      19   28 L=560     density 18/35
+      23   28 L=56      density 3/7
+      24   28 split      density 0
+      25   28 split      density 0
+      26   28 L=56      density 1/2
+      27    1 L=56      density 1/2
+      27   28 split      density 1
+      28    0 split      density 0
+      28    1 L=56      density 1
+      28    2 L=784     density 1/2
+      28    3 L=784     density 1/2
+      28    4 L=196     density 16/49
+      28    5 L=196     density 16/49
+      28    6 L=196     density 16/49
+      28    7 L=392     density 33/49
+      28    8 L=784     density 1/2
+      28    9 L=196     density 16/49
+      28   10 L=784     density 1/2
+      28   11 L=784     density 1/2
+      28   12 L=112     density 1/2
+      28   13 L=196     density 16/49
+      28   14 L=784     density 1/2
+      28   15 L=784     density 1/2
+      28   16 L=392     density 33/49
+      28   17 L=112     density 1/2
+      28   18 L=784     density 1/2
+      28   19 L=784     density 1/2
+      28   20 L=392     density 33/49
+      28   21 L=784     density 1/2
+      28   22 L=196     density 16/49
+      28   23 L=392     density 33/49
+      28   24 L=392     density 33/49
+      28   25 L=392     density 33/49
+      28   26 L=784     density 1/2
+      28   27 L=784     density 1/2
+      28   28 split      density 0
+============================================================================
+q = 29  (q = 1 mod 4)   812 fibres   [199s]
+  enumerated exactly : 72   (L <= 2000)
+  L above cap        : 740   (empirically ~1/2)
+
+  density = 0 (always +1) :    8   = 0.0099 of all fibres
+  density = 1 (always -1) :    4   = 0.0049
+  min over the rest       : 16/49 = 0.3265  attained by 12 fibre(s)
+      (r,m0)=(1,6)  degrees 7+7+7+7              L=196
+      (r,m0)=(1,15)  degrees 7+7+7+7              L=196
+      (r,m0)=(1,19)  degrees 7+7+7+7              L=196
+      (r,m0)=(1,22)  degrees 7+7+7+7              L=196
+      (r,m0)=(1,23)  degrees 7+7+7+7              L=196
+      (r,m0)=(1,24)  degrees 7+7+7+7              L=196
+  mean over all fibres    : 0.49736   (large-L counted as 1/2)
+
+  spectrum among 0 < density < 1 (60 fibres):
+     16/49        x12
+     3/7          x2
+     17/35        x1
+     1/2          x32
+     18/35        x1
+     33/49        x12
+
+       1    0 split      density 0
+       1    1 L=1296    density 1/2
+       1    2 L=648     density 53/81
+       1    3 L=648     density 53/81
+       1    4 L=1296    density 1/2
+       1    5 L=144     density 7/18
+       1    6 L=324     density 52/81
+       1    7 L=432     density 29/54
+       1    8 L=324     density 52/81
+       1    9 L=108     density 2/27
+       1   10 L=216     density 1/27
+       1   11 L=324     density 52/81
+       1   12 L=1296    density 1/2
+       1   13 L=432     density 29/54
+       1   14 L=1296    density 1/2
+       1   15 L=324     density 52/81
+       1   16 L=1296    density 1/2
+       1   17 L=1296    density 1/2
+       1   18 L=1296    density 1/2
+       1   19 L=1296    density 1/2
+       1   20 L=648     density 53/81
+       1   21 L=1296    density 1/2
+       1   22 L=432     density 25/54
+       1   23 L=1296    density 1/2
+       1   24 L=648     density 53/81
+       1   25 L=108     density 2/27
+       1   26 L=216     density 1/27
+       1   27 L=648     density 53/81
+       1   28 L=432     density 25/54
+       1   29 L=648     density 53/81
+       1   30 L=144     density 7/18
+       1   31 L=1296    density 1/2
+       1   32 L=324     density 52/81
+       1   33 L=324     density 52/81
+       1   34 L=1296    density 1/2
+       1   35 L=72      density 7/9
+       1   36 split      density 0
+       2    0 split      density 1
+       2   35 L=72      density 1/2
+       3    0 split      density 0
+       4    0 L=72      density 1/2
+       5    0 L=72      density 1/2
+       6    0 split      density 1
+       7    0 L=72      density 11/18
+      10    0 L=72      density 1/2
+      27   36 L=72      density 1/2
+      30   36 L=72      density 11/18
+      31   36 split      density 1
+      32   36 L=72      density 1/2
+      33   36 L=72      density 1/2
+      34   36 split      density 0
+      35    1 L=72      density 1/2
+      35   36 split      density 1
+      36    0 split      density 0
+      36    1 L=72      density 7/9
+      36    2 L=1296    density 1/2
+      36    3 L=324     density 52/81
+      36    4 L=324     density 52/81
+      36    5 L=1296    density 1/2
+      36    6 L=144     density 11/18
+      36    7 L=648     density 53/81
+      36    8 L=432     density 29/54
+      36    9 L=648     density 53/81
+      36   10 L=216     density 1/27
+      36   11 L=108     density 2/27
+      36   12 L=648     density 53/81
+      36   13 L=1296    density 1/2
+      36   14 L=432     density 29/54
+      36   15 L=1296    density 1/2
+      36   16 L=648     density 53/81
+      36   17 L=1296    density 1/2
+      36   18 L=1296    density 1/2
+      36   19 L=1296    density 1/2
+      36   20 L=1296    density 1/2
+      36   21 L=324     density 52/81
+      36   22 L=1296    density 1/2
+      36   23 L=432     density 25/54
+      36   24 L=1296    density 1/2
+      36   25 L=324     density 52/81
+      36   26 L=216     density 1/27
+      36   27 L=108     density 2/27
+      36   28 L=324     density 52/81
+      36   29 L=432     density 25/54
+      36   30 L=324     density 52/81
+      36   31 L=144     density 11/18
+      36   32 L=1296    density 1/2
+      36   33 L=648     density 53/81
+      36   34 L=648     density 53/81
+      36   35 L=1296    density 1/2
+      36   36 split      density 0
+============================================================================
+q = 37  (q = 1 mod 4)   1332 fibres   [725s]
+  enumerated exactly : 90   (L <= 2000)
+  L above cap        : 1242   (empirically ~1/2)
+
+  density = 0 (always +1) :    6   = 0.0045 of all fibres
+  density = 1 (always -1) :    4   = 0.0030
+  min over the rest       : 1/27 = 0.0370  attained by 4 fibre(s)
+      (r,m0)=(1,10)  degrees 6+6+6+6+6+6          L=216
+      (r,m0)=(1,26)  degrees 6+6+6+6+6+6          L=216
+      (r,m0)=(36,10)  degrees 6+6+6+6+6+6          L=216
+      (r,m0)=(36,26)  degrees 6+6+6+6+6+6          L=216
+  mean over all fibres    : 0.49983   (large-L counted as 1/2)
+
+  spectrum among 0 < density < 1 (80 fibres):
+     1/27         x4
+     2/27         x4
+     7/18         x2
+     25/54        x4
+     1/2          x32
+     29/54        x4
+     11/18        x4
+     52/81        x12
+     53/81        x12
+     7/9          x2
+

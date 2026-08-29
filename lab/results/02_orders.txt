@@ -1,0 +1,13 @@
+d=2 fibres: claim  ord(gamma) = 2^(a+1) * t,  t | s,  where q-1 = 2^a s
+  q   q-1 2^a    s allowed                  observed                 note
+  3     2   2    1 [4]                      {4: 2}                   s prime/1 - forced
+  5     4   4    1 [8]                      {8: 12}                  s prime/1 - forced
+  7     6   2    3 [4, 12]                  {4: 6, 12: 16}           s prime/1 - forced
+ 11    10   2    5 [4, 20]                  {4: 18, 20: 64}          s prime/1 - forced
+ 13    12   4    3 [8, 24]                  {8: 32, 24: 80}          s prime/1 - forced
+ 17    16  16    1 [32]                     {32: 224}                s prime/1 - forced
+ 19    18   2    9 [4, 12, 36]              {4: 34, 12: 60, 36: 204} ALL allowed occur
+ 23    22   2   11 [4, 44]                  {4: 38, 44: 492}         s prime/1 - forced
+ 29    28   4    7 [8, 56]                  {8: 100, 56: 568}        s prime/1 - forced
+ 31    30   2   15 [4, 12, 20, 60]          {4: 70, 12: 148, 20: 232 ALL allowed occur
+violations: 0

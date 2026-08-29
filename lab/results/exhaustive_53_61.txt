@@ -1,0 +1,59 @@
+======================================================================
+q = 53   s = 13   a = k-1 = 25
+  m0=1   iota=0    |pred|=4   |actual|=4    EXACT
+  m0=2   iota=49   |pred|=4   |actual|=4    EXACT
+C:\Users\wwwsa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sympy\polys\polytools.py:6282: SymPyDeprecationWarning: 
+
+Ordered comparisons with modular integers are deprecated.
+
+            Use e.g. int(a) < int(b) instead of a < b.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#modularinteger-compare
+for details.
+
+This has been deprecated since SymPy version 1.13. It
+will be removed in a future version of SymPy.
+
+  return sorted(factors, key=key)
+  m0=4   iota=10   |pred|=4   |actual|=4    EXACT
+  m0=7   iota=22   |pred|=4   |actual|=4    EXACT
+  m0=11  iota=14   |pred|=4   |actual|=4    EXACT
+  m0=13  iota=12   |pred|=4   |actual|=4    EXACT
+  m0=17  iota=30   |pred|=4   |actual|=4    EXACT
+  m0=18  iota=15   |pred|=4   |actual|=4    EXACT
+  m0=19  iota=5    |pred|=4   |actual|=4    EXACT
+  m0=20  iota=15   |pred|=4   |actual|=4    EXACT
+  m0=21  iota=49   |pred|=4   |actual|=4    EXACT
+  m0=25  iota=10   |pred|=4   |actual|=4    EXACT
+  m0=26  iota=27   |pred|=4   |actual|=4    EXACT
+  m0=30  iota=13   |pred|=4   |actual|=4    EXACT
+  m0=31  iota=17   |pred|=4   |actual|=4    EXACT
+  m0=32  iota=7    |pred|=4   |actual|=4    EXACT
+  m0=33  iota=21   |pred|=4   |actual|=4    EXACT
+  m0=34  iota=7    |pred|=4   |actual|=4    EXACT
+  m0=38  iota=6    |pred|=4   |actual|=4    EXACT
+  m0=40  iota=30   |pred|=4   |actual|=4    EXACT
+  m0=44  iota=20   |pred|=4   |actual|=4    EXACT
+  m0=47  iota=12   |pred|=4   |actual|=4    EXACT
+  m0=49  iota=20   |pred|=4   |actual|=4    EXACT
+  m0=50  iota=17   |pred|=4   |actual|=4    EXACT
+q=53 : 24 fibres, 24 exact, 0 mismatched   [4s]
+======================================================================
+q = 61   s = 15   a = k-1 = 29
+  m0=1   iota=0    |pred|=4   |actual|=4    EXACT
+  m0=5   iota=46   |pred|=4   |actual|=4    EXACT
+  m0=6   iota=43   |pred|=4   |actual|=4    EXACT
+  m0=9   iota=24   |pred|=4   |actual|=4    EXACT
+  m0=16  iota=32   |pred|=4   |actual|=4    EXACT
+  m0=17  iota=59   |pred|=4   |actual|=4    EXACT
+  m0=25  iota=4    |pred|=4   |actual|=4    EXACT
+  m0=29  iota=55   |pred|=4   |actual|=4    EXACT
+  m0=30  iota=31   |pred|=4   |actual|=4    EXACT
+  m0=34  iota=48   |pred|=4   |actual|=4    EXACT
+  m0=42  iota=32   |pred|=4   |actual|=4    EXACT
+  m0=43  iota=59   |pred|=4   |actual|=4    EXACT
+  m0=50  iota=45   |pred|=4   |actual|=4    EXACT
+  m0=53  iota=27   |pred|=4   |actual|=4    EXACT
+  m0=54  iota=7    |pred|=4   |actual|=4    EXACT
+  m0=58  iota=36   |pred|=4   |actual|=4    EXACT
+q=61 : 16 fibres, 16 exact, 0 mismatched   [4s]

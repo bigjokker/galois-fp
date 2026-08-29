@@ -1,0 +1,7 @@
+q = 3 (mod 4), h reducible:
+  C: ord(c) EVEN  => density = 1/2                : 13 hold, 0 fail
+  D: ord(c) ODD   => density = 1/2 - 1/(2 ord^2)  : 34 hold, 4 fail
+      exception q=31 m0=3 ord=5: 73/150 (formula 12/25, diff 1/150)
+      exception q=31 m0=4 ord=3: 41/90 (formula 4/9, diff 1/90)
+      exception q=31 m0=7 ord=5: 73/150 (formula 12/25, diff 1/150)
+      exception q=31 m0=24 ord=3: 41/90 (formula 4/9, diff 1/90)
