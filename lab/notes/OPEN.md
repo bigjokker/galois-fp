@@ -170,12 +170,28 @@ needs all roots of one degree d (Kummer). New item:
         that the value is -1 rather than merely "some fixed non-residue". The
         measurement gives -1, which is strictly stronger and is the thing to
         prove.
+      * It is ONE example, not two: (5,10) and (6,0) are the r <-> q-r copies
+        of each other. Exhaustion over the full period still proves the
+        identity on that example.
       * Existence check (grep-first, partial): q = 3 (mod 4) with
         v2(q^4 - 1) = v2(q-1) + v2(q+1) + 1 = 4 gives candidates
         q = 11, 19, 43, 59, 67 (NOT 23 or 7, where v2 = 5). **At q = 19 there
-        are ZERO fibres with a unique non-split quartic factor**, so no
-        instance there. q = 43, 59, 67 timed out unscanned. On present evidence
-        this may be a q = 11 accident; that is the first thing to settle.
+        are ZERO fibres with a unique non-split quartic factor.**
+
+        **Read that correctly.** q = 19 is an EMPTY SETUP, not a counterexample:
+        the identity was never evaluated there, because nothing there satisfies
+        its hypotheses. This is unlike the n | d rule, coset => 1/2, and the
+        order-4-pair picture, each of which FAILED at a next prime that did
+        carry the same hypotheses. The evidence here is that the setup is
+        **sparse** — one dual pair at q = 11, none at q = 19 — which is a
+        weaker and different conclusion than "one-prime accident". Sparsity is
+        a reason not to write the proof until a second instance exists; it is
+        not a reason to retract the exhaustion.
+
+        q = 43, 59, 67 left unscanned: factoring every fibre there is the
+        expensive census and it answers existence of a SHAPE, not the identity.
+        A cheaper filter, if wanted later: "does h have exactly one irreducible
+        of degree 4 and the rest linear?" — same computation, smaller ambition.
 
     Scope: 40 fibres at q = 11 admit a full-period pairing, 38 of them in the
     v2(L) = 2 Step-2 window (leave those). (2,6) admits none — BAL = 681/1330
