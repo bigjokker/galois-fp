@@ -148,8 +148,34 @@ needs all roots of one degree d (Kummer). New item:
     (mod 4) — so the flip is supplied by chi_q(−1) acting INSIDE the character
     term rather than on the archimedean factor.
 
-    Galois-matching is the route to a proof, not 2-adic arithmetic:
-    phi(i) = i^q = i^11 = i^3 = −i is exactly the multiplier (verified).
+    **Where chi_q(-1) enters — a THIRD role.** It is used as the value of
+    chi_q o N, not as Stickelberger's (-1)^((p-1)/2). Same number, different
+    slot. Consequence: at q = 1 (mod 4) the identical norm identity would give
+    chi_q(-1) = +1 and s would NOT flip. So the mechanism has the q = 1 shape
+    (character moves, sign factor frozen) while still requiring q = 3 (mod 4).
+    It is not T3 transplanted.
+
+    **A naive (star) is blocked.** If 1 - iu = mu * phi^k(1 + u), then
+    N((1-iu)/(1+u)) = N(mu), so one needs N(mu) = -1. But no element of <i>
+    can serve: i is in F_{q^2} \ F_q, so N_{q^4/q}(i) = N_{q^2/q}(i)^2 = 1, and
+    likewise for -i and +-1. The multiplier on u is -i = phi(i), but the
+    matching scalar, if one exists, lies outside mu_4. Galois matching is still
+    the right shape; the scalar is not the multiplier.
+
+    **Status: proved by exhaustion on two fibres, not a lemma.**
+      * Proved: on (5,10) and (6,0), N((1-iu)/(1+u)) = -1 on the full admissible
+        coset (8+8 exponents, the whole period, not a sample); T has order 4;
+        T^2 is u -> -u and preserves s.
+      * NOT proved: that this holds for every unique quartic 2-Sylow orbit, or
+        that the value is -1 rather than merely "some fixed non-residue". The
+        measurement gives -1, which is strictly stronger and is the thing to
+        prove.
+      * Existence check (grep-first, partial): q = 3 (mod 4) with
+        v2(q^4 - 1) = v2(q-1) + v2(q+1) + 1 = 4 gives candidates
+        q = 11, 19, 43, 59, 67 (NOT 23 or 7, where v2 = 5). **At q = 19 there
+        are ZERO fibres with a unique non-split quartic factor**, so no
+        instance there. q = 43, 59, 67 timed out unscanned. On present evidence
+        this may be a q = 11 accident; that is the first thing to settle.
 
     Scope: 40 fibres at q = 11 admit a full-period pairing, 38 of them in the
     v2(L) = 2 Step-2 window (leave those). (2,6) admits none — BAL = 681/1330
