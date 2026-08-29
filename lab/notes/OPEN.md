@@ -134,12 +134,17 @@ needs all roots of one degree d (Kummer). New item:
     alternating sign, so BAL = 1/2. **It is not an involution**; "pairing" is
     right for the density, T² = id is not.
 
-    **The identity, measured on the realized orbit (even exponents only —
-    testing all 16 gives 8 spurious failures):**
+    **The identity, measured on each fibre's own realized orbit:**
 
         N_{F_{q^4}/F_q}( (1 − i·u)/(1 + u) ) = **−1**, constant, all 8 exponents
 
-    on both fibres, 0 chi-flip failures. And chi_q(−1) = −1 because q ≡ 3
+    on both fibres, 0 chi-flip failures. *The realized orbit differs between
+    them*: (5,10) has r odd so m is EVEN (exponents 0,2,...,14), while (6,0) has
+    r even so m is ODD (1,3,...,15). Hand-rolling `range(0,16,2)` for both gives
+    8 spurious failures on (6,0) and would have made the mechanism look
+    fibre-specific — instance EIGHT of the off-fibre/parity family, and avoided
+    by using `core.period_m`, which is what it exists for.
+    And chi_q(−1) = −1 because q ≡ 3
     (mod 4) — so the flip is supplied by chi_q(−1) acting INSIDE the character
     term rather than on the archimedean factor.
 
