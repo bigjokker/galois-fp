@@ -54,6 +54,10 @@ NOTES.md                   hypotheses the data suggested that turned out
                            false, recorded so they are not rediscovered
 tools/                     one self-contained checker per computational claim
                            (see tools/README.md for the claim ↔ tool map)
+formal/                    Lean 4 formalisation of the AGL(1,p) step
+                           (see formal/README.md); builds, no sorry
+lab/                       work in progress on fibre densities, NOT part of
+                           the paper (see lab/README.md)
 ```
 
 ## Verify everything
