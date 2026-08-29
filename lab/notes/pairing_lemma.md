@@ -331,7 +331,67 @@ r = 1 fibres are outside the lemma entirely.
 
 ---
 
-## Census facts (q = 29, 37; L ≤ 2000)
+## Census re-derived over primes (266 fibres, q = 13, 19, 29, 37)
+
+The exactly-enumerated fibres of `06_small_L.txt` and `census_q29_q37.txt`, put
+through `fibre_counts_primes`. **130 of 266 fibres change — 48.9%.** All 36
+split fibres are unchanged; every change is non-split (130/230 = 56.5% of them).
+
+**16/49 was never a density.** The census advertised it as the minimum at
+q = 29. It is EPS_class on the twelve L = 196 (7+7+7+7) fibres, produced by two
+ramified classes per period. BAL_class was already 1/3, both ramified classes
+are prime-free, so over primes those fibres are exactly **1/3**. The advertised
+minimum was a bookkeeping artifact and vanishes.
+
+**1/3 survives and is the new floor** (12 fibres → 14; q=29 (6,0) and (23,28)
+fall onto it from 3/7). **2/3 survives** and becomes the dominant non-half
+value, 36 fibres.
+
+**22 fibres collapse to an endpoint**, and the rule is *not* "small rational" —
+it is **uniform root degree d ∈ {2,3,6} at a bad q**:
+
+    1/9   → 0   4 fibres   q=13 (1,3)(1,9)(12,3)(12,9)   6+6
+    1/27  → 0   4          q=37 (1,10)(1,26)(36,10)(36,26)  6×6
+    2/27  → 0   4          q=37 (1,9)(1,25)(36,11)(36,27)   3×12
+    2/3   → 1   2          q=13 (1,11)(12,1)   2×6
+    5/6   → 1   2          q=13 (2,11)(11,1)   2×6
+    8/9   → 1   4          q=13  3×4, L=36
+    7/9   → 1   2          q=37 (1,35)(36,1)  2×18
+
+**Twelve non-split fibres are identically +1 over primes; the census said zero.**
+4 at q=13, 8 at q=37 — 5.2% of all non-split fibres, 9.5% at q=13 and 10.0% at
+q=37. Class-side there are 20 density-0 fibres, all split; over primes there are
+32, of which **12 are non-split**. Each is an arithmetic progression on which the
+q-test provably never yields a −1 certificate. Twelve more are identically −1
+(10 of them new).
+
+**EPS_prime = BAL_prime identically here**: no prime-admissible class is ramified
+anywhere in the 266 fibres. Within this sample the whole BAL/EPS distinction is
+a class-side artifact. (Not universal — 8 of 2568 prime-admissible classes at
+q = 7 are ramified, and (2677,7) is a real ramified prime.)
+
+**Why nobody would have caught this from the aggregate.** The per-fibre mean
+moves by under 0.016 at every q, and q = 19's non-split mean lands on exactly
+1/2:
+
+    q     mean EPS_class    mean EPS_prime
+    13      0.491587          0.507535
+    19      0.494513          0.500000
+    29      0.470238          0.467593
+    37      0.497531          0.501852
+    pooled  0.488413          0.493271
+
+Half the individual fibres change, 22 go to an endpoint, and the aggregate barely
+moves. That is exactly why the ε_3 / ε_5 anchor check passed earlier and gave
+false confidence. Distinct values in the spectrum drop from 27 to 17; fibres at
+exactly 1/2 rise from 118 to 140.
+
+*Ground truth: the agent also checked 21 fibres against actual primes below
+3·10^6. Every empirical density matched BAL_prime, never BAL_class — e.g. q=13
+(12,1) measured 1.000000 against BAL_class 2/3, and q=13 (5,12) measured
+0.243553 against BAL_prime 1/4, BAL_class 1/3.*
+
+## Census facts (q = 29, 37; L ≤ 2000) — CLASS densities, superseded above
 
 Every density-0 fibre found is **split**: 8 at q = 29, 6 at q = 37, and **zero
 non-split fibres with L ≤ 2000 are identically +1**. For split h the residue is
