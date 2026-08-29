@@ -38,26 +38,28 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
    2716/2716 result is about integers, not primes. The census "floors"
    1/9, 1/27, 2/27 are **zeros** over primes. This enlarges the density-0
    population, which is the direction that hurts ε_q ≥ c.
-7. **Do the density-1 slices generalise?** `q = 113, ρ = 14` sits at density 1
-   on 384 points — every point a certificate. First `r = 1` piece that *raises*
-   ε_q rather than pinning it at 1/2. One stratum of one fibre is still
-   `O(1/q)`, but it is evidence the lists are not always balanced.
+7. **ANSWERED — survives, and is a whole-fibre fact.** q = 113, d = 8: ρ = 14
+   = n is the only prime-occupied stratum, so density 1 is not a slice but the
+   **entire fibre identically −1 among primes**, for all four m0. 2000 real
+   primes to 1.14·10^8, all −1; two re-derived from the raw discriminant with
+   `fpcore.symbol`, no fibre machinery. Still O(1/q) mass, but it is the one
+   observed object that *raises* ε_q rather than pinning it.
 
 ## C. r = 1, q ≡ 1 (mod 4), general c
 
-8. **STILL LIVE as an identification; dead only as an explanation of splits.**
-    The j-class has no effect on prime density (18/18 splits dissolve), so
-    identifying {α^ρ} is no longer how one explains why j-classes disagree —
-    they don't. But s(m) = χ_q(1 − α^ρ) remains an identity at each m, and
-    identifying the list is still how one would *prove* a prime density,
-    including the values 0 and 1. Motivation changed, not removed.
+8. **THE REMAINING r = 1 QUESTION, now much smaller: which α^n occur among
+    prime-admissible m, indexed by (q, d) alone.** No j (18/18 splits dissolve),
+    no ρ (every stratum but ρ = n is prime-free, by the compositeness theorem).
+    Over primes s(p) = χ_q(1 − α^n) with no case analysis, and the live density
+    is constant across all fibres and j-classes of a (q,d) row — matching the
+    j-class table's one BAL_prime per row. This is still how one would *prove* a
+    prime density, including the 0 and 1 that item 10 requires.
 
-9. **SPLIT IN TWO.** "j-freeness is universal over primes" — now known, 92 rows.
-    But the other half was never measured: the old example was ρ = 6 frozen at
-    3/4 while ρ = 2 split *by j*. The j-half is dead; whether **ρ = 6 is still
-    3/4 over primes, and whether ρ = 2 and ρ = 6 still differ from each other**,
-    was not the measurement taken. Do not read the j-result as "strata do not
-    matter". Item 7 (density-1 slices) is the same family and equally untested.
+9. **ANSWERED BY DELETION.** The question was whether different ρ give different
+    prime densities. Neither: **every stratum but ρ = n is empty of primes.**
+    q = 97 was never "do ρ=2 and ρ=6 agree" — ρ=2 carries no primes, and the
+    3/4 is the density of the whole fibre. The j-half ("j-freeness is
+    universal") stands separately, 92 rows.
 
 10. **Characterise the unbalanced lists.** `q = 17, d = 2` freezes at density 0;
     `q = 113, ρ = 14` at density 1. Any identification of `{α^ρ}` must permit
@@ -240,6 +242,13 @@ needs all roots of one degree d (Kummer). New item:
     d | q−1" is overstated.
 
 ## D. Verification debt
+
+12a. **TRAP 5 is still alive inside ρ = n.** The stratum collapse does NOT make
+    class counts safe on the surviving stratum: of 178 fibres with 2 ≤ d ≤ 12,
+    class and prime density differ in **82**. The five audited rows had every
+    ρ=n class prime-admissible, which is luck about P, not a theorem. The
+    identically-+1 list growing to 18 (q,d) rows is that same gap, not a new
+    mechanism.
 
 12. **The empirical claims have not been independently re-derived** the way
     Step 0 and the two translations were: the witness sweep, the census, and
