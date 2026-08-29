@@ -1,0 +1,5 @@
+# 233 MB of third-party PDFs: not ours to redistribute, and far too large for
+# the repo. Kept locally alongside the scripts.
+paper/
+__pycache__/
+*.pyc

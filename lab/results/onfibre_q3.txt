@@ -1,0 +1,88 @@
+C:\Users\wwwsa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sympy\polys\polytools.py:6282: SymPyDeprecationWarning: 
+
+Ordered comparisons with modular integers are deprecated.
+
+            Use e.g. int(a) < int(b) instead of a < b.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#modularinteger-compare
+for details.
+
+This has been deprecated since SymPy version 1.13. It
+will be removed in a future version of SymPy.
+
+  return sorted(factors, key=key)
+on-fibre spot-check vs core: 0 mismatches
+
+   q    d      L   cls  BAL on-fibre           split?
+   7    2     12     1  1/2                    
+   7    3     18     1  1/2                    
+  11    2     20     1  1/2                    
+  11    5     50     2  1/2                    
+  19    2     36     1  1/2                    
+  19    3     54     1  1/2                    
+  19    6    108     1  1/2                    
+  19    9    162     3  1/2                    
+  23    2     44     1  1/2                    
+  23   11    242     5  1/2                    
+  31    2     60     1  1/2                    
+  31    3     90     1  1/2                    
+  31    5    150     2  1/2                    
+  31    6    180     1  1/2                    
+  31   10    300     2  1/2                    
+  31   15    450     4  1/2                    
+  43    2     84     1  1/2                    
+  43    3    126     1  1/2                    
+  43    6    252     1  1/2                    
+  43    7    294     3  1/2                    
+  43   14    588     3  1/2                    
+  43   21    882     6  1/2                    
+  47    2     92     1  1/2                    
+  47   23   1058    11  1/2                    
+  59    2    116     1  1/2                    
+  59   29   1682    14  1/2                    
+  67    2    132     1  1/2                    
+  67    3    198     1  1/2                    
+  67    6    396     1  1/2                    
+  67   11    726     5  1/2                    
+  67   22   1452     5  1/2                    
+  67   33   2178    10  1/2                    
+  71    2    140     1  1/2                    
+  71    5    350     2  1/2                    
+  71    7    490     3  1/2                    
+  71   10    700     2  1/2                    
+  71   14    980     3  1/2                    
+  71   35   2450    12  1/2                    
+  79    2    156     1  1/2                    
+  79    3    234     1  1/2                    
+  79    6    468     1  1/2                    
+  79   13   1014     6  1/2                    
+  79   26   2028     6  1/2                    
+  79   39   3042    12  1/2                    
+  83    2    164     1  1/2                    
+  83   41   3362    20  1/2                    
+ 103    2    204     1  1/2                    
+ 103    3    306     1  1/2                    
+ 103    6    612     1  1/2                    
+ 103   17   1734     8  1/2                    
+ 103   34   3468     8  1/2                    
+ 107    2    212     1  1/2                    
+ 127    2    252     1  1/2                    
+ 127    3    378     1  1/2                    
+ 127    6    756     1  1/2                    
+ 127    7    882     3  1/2                    
+ 127    9   1134     3  1/2                    
+ 127   14   1764     3  1/2                    
+ 127   18   2268     3  1/2                    
+ 127   21   2646     6  1/2                    
+ 127   42   5292     6  1/2                    
+ 131    2    260     1  1/2                    
+ 131    5    650     2  1/2                    
+ 131   10   1300     2  1/2                    
+ 131   13   1690     6  1/2                    
+ 131   26   3380     6  1/2                    
+ 139    2    276     1  1/2                    
+ 139    3    414     1  1/2                    
+ 139    6    828     1  1/2                    
+ 139   23   3174    11  1/2                    
+
+70 (q,d) pairs at q = 3 mod 4 [on-fibre]: 0 split, 0 not exactly 1/2

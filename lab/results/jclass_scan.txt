@@ -1,0 +1,200 @@
+C:\Users\wwwsa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sympy\polys\polytools.py:6282: SymPyDeprecationWarning: 
+
+Ordered comparisons with modular integers are deprecated.
+
+            Use e.g. int(a) < int(b) instead of a < b.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#modularinteger-compare
+for details.
+
+This has been deprecated since SymPy version 1.13. It
+will be removed in a future version of SymPy.
+
+  return sorted(factors, key=key)
+density_r1 vs core: 108 fibres, 0 mismatches
+
+=== NAMED TEST CASES (stated before the run) ===
+  q=41   d=5    L=200    phi=4   cls=2  ram=[4]        predict same  actual same   BAL 1/2
+  q=41   d=8    L=320    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(9, 20), Fraction(11, 20)]  sum=1
+        j-class +-1   -> [Fraction(9, 20)]
+        j-class +-3   -> [Fraction(11, 20)]
+  q=61   d=5    L=300    phi=4   cls=2  ram=[4, 6]     predict same  actual SPLIT  BAL [Fraction(36, 73), Fraction(1, 2)]  sum=145/146
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-2   -> [Fraction(36, 73)]
+  q=61   d=10   L=600    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 62/75
+  q=61   d=12   L=720    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(43, 90), Fraction(47, 90)]  sum=1
+        j-class +-1   -> [Fraction(47, 90)]
+        j-class +-5   -> [Fraction(43, 90)]
+  q=61   d=5    L=300    phi=4   cls=2  ram=[4, 6]     predict same  actual SPLIT  BAL [Fraction(36, 73), Fraction(1, 2)]  sum=145/146
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-2   -> [Fraction(36, 73)]
+  q=61   d=10   L=600    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 62/75
+  q=61   d=12   L=720    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(43, 90), Fraction(47, 90)]  sum=1
+        j-class +-1   -> [Fraction(47, 90)]
+        j-class +-5   -> [Fraction(43, 90)]
+  q=61   d=15   L=900    phi=8   cls=4  ram=[2]        predict same  actual same   BAL 27/56
+  q=61   d=20   L=1200   phi=8   cls=4  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(37, 75), Fraction(1, 2), Fraction(38, 75)]  sum=3/2
+        j-class +-1   -> [Fraction(38, 75)]
+        j-class +-3   -> [Fraction(1, 2)]
+        j-class +-7   -> [Fraction(37, 75)]
+        j-class +-9   -> [Fraction(1, 2)]
+
+=== SYSTEMATIC SCAN ===
+  q=11   d=5    L=50     phi=4   cls=2  ram=[2]        predict same  actual same   BAL 1/2
+  q=17   d=8    L=128    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 1/2
+  q=19   d=9    L=162    phi=6   cls=3  ram=[2]        predict same  actual same   BAL 1/2
+  q=23   d=11   L=242    phi=10  cls=5  ram=[2]        predict same  actual same   BAL 1/2
+  q=29   d=7    L=196    phi=6   cls=3  ram=[2]        predict same  actual same   BAL 1/3
+  q=29   d=14   L=392    phi=6   cls=3  ram=[0]        predict same  actual same   BAL 33/49
+  q=31   d=5    L=150    phi=4   cls=2  ram=[4, 6]     predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(12, 25), Fraction(73, 150)])
+  q=31   d=10   L=300    phi=4   cls=2  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=31   d=15   L=450    phi=8   cls=4  ram=[2]        predict same  actual same   BAL 1/2
+  q=37   d=9    L=324    phi=6   cls=3  ram=[2]        predict same  actual same   BAL 13/20
+  q=37   d=12   L=432    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(25, 54), Fraction(29, 54)]  sum=1
+        j-class +-1   -> [Fraction(29, 54)]
+        j-class +-5   -> [Fraction(25, 54)]
+  q=37   d=18   L=648    phi=6   cls=3  ram=[0]        predict same  actual same   BAL 53/81
+  q=41   d=5    L=200    phi=4   cls=2  ram=[4]        predict same  actual same   BAL 1/2
+  q=41   d=8    L=320    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(9, 20), Fraction(11, 20)]  sum=1
+        j-class +-1   -> [Fraction(9, 20)]
+        j-class +-3   -> [Fraction(11, 20)]
+  q=41   d=10   L=400    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 24/25
+  q=41   d=20   L=800    phi=8   cls=4  ram=[0]        predict same  actual same   BAL 12/25
+  q=43   d=7    L=294    phi=6   cls=3  ram=[4]        predict same  actual same   BAL 1/2
+  q=43   d=14   L=588    phi=6   cls=3  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=43   d=21   L=882    phi=12  cls=6  ram=[2]        predict same  actual same   BAL 1/2
+  q=47   d=23   L=1058   phi=22  cls=11 ram=[2]        predict same  actual same   BAL 1/2
+  q=53   d=13   L=676    phi=12  cls=6  ram=[2]        predict same  actual same   BAL 2/3
+  q=53   d=26   L=1352   phi=12  cls=6  ram=[0]        predict same  actual same   BAL 57/169
+  q=59   d=29   L=1682   phi=28  cls=14 ram=[2]        predict same  actual same   BAL 1/2
+  q=61   d=5    L=300    phi=4   cls=2  ram=[4, 6]     predict same  actual SPLIT  BAL [Fraction(36, 73), Fraction(1, 2)]  sum=145/146
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-2   -> [Fraction(36, 73)]
+  q=61   d=10   L=600    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 62/75
+  q=61   d=12   L=720    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(43, 90), Fraction(47, 90)]  sum=1
+        j-class +-1   -> [Fraction(47, 90)]
+        j-class +-5   -> [Fraction(43, 90)]
+  q=61   d=15   L=900    phi=8   cls=4  ram=[2]        predict same  actual same   BAL 27/56
+  q=61   d=20   L=1200   phi=8   cls=4  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(37, 75), Fraction(1, 2), Fraction(38, 75)]  sum=3/2
+        j-class +-1   -> [Fraction(38, 75)]
+        j-class +-3   -> [Fraction(1, 2)]
+        j-class +-7   -> [Fraction(37, 75)]
+        j-class +-9   -> [Fraction(1, 2)]
+  q=61   d=30   L=1800   phi=8   cls=4  ram=[0]        predict same  actual same   BAL 121/225
+  q=67   d=11   L=726    phi=10  cls=5  ram=[4, 6]     predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(60, 121), Fraction(361, 726)])
+  q=67   d=22   L=1452   phi=10  cls=5  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=67   d=33   L=2178   phi=20  cls=10 ram=[2]        predict same  actual same   BAL 1/2
+  q=71   d=5    L=350    phi=4   cls=2  ram=[12]       predict same  actual same   BAL 1/2
+  q=71   d=7    L=490    phi=6   cls=3  ram=[8]        predict same  actual same   BAL 1/2
+  q=71   d=10   L=700    phi=4   cls=2  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=71   d=14   L=980    phi=6   cls=3  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=71   d=35   L=2450   phi=24  cls=12 ram=[2]        predict same  actual same   BAL 1/2
+  q=73   d=8    L=576    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(17, 36), Fraction(1, 2)]  sum=35/36
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-3   -> [Fraction(17, 36)]
+  q=73   d=9    L=648    phi=6   cls=3  ram=[4]        predict same  actual same   BAL 7/20
+  q=73   d=12   L=864    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 5/27
+  q=73   d=18   L=1296   phi=6   cls=3  ram=[0]        predict same  actual same   BAL 52/81
+  q=73   d=24   L=1728   phi=8   cls=4  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(1, 2), Fraction(14, 27)]  sum=55/54
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-5   -> [Fraction(14, 27)]
+        j-class +-7   -> [Fraction(14, 27)]
+        j-class +-11  -> [Fraction(14, 27)]
+  q=73   d=36   L=2592   phi=12  cls=6  ram=[0]        predict same  actual same   BAL 53/81
+  q=79   d=13   L=1014   phi=12  cls=6  ram=[4, 6]     predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(84, 169), Fraction(505, 1014)])
+  q=79   d=26   L=2028   phi=12  cls=6  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=79   d=39   L=3042   phi=24  cls=12 ram=[2]        predict same  actual same   BAL 1/2
+  q=83   d=41   L=3362   phi=40  cls=20 ram=[2]        predict same  actual same   BAL 1/2
+  q=89   d=8    L=704    phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(1, 2), Fraction(6, 11)]  sum=23/22
+        j-class +-1   -> [Fraction(6, 11)]
+        j-class +-3   -> [Fraction(1, 2)]
+  q=89   d=11   L=968    phi=10  cls=5  ram=[4]        predict same  actual same   BAL 4/5
+  q=89   d=22   L=1936   phi=10  cls=5  ram=[0]        predict same  actual same   BAL 48/121
+  q=89   d=44   L=3872   phi=20  cls=10 ram=[0]        predict same  actual same   BAL 49/121
+  q=97   d=8    L=768    phi=4   cls=2  ram=[0]        predict same  actual same   BAL 1/2
+  q=97   d=12   L=1152   phi=4   cls=2  ram=[0]        predict same  actual same   BAL 1
+  q=97   d=16   L=1536   phi=8   cls=4  ram=[0]        predict same  actual SPLIT  BAL [Fraction(7, 12), Fraction(3, 4)]  sum=4/3
+        j-class +-1   -> [Fraction(7, 12)]
+        j-class +-3   -> [Fraction(7, 12)]
+        j-class +-5   -> [Fraction(3, 4)]
+        j-class +-7   -> [Fraction(7, 12)]
+  q=97   d=24   L=2304   phi=8   cls=4  ram=[0]        predict same  actual same   BAL 1/2
+  q=97   d=32   L=3072   phi=16  cls=8  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(11, 24), Fraction(1, 2), Fraction(13, 24)]  sum=3/2
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-3   -> [Fraction(13, 24)]
+        j-class +-5   -> [Fraction(1, 2)]
+        j-class +-7   -> [Fraction(11, 24)]
+        j-class +-9   -> [Fraction(1, 2)]
+        j-class +-11  -> [Fraction(1, 2)]
+        j-class +-13  -> [Fraction(13, 24)]
+        j-class +-15  -> [Fraction(13, 24)]
+  q=97   d=48   L=4608   phi=16  cls=8  ram=[0]        predict same  actual same   BAL 11/36
+  q=101  d=5    L=500    phi=4   cls=2  ram=[10]       predict same  actual SPLIT  BAL [Fraction(29, 30), Fraction(59, 60)]  sum=39/20
+        j-class +-1   -> [Fraction(29, 30)]
+        j-class +-2   -> [Fraction(59, 60)]
+  q=101  d=10   L=1000   phi=4   cls=2  ram=[0]        predict same  actual same   BAL 7/125
+  q=101  d=20   L=2000   phi=8   cls=4  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(119, 250), Fraction(121, 250)]  sum=24/25
+        j-class +-1   -> [Fraction(119, 250)]
+        j-class +-3   -> [Fraction(121, 250)]
+        j-class +-7   -> [Fraction(121, 250)]
+        j-class +-9   -> [Fraction(121, 250)]
+  q=101  d=25   L=2500   phi=20  cls=10 ram=[2]        predict same  actual same   BAL 21/52
+  q=101  d=50   L=5000   phi=20  cls=10 ram=[0]        predict same  actual same   BAL 373/625
+  q=103  d=17   L=1734   phi=16  cls=8  ram=[4, 6]     predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(144, 289), Fraction(865, 1734)])
+  q=103  d=34   L=3468   phi=16  cls=8  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=103  d=51   SKIPPED (est 4.3e+08 ops)
+  q=107  d=53   SKIPPED (est 8.2e+08 ops)
+  q=109  d=9    L=972    phi=6   cls=3  ram=[6]        predict same  actual same   BAL 43/120
+  q=109  d=12   L=1296   phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(25, 54), Fraction(29, 54)]  sum=1
+        j-class +-1   -> [Fraction(29, 54)]
+        j-class +-5   -> [Fraction(25, 54)]
+  q=109  d=18   L=1944   phi=6   cls=3  ram=[0]        predict same  actual SPLIT  BAL [Fraction(157, 243), Fraction(161, 243)]  sum=106/81
+        j-class +-1   -> [Fraction(157, 243)]
+        j-class +-5   -> [Fraction(157, 243)]
+        j-class +-7   -> [Fraction(161, 243)]
+  q=109  d=27   L=2916   phi=18  cls=9  ram=[2]        predict same  actual same   BAL 101/182
+  q=109  d=36   L=3888   phi=12  cls=6  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(79, 162), Fraction(1, 2), Fraction(83, 162)]  sum=3/2
+        j-class +-1   -> [Fraction(79, 162)]
+        j-class +-5   -> [Fraction(1, 2)]
+        j-class +-7   -> [Fraction(79, 162)]
+        j-class +-11  -> [Fraction(83, 162)]
+        j-class +-13  -> [Fraction(83, 162)]
+        j-class +-17  -> [Fraction(1, 2)]
+  q=109  d=54   L=5832   phi=18  cls=9  ram=[0]        predict same  actual same   BAL 325/729
+  q=113  d=7    L=784    phi=6   cls=3  ram=[8]        predict same  actual same   BAL 2/3
+  q=113  d=8    L=896    phi=4   cls=2  ram=[0]        predict same  actual SPLIT  BAL [Fraction(13, 14), Fraction(27, 28)]  sum=53/28
+        j-class +-1   -> [Fraction(13, 14)]
+        j-class +-3   -> [Fraction(27, 28)]
+  q=113  d=14   L=1568   phi=6   cls=3  ram=[0]        predict same  actual same   BAL 32/49
+  q=113  d=16   L=1792   phi=8   cls=4  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(27, 56), Fraction(29, 56)]  sum=1
+        j-class +-1   -> [Fraction(29, 56)]
+        j-class +-3   -> [Fraction(27, 56)]
+        j-class +-5   -> [Fraction(27, 56)]
+        j-class +-7   -> [Fraction(27, 56)]
+  q=113  d=28   L=3136   phi=12  cls=6  ram=[0]        predict same  actual same   BAL 16/49
+  q=127  d=7    L=882    phi=6   cls=3  ram=[12, 18]   predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(24, 49), Fraction(145, 294)])
+  q=127  d=9    L=1134   phi=6   cls=3  ram=[12]       predict same  actual same   BAL 1/2
+  q=127  d=14   L=1764   phi=6   cls=3  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=127  d=18   L=2268   phi=6   cls=3  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=127  d=21   L=2646   phi=12  cls=6  ram=[6]        predict same  actual same   BAL 1/2
+  q=127  d=42   L=5292   phi=12  cls=6  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=131  d=5    L=650    phi=4   cls=2  ram=[24]       predict same  actual same   BAL 1/2
+  q=131  d=10   L=1300   phi=4   cls=2  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=131  d=13   L=1690   phi=12  cls=6  ram=[8, 10]    predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(84, 169), Fraction(841, 1690)])
+  q=131  d=26   L=3380   phi=12  cls=6  ram=[0]        predict SPLIT actual same   BAL 1/2
+  q=137  d=8    L=1088   phi=4   cls=2  ram=[0]        predict SPLIT actual SPLIT  BAL [Fraction(33, 68), Fraction(1, 2)]  sum=67/68
+        j-class +-1   -> [Fraction(1, 2)]
+        j-class +-3   -> [Fraction(33, 68)]
+  q=137  d=17   L=2312   phi=16  cls=8  ram=[4]        predict same  actual same   BAL 3/8
+  q=137  d=34   L=4624   phi=16  cls=8  ram=[0]        predict same  actual same   BAL 144/289
+  q=139  d=23   L=3174   phi=22  cls=11 ram=[4, 6]     predict same  actual same   BAL 1/2
+        (EPS differs only via ramification: [Fraction(264, 529), Fraction(1585, 3174)])
+  q=149  d=37   SKIPPED (est 5.4e+08 ops)
+
+prediction agrees on 72 (q,d) pairs, disagrees on 17  [207s]

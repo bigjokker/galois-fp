@@ -1,0 +1,19 @@
+C:\Users\wwwsa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sympy\polys\polytools.py:6282: SymPyDeprecationWarning: 
+
+Ordered comparisons with modular integers are deprecated.
+
+            Use e.g. int(a) < int(b) instead of a < b.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#modularinteger-compare
+for details.
+
+This has been deprecated since SymPy version 1.13. It
+will be removed in a future version of SymPy.
+
+  return sorted(factors, key=key)
+q=41  s=5    16 primitive fibres  exhaustive
+q=53  s=13   24 primitive fibres  predicted-only
+q=61  s=15   16 primitive fibres  predicted-only
+
+predicted b that work: 288   fail: 0
+fibres where predicted set == actual set exactly: 16   mismatched: 0

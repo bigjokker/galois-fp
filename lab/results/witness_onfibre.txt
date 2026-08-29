@@ -1,0 +1,29 @@
+C:\Users\wwwsa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sympy\polys\polytools.py:6282: SymPyDeprecationWarning: 
+
+Ordered comparisons with modular integers are deprecated.
+
+            Use e.g. int(a) < int(b) instead of a < b.
+
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#modularinteger-compare
+for details.
+
+This has been deprecated since SymPy version 1.13. It
+will be removed in a future version of SymPy.
+
+  return sorted(factors, key=key)
+q = 19  (q = 3 mod 4):  342 fibres = 8 split + 46 exact(L<=2000) + 288 tail
+  K=64:  witnessed -1 : 288 / 288   |  budget hit all-+1 : 0   all-0 : 0   [582 evals, 6s]
+  every non-split tail fibre yields a -1.  No identically-+1 fibre at this q, at any L.
+
+q = 23  (q = 3 mod 4):  506 fibres = 8 split + 52 exact(L<=2000) + 446 tail
+  K=64:  witnessed -1 : 446 / 446   |  budget hit all-+1 : 0   all-0 : 0   [856 evals, 13s]
+  every non-split tail fibre yields a -1.  No identically-+1 fibre at this q, at any L.
+
+q = 29  (q = 1 mod 4):  812 fibres = 10 split + 62 exact(L<=2000) + 740 tail
+  K=64:  witnessed -1 : 740 / 740   |  budget hit all-+1 : 0   all-0 : 0   [1519 evals, 44s]
+  every non-split tail fibre yields a -1.  No identically-+1 fibre at this q, at any L.
+
+q = 37  (q = 1 mod 4):  1332 fibres = 10 split + 80 exact(L<=2000) + 1242 tail
+  K=64:  witnessed -1 : 1242 / 1242   |  budget hit all-+1 : 0   all-0 : 0   [2545 evals, 159s]
+  every non-split tail fibre yields a -1.  No identically-+1 fibre at this q, at any L.
+
