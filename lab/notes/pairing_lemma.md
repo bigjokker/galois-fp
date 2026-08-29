@@ -809,6 +809,70 @@ generalises (γ^{q−1} = c of order d gives L = d(q−1)), but the pairing must
 on a product of (q−1)/d character values, one per orbit, instead of the single
 u of the primitive case — and j is exactly the scalar permuting those orbits.
 
+## Theorem (r = 1): every PRIME has ρ = n. The stratification is trivial over primes.
+
+Let q ≡ 1 (mod 4), r = 1, d = ord(c), n = (q−1)/d, and for an admissible m put
+g = gcd(m+1, d), k = (m+1)/g, ρ = n/gcd(k, n).
+
+**For every prime p = qm + 1 of the fibre, ρ = n.**
+
+*Proof.* Suppose ρ < n. Then some prime ℓ divides gcd(k, n). Since k | m+1 we
+get ℓ | m+1; and ℓ | n | q−1 gives q ≡ 1 (mod ℓ). Hence
+p = qm + 1 ≡ m + 1 ≡ 0 (mod ℓ). As ℓ ≤ n < q < p, p is composite. ∎
+
+So **every stratum but ρ = n is prime-free** — not "collapses to the same
+value", but empty. For primes the whole stratification disappears and
+
+    s(p) = χ_q(1 − α^n)
+
+with no case analysis. Verified: 49,440 genuine primes across 824 r = 1 fibres
+for q ∈ {5,13,17,29,37,41,53,61,73,89,97,101,109,113} — **primes with ρ ≠ n:
+zero**, including the degenerate m0 = 0 fibres.
+
+    q=73  d=8  n=9   ρ=1: 0 prime-adm | ρ=3: 0 | ρ=9: 192, density 1/2
+    q=97  d=16 n=6   ρ=2: 0           | ρ=6: 512, density 3/4
+    q=97  d=32 n=3   ρ=1: 0           | ρ=3: 1024, density 1/2
+    q=113 d=8  n=14  ρ=2: 0           | ρ=14: 384, density **1**
+    q=113 d=16 n=7   ρ=1: 0           | ρ=7: 768, density 1/2
+
+Every class-level split chased earlier sits entirely in the dead strata:
+q=73 ρ=1 gives 1/2,1/2,1/4,1/4; q=97 d=16 ρ=2 gives 1/4 and 3/4; q=113 d=8 ρ=2
+gives 1/2,1/2,3/4,3/4. **None of it is realised by a prime.**
+
+**This is a worse artefact than the j-class one, with a different cause.** The
+j-classes dissolved by *averaging* — prime-free classes were scattered through
+all of them and removing them equalised the densities. The ρ strata are
+*annihilated*: ρ < n is literally the same set as "p divisible by some ℓ | n".
+
+**q = 113, d = 8 survives at density 1.** The one observed slice that would
+*raise* ε_q rather than pin it is intact: all 384 ρ=14 classes prime-admissible
+and all −1, in each of m0 = 17,43,68,94; 2000 real primes to 1.14·10^8, all −1,
+two re-derived from the raw discriminant with `fpcore.symbol` and no fibre
+machinery. Since ρ=2 is prime-free, the *whole fibre* is identically −1 over
+primes.
+
+**What survives as a prime-level invariant is (q, d).** In every row computed
+the live density is constant across all fibres and all j-classes of that row.
+The remaining r = 1 question is therefore a statement about one list, indexed by
+(q, d) alone.
+
+**Caveat, and it is the one place the collapse does not help.** ρ = n being the
+only live stratum does *not* make class counts safe inside it. Over the 178
+fibres with 2 ≤ d ≤ 12, class and prime density of the ρ=n stratum differ in
+**82**: q=13 d=6 class 1/9 → prime 0; q=29 d=7 class 16/49 → 1/3; q=37 d=9
+class 52/81 → 2/3. In the five rows above every ρ=n class happens to be
+prime-admissible — luck, a property of P there, not a theorem.
+
+**The identically-+1 list is therefore larger than the census reported**, at
+(q,d) level: q=13 d=6, 17 d=2, 37 d=3, 37 d=6, 41 d=2, 41 d=4, 61 d=3, 61 d=6,
+73 d=2, 73 d=6, 73 d=12, 89 d=2, 97 d=2, 97 d=6, 101 d=10, 109 d=6, 113 d=2,
+113 d=4. Identically −1: q=5 d=2, 13 d=2, 13 d=3, 17 d=4, 29 d=2, 37 d=2,
+41 d=10, 53 d=2, 61 d=2, 61 d=10, 73 d=3, 73 d=4, 89 d=4, 97 d=3, 97 d=4,
+97 d=12, 101 d=2, 101 d=5, 109 d=2, 109 d=3, 113 d=8.
+
+*Scope: r = 1 throughout. ρ is an r = 1 object and nothing here constrains
+r ≠ 1.*
+
 ## The j-class density structure is a CLASS ARTEFACT, end to end
 
 All 92 (q,d) rows of `results/jclass_scan.txt`, 980 r = 1 fibres, q = 11..149,
