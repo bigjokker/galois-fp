@@ -19,7 +19,7 @@ Status, three separate items — the first two are densities, the third is not:
 * **q ≡ 1 (mod 4), c primitive** (h irreducible): density exactly 1/2.
   **Proved.** Inversion times an F_q-scalar, with the j rule 2j ≡ 4ι+1 (mod s)
   derived as the solvability condition.
-* **q ≡ 1 (mod 4), c arbitrary**: s(m) = χ_q(1 − α^ρ) on each ρ-stratum.
+* **q ≡ 1 (mod 4), every c ∉ {0,1}**: s(m) = χ_q(1 − α^ρ) on each ρ-stratum.
   **The formula is proved; the density is not.** The density is the proportion
   of −1 on the short list {α^ρ}, which depends on the ρ-stratum and on the
   j-class and **has not been identified**. This is a reduction, not a closed
@@ -453,7 +453,9 @@ conjectural. The 70 on-fibre (q,d) pairs below are corroboration of a proof, not
 a substitute for one.
 
 **Verification (on-fibre).** `10_onfibre_q3.py`: m = m_0 + qt stepping by 2q.
-70 (q,d) pairs, q ≡ 3 (mod 4), q ≤ 139, every d | q−1 with d > 1: **BAL = 1/2
+70 (q,d) pairs, q ≡ 3 (mod 4), q ≤ 139, every d | q−1 with **1 < d < q−1**
+(the script skips d = q−1 as well as d = 1 — the primitive case is covered
+separately, not by these rows): **BAL = 1/2
 in every one, 0 splits.** Spot-checked against `core` at 0 mismatches.
 
 *An earlier scan (`09_jclass.py`) iterated m over range(0, P, 2), never
@@ -807,7 +809,10 @@ q = 97 d = 16 (n = 6), q = 109 d = 18 (n = 6), q = 113 d = 8 (n = 14).
 
 ## Theorem: the q ≡ 1 fibre symbol is ALWAYS one quadratic character
 
-Let q ≡ 1 (mod 4), r = 1, c any non-zero value, d = ord(c), n = (q−1)/d. For an
+Let q ≡ 1 (mod 4), r = 1, **c ∉ {0, 1}**, d = ord(c), n = (q−1)/d.
+(**c ≠ 1 is required and was missing.** At c = 1 every γ_i = 0, so every
+u_i = 0 and every w_i = 0: the w take ONE value, not ρ, and {0} is not a
+μ_ρ coset. Verified at q = 13, 17, 29. c = 0 is outside the framework.) For an
 admissible m put g := gcd(m+1, d), k := (m+1)/g, and
 
     **ρ := n / gcd(k, n)**.
