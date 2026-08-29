@@ -7,12 +7,18 @@ Status, three separate items — the first two are densities, the third is not:
   (i) *not* every c — c = 1 gives d = 1, γ = 0, L = 1 (not d(q−1)), and the
   prescribed Δm = qL is then **odd**, breaking parity; c = 0 (m_0 = q−1) is
   outside the framework (h = x^{q−1}). Both fall under the L-odd case Δm = 2qL.
-  (ii) what is proved is **BAL**, not the certificate density EPS that ε_q is
-  defined by. They differ whenever the fibre ramifies, which for **odd d** is a
-  positive fraction of the period: measured EPS = 4/9 (q=7, m_0=1), 4/9 (q=19,
-  m_0=6), 19/42 (q=43, m_0=5), 12/25 and 73/150 (q=31) — every one with
-  BAL = 1/2. For even d no m ramifies (u_i = −1 would force d | m+1 with d and
-  m both even), so there BAL = EPS.
+  (ii) what is proved is **BAL over classes**. Transfer to primes needs the
+  lemma below (pairings preserve prime-carrying classes) **and** the fact that
+  in these fibres the ramified classes are prime-free — see TRAP 5.
+
+  *An earlier version of this bullet claimed EPS ≠ 1/2 for odd d, citing 4/9
+  (q=7, m_0=1), 4/9 (q=19, m_0=6), 19/42 (q=43), 12/25 and 73/150 (q=31). Those
+  are **class** densities. Restricted to prime-admissible classes every one of
+  them is exactly 1/2 with ZERO ramified classes — matching PARI's 136,890 real
+  primes in (7;1,1) at EPS = 0.500325. The correction was itself an artefact of
+  counting over all classes. Ramification is not universally invisible, though:
+  8 of 2568 prime-admissible classes at q = 7 are ramified, and PARI found real
+  ramified primes, e.g. (p,q) = (2677,7) in fibre (3,4).*
   Two translations
   (Δm = qL/2 for even d via Step 2; Δm = qL for odd d, no Step 2), Step 0
   proved, on-fibre. 70 (q,d) pairs corroborate.
@@ -525,6 +531,36 @@ not one either: it is a sufficient condition. The open case is v₂(L) ≥ 2 at
 q ≡ 3, where Step 2 was the r = 1 tool and is no longer available. Item 20
 (equal-degree ⇒ BAL = 1/2) is not subsumed — 2+2+2+2+2 has L = 20, v₂ = 2,
 BAL = 1/2, which this theorem does not reach.
+
+## TRAP 5: class density is not prime density
+
+**Independent PARI/GP verification (15,931 (p,q) pairs, disc(f_p) built from the
+definition, 0 disagreements) confirmed the fibre machinery — and exposed a
+measurement error in this project's own tooling.**
+
+`core.fibre_counts` / `period_m` average over **every** admissible class mod
+P = lcm(L,4). Only the classes with gcd(qm + r, P) = 1 carry primes. Averaging
+over all of them is a different quantity:
+
+    eps_7 over all classes       = 3541/7182 = 0.49304    WRONG
+    eps_7 over prime-admissible  =  323/648  = 0.498457   the published value,
+                                   and 0.498554 ± 0.0002 over 5.76M real primes
+
+**eps_3 and eps_5 agree under both conventions**, which is exactly why the
+anchor check on q = 3, 5 passed earlier in this session and gave false
+confidence. Sharper still: q = 13, fibre (12,1) has BAL = 2/3 over all classes,
+while **all 37,011 primes p < 10^8 in that fibre have symbol −1** (density 1).
+
+Use `core.fibre_counts_primes` for anything about primes. It reproduces
+eps_3 = 1/2, eps_5 = 11/20 and eps_7 = 323/648 exactly.
+
+**Scope of the damage.** Every density reported in this note from
+`fibre_counts` — the census, the j-class tables (16/49, 1/27, 29/54, 43/90,
+681/1330, 7/15, 1/4), the v₂(L) verifications — is a **class** density. As a
+statement about integers m each is correct; as a statement about primes none has
+been re-derived. The pairing theorems are unaffected in substance, because the
+lemma below shows the maps preserve prime-carrying classes, so a BAL of 1/2 over
+all classes restricts to 1/2 over the prime-carrying ones.
 
 ## Transfer to primes: the pairing maps preserve prime-carrying classes
 

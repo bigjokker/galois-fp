@@ -304,6 +304,55 @@ def period_m(q, r, m0):
     return admissible_m(q, r, m0, count=P // 2)
 
 
+# TRAP 5.  A class c mod P carries primes only if gcd(qc + r, P) = 1.  The
+# admissible m cover EVERY class mod P, but the prime-free ones contribute
+# nothing to a density over primes, and averaging over all classes is simply a
+# different quantity.  This is not pedantry:
+#
+#   eps_7 over all classes        = 3541/7182 = 0.49304   (WRONG)
+#   eps_7 over prime-admissible   =  323/648  = 0.49846   (the published value,
+#                                                          and 0.498554 +- 0.0002
+#                                                          over 5.76M real primes)
+#
+# eps_3 and eps_5 agree under both conventions, which is exactly why an anchor
+# check on q = 3, 5 passes and gives false confidence.  Likewise q=13 (12,1):
+# all classes give BAL 2/3, while all 37011 primes p < 10^8 in that fibre have
+# symbol -1 (density 1).  Use fibre_counts_primes for anything about primes.
+
+
+def prime_admissible(q, r, m0, m):
+    """Does the class of m carry primes?  gcd(qm + r, P) = 1, P = lcm(L, 4).
+
+    gcd(qm + r, q) = gcd(r, q) = 1 already since 0 < r < q, so only P matters.
+    """
+    _, L = fibre(q, r, m0)
+    P = L * 4 // gcd(L, 4)
+    return gcd(q * m + r, P) == 1
+
+
+def fibre_counts_primes(q, r, m0):
+    """(neg, pos, zero) over the PRIME-ADMISSIBLE classes of one period.
+
+    This is the object a statement about primes needs.  fibre_counts() counts
+    over all admissible classes and is the right object only for a statement
+    about integers m.  See TRAP 5.
+    """
+    _, L = fibre(q, r, m0)
+    P = L * 4 // gcd(L, 4)
+    neg = pos = zero = 0
+    for m in period_m(q, r, m0):
+        if gcd(q * m + r, P) != 1:
+            continue
+        s = symbol_from_fibre(q, r, m0, m)
+        if s == -1:
+            neg += 1
+        elif s == 1:
+            pos += 1
+        else:
+            zero += 1
+    return neg, pos, zero
+
+
 def fibre_counts(q, r, m0):
     """(neg, pos, zero) over one period, sampled on-fibre.
 
