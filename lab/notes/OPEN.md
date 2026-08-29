@@ -45,15 +45,20 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 
 ## C. r = 1, q ≡ 1 (mod 4), general c
 
-8. **LARGELY VOID — the j-class has no effect on prime densities.** All 18
-    j-class splits dissolve over primes (92 rows, 980 fibres); every row has one
-    BAL_prime. The α^ρ list may still differ by j-class as an identity about
-    classes, but it does not produce a density difference, so the motivation
-    for identifying it is gone. Superseded question: The one
-   live item from the session that produced the single-character theorem. Pure
-   `F_q^×` arithmetic — no new machinery needed.
-9. **VOID — j-freeness is universal over primes.**  Old question: `q = 97`: `ρ = 6` frozen at 3/4 across
-   all four `j`-classes while `ρ = 2` splits. `q = 73`: the reverse.
+8. **STILL LIVE as an identification; dead only as an explanation of splits.**
+    The j-class has no effect on prime density (18/18 splits dissolve), so
+    identifying {α^ρ} is no longer how one explains why j-classes disagree —
+    they don't. But s(m) = χ_q(1 − α^ρ) remains an identity at each m, and
+    identifying the list is still how one would *prove* a prime density,
+    including the values 0 and 1. Motivation changed, not removed.
+
+9. **SPLIT IN TWO.** "j-freeness is universal over primes" — now known, 92 rows.
+    But the other half was never measured: the old example was ρ = 6 frozen at
+    3/4 while ρ = 2 split *by j*. The j-half is dead; whether **ρ = 6 is still
+    3/4 over primes, and whether ρ = 2 and ρ = 6 still differ from each other**,
+    was not the measurement taken. Do not read the j-result as "strata do not
+    matter". Item 7 (density-1 slices) is the same family and equally untested.
+
 10. **Characterise the unbalanced lists.** `q = 17, d = 2` freezes at density 0;
     `q = 113, ρ = 14` at density 1. Any identification of `{α^ρ}` must permit
     both.

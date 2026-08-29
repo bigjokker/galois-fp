@@ -855,11 +855,19 @@ with class 7/125 — prime counts (0,288,0) and (0,400,0). Real primes: 0 of 108
 and 0 of 1119 give −1 below 2·10^8.
 
 **What this does NOT touch.** The ρ theorem s(m) = χ_q(1 − α^ρ) is an identity
-at each individual m, proved, and independent of any density. The pairing
-theorems are likewise untouched — and in fact vindicated: they predict 1/2, the
-splits said otherwise, and over primes the splits vanish and 1/2 is what
-remains. What dissolves is the *density structure* built on top: the j-class
-dependence, the v₂(d) = e split criterion, and the spectrum of exotic rationals.
+at each individual m, proved, and independent of any density.
+
+The pairing theorems are untouched, but **not "vindicated"** — they were never
+at war with these splits. The splits live at q ≡ 1 with general c, where there
+has never been a pairing proof of 1/2; they were never a counterexample to
+anything proved. And 652/980 fibres at 1/2 is the *typical prime value*, not a
+theorem for general c. The remaining 328 are the live empirical object — now
+j-free, with small denominators.
+
+What dissolves is the density structure built on top: the j-class dependence,
+the v₂(d) = e split criterion, and the spectrum of exotic rationals. **Item 22
+is not in this table** — q = 11 is ≡ 3 (mod 4) and the unclassified T : u ↦ −iu
+sits on a different fibre. It stays parked.
 
 ## The q ≡ 1 table: what the right contraction is
 
