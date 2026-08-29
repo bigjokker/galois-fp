@@ -112,14 +112,32 @@ needs all roots of one degree d (Kummer). New item:
 
     And the taxonomy is **not exhaustive**, which is the important part:
 
-22. **The unclassified pairing mechanism — most promising open lead.** An
-    exhaustive search over *every* fibre-preserving translation (the admissible
-    m form one progression of step 2q and period N = lcm(L,4)/2, so Δm = qa with
-    a = 2k is an index shift; scanning k = 1..N−1 covers all of them) found
-    symbol-flipping pairings at **v₂(L) = 4** fibres — exactly where the refuted
-    taxonomy said none could exist. At least two such at q = 11, independently
-    reproduced. Whatever pairs those fibres is neither of the two known
-    mechanisms. Identifying it is the best lead in the project.
+22. **A THIRD pairing mechanism exists. Confirmed, and not absorbed by item 23.**
+    Exhaustive scan over every fibre-preserving translation at q = 11 (the
+    admissible m form one progression of step 2q and period N = lcm(L,4)/2, so
+    Δm = q·2k is the index shift k; k = 1..N−1 covers all of them), capped at
+    N ≤ 4000:
+
+        40 fibres with v₂(L) ≥ 2 admit a full-period symbol-flipping pairing
+        38 of them at v₂(L) = 2  —  the Step-2 window
+         2 of them at v₂(L) = 4  —  UNCLASSIFIED:
+
+        (r,m0)   degrees   mults        L    v₂  L_odd  v₂  BAL   shift
+        (5,10)   1^5+4     1,1,1,1,2,1  16   4    16    4   1/2   k=2
+        (6, 0)   1^5+4     1,1,1,1,2,1  16   4    16    4   1/2   k=2
+
+    k = 2 means Δm = 4q = 44, i.e. Δm ≡ 12 (mod L=16) — **neither 0 nor L/2**.
+    So γ_i^{Δm} is neither 1 nor −1: the u_i genuinely MOVE and the symbol flips
+    anyway. Neither known mechanism (character-preserved + sign-flip, or
+    u ↦ −u + Step 2) applies. **Identifying this Δm is the best lead open.**
+
+    **Item 23 does not eat it**: L_odd = L = 16 on both, so even-multiplicity
+    roots do not lower the valuation. The fork was run and came out this way.
+
+    Two scope corrections to the referee's report of this: it is 40 fibres, not
+    two; and the 4+6 fibres are NOT among them. (2,6) admits no pairing — BAL =
+    681/1330 forbids one, since a full-period flipping bijection forces BAL =
+    1/2. (2,7) has N = 15960 and was never tested; its status is unknown.
 
 23. **L is the wrong invariant: use odd multiplicity only.** A root of *even*
     multiplicity enters the residue as N(z)^mult, a perfect square, so its
@@ -158,7 +176,8 @@ needs all roots of one degree d (Kummer). New item:
 ## E. Publication
 
 15. **§7 of the published note is partly outdated.** It lists the `q ≡ 3`
-    primitive-`r=1` family as open; it is now proved, for all `c`.
+    primitive-`r=1` family as open; it is now proved — for every `c` with
+    `d > 1`, and for **BAL**, not the EPS that ε_q is defined by.
 16. **Do the two new theorems justify a second note or a revision?** The
     `q ≡ 3` all-`c` result and the single-character theorem
     `s(m) = χ_q(1 − α^ρ)` are the candidates.
@@ -176,7 +195,10 @@ needs all roots of one degree d (Kummer). New item:
 
 ## Done
 
-- **`q ≡ 3 (mod 4)`, every `c`: density exactly 1/2.** Two translations
+- **`q ≡ 3 (mod 4)`, every `c` with `d > 1`: BAL exactly 1/2** (plus the split
+  case by Δm = 2qL). NOT "every c" — c = 1 and c = 0 are excluded — and BAL,
+  not the EPS that ε_q consumes: odd d ramifies, contributing 4/9, 12/25, 40/81
+  rather than 1/2. Two translations
   (`Δm = qL/2` for even `d` via Step 2; `Δm = qL` for odd `d`, no Step 2), with
   `L = d(q−1)` proved as an lcm over the `n` orbits. `notes/pairing_lemma.md`.
 - **`q ≡ 1 (mod 4)`, `c` primitive: density exactly 1/2.** Inversion times an
