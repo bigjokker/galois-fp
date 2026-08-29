@@ -809,6 +809,49 @@ generalises (γ^{q−1} = c of order d gives L = d(q−1)), but the pairing must
 on a product of (q−1)/d character values, one per orbit, instead of the single
 u of the primitive case — and j is exactly the scalar permuting those orbits.
 
+## C8 CLOSED (as a closed form): the prime density is a count of generators
+
+For q ≡ 1 (mod 4), r = 1, c = 1 + m_0, d = ord(c): over prime-admissible m the
+value α^n ranges over **exactly the φ(d) generators of ⟨c⟩**, uniformly —
+
+    {α^n} = { c^j : gcd(j, d) = 1 }
+
+and therefore, since s(p) = χ_q(1 − α^n) with ρ = n for every prime,
+
+    **density(q, d) = #{ j ∈ (Z/d)^× : χ_q(1 − c^j) = −1 } / φ(d).**
+
+It depends on **(q, d) only** — matching the measured invariant — and needs no
+fibre machinery at all: take the order-d subgroup of F_q^×, count how many of
+its generators γ have 1 − γ a non-residue.
+
+**Status: verified, not proved.** 69 fibres at q = 13, 17, 29, 37, 41 with
+L ≤ 420, **0 mismatches** against `fibre_counts_primes`; 23 (q,d) rows, none
+carrying more than one density. A proof owes three steps: α^n ∈ ⟨c⟩; it is a
+*generator*, i.e. gcd(j,d) = 1; and each generator is hit equally often.
+
+The exponent sets are visibly the units: {1,2} mod 3, {1,3} mod 4, {1,3,5,7}
+mod 8, {1,3,5,9,11,13} mod 14, {1,5,7,11,13,17} mod 18, {1,7,11,13,17,19,23,29}
+mod 30.
+
+**It reproduces every hard case, from the formula alone:**
+
+    q=113 d=8   -> 1      whole fibre identically −1 (2000 real primes)
+    q=101 d=10  -> 0      identically +1 (0 of 1119 primes)
+    q=73  d=12  -> 0      identically +1
+    q=97  d=16  -> 3/4    the C9 example
+    q=29  d=7   -> 1/3    the census's "16/49"
+    q=17  d=2   -> 0      the freeze
+    q=37  d=6   -> 0
+
+and, as an independent consistency check, **d = q−1 gives exactly 1/2 at every
+q ≡ 1 (mod 4) up to 149, 0 deviations** — the primitive theorem, re-derived
+from a generator count rather than from the inversion pairing.
+
+So the identically-+1 rows are exactly those where 1 − γ is a residue for every
+generator γ of the order-d subgroup, and identically-−1 those where it is a
+non-residue for all of them. C10's requirement that the list permit 0 and 1 is
+satisfied structurally.
+
 ## Theorem (r = 1): every PRIME has ρ = n. The stratification is trivial over primes.
 
 Let q ≡ 1 (mod 4), r = 1, d = ord(c), n = (q−1)/d, and for an admissible m put

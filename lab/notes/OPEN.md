@@ -47,13 +47,17 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 
 ## C. r = 1, q ≡ 1 (mod 4), general c
 
-8. **THE REMAINING r = 1 QUESTION, now much smaller: which α^n occur among
-    prime-admissible m, indexed by (q, d) alone.** No j (18/18 splits dissolve),
-    no ρ (every stratum but ρ = n is prime-free, by the compositeness theorem).
-    Over primes s(p) = χ_q(1 − α^n) with no case analysis, and the live density
-    is constant across all fibres and j-classes of a (q,d) row — matching the
-    j-class table's one BAL_prime per row. This is still how one would *prove* a
-    prime density, including the 0 and 1 that item 10 requires.
+8. **CLOSED as a closed form; open as a proof.** Over primes
+    {α^n} = the φ(d) generators of ⟨c⟩, so
+
+        density(q,d) = #{ j in (Z/d)^x : chi_q(1 - c^j) = -1 } / phi(d)
+
+    depending on (q,d) alone, with no fibre machinery. Verified on 69 fibres,
+    0 mismatches; reproduces every hard case (113/8 → 1, 101/10 → 0, 97/16 →
+    3/4, 29/7 → 1/3, 17/2 → 0) and gives 1/2 for d = q−1 at every q ≡ 1 up to
+    149, independently re-deriving the primitive theorem. **A proof owes:**
+    α^n ∈ ⟨c⟩; it is a generator; each generator is hit equally often. That is
+    now the whole remaining r = 1 question.
 
 9. **ANSWERED BY DELETION.** The question was whether different ρ give different
     prime densities. Neither: **every stratum but ρ = n is empty of primes.**
