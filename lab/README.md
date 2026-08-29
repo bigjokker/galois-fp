@@ -57,7 +57,9 @@ Full write-up with proofs: `notes/pairing_lemma.md`. Open items:
                        _sym2.py evaluate the symbol off-fibre). Do not reuse
                        without reading notes/pairing_lemma.md first.
     notes/             pairing_lemma.md (the write-up), OPEN.md (todo)
-    results/           computed data, referenced from the write-up
+    results/           computed data. results/README.md records provenance
+                       and marks superseded files -- several predate later
+                       corrections (EPS vs BAL, off-fibre sampling).
     paper/             literature. **Local only, gitignored** — third-party
                        PDFs, not ours to redistribute.
 

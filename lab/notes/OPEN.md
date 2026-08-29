@@ -92,4 +92,6 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
   2716/2716.
 - **Refuted:** the `{0,1/2,1}` trichotomy (`q = 11`); the `v₂(d) = v₂(q−1)`
   split criterion as stated (it was reading a `q mod 4` effect); cyclotomic
-  `(i,j)_e` tables as a formula for the density.
+  `(i,j)_e` tables as a formula for the density; **rule D of
+  `results/03_r1_rules.txt`** (`q ≡ 3`, `ord(c)` odd ⟹ `1/2 − 1/(2 ord²)`) —
+  it was measured in EPS, and BAL is exactly `1/2` for every `q ≡ 3` fibre.
