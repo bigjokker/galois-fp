@@ -253,6 +253,78 @@ def fibre_density(q, r, m0, primes):
     return (good / tot if tot else float("nan")), tot
 
 
+# -------------------------------------------------------- on-fibre sampling --
+
+# TRAP 3.  The fibre (r, m0) is the set of primes p = qm + r with m = m0 (mod q).
+# Iterating m by 2 from the right parity does NOT enforce m = m0 (mod q).  This
+# recurred SEVEN times before being fixed here rather than in each script, but
+# it is consequential in only two of the three ways it shows up:
+#
+#   * Full-period BAL/EPS: HARMLESS, provably.  gcd(q, P) = 1, so the on-fibre
+#     progression m_start + 2q*i has orbit size P//2 mod P and covers exactly
+#     the residues of the right parity -- the same classes a raw range(0,P,2)
+#     covers.  Same multiset, same density, at q = 3 (mod 4) too.  Measured:
+#     the loops differ pointwise on 32/50 ... 286/450 samples and give identical
+#     BAL at q = 11,19,23,31 and q = 13,17,29 alike.
+#   * Pairing maps: FATAL.  A map m -> am + b must send primes of the fibre to
+#     primes of the fibre.  Delta m = L/2 does not (L = 1 mod q), so it pairs
+#     across fibres and proves nothing.
+#   * Truncated samples: FATAL.  A search stopping after K terms reads a
+#     prefix, and the on-fibre and off-fibre prefixes are different sets.
+#
+# Use these iterators and the question does not arise.
+
+
+def admissible_m(q, r, m0, count=None, start=0):
+    """Yield m with m = m0 (mod q) and p = qm + r ODD, increasing.
+
+    q odd gives p = qm + r = m + r (mod 2), so p odd forces m = r+1 (mod 2).
+    With gcd(q, 2) = 1 those two congruences pin m modulo 2q, so the admissible
+    m are an arithmetic progression of common difference 2q.
+    """
+    t0 = (r + 1 - m0) % 2
+    m = m0 + q * t0 + 2 * q * start
+    i = 0
+    while count is None or i < count:
+        yield m
+        m += 2 * q
+        i += 1
+
+
+def period_m(q, r, m0):
+    """One full period of admissible m: every symbol class exactly once.
+
+    symbol_from_fibre depends on m only through gamma^m (period L) and
+    (p-1)/2 mod 2 (period 4 in m), so through m mod P, P = lcm(L, 4).  The
+    admissible m step by 2q with gcd(2q, P) = 2 (q is coprime to L, which
+    divides q^d - 1), so their orbit mod P has exactly P // 2 elements.
+    """
+    _, L = fibre(q, r, m0)
+    P = L * 4 // gcd(L, 4)
+    return admissible_m(q, r, m0, count=P // 2)
+
+
+def fibre_counts(q, r, m0):
+    """(neg, pos, zero) over one period, sampled on-fibre.
+
+    neg/(neg+pos)          BAL: the -1 : +1 balance, ramified m excluded.
+    neg/(neg+pos+zero)     EPS: fraction of primes giving a -1 certificate;
+                           a ramified p certifies nothing, so it belongs in
+                           the denominator.
+    These agree iff zero == 0.  Conflating them is TRAP 4.
+    """
+    neg = pos = zero = 0
+    for m in period_m(q, r, m0):
+        s = symbol_from_fibre(q, r, m0, m)
+        if s == -1:
+            neg += 1
+        elif s == 1:
+            pos += 1
+        else:
+            zero += 1
+    return neg, pos, zero
+
+
 # ---------------------------------------------------------------- selftest --
 
 def selftest():

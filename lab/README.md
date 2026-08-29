@@ -82,10 +82,24 @@ test is what caught them.
    symbol instead is wrong exactly when `χ_q(−1) = +1`, i.e. `q ≡ 1 (mod 4)`.
    Corrupts `q = 5,13,17,29`, invisible at `q = 3,7,11,19,23`.
 2. **Off-fibre evaluation.** The fibre is `m ≡ m0 (mod q)`. Iterating `m` by 2
-   from the right parity does *not* enforce that. Harmless for `q ≡ 1 (mod 4)`
-   (no archimedean factor, and `gcd(q,L) = 1`), wrong for `q ≡ 3`. This error
-   recurred **seven times** in different disguises; if a result at `q ≡ 3`
-   looks clean, check the sampling before believing it.
+   from the right parity does *not* enforce that. This recurred **seven times**
+   in different disguises — but it matters in only two of them, and it is worth
+   knowing which:
+
+   * **Full-period densities: harmless, provably.** `gcd(q, P) = 1`, so the
+     on-fibre progression `m_start + 2q·i` has orbit size `P//2` mod `P` and
+     covers exactly the residues of the right parity — the same set a raw
+     `range(0, P, 2)` covers. Same multiset, same density. Measured: the two
+     loops differ *pointwise* on 32/50 … 286/450 samples and give identical BAL
+     at `q = 11,19,23,31` and `q = 13,17,29` alike.
+   * **Pairing maps: fatal.** A map `m ↦ am + b` must send primes of the fibre
+     to primes of the fibre. `Δm = L/2` does not (`L ≡ 1 mod q`), so it pairs
+     across fibres and proves nothing. This is the error that mattered.
+   * **Truncated samples: fatal.** A witness search that stops after `K` terms
+     reads a *prefix*, and the on-fibre and off-fibre prefixes are different
+     sets. Full-period reasoning does not rescue it.
+
+   Use `core.admissible_m` / `core.period_m` and the question does not arise.
 3. **Measure.** Only one parity of `m` is admissible (`p = qm + r` odd), and
    ramified `m` (symbol 0) belong in the denominator for a certificate density
    but not for the `−1 : +1` balance. Conflating those two is what made

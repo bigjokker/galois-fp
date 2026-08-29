@@ -23,10 +23,13 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
    `φ(q−1)` of `q(q−1)` fibres: mass `~1/q`. Nothing yet bounds `ε_q`.
 4. **`r ≥ 2`: no structural results.** `04_r2.py` opened this. The Kummer
    structure is gone; the only handle is `g(β) = m0 / H_r(β)` with
-   `H_r = Σ_{k<r} 1/(x−k)`.
+   `H_r = Σ_{k<r} 1/(x−k)`. Literature for this lives in
+   `paper/13-r2-rational-frobenius/` (empty of PDFs until B5); do not mix
+   into `05-kummer-character-sums`.
 5. **Does the `ρ`-stratification survive past `r = 1`?** i.e. does
    `s(m) = χ_q(1 − α^ρ)` have an analogue when `h` is not a Kummer equation?
-   Cheapest generalisation question available; decides how much (C7) is worth.
+   Cheapest generalisation question available; decides how much (C8) is worth.
+   First check: is `φ(u)/u` a scalar in `F_q` for `r=2`? Prediction: no.
 6. **Is any non-split fibre with large `L` identically `+1`?** Witnessed *no*
    at `q = 19, 23, 29, 37` only (`08_witness.py`). Four primes is not a theorem.
 7. **Do the density-1 slices generalise?** `q = 113, ρ = 14` sits at density 1
@@ -46,6 +49,47 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
     both.
 11. **Is there a `q ≡ 1` analogue of the two-translation proof for general `c`,**
     or is `ρ` genuinely where that line ends?
+
+## B5 result (settled) and what it leaves
+
+**Frobenius does not act on `u` by a scalar for `r >= 2`.** Measured
+`u^(q-1) in F_q`: `r=1` 624/624, `r=2` 1/684, `r=3` 6/708 (degrees > 2; the
+`d=2` rows are the `N(u)/u^2` artefact and are not evidence). So Step 1 — and
+with it (1'), the rho-stratification and `s(m) = chi_q(1 - a^rho)` — is
+**specific to r = 1**. The exceptional-polynomial literature (folder 13) stays
+unfetched.
+
+**REFUTED: "BAL = 1/2 for every fibre at q = 3 (mod 4)".** Fails at q = 11 on
+six fibres of degree pattern 2+4+4: `(3,1),(5,9),(6,1),(8,9)` at L=240 give
+BAL = 7/15, and `(3,6),(8,4)` at L=16 give BAL = 1/4. BAL = EPS on all six, so
+it is not ramification. Holds at q = 3, 7 (all fibres) and at q = 19, 23
+(within L <= 2000, i.e. 16% and 12% of fibres — weak).
+
+*Process note: the (3,6) fibre at 1/4 was already in `README.md` and
+`../NOTES.md` as the counterexample to the {0,1/2,1} trichotomy. The prediction
+was refutable from data in this repo before it was run.*
+
+**What the failures have in common:** mixed factor degrees. The r=1 theorem
+needs all roots of one degree d (Kummer). New item:
+
+20. **Equal-degree, one-directional.** PREDICTION for `q = 3 (mod 4)`:
+    (a) all non-split factors of equal degree ⟹ BAL = 1/2;
+    (b) BAL ≠ 1/2 ⟹ the fibre is mixed-degree;
+    (c) the converse of (b) is **false** — mixed-degree fibres may still be 1/2.
+
+    Confirmed on the five `04_r2.txt` rows with `fibre_counts` (BAL, not the
+    file's EPS column):
+
+        q=7  (2,4) 3+3         BAL 1/2      EPS 85/171       equal
+        q=11 (2,2) 5+5         BAL 1/2      EPS 40262/80525  equal
+        q=11 (2,9) 2+2+2+2+2   BAL 1/2      EPS 1/2          equal
+        q=11 (2,8) 2+3+3       BAL 1/2      EPS 332/665      MIXED  <- (c)
+        q=11 (2,6) 4+6         BAL 681/1330 = EPS            MIXED  <- (b)
+
+    So "mixed" is not the complement of "balanced": 2+3+3 is mixed and exactly
+    1/2, and 2+4+4 is 1/2 at r=2 while being 7/15 and 1/4 at r=3. The same
+    degree pattern goes either way. Still a prediction, not a result: needs
+    mixed-degree fibres at q = 19, 23 examined **individually**, not aggregated.
 
 ## D. Verification debt
 
