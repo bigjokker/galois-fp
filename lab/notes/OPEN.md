@@ -45,10 +45,14 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 
 ## C. r = 1, q ≡ 1 (mod 4), general c
 
-8. **Identify `{α^ρ}` per `ρ`-stratum as a function of the `j`-class.** The one
+8. **LARGELY VOID — the j-class has no effect on prime densities.** All 18
+    j-class splits dissolve over primes (92 rows, 980 fibres); every row has one
+    BAL_prime. The α^ρ list may still differ by j-class as an identity about
+    classes, but it does not produce a density difference, so the motivation
+    for identifying it is gone. Superseded question: The one
    live item from the session that produced the single-character theorem. Pure
    `F_q^×` arithmetic — no new machinery needed.
-9. **Why is `j`-freeness stratum-local?** `q = 97`: `ρ = 6` frozen at 3/4 across
+9. **VOID — j-freeness is universal over primes.**  Old question: `q = 97`: `ρ = 6` frozen at 3/4 across
    all four `j`-classes while `ρ = 2` splits. `q = 73`: the reverse.
 10. **Characterise the unbalanced lists.** `q = 17, d = 2` freezes at density 0;
     `q = 113, ρ = 14` at density 1. Any identification of `{α^ρ}` must permit

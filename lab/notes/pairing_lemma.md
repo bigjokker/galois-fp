@@ -809,6 +809,58 @@ generalises (γ^{q−1} = c of order d gives L = d(q−1)), but the pairing must
 on a product of (q−1)/d character values, one per orbit, instead of the single
 u of the primitive case — and j is exactly the scalar permuting those orbits.
 
+## The j-class density structure is a CLASS ARTEFACT, end to end
+
+All 92 (q,d) rows of `results/jclass_scan.txt`, 980 r = 1 fibres, q = 11..149,
+re-derived with `fibre_counts_primes`.
+
+**Zero of 18 j-class splits survive over primes.** Every one of the 92 rows has
+**exactly one** BAL_prime, shared by all its j-classes. The class of j in
+(Z/d)^×/{±1} has **no effect on the density over primes anywhere in the scan**,
+and no row that was uniform over classes acquires a split over primes. This is
+not "mostly artefactual"; it is artefactual end to end.
+
+    dissolved: (37,12) (41,8) (61,5) (61,12) (61,20) (73,8) (73,24) (89,8)
+               (97,16) (97,32) (101,5) (101,20) (109,12) (109,18) (109,36)
+               (113,8) (113,16) (137,8)
+
+**(41,8) is the row `09_jclass.py` named in advance** as the out-of-sample
+confirmation of the v₂(d) = e prediction. 11/20 vs 9/20 over classes; over
+primes (64,64,0) on all four fibres — 1/2 and 1/2. The predicted split is real
+about integer residue classes and empty about primes.
+
+**58 distinct class values collapse to 13 prime values.** (The "47" recorded
+earlier was an undercount.) Over primes only the denominators 1,2,3,4,5,8,9
+survive: 0, 1/4, 1/3, 3/8, 2/5, 4/9, 1/2, 5/9, 3/5, 2/3, 3/4, 4/5, 1 — with
+1/2 taking 652 of 980 fibres. Only 7 of the 58 class values are prime values at
+all, and 6 of the 13 prime values never appear in the class table. Every exotic
+denominator — 49, 54, 73, 81, 121, 169, 243, 250, 289, 625, 729, 1014 — is
+manufactured by counting prime-free classes: 5/27 → 0, 7/125 → 0, 62/75 → 1,
+373/625 → 3/5, 325/729 → 4/9, 144/289 → 1/2, 11/36 → 1/4, 101/182 → 5/9.
+
+**16/49 appears twice — (29,7) and (113,28) — and is 1/3 both times.**
+
+Two mechanisms, both fatal: prime-free *ramified* classes (the 16/49 failure
+mode) and prime-free *unramified* classes — (37,12), (41,8), (61,12), (61,20),
+(73,8), (73,24) have no ramified m at all, and their splits are created purely
+by classes with gcd(qm+1, P) > 1.
+
+**EPS_prime = BAL_prime in all 980 fibres**: the ramified count over
+prime-admissible classes is 0 in every one. Every "(EPS differs only via
+ramification)" note in the scan file is ramification carrying no primes.
+
+**Eight more fibres are identically +1 over primes**, on top of the census's 12:
+(73,12) at m0 = 2,23,48,69 with class 5/27, and (101,10) at m0 = 5,13,16,64
+with class 7/125 — prime counts (0,288,0) and (0,400,0). Real primes: 0 of 1080
+and 0 of 1119 give −1 below 2·10^8.
+
+**What this does NOT touch.** The ρ theorem s(m) = χ_q(1 − α^ρ) is an identity
+at each individual m, proved, and independent of any density. The pairing
+theorems are likewise untouched — and in fact vindicated: they predict 1/2, the
+splits said otherwise, and over primes the splits vanish and 1/2 is what
+remains. What dissolves is the *density structure* built on top: the j-class
+dependence, the v₂(d) = e split criterion, and the spectrum of exotic rationals.
+
 ## The q ≡ 1 table: what the right contraction is
 
 `paper/10-cyclotomic-numbers/AcharyaKatre1995` defines, for q ≡ 1 (mod e) and γ
