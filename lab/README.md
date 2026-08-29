@@ -34,10 +34,18 @@ The third is a reduction, not a density: it removes the product over the `n`
 orbits, but the proportion of `−1` on the resulting list `{α^ρ}` — which depends
 on the stratum `ρ` and on a class in `(Z/d)^×/{±1}` — has not been identified.
 
-Also established: no non-split fibre is identically `+1` at `q = 19, 23, 29, 37`
-(on-fibre witness search, 2716/2716 tail fibres). Split fibres are the only
-density-0 family at `q = 29, 37`, mass `O(1/q)` — **not** at `q = 19, 23`,
-where split fibres alternate and give BAL = EPS = 1/2.
+**RETRACTED — see TRAP 5.** This said: no non-split fibre is identically `+1`
+at `q = 19, 23, 29, 37` (on-fibre witness search, 2716/2716 tail fibres), and
+split fibres are the only density-0 family. Both measured **classes**, not
+prime-carrying classes, so the `−1` witnesses sat in classes that carry no
+primes. Over primes, non-split identically-`+1` fibres **do** exist —
+`q=37 (1,10)`, `(1,26)`, `(1,9)`, `q=13 (1,3)`, `(1,9)` — verified on 4000
+actual primes in the first, every one `+1`. The census "floors" `1/9` and
+`1/27` are **zeros** over primes, so the density-0 population is larger than
+reported, not smaller.
+
+What survives: the `{0, 1/2, 1}` trichotomy refutation. `q=11 (3,6)` is `1/4`
+over classes and over primes alike (4000 primes, measured 0.2437).
 
 **None of this bounds `ε_q` below.** All of it is `r = 1`, which is `φ(q−1)` of
 `q(q−1)` fibres — mass `~1/q`. `ε_q ≥ c` still lives in the other `r`.
