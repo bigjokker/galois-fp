@@ -56,15 +56,18 @@ Stickelberger reads the Kronecker symbol of the discriminant, and
 disc f_p ≡ (−1)^{(p−1)/2}·R (mod q) with R the unsigned residue. What survives
 is χ_q of that sign, **not the sign itself**:
 
-    s(m) = χ_q(−1)^{(p−1)/2} · χ_q(R)
-         = χ_q(−1)^{m/2} · χ_q(r^p) · χ_{q^d}(1 + u),        (S)
+    s(m) = χ_q(−1)^{(p−1)/2} · χ_q(r^p) · Π_i χ_{q^{d_i}}(1 + u_i),   (S)
 
-using χ_q ∘ N = χ_{q^d}, and (p−1)/2 = qm/2 ≡ m/2 (mod 2) as q is odd. For
-r = 1, χ_q(r^p) = 1. This is what `core.symbol_from_fibre` computes: it negates
+using χ_q ∘ N = χ_{q^{d_i}}. Note χ_q(r^p) = χ_q(r)^p = **χ_q(r)**, constant on
+the fibre, since p is always odd. **For r = 1 only**, p = qm + 1 gives
+(p−1)/2 = qm/2 ≡ m/2 (mod 2) and χ_q(r^p) = 1, and the sections below write
+χ_q(−1)^{m/2}. For even r the admissible m are **odd** and m/2 is not an
+integer: use (p−1)/2 directly, as the general-r theorem does. This is what `core.symbol_from_fibre` computes: it negates
 the **residue**, then applies `leg`. So
 
-    q ≡ 3 (mod 4):  χ_q(−1) = −1,  s(m) = (−1)^{m/2} · χ_{q^d}(1 + u),
-    q ≡ 1 (mod 4):  χ_q(−1) = +1,  s(m) =              χ_{q^d}(1 + u).
+    q ≡ 3 (mod 4), r = 1:  χ_q(−1) = −1,  s(m) = (−1)^{m/2} · χ_{q^d}(1 + u),
+    q ≡ 3 (mod 4), general r: s(m) = (−1)^{(p−1)/2} · χ_q(r) · Π_i χ(1+u_i),
+    q ≡ 1 (mod 4):  χ_q(−1) = +1,  s(m) = Π_i χ(1+u_i).
 
 For q ≡ 1 there is **no archimedean factor**: the discriminant sign is
 invisible to the symbol. The identity (−1)^{(p−1)/2} = (−1)^{m/2} is true and
@@ -439,6 +442,65 @@ are superseded by the on-fibre run above.*
 *Also: the "non-1/2" q ≡ 3 densities in `03_r1.txt` are EPS, not BAL. Converting
 — q = 7, d = 3 at 4/9 is 8:8 plus 2 ramified; q = 11, d = 5 at 12/25 is 24:24
 plus 2; q = 19, d = 9 at 40/81 is 80:80 plus 2 — all give BAL = 1/2.*
+
+## Theorem (any r): q ≡ 3 (mod 4) and v₂(L) ≤ 1 ⟹ BAL = 1/2
+
+Let q ≡ 3 (mod 4) and let (r, m_0) be **any** fibre — any r, any degree pattern,
+split or not — with L := lcm of orders of the *non-split* γ_i satisfying
+**v₂(L) ≤ 1**. Then the −1 : +1 balance is exactly 1/2.
+
+*Proof.* Two cases, same mechanism.
+
+**v₂(L) = 1.** Take Δm := qL and T : m ↦ m + Δm.
+
+* **on-fibre**: Δm ≡ 0 (mod q);
+* **parity**: L is even, so Δm is even and p = qm + r stays odd;
+* **character preserved**: γ_i^{Δm} = (γ_i^L)^q = 1 for every root **that
+  appears in s**, since ord(γ_i) | L. (L is the lcm over the *non-split* γ_i;
+  split roots have γ = 0, contribute 1 to the product by f_p ≡ 1 on F_q, and
+  are invisible to both L and s — so "every root" would be false for them and
+  is not needed.) Hence every u_i is unchanged and ∏_i χ(u_i + 1) is preserved.
+  χ_q(r^p) = χ_q(r) is constant on the fibre anyway. **No Step 1, no Step 2, no
+  Kummer structure, no equal degrees.**
+* **sign flips**: the archimedean exponent (p−1)/2 moves by qΔm/2 = q²L/2,
+  odd exactly when v₂(L) = 1; and χ_q(−1) = −1 for q ≡ 3 (mod 4).
+
+So s(m + Δm) = −s(m). **Bijectivity, stated rather than waved at** — this is a
+pairing map, and pairing maps are where off-fibre was fatal: at v₂(L) = 1,
+P = lcm(L,4) = 2L and qL ≡ L (mod 2L), so on the admissible progression (step
+2q) T is an involution with no fixed points. Zeros pair with zeros. BAL = 1/2.
+
+**v₂(L) = 0** (L odd, including L = 1, the fully split fibre). Take Δm = 2qL
+instead: still on-fibre, now even, kills every γ_i that appears in s, and moves
+the exponent by q²L, odd since L is. Same conclusion. In particular **split
+fibres at q ≡ 3 (mod 4) are BAL = 1/2** — the same argument, and the reason the
+census patch was needed. ∎
+
+This is the odd-d translation of the r = 1 proof with its Kummer hypothesis
+removed — that argument never used φ(u) = c^{m+1}u, which is why it survives
+B5's finding that Step 1 is r = 1 only.
+
+**Verified:** 58 fibres with v₂(L) = 1 at q = 7, 11, 19, 23 (L ≤ 3000), zero
+counterexamples. Every fibre observed with BAL ≠ 1/2 has v₂(L) = 4:
+
+    q=11 (3,1),(5,9),(6,1),(8,9)  2+4+4  L=240  v₂=4  BAL 7/15
+    q=11 (3,6),(8,4)              2+4+4  L=16   v₂=4  BAL 1/4
+
+**v₂(L) = 4 is NOT the complement of balanced.** From `results/04_r2.txt`:
+q = 11, (2,6) is 4+6 with L = 10640, v₂ = 4, BAL = 681/1330 ≠ 1/2 — but
+q = 11, (2,7) is *also* 4+6, L = 31920, v₂ = 4, and fibre_counts is
+(7980, 7980, 0), BAL = 1/2. Same
+degree pattern, same valuation, both ways — the identical trap as
+"mixed-degree", one level up. Listing only 7/15 and 1/4 as the deviations
+omitted 681/1330.
+
+**Not necessary**, only sufficient: v₂(L) = 2 fibres are often 1/2 as well
+(q=11 (2,8) 2+3+3, L=2660; q=11 (2,9) 2+2+2+2+2, L=20). Equal-degree was a
+proxy for *some* of the v₂ = 1 rows, not a complete invariant, and v₂(L) is
+not one either: it is a sufficient condition. The open case is v₂(L) ≥ 2 at
+q ≡ 3, where Step 2 was the r = 1 tool and is no longer available. Item 20
+(equal-degree ⇒ BAL = 1/2) is not subsumed — 2+2+2+2+2 has L = 20, v₂ = 2,
+BAL = 1/2, which this theorem does not reach.
 
 ## Beyond primitive c: the reducible r = 1 family
 

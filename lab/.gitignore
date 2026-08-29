@@ -3,3 +3,11 @@
 paper/
 __pycache__/
 *.pyc
+
+# Other tools' state directories: kept on disk, never published from here.
+.grok/
+.cursor/
+.aider*
+
+# Scratch written by verification subagents mid-run.
+_tmp_*.py

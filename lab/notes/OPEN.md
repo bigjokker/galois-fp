@@ -56,8 +56,9 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 `u^(q-1) in F_q`: `r=1` 624/624, `r=2` 1/684, `r=3` 6/708 (degrees > 2; the
 `d=2` rows are the `N(u)/u^2` artefact and are not evidence). So Step 1 — and
 with it (1'), the rho-stratification and `s(m) = chi_q(1 - a^rho)` — is
-**specific to r = 1**. The exceptional-polynomial literature (folder 13) stays
-unfetched.
+**specific to r = 1**. Folder `paper/13-r2-rational-frobenius/` has 26 PDFs on
+disk; B5 closed the line, so they stay unread. The gate is "do not open", not
+"unfetched".
 
 **REFUTED: "BAL = 1/2 for every fibre at q = 3 (mod 4)".** Fails at q = 11 on
 six fibres of degree pattern 2+4+4: `(3,1),(5,9),(6,1),(8,9)` at L=240 give
@@ -88,8 +89,24 @@ needs all roots of one degree d (Kummer). New item:
 
     So "mixed" is not the complement of "balanced": 2+3+3 is mixed and exactly
     1/2, and 2+4+4 is 1/2 at r=2 while being 7/15 and 1/4 at r=3. The same
-    degree pattern goes either way. Still a prediction, not a result: needs
-    mixed-degree fibres at q = 19, 23 examined **individually**, not aggregated.
+    degree pattern goes either way. **Not superseded** by the v₂(L)≤1 theorem:
+    2+2+2+2+2 has L=20, v₂=2, BAL=1/2, which that theorem does not reach.
+    Two of the three equal-degree rows (3+3, 5+5) are v₂=1 instances; the
+    third is not.
+
+21. **q ≡ 3 (mod 4) with v₂(L) ≥ 2, any r.** The open case. v₂(L)≤1 is
+    sufficient for BAL=1/2, never "the invariant". All observed deviations
+    sit at v₂(L)=4, but v₂=4 is not the complement of balanced:
+
+        q=11 (3,1),(5,9),(6,1),(8,9)  2+4+4  L=240    v₂=4  BAL 7/15
+        q=11 (3,6),(8,4)              2+4+4  L=16     v₂=4  BAL 1/4
+        q=11 (2,6)                    4+6    L=10640  v₂=4  BAL 681/1330
+        q=11 (2,7)                    4+6    L=31920  v₂=4  BAL 1/2
+          fibre_counts (7980, 7980, 0) — prediction confirmed, no zeros
+
+    Simultaneous −1 and an archimedean flip are compatible iff v₂(L)=2, so
+    "Step 2 without Kummer" cannot pair the deviant (v₂=4) fibres. Hold
+    folder 14. Skip the q=19,23 mixed-degree listing.
 
 ## D. Verification debt
 
