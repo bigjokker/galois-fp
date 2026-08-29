@@ -11,3 +11,6 @@ __pycache__/
 
 # Scratch written by verification subagents mid-run.
 _tmp_*.py
+
+# Subagent scratch directories.
+.scratch/
