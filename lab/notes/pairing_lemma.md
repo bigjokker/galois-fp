@@ -533,6 +533,10 @@ needs is a density over the **primes** of the fibre, and those are not the same
 thing: some classes mod P carry no primes at all. This lemma closes the gap for
 every pairing sentence in the note at once.
 
+**The condition is prime-by-prime, not P | Δm.** Each ℓ | P is checked
+separately; one never needs P | Δm. That is exactly why v₂(L) = 1 with
+Δm = qL works: qL ≢ 0 (mod 4), but only 2 | Δm was ever required.
+
 **Setup.** A class c mod P carries primes iff gcd(qc + r, qP) = 1. Since
 0 < r < q gives gcd(qc + r, q) = gcd(r, q) = 1, the condition is
 **gcd(qc + r, P) = 1**. The primes dividing P = lcm(L,4) are those of L together
@@ -552,13 +556,30 @@ so with gcd(a, ℓ) = 1 the property is preserved iff ℓ | qb + r(1−a). Every
     qb + 1 − a ≡ b + 1 − a ≡ (−2) + 1 − (−1) = 0   (mod ℓ),
 
 using b = (q−1)j − 2 ≡ −2 and a = (q−3)/2 ≡ (1−3)/2 = −1. For ℓ = 2: b is even
-and a is odd, giving 0 + 1 − 1 = 0. And a ≡ −1 (mod ℓ) gives gcd(a, ℓ) = 1. ✓
+and a is odd, giving 0 + 1 − 1 = 0. And gcd(a, ℓ) = 1 is free: an odd ℓ dividing
+both q−1 and q−3 would divide 2. ✓
 
-**Consequence.** Each map permutes the prime-carrying classes among themselves
-and the prime-free classes among themselves. Restricted to the prime-carrying
-classes it is still a sign-reversing bijection, and those classes have equal
-prime density by Dirichlet. So **BAL over integers = the −1 density among the
-primes of the fibre**, and every "density 1/2" in this note transfers.
+*Note the j-rule is NOT used.* b ≡ −2 (mod q−1) follows from the **shape**
+b = (q−1)j − 2 — which Galois matching forced, needing q−1 | b+2 — and holds
+for **every** j, not just the one the j-rule selects. Likewise a ≡ −1 is just
+a = k−1 reduced. Both were already in the map, and neither was chosen with
+Dirichlet classes in mind.
+
+**Consequence, stated at exactly its reach.** Each map permutes the
+prime-carrying classes among themselves and the prime-free classes among
+themselves. Restricted to the prime-carrying classes it is still a
+sign-reversing bijection; those classes have equal Dirichlet density; zeros
+pair with zeros. Therefore
+
+    **BAL among integers = BAL among the UNRAMIFIED primes of the fibre.**
+
+**This is still not EPS.** Ramified classes can carry primes, and those primes
+sit in the EPS denominator. For odd d ramification is a positive fraction of the
+period, so the earlier figures stand unchanged: EPS = 4/9 (q=7, m_0=1), 12/25
+(q=31, m_0=1), and so on, every one with BAL = 1/2. Pairing never claimed to
+kill ramification, and this lemma does not either. It licenses the pairing
+theorems to speak about primes; it does not convert BAL into the quantity ε_q
+consumes.
 
 *Verified: 141,736 classes (translations, q = 7, 11, 19, 23, 31, all r, all m_0
 with L ≤ 3000) and 27,584 classes (affine map, q = 13, 17, 29, 37, primitive

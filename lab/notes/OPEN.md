@@ -213,7 +213,11 @@ needs all roots of one degree d (Kummer). New item:
     integers equals the −1 density among primes. Translations need ℓ | Δm for
     each ℓ | P, which qL, qL/2 and 2qL all satisfy; the affine map needs
     ℓ | qb + r(1−a), which holds because b ≡ −2 and a ≡ −1 mod every ℓ | q−1.
-    Verified on 169,320 classes, 0 failures. Written up in pairing_lemma.md.
+    Verified on 169,320 classes, 0 failures — corroboration of a two-line
+    argument, in the same role as the 70 (q,d) pairs. Written up in
+    pairing_lemma.md. **Reach: BAL among integers = BAL among UNRAMIFIED primes.
+    Still not EPS** — ramified classes carry primes too, and those primes are in
+    the EPS denominator (odd d: 4/9, 12/25, unchanged).
 
 25. **`10_onfibre_q3.py` does not test what the note claims.** It contains
     `if d < 2 or d == q-1: continue` plus an L cutoff, so the primitive case
