@@ -347,8 +347,13 @@ minimum was a bookkeeping artifact and vanishes.
 fall onto it from 3/7). **2/3 survives** and becomes the dominant non-half
 value, 36 fibres.
 
-**22 fibres collapse to an endpoint**, and the rule is *not* "small rational" —
-it is **uniform root degree d ∈ {2,3,6} at a bad q**:
+**22 fibres collapse to an endpoint.** "Small rational" is not the predictor;
+every collapse in this sample has **uniform root degree d ∈ {2,3,6}**, and the
+q = 29 values that do not move sit on d ∈ {7,14}. **State that as a pattern in
+this sample, not a cause** — it has not been tested off this fibre list. It
+would be falsified by a uniform-degree d ∈ {2,3,6} fibre whose prime density
+stays strictly inside (0,1), or by a collapse at some other d. Until such a
+check exists it is a description of 22 rows:
 
     1/9   → 0   4 fibres   q=13 (1,3)(1,9)(12,3)(12,9)   6+6
     1/27  → 0   4          q=37 (1,10)(1,26)(36,10)(36,26)  6×6
@@ -365,10 +370,12 @@ q=37. Class-side there are 20 density-0 fibres, all split; over primes there are
 q-test provably never yields a −1 certificate. Twelve more are identically −1
 (10 of them new).
 
-**EPS_prime = BAL_prime identically here**: no prime-admissible class is ramified
-anywhere in the 266 fibres. Within this sample the whole BAL/EPS distinction is
-a class-side artifact. (Not universal — 8 of 2568 prime-admissible classes at
-q = 7 are ramified, and (2677,7) is a real ramified prime.)
+**EPS_prime = BAL_prime identically here** — no prime-admissible class is
+ramified anywhere in the 266 fibres, so within this sample the BAL/EPS
+distinction is entirely a class-side artifact. **This is a fact about the
+sample, not a theorem**, and the caveat belongs in the same breath: at q = 7,
+8 of 2568 prime-admissible classes ARE ramified, and (2677,7) is a real
+ramified prime.
 
 **Why nobody would have caught this from the aggregate.** The per-fibre mean
 moves by under 0.016 at every q, and q = 19's non-split mean lands on exactly
