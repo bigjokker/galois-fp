@@ -59,6 +59,35 @@ observed minimum is about 1/4 — then
 
 and the reduction survives in amended form. That is unproven.
 
+**Further correction (2026-08-29).** The amended reduction inherits a false
+identification from the original one: line 33 above certifies *non-constant* by
+"`u_r - m0` fails to split", i.e. treats **non-split** and **non-constant** as
+the same condition. Over primes they are not.
+
+    q = 13, fibre (r,m0) = (1,3)   degrees 6+6, non-split
+    q = 13, fibre (1,9)            degrees 6+6, non-split
+    q = 37, fibres (1,10), (1,26)  degrees 6x6, non-split
+    q = 37, fibre (1,9)            degrees 12x3, non-split
+
+Each is **identically +1 over the primes of its fibre** — measured on 3000
+actual primes for each `q = 13` case and 4000 for `q = 37, (1,10)`, with not one
+`-1`. They are non-split and constant.
+
+Two consequences. There is **no positive floor over the non-split fibres**, so
+the amended reduction is false if "the rest" is read as "non-split". And the
+fraction of non-constant fibres cannot be obtained by counting non-split ones —
+it is strictly smaller — so the reduction loses the property that made it
+attractive: certifying non-constancy is no longer a finite-field splitting
+statement "with no analysis in it".
+
+*Why this was not visible earlier.* The lab census that reported small floors
+(1/9 at `q = 13`, 1/27 and 2/27 at `q = 37`) averaged the symbol over **all**
+admissible residue classes mod `lcm(L,4)`. Only classes with
+`gcd(qm + r, lcm(L,4)) = 1` contain primes. Restricted to those, the same
+fibres give 0. See `lab/notes/pairing_lemma.md`, TRAP 5. The `eps_q` table and
+the `p < 10^7` certificate sweep above are unaffected: both were counted on
+actual primes throughout.
+
 ## What the measurement does support
 
 Across `q <= 29`, at eight times the precision of the `p < 10^5` sweep
