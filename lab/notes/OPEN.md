@@ -94,19 +94,54 @@ needs all roots of one degree d (Kummer). New item:
     Two of the three equal-degree rows (3+3, 5+5) are v₂=1 instances; the
     third is not.
 
-21. **q ≡ 3 (mod 4) with v₂(L) ≥ 2, any r.** The open case. v₂(L)≤1 is
-    sufficient for BAL=1/2, never "the invariant". All observed deviations
-    sit at v₂(L)=4, but v₂=4 is not the complement of balanced:
+21. **REFUTED as stated — the 2-adic "obstruction" is false.** The claim was:
+    for Δm = qa, (1) every u_i fixed ⟺ L | a; (2) archimedean flips ⟺ v₂(a) = 1;
+    (3) simultaneous γ_i^a = −1 ⟺ all v₂(n_i) equal e and v₂(a) = e−1; hence no
+    translation pairing exists at v₂(L) ≥ 3. Refereeing found **two fatal
+    errors**, both in the ⟸ direction:
 
-        q=11 (3,1),(5,9),(6,1),(8,9)  2+4+4  L=240    v₂=4  BAL 7/15
-        q=11 (3,6),(8,4)              2+4+4  L=16     v₂=4  BAL 1/4
-        q=11 (2,6)                    4+6    L=10640  v₂=4  BAL 681/1330
-        q=11 (2,7)                    4+6    L=31920  v₂=4  BAL 1/2
-          fibre_counts (7980, 7980, 0) — prediction confirmed, no zeros
+    * (3) is false. γ_i^{qa} = −1 needs n_i | 2a **and** n_i ∤ a, which forces
+      v₂(n_i) = v₂(a)+1 *and* **oddpart(n_i) | a** — the second condition was
+      omitted. Whenever oddpart(L) > 1 the stated criterion admits many a for
+      which no γ_i^{qa} is −1. Exhaustive full-period scan: stated set and true
+      set differ on 122 fibres.
+    * (2)&(3) requires *all* v₂(n_i) = 2, not merely v₂(L) = 2 (which only says
+      the max is 2). Of 372 fibres with v₂(L) = 2, only 250 have all v₂(n_i) = 2;
+      the claim asserts a pairing on the other 122 where exhaustive search finds
+      none.
 
-    Simultaneous −1 and an archimedean flip are compatible iff v₂(L)=2, so
-    "Step 2 without Kummer" cannot pair the deviant (v₂=4) fibres. Hold
-    folder 14. Skip the q=19,23 mixed-degree listing.
+    And the taxonomy is **not exhaustive**, which is the important part:
+
+22. **The unclassified pairing mechanism — most promising open lead.** An
+    exhaustive search over *every* fibre-preserving translation (the admissible
+    m form one progression of step 2q and period N = lcm(L,4)/2, so Δm = qa with
+    a = 2k is an index shift; scanning k = 1..N−1 covers all of them) found
+    symbol-flipping pairings at **v₂(L) = 4** fibres — exactly where the refuted
+    taxonomy said none could exist. At least two such at q = 11, independently
+    reproduced. Whatever pairs those fibres is neither of the two known
+    mechanisms. Identifying it is the best lead in the project.
+
+23. **L is the wrong invariant: use odd multiplicity only.** A root of *even*
+    multiplicity enters the residue as N(z)^mult, a perfect square, so its
+    character value is identically +1 and the symbol cannot see it. The right
+    invariant for a pairing argument is **L_odd = lcm of n_i over roots of odd
+    multiplicity**, not core's lcm over all non-split γ_i. This is reported to
+    explain several otherwise anomalous fibres.
+
+24. **T3 (q ≡ 1 primitive) — the density step's stated reason is false.** The
+    fibre density is over PRIMES p = qm+1, and primes do **not** visit every
+    even class mod L: for ℓ | q−1, q ≡ 1 (mod ℓ) gives p ≡ m+1 (mod ℓ), so every
+    m with gcd(m+1, q−1) > 1 makes p composite and its class carries no primes.
+    gcd(q,L) = 1 shows the admissible m cover all even classes; it says nothing
+    about which classes contain primes. The j-rule "necessity" argument is run
+    entirely on prime-free classes (it picks t with s | m+1). The conclusion may
+    well survive — on classes that do carry primes, g = gcd(m+1,q−1) = 1 and
+    (★) holds for every j — but the argument as written does not establish it.
+
+25. **`10_onfibre_q3.py` does not test what the note claims.** It contains
+    `if d < 2 or d == q-1: continue` plus an L cutoff, so the primitive case
+    d = q−1 is excluded from all 70 rows and d = 1 from everything. "Every
+    d | q−1" is overstated.
 
 ## D. Verification debt
 

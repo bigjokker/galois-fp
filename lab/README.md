@@ -36,7 +36,8 @@ on the stratum `ρ` and on a class in `(Z/d)^×/{±1}` — has not been identifi
 
 Also established: no non-split fibre is identically `+1` at `q = 19, 23, 29, 37`
 (on-fibre witness search, 2716/2716 tail fibres). Split fibres are the only
-density-0 family at those `q`, mass `O(1/q)`.
+density-0 family at `q = 29, 37`, mass `O(1/q)` — **not** at `q = 19, 23`,
+where split fibres alternate and give BAL = EPS = 1/2.
 
 **None of this bounds `ε_q` below.** All of it is `r = 1`, which is `φ(q−1)` of
 `q(q−1)` fibres — mass `~1/q`. `ε_q ≥ c` still lives in the other `r`.

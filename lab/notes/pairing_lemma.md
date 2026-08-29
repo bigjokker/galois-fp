@@ -2,7 +2,18 @@
 
 Status, three separate items — the first two are densities, the third is not:
 
-* **q ≡ 3 (mod 4), every c**: density exactly 1/2. **Proved.** Two translations
+* **q ≡ 3 (mod 4), every c ∉ {0, 1}**: **BAL** exactly 1/2. **Proved.**
+  Two warnings this bullet previously got wrong, both found by refereeing:
+  (i) *not* every c — c = 1 gives d = 1, γ = 0, L = 1 (not d(q−1)), and the
+  prescribed Δm = qL is then **odd**, breaking parity; c = 0 (m_0 = q−1) is
+  outside the framework (h = x^{q−1}). Both fall under the L-odd case Δm = 2qL.
+  (ii) what is proved is **BAL**, not the certificate density EPS that ε_q is
+  defined by. They differ whenever the fibre ramifies, which for **odd d** is a
+  positive fraction of the period: measured EPS = 4/9 (q=7, m_0=1), 4/9 (q=19,
+  m_0=6), 19/42 (q=43, m_0=5), 12/25 and 73/150 (q=31) — every one with
+  BAL = 1/2. For even d no m ramifies (u_i = −1 would force d | m+1 with d and
+  m both even), so there BAL = EPS.
+  Two translations
   (Δm = qL/2 for even d via Step 2; Δm = qL for odd d, no Step 2), Step 0
   proved, on-fibre. 70 (q,d) pairs corroborate.
 * **q ≡ 1 (mod 4), c primitive** (h irreducible): density exactly 1/2.
@@ -341,8 +352,13 @@ K = 64 misses.
 evaluations per fibre 2.02, 1.92, 2.05, 2.05 — a geometric variable with
 p = 1/2 has mean 2, so the tail behaves like a fair coin, not a rare event.
 
-So at q = 19, 23, 29, 37 the density-0 population is **exactly the split
-fibres**: no non-split fibre is identically +1, at any L.
+**Corrected.** At q = **29, 37** the density-0 population is exactly the split
+fibres, and at all four q no non-split fibre is identically +1 at any L. The
+sentence previously said this held at q = 19 and 23 as well. It does not: for
+q ≡ 3 (mod 4) a split fibre ALTERNATES, so BAL = EPS = 1/2, not 0 — as this
+note's own split analysis says. Re-measured: all 8 split fibres at q = 19 and
+all 8 at q = 23 give BAL = 1/2 with zero ramified. Density-0 split fibres are a
+q ≡ 1 (mod 4) phenomenon only.
 
 Two limits. Four primes is not a theorem. And the search is one-sided by
 construction — it can only settle "not identically +1" and can never bound a
@@ -364,7 +380,13 @@ For q ≡ 3 (mod 4), v₂(q−1) = 1, so every d | q−1 is **odd or ≡ 2 (mod 
 never ≡ 0 (mod 4). The two cases take different translations, both on-fibre,
 and neither needs c primitive.
 
-**Step 0 (general c) — a theorem.** L := lcm_i ord(γ_i) = **d(q−1)**, d = ord(c).
+**Step 0 (r = 1, c ∉ {0,1}) — a theorem.** *The hypothesis d > 1 was missing
+and is required*: at c = 1, γ_0 = m_0β = 0, δ := γ_0^d is not in F_q^×, there
+are no non-split roots, and L = 1 — not q−1 (checked at q = 7, 11, 19, 31).
+The proof is also Kummer-only, i.e. **r = 1**: it uses β^{q−1} = c and
+γ = (c−1)β = m_0β, neither of which survives r > 1.
+
+**Step 0 restated.** L := lcm_i ord(γ_i) = **d(q−1)**, d = ord(c).
 
 *Proof.* β^{q^i} = c^i β, so the Galois orbit of β is ⟨c⟩β and the orbit
 representatives are ηβ for η a transversal of ⟨c⟩ in F_q^×; hence γ_i = η_i γ_0
@@ -527,7 +549,8 @@ non-split fibres at 0 and at 1:
     q=17, m_0=3, 12,        d=4, L=64                 density 1
     q=5,  m_0=3,            d=2                       density 1
 
-So "split is the only density-0 family" holds at q = 19, 23, 29, 37 but is
+So "split is the only density-0 family" holds at q = 29, 37 (NOT at 19, 23 —
+there split fibres are 1/2) and is
 **false in general**: q = 17, m_0 = 15 is non-split and identically +1. It has
 L = 32 ≤ 2000, so it is exact, and no witness search would ever have reached it.
 Some d flip, some cancel, some freeze.
