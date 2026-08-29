@@ -526,6 +526,50 @@ q ≡ 3, where Step 2 was the r = 1 tool and is no longer available. Item 20
 (equal-degree ⇒ BAL = 1/2) is not subsumed — 2+2+2+2+2 has L = 20, v₂ = 2,
 BAL = 1/2, which this theorem does not reach.
 
+## Transfer to primes: the pairing maps preserve prime-carrying classes
+
+Every pairing in this note proves BAL over **admissible integers m**. What ε_q
+needs is a density over the **primes** of the fibre, and those are not the same
+thing: some classes mod P carry no primes at all. This lemma closes the gap for
+every pairing sentence in the note at once.
+
+**Setup.** A class c mod P carries primes iff gcd(qc + r, qP) = 1. Since
+0 < r < q gives gcd(qc + r, q) = gcd(r, q) = 1, the condition is
+**gcd(qc + r, P) = 1**. The primes dividing P = lcm(L,4) are those of L together
+with 2, and none of them divides q (gcd(q, L) = 1 as L | lcm_i(q^{d_i} − 1)).
+
+**Translations.** q(c + Δm) + r = (qc + r) + q·Δm, so the property is preserved
+iff ℓ | Δm for every prime ℓ | P.
+
+    Δm = qL     : every odd ℓ | P divides L, and 2 | L when L is even.   ✓
+    Δm = qL/2   : L ≡ 4 (mod 8), so odd ℓ | L/2 and L/2 ≡ 2 (mod 4) is even.  ✓
+    Δm = 2qL    : L odd; odd ℓ | L, and 2 | 2qL.   ✓
+
+**The affine map** (q ≡ 1, r = 1). q(ac + b) + r = a(qc + r) + (qb + r(1−a)),
+so with gcd(a, ℓ) = 1 the property is preserved iff ℓ | qb + r(1−a). Every
+ℓ | L = (q−1)² divides q−1, so q ≡ 1 (mod ℓ) and, for odd ℓ,
+
+    qb + 1 − a ≡ b + 1 − a ≡ (−2) + 1 − (−1) = 0   (mod ℓ),
+
+using b = (q−1)j − 2 ≡ −2 and a = (q−3)/2 ≡ (1−3)/2 = −1. For ℓ = 2: b is even
+and a is odd, giving 0 + 1 − 1 = 0. And a ≡ −1 (mod ℓ) gives gcd(a, ℓ) = 1. ✓
+
+**Consequence.** Each map permutes the prime-carrying classes among themselves
+and the prime-free classes among themselves. Restricted to the prime-carrying
+classes it is still a sign-reversing bijection, and those classes have equal
+prime density by Dirichlet. So **BAL over integers = the −1 density among the
+primes of the fibre**, and every "density 1/2" in this note transfers.
+
+*Verified: 141,736 classes (translations, q = 7, 11, 19, 23, 31, all r, all m_0
+with L ≤ 3000) and 27,584 classes (affine map, q = 13, 17, 29, 37, primitive
+r = 1) — **0 classes where the map changes prime-carrying status**.*
+
+*This was flagged by refereeing: the note previously justified the transfer with
+gcd(q, L) = 1, which shows only that admissible m cover every class mod L, not
+that those classes contain primes. For ℓ | q−1 one has p = qm + 1 ≡ m + 1
+(mod ℓ), so every m with gcd(m+1, q−1) > 1 gives a composite p. The conclusion
+survives; the reason given for it did not.*
+
 ## Beyond primitive c: the reducible r = 1 family
 
 The census floors are **not** unequal-degree "mixed" fibres — those sit near

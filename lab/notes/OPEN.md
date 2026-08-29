@@ -205,15 +205,15 @@ needs all roots of one degree d (Kummer). New item:
     multiplicity**, not core's lcm over all non-split γ_i. This is reported to
     explain several otherwise anomalous fibres.
 
-24. **T3 (q ≡ 1 primitive) — the density step's stated reason is false.** The
-    fibre density is over PRIMES p = qm+1, and primes do **not** visit every
-    even class mod L: for ℓ | q−1, q ≡ 1 (mod ℓ) gives p ≡ m+1 (mod ℓ), so every
-    m with gcd(m+1, q−1) > 1 makes p composite and its class carries no primes.
-    gcd(q,L) = 1 shows the admissible m cover all even classes; it says nothing
-    about which classes contain primes. The j-rule "necessity" argument is run
-    entirely on prime-free classes (it picks t with s | m+1). The conclusion may
-    well survive — on classes that do carry primes, g = gcd(m+1,q−1) = 1 and
-    (★) holds for every j — but the argument as written does not establish it.
+24. **CLOSED — transfer to primes proved.** The referee was right that the
+    stated reason was false (gcd(q,L) = 1 shows admissible m cover every class
+    mod L, not that those classes carry primes; for ℓ | q−1, p ≡ m+1 mod ℓ makes
+    every gcd(m+1,q−1) > 1 class prime-free). But the conclusion holds: **every
+    pairing map in the note preserves prime-carrying classes**, so BAL over
+    integers equals the −1 density among primes. Translations need ℓ | Δm for
+    each ℓ | P, which qL, qL/2 and 2qL all satisfy; the affine map needs
+    ℓ | qb + r(1−a), which holds because b ≡ −2 and a ≡ −1 mod every ℓ | q−1.
+    Verified on 169,320 classes, 0 failures. Written up in pairing_lemma.md.
 
 25. **`10_onfibre_q3.py` does not test what the note claims.** It contains
     `if d < 2 or d == q-1: continue` plus an L cutoff, so the primitive case
