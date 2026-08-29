@@ -816,18 +816,28 @@ value α^n ranges over **exactly the φ(d) generators of ⟨c⟩**, uniformly �
 
     {α^n} = { c^j : gcd(j, d) = 1 }
 
-and therefore, since s(p) = χ_q(1 − α^n) with ρ = n for every prime,
+**and that set does not depend on c.** F_q^× is cyclic, so it has a *unique*
+subgroup of order d, and every c of order d generates it. Hence
+{c^j : gcd(j,d) = 1} is simply **the set of all elements of order d**,
+independent of m_0, of j, and of the fibre. That is why one density per (q,d)
+was *forced* the moment the list was identified as that set. Written without c:
 
-    **density(q, d) = #{ j ∈ (Z/d)^× : χ_q(1 − c^j) = −1 } / φ(d).**
+    **density(q, d) = #{ γ ∈ F_q^× : ord(γ) = d, χ_q(1 − γ) = −1 } / φ(d).**
 
-It depends on **(q, d) only** — matching the measured invariant — and needs no
-fibre machinery at all: take the order-d subgroup of F_q^×, count how many of
-its generators γ have 1 − γ a non-residue.
+No fibre machinery, no c, no m_0.
 
-**Status: verified, not proved.** 69 fibres at q = 13, 17, 29, 37, 41 with
-L ≤ 420, **0 mismatches** against `fibre_counts_primes`; 23 (q,d) rows, none
-carrying more than one density. A proof owes three steps: α^n ∈ ⟨c⟩; it is a
-*generator*, i.e. gcd(j,d) = 1; and each generator is hit equally often.
+**Status: density formula verified; identification observed; proof open.**
+The 69 fibres (q = 13, 17, 29, 37, 41, L ≤ 420, 0 mismatches, 23 (q,d) rows
+none carrying two densities) compared **ratios** — measured density against the
+generator count. That does not establish the identification: *a proper subset of
+(Z/d)^× with the same residue / non-residue ratio would give the same number*,
+and TRAP 5 inside ρ = n (82 of 178 fibres) is exactly where such a subset could
+hide. The set-level evidence is the smaller exponent table below — {1,2} mod 3,
+{1,3} mod 4, units mod 8, 14, 18, 20, 26, 30 — which is stronger but a smaller
+sample.
+
+So the proof debt is all three steps, none discharged:
+  (1) α^n ∈ ⟨c⟩;  (2) it is a *generator*;  (3) each generator equally often.
 
 The exponent sets are visibly the units: {1,2} mod 3, {1,3} mod 4, {1,3,5,7}
 mod 8, {1,3,5,9,11,13} mod 14, {1,5,7,11,13,17} mod 18, {1,7,11,13,17,19,23,29}
@@ -843,14 +853,26 @@ mod 30.
     q=17  d=2   -> 0      the freeze
     q=37  d=6   -> 0
 
-and, as an independent consistency check, **d = q−1 gives exactly 1/2 at every
-q ≡ 1 (mod 4) up to 149, 0 deviations** — the primitive theorem, re-derived
-from a generator count rather than from the inversion pairing.
+and d = q−1 gives exactly 1/2 at every q ≡ 1 (mod 4) up to 149, 0 deviations.
+That is **consistency with** the inversion theorem — a count of primitive roots
+γ with χ_q(1−γ) = −1 coming out at half — **not a second proof of it**.
+
+**C11 is answered in passing.** There is no two-translation analogue yielding
+1/2 for general c, because this count simply is not 1/2: d = 2 and d = 8 at
+q = 113, d = 7 at q = 29.
 
 So the identically-+1 rows are exactly those where 1 − γ is a residue for every
 generator γ of the order-d subgroup, and identically-−1 those where it is a
 non-residue for all of them. C10's requirement that the list permit 0 and 1 is
 satisfied structurally.
+
+**The literature pause no longer applies to C8.** Its original reason was that
+the (i,j)_e tables count over a *full* cyclotomic class while our objects ran
+proper subsets. The list here is a complete set — all elements of order d — so
+the tables are now aimed at the object we actually have. That is not a reason to
+fetch folder 10 tonight; it is a reason to resume *if* a closed form for
+Σ_{j ∈ (Z/d)^×} χ_q(1 − c^j) is wanted, which would **prove** the density rather
+than verify it.
 
 ## Theorem (r = 1): every PRIME has ρ = n. The stratification is trivial over primes.
 
