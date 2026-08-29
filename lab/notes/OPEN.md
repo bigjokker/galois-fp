@@ -244,12 +244,20 @@ needs all roots of one degree d (Kummer). New item:
 
 ## E. Publication
 
-15. **§7 of the published note is partly outdated.** It lists the `q ≡ 3`
-    primitive-`r=1` family as open; it is now proved — for every `c` with
-    `d > 1`, and for **BAL**, not the EPS that ε_q is defined by.
-16. **Do the two new theorems justify a second note or a revision?** The
-    `q ≡ 3` all-`c` result and the single-character theorem
-    `s(m) = χ_q(1 − α^ρ)` are the candidates.
+15. **DELETED — the claim was false; §7 is fine, do not touch the .tex.**
+    E.15 said §7 was outdated because it listed the q ≡ 3 primitive r = 1
+    family as an open density. It does not. §7 already separates constant-`R`
+    from constant-symbol, already refuses the trichotomy past q = 3, 5, 7, and
+    already contains the sentence TRAP 5 rediscovered: at q = 7, "among
+    unramified unit classes one has exactly 1/2; among all unit classes,
+    ε_7 = 323/648, the deficit 1/648 being ramification". The published note
+    was careful about the class-vs-prime distinction before this session was.
+16. **A second note, not a revision.** The q ≡ 3 two-translation theorem
+    (every c with d > 1, plus split), Step 0, the single-character theorem
+    `s(m) = χ_q(1 − α^ρ)`, the v₂(L) ≤ 1 theorem for all r, and item 24's
+    transfer are **new content**, not corrections to §7. Nothing in
+    `galois_fp.tex` needs changing on their account. If written, the note must
+    state BAL, not ε_q — see the flagship bullet and TRAP 5.
 
 ## F. Literature — paused
 
