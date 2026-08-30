@@ -19,8 +19,16 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 
 ## B. ε_q ≥ c > 0 — the real target
 
-3. **The mean over *all* fibres.** Every result so far is `r = 1`, which is
-   `φ(q−1)` of `q(q−1)` fibres: mass `~1/q`. Nothing yet bounds `ε_q`.
+3. **MEASURED at r ≥ 2, and it is good news.** 3,774 band fibres
+   (2 ≤ r ≤ q−2) at q = 13, 19, 23, 29, 31, 37: **no genuine non-split zero
+   anywhere**. 534 exact, ~3,240 with explicit −1 witnesses at prime-admissible
+   m (a Dirichlet proof of positivity). The only band zeros are 8 fully split
+   fibres at q ≡ 1 with χ_q(r) = +1 — closed family, mass O(1/q). At q ≡ 3 there
+   are none at all. Floor does not decay: 1/4, 15/32, 15/32, 1/3, 31/64, 5/12
+   for q = 13..37, tracking the smallest non-split L, with deviation from 1/2
+   scaling as L^{−1/2}. **Supports ε_q ≥ c; does not prove it** — positivity is
+   per-fibre, a uniform c is not, and the minima cover 14% of the band.
+
 4. **`r ≥ 2`: no structural results.** `04_r2.py` opened this. The Kummer
    structure is gone; the only handle is `g(β) = m0 / H_r(β)` with
    `H_r = Σ_{k<r} 1/(x−k)`. Literature for this lives in

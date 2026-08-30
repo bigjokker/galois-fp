@@ -809,6 +809,73 @@ generalises (γ^{q−1} = c of order d gives L = d(q−1)), but the pairing must
 on a product of (q−1)/d character values, one per orbit, instead of the single
 u of the primitive case — and j is exactly the scalar permuting those orbits.
 
+## The r >= 2 prime floor: no non-split zeros in the band
+
+The strategic measurement. ε_q is the mean over all q(q−1) fibres; r = 1 is only
+φ(q−1) of them and is now known to contain genuine zeros. The mass is at r ≥ 2.
+**Report r = q−1 separately: it is the dual of r = 1, not part of the bulk.**
+
+**3,774 fibres with 2 ≤ r ≤ q−2 at q = 13, 19, 23, 29, 31, 37.** 534 enumerated
+exactly over a full period restricted to prime-admissible classes; the other
+~3,240 carry an **explicit −1 at a prime-admissible m**, which is a Dirichlet
+proof that the density is > 0, not a sample.
+
+**No genuine non-split zero anywhere in the band, at any q examined.** The only
+prime-density-0 fibres there are **8, all fully split**, all at q ≡ 1 (mod 4)
+with χ_q(r) = +1 — q=13 (3,0),(10,12); q=17 (2,0); q=29 (4,0),(5,0),(24,28),
+(25,28); q=37 (3,0),(34,36); q=41 (2,0),(4,0). On a split fibre the symbol is
+χ_q(−1)^{(p−1)/2}·χ_q(r), which at q ≡ 1 is the **constant** χ_q(r). A closed,
+explicitly characterised family of size O(1) per q — 8 of 3,774 = 0.21%.
+
+**At q ≡ 3 (mod 4) there are no band zeros at all** (1,632 fibres at
+q = 19, 23, 31): there the sign factor alternates, so split fibres sit at exactly
+1/2 rather than at 0 or 1.
+
+**The floor does not decay with q.**
+
+    q        13      19      23      29      31      37
+    min      1/4    15/32   15/32    1/3    31/64    5/12
+    at L      24     720    1056      56    1920      72
+
+No monotone trend and never below 1/4 from q = 13 to 37. The reason is
+structural: every minimum sits at the **smallest non-split L available at that
+q**, and deviation from 1/2 collapses like L^{−1/2} (measured at q = 29:
+max |δ − 1/2| = 1/6 for L ≤ 100, 1/24 for L ≤ 10^4, 0.0045 for L ≤ 10^6,
+0.0010 for L ≤ 6·10^8). **The floor is a function of L, not of q** — growing q
+pushes fibres toward 1/2, not toward 0.
+
+**The dangerous zeros are confined to the two edges.** Genuine non-split
+prime-density-0 fibres occur only at r = 1 and r = q−1, and only at q ≡ 1
+(mod 4). r = q−1 mirrors r = 1 exactly: at q = 29 the two have identical L
+multisets, identical prime-density multisets 0(×2), 1/3(×6), 1/2(×14), 2/3(×6),
+1(×1), and identical means. Together they carry mass ~2/q. Pooling r = q−1 into
+the band would have imported those zeros and falsely reported a band zero.
+
+**Tail: 1,982 large-L band fibres at q = 29, 37 (L up to 3.4·10^28), witness
+search on prime-admissible m only: 1,982 / 1,982 yielded a −1. Zero budget
+hits, zero suspects.** Mean cost to first −1 was 1.99 evaluations, median 2,
+max 13. The 38 slowest were re-run at K = 5000 and all returned to
+[0.4858, 0.5164]; the low K = 200 readings were sampling noise.
+
+**Verdict: this supports ε_q ≥ c > 0 at r ≥ 2. It does not prove it.**
+
+Not established, without softening:
+* **Positivity per fibre is proved; a uniform c is not.** The bound extractable
+  from a single witness is 1/N with N the number of prime-admissible classes;
+  for L ~ 10^28 that is vacuous. 3,240 of 3,774 have proved positivity and an
+  *estimated* value only.
+* The minima are over the 534 enumerated fibres (14% of the band). That the
+  other 86% cannot go lower rests on the empirical L^{−1/2} concentration, not
+  on a theorem.
+* **Any fibre-theoretic bound must hypothesise away the split family**, or it is
+  simply false at q = 13, 17, 29, 37, 41.
+
+*Also observed, beyond the v₂(L) ≤ 1 theorem: at q ≡ 3 (mod 4) a shift with
+Δ ≡ 0 (mod lcm(L,q)) and Δ ≡ 2 (mod 4) preserves m mod q, parity, every γ_i^m,
+**and prime-admissibility**, while flipping the sign factor — giving exactly 1/2.
+It also held on every v₂(L) = 2 fibre tested (48/48 at q = 23, 20/20 at q = 31),
+which the theorem does not cover. First departure from 1/2 is at v₂(L) = 4.*
+
 ## C8 CLOSED (as a closed form): the prime density is a count of generators
 
 For q ≡ 1 (mod 4), r = 1, c = 1 + m_0, d = ord(c): over prime-admissible m the
