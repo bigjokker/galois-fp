@@ -39,9 +39,29 @@ Status, three separate items — the first two are densities, the third is not:
   F_q^× steps are now proved** (Part 4): over primes α^n = c^{m+1}, it is a
   generator, and the generators are hit uniformly.
 
-* Beyond r = 1: the fibre-theoretic **infimum route is closed** (c_band = 0,
-  Part 6), while the total prime-density-0 mass measures o(1/q) on the range
-  searched (Part 5). Σ ε_q = ∞ is untouched and still rests on the prime sweep.
+* **Covering, two targets, not one.** A.2 (every `p`) **cannot be reached by a
+  density argument**: witnesses are `q < p`, so covering that `p` needs `Q`
+  growing with `p`, and a statement at modulus `Π(Q) > p` is silent about that
+  `p`. Even `ε_q = 1/2` for every `q`, proved, leaves an exceptional set that
+  density cannot empty. `ε_q ≥ c` is **stronger than density 1 needs and weaker
+  than A.2 needs**. The "therefore" in §7 (the barrier is `ε_q ≥ c`) is a
+  *choice* of sufficient condition for `Σ ε_q = ∞`, not a deduction from the
+  covering structure. The fibre infimum (`c_band = 0`, Part 6) was the barrier
+  for that chosen proxy; it is not the barrier for **density 1**, which is a
+  statement about the mean and the joint law of the events
+  `E_q = {(disc f_p / q) = −1}`. Uncovered density for finite `Q` is that joint
+  law (`thm:dens`), not `∏(1−ε_q)`: `{3,5}` independent, `{3,7}` not.
+  `Σ ε_q = ∞` is well supported by the sweep and does not by itself force
+  uncovered density → 1. lab/ via the infimum proxy does not approach A.2.
+
+  Pairwise excess at `p < 10^7` (odd `q ≤ 31`): `{3,5}` and `{3,7}` match
+  `thm:dens`; the three pre-specified candidates were noise; `{3,13}` is
+  post-hoc 4.8σ. **Near-zero excess is alignment, not structural independence.**
+  `ε_5` is a function of `p mod 4` (≈ 0.475 / 0.625, mean 11/20, within-group
+  1.2σ) with spread 0.15 across the 12 unit classes mod 36, and inner product
+  with `s_3` exactly 0 — E₃'s good classes are 3+3 balanced mod 4. `{3,q}`
+  excesses are decided on modulus 36, where E₃ is a class function; that is
+  not the same question as where `ε_q` lives.
 
 No Weil, no character-sum estimate, no `E_q`, no CFSG. Verified computationally
 for q ≤ 139.
@@ -1818,6 +1838,18 @@ near 1/2 while the infimum is 0. This is TRAP 5 at the strategic level: the mean
 never saw these fibres, and the infimum is exactly what was just measured. The
 10^7 prime sweep is unaffected; per-fibre positivity at q ≤ 37 stands as a
 measurement of that range.
+
+**What it also does not kill, because it was never on that path: density 1 of
+covered primes.** `ε_q ≥ c` is stronger than density 1 needs (divergence of
+the means suffices, and the sweep supports it) and weaker than A.2 needs
+(witnesses are `q < p`; a density statement at modulus `Π(Q) > p` cannot empty
+the exceptional set). The fibre infimum was the barrier for a *chosen proxy*,
+not for covering. Density 1 lives on the joint law of the `E_q`; `{3,5}`
+independent and `{3,7}` not is the existing evidence that the joint law is the
+object, and that `Σ ε_q = ∞` does not by itself force uncovered density → 1.
+A small pairwise excess is **alignment of class sets**, not structural
+independence: `ε_5` has spread 0.15 on `p mod 4` and inner product zero with
+`s_3`.
 
 ## The j-class density structure is a CLASS ARTEFACT, end to end
 

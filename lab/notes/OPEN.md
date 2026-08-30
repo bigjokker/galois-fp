@@ -3,8 +3,16 @@
 Live list. Add to it as new areas open up; move finished items to **Done**
 with the commit or note section that closed them.
 
-Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftovers ·
+Legend: **[A]** every `p` · **[B]** density 1 (joint law) · **[C]** r=1 leftovers ·
 **[D]** verification debt · **[E]** publication · **[F]** literature
+
+Former **[B]** was `ε_q ≥ c`, used as a proxy for A.2. That proxy cannot reach
+A.2 (item 2). `ε_q ≥ c` is **stronger than density 1 needs and weaker than A.2
+needs**. The "therefore" in `galois_fp.tex` §7 (the barrier is `ε_q ≥ c`) is a
+choice of sufficient condition for `Σ ε_q = ∞`, not a deduction from the
+covering structure. Items 3–7 below are measurements made under that proxy;
+they stand as measurements. The fibre infimum (`c_band = 0`) was the barrier
+for the proxy; it is not the barrier for density 1.
 
 ---
 
@@ -13,11 +21,42 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 1. **`Gal(f_p/Q) = S_p` for every odd prime `p`.** Open. The certificate needs,
    for each `p`, *some* odd unramified `q` whose Frobenius is both odd and
    fixed-point-free.
-2. **No `p` escapes every `q`.** This is the missing lemma. Verified to `10^7`
-   by exhaustive witness search (`../ancillary/witnesses.txt`), not proved.
-   Everything in `lab/` is an attempt to get at it via (B).
+2. **No `p` escapes every `q`.** Open. Verified to `10^7` by exhaustive witness
+   search (`../ancillary/witnesses.txt`), not proved. **A density argument
+   cannot prove this.** Witnesses are `q < p`, so covering a given `p` needs
+   `Q` growing with `p`, and a statement at modulus `Π(Q) > p` is silent about
+   that `p`. Even `ε_q = 1/2` for every `q`, proved, leaves an exceptional set
+   that density cannot empty. This is structural, not a gap to close with
+   better bounds. **lab/ via (B) does not approach A.2**, and must not be
+   described as if it did.
 
-## B. ε_q ≥ c > 0 — the real target
+## B. Density 1 of covered primes — the live target
+
+Not progress toward A.2. For a *fixed* finite `Q`, uncovered density is the
+**joint law** of the events `E_q = {(disc f_p / q) = −1}` (`thm:dens`), not
+`∏(1−ε_q)`. `{3,5}` is exactly independent; `{3,7}` is not. As more `q` are
+adjoined, uncovered density → 0 if and only if those finite-union densities
+tend to 1. Divergence of the *marginals* (`Σ ε_q = ∞`) is well supported by
+the sweep (every measured `ε_q` near 1/2, no drift) and does **not** by itself
+force that limit: strong enough dependence leaves uncovered density bounded
+away from 0.
+
+**LIVE.** Pairwise correlations of the `E_q`. At `p < 10^7` the pre-specified
+candidates died; `{3,5}` and `{3,7}` match `thm:dens`; `{3,13}` is a post-hoc
+4.8σ. The 45-pair table measures **alignment of class sets, not structural
+independence**. Proof by example: `ε_5` is a function of `p mod 4` (levels
+≈ 0.475 and 0.625, within-group 1.2σ, mean 11/20) with per-class spread 0.15,
+and its inner product with `s_3` is exactly 0 because E₃'s good classes are
+3+3 balanced mod 4. Near-zero excess is that alignment, not "no structure".
+`{3,q}` excesses are decided on **modulus 36** (where E₃ is a class function),
+which is a different question from where `ε_q` itself lives.
+
+*Untested, not a finding:* leading structure of `ε_q` on `lcm(4, q−1)`. Do not
+attribute the 4 to the archimedean factor — at `q=5` one has `χ_5(−1)=+1`, so
+that factor is frozen, and mod 4 is just `q−1`. Amplitude is a separate
+question (`q=19` has `lcm(4,18)=36` and spread 0.015, not 0.15).
+
+### Former proxy: `ε_q ≥ c` (measurements kept)
 
 3. **MEASURED at r ≥ 2, and it is good news.** 3,774 band fibres
    (2 ≤ r ≤ q−2) at q = 13, 19, 23, 29, 31, 37: **no genuine non-split zero
@@ -69,7 +108,9 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
     are now proved**: primality forces gcd(m+1, q−1) = 1, whence α^n = c^(m+1),
     a generator; and the units mod P reduce onto (Z/d)^× with equal fibres
     φ(P)/φ(d). The prime-level form uses Dirichlet mod q²P. The r = 1 family is
-    closed; ε_q ≥ c still lives in r ≥ 2.
+    closed. The covering proxy `ε_q ≥ c` is dropped (see A.2 / B above); what
+    remains of r ≥ 2 for density 1 is the mean and the joint law, not a fibre
+    infimum.
 
 9. **ANSWERED BY DELETION.** The question was whether different ρ give different
     prime densities. Neither: **every stratum but ρ = n is empty of primes.**
