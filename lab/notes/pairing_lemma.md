@@ -632,6 +632,83 @@ q ≡ 3, where Step 2 was the r = 1 tool and is no longer available. Item 20
 (equal-degree ⇒ BAL = 1/2) is not subsumed — 2+2+2+2+2 has L = 20, v₂ = 2,
 BAL = 1/2, which this theorem does not reach.
 
+## Theorem (any r): even multiplicity ⟹ the symbol is constant in the product
+
+*The second r-general theorem. Like the translation theorem it uses no Kummer
+structure, so B5 does not touch it.*
+
+**Hypothesis.** Every **non-split** factor of h has **even** multiplicity.
+(Split factors have γ = 0, contribute 1 to the product, and are invisible to s;
+the hypothesis says nothing about them. The fibre must have at least one
+non-split factor — a fully split fibre is a different family.)
+
+**Statement.** On unramified m the character product is identically +1, so
+
+    s = χ_q(−1)^{(p−1)/2} · χ_q(r).
+
+* At **q ≡ 1 (mod 4)**: χ_q(−1) = +1, so s = χ_q(r) is **constant** — density
+  **0** when χ_q(r) = +1, density **1** when χ_q(r) = −1.
+* At **q ≡ 3 (mod 4)**: the archimedean factor alternates and **BAL = 1/2**.
+
+*Proof.* Each non-split root enters the residue as N(z)^{mult}. With mult even
+that is a square in F_q^×, so χ_q of it is +1 whenever it is nonzero. The
+product over the non-split roots is therefore identically +1 on unramified m,
+and what remains of (S) is the archimedean factor times χ_q(r^p) = χ_q(r) (p is
+odd). ∎
+
+**Duals.** r ↦ q − r. At q ≡ 1 the duals are **copies**, because
+χ_q(−r) = χ_q(r) when χ_q(−1) = +1; at q ≡ 3 the character **flips**, though
+both members still sit at 1/2. **m₀ is not carried by any formula** — it is
+m₀ ↦ q − 1 at q = 31, 59, 197 and m₀ ↦ m₀ at q = 5. The pairs below are listed
+as computed.
+
+**SCOPE — this prices the constant family; it does not bound ε_q.** The theorem
+makes a closed-form family of *constant* fibres, and the family runs the whole
+range: density 1 (certificates everywhere), 1/2, and 0. The q ≡ 1, χ_q(r) = +1
+members are density **0** — they are the enemy, and no count of them is a lower
+bound on anything. What the closed form buys is that this part of the zero
+population can be *enumerated* rather than searched, which is how the interior
+mass was priced at O(1/q²) in Run 2.
+
+**The fibre list, complete for 5 ≤ q ≤ 200.**
+
+    q     q mod 4   (r, m₀)       shape        L      χ_q(r)   primes      density
+    5        1      (2, 2)        [(2,2)]      8        −1      4 : 0        1
+    5        1      (3, 2)        [(2,2)]      8        −1      4 : 0        1
+    31       3      (8, 0)        [(2,2)]      60       +1      8 : 8        1/2
+    31       3      (23, 30)      [(2,2)]      60       −1      8 : 8        1/2
+    59       3      (10, 0)       [(2,2)]      116      −1     28 : 28       1/2
+    59       3      (49, 58)      [(2,2)]      116      +1     28 : 28       1/2
+    197      1      (7, 0)        [(2,2)]      392      +1      0 : 168      0
+    197      1      (190, 196)    [(2,2)]      392      +1      0 : 168      0
+
+Four dual pairs, eight fibres, every one of shape **[(2,2)]** — a single
+quadratic of multiplicity 2. `primes` is neg : pos over prime-admissible
+classes of a full period, from `core.fibre_counts_primes`; no fibre in the list
+has a ramified prime-admissible class, so BAL = EPS throughout.
+
+**Correction to the earlier count.** The Run 2 bullet said *"exactly three such
+dual pairs"* over 5 ≤ q ≤ 691, naming q = 31, 59, 197. Over the range actually
+rescanned here — 5 ≤ q ≤ 200, complete — there are **four**, and the omitted one
+is **q = 5**, the density-1 pair. `200 < q ≤ 691` has not been rescanned by this
+pipeline and the older figure for that stretch is not carried forward.
+
+**How the list was computed.** A fibre of the family must have gcd(h, h′) ≠ 1:
+if h were squarefree every multiplicity would be 1, so the hypothesis would
+force *no* non-split factor at all — the fully split case, excluded. So
+screening on gcd(h, h′) ≠ 1 is **complete, not a heuristic**. On the survivors
+the family test is decided without factoring: deg h = q − 1 < q, so no
+multiplicity is divisible by the characteristic and classical Yun applies,
+h = ∏ s_i^i = A·B² with A = ∏_{i odd} s_i, and
+
+* every non-split factor has even multiplicity  ⟺  **A | x^q − x**
+* the fibre is not fully split                  ⟺  **rad(h) ∤ x^q − x**
+
+both single modular exponentiations. (A = 1 is the shape that actually occurs,
+and deg A ≤ 1 divides x^q − x.) `core.fibre` runs only on true hits, where the
+shape and L are needed — factoring every survivor is what made the first
+attempt take hours at q = 197 and finish in 68 s here.
+
 ## Transfer to primes: the pairing maps preserve prime-carrying classes
 
 
@@ -1180,6 +1257,87 @@ Not established, without softening:
 * **Any fibre-theoretic bound must hypothesise away the split family**, or it is
   simply false at q = 13, 17, 29, 37, 41.
 
+## (11; 3, 6): the smallest band fibre no theorem reaches
+
+The record-low density, and the first fibre analysed at r ≥ 2 for a *reason*
+rather than a number. It is uncovered on all three counts:
+
+* the **translation theorem** misses it — q ≡ 3 (mod 4) but v₂(L) = 4, and the
+  sign flip needs v₂(Δm) = 1 while L | Δm forces v₂(Δm) ≥ 4;
+* **C8** misses it — r = 3, so no Kummer structure (B5);
+* **even multiplicity** misses it — all multiplicities are 1.
+
+**Anatomy** (`core`, one full period; the dual is (11; 8, 4)):
+
+    (11; 3, 6)                      dual (11; 8, 4)
+    degrees      2, 4, 4            2, 4, 4
+    ord(γ)       4, 16, 16          4, 16, 16
+    L = 16, P = 16                  L = 16, P = 16
+    χ_q(r) = χ_11(3) = +1           χ_11(8) = −1
+    true period of s: 8             8
+    s = −1 at m ≡ 2 (mod 8)         m ≡ 5 (mod 8)
+    (neg,pos,zero) = (2, 6, 0)      (2, 6, 0)
+    BAL = EPS = 1/4                 1/4
+
+Eight admissible classes, **all prime-carrying, none ramified**, so class and
+prime densities coincide here — this fibre has no TRAP 5 gap. The dual shares
+the density but **not** the residue class (m is even at r = 3, odd at r = 8).
+
+**The true period is 8, not L = 16.** The halving is realised by an **on-fibre
+integer** translation Δm = **88** ≡ 8 (mod 16). Note Δm = 8 itself is *not*
+available: m + 8 leaves the fibre at q = 11, since the fibre requires
+m ≡ 6 (mod 11). A period must be quoted as an integer shift, never as a residue
+mod P — that is TRAP 3, and stating it as "m ↦ m + 8" is how it gets in.
+
+**Why it halves: synchrony, not cancellation.** The two quartic characters each
+have period 16. Pairing the admissible classes mod 16 as {t, t+8} — that is
+{0,8}, {2,10}, {4,12}, {6,14} — **both** quartics flip on the first three pairs
+and **both** hold on the fourth. Because their shift-ratios are *equal*, the
+product is invariant and its period drops to 8. Opposite ratios would flip the
+product and would **not** halve the period. So the mechanism is two factors
+sharing a translation ratio — not "flips that cancel", which is the wrong
+picture, and not a coincidence of one factor.
+
+**It is not the r ≥ 2 analogue of Step 2.** Step 2 is a Kummer Galois
+involution φ^{d/2}(u) = −u acting on **one** coordinate. Here two distinct
+character factors of h happen to share a translation ratio. The numerical
+effect is the same — the period of the product drops — but the objects are
+different, and the effect is common rather than structural: 44 of 86 band
+fibres in the first scan have true period < P.
+
+**The quadratic is degree-2-constant, not "inert".** Its character is
+identically +1 over the period, but it is **live**: multiplicity 1, ord(γ) = 4,
+and it contributes to L. Neither the even-multiplicity theorem nor L_odd
+removes it. Constancy here is a fact about the character, not about the factor's
+multiplicity.
+
+**A small true period is the opportunity, not the mechanism.** It permits a
+large deviation — a nonzero |BAL − 1/2| is at least 1/(2·#classes in one true
+period) — but it does not choose 2-of-8 over 4-of-8, and it does not make this
+fibre unique at 1/4. The witness is **q = 13, (5, 12)**: three live *quadratics*
+of order 24, q ≡ 1 (mod 4) so the archimedean factor is frozen, true period 12
+(Δm = 156), and
+
+    BAL_class = 4/12 = 1/3      BAL_prime = 2/8 = 1/4
+
+— the same prime density by a different route, and with a **TRAP 5 split that
+(11; 3, 6) does not have**. Reading its class figure as the density gives 1/3,
+which is also the q = 29 floor and the density of a different object entirely.
+
+**Status of the surrounding scan.** Whether s has period < P is a fact about s
+on the fibre and does not depend on prime-admissibility: the 44 of 86 stands.
+The rest of that scan's table — the balanced count and the deviation list —
+was computed over *all* admissible classes and is withdrawn pending a rerun with
+prime-admissible counts and BAL separated from |BAL − 1/2| (`.scratch/bandscan_v2.py`).
+
+**Carried forward for (SQ).** When the cancellation conjecture is written, N
+must be the **true-period** prime-admissible class count, folded to one
+fundamental domain. `fibre_counts_primes` reports the P-window: here N_P = 8,
+which is P/e = 2 copies of the 4 even classes. Folded N is **4, not 8, and
+not L = 16**. On that domain D = 2, so D/√N = 1. Using the P-window as N
+(N = 8, D = 4) inflates D/√N to √2. Using L = 16 with the P-window D mixes
+two windows.
+
 ## Run 2: the interior zero class is NOT real, and the interior mass decays like 1/q²
 
 
@@ -1227,19 +1385,11 @@ No actual prime ever produced a −1.
   q ≡ 5 (mod 8) has v₂(L) = 3 — 114 of them below q = 200 (10 extreme), 84 out
   of sample (**0** extreme). The five zeros agreeing on v₂(L) = 3 was a forced
   invariant agreeing with itself.
-* **q = 197 is a different theorem entirely.** Its only non-split factor is a
-  quadratic of **multiplicity 2**, so every exponent in the residue is even, the
-  product is a perfect square, and the symbol collapses to χ_q(r) = χ_197(7)
-  = +1 identically — on all 196 classes, with no reference to L or any 2-Sylow.
-  This *is* a **theorem, not a class**: if every non-split factor has even
-  multiplicity, each N(z)^mult is a square, the character product is identically
-  +1 on unramified m, and s = χ_q(r). At q ≡ 1 (mod 4) that is constant —
-  density 0 when χ_q(r) = +1, 1 when −1. At q ≡ 3 the archimedean factor still
-  alternates and gives 1/2, which is why the family is harmless there. The duals
-  are copies rather than mirrors because χ_q(−r) = χ_q(r) when χ_q(−1) = +1. An exhaustive scan over
-  all 123 primes 5 ≤ q ≤ 691 finds exactly three such dual pairs: q = 31 and
-  q = 59 (both ≡ 3 mod 4, hence 1/2, harmless) and q = 197. This is item 23
-  (even multiplicity is invisible to χ_q) surfacing as a density mechanism.
+* **q = 197 is a different theorem entirely** — even multiplicity, now promoted
+  to PART 3 with hypothesis, scope and the fibre list (complete for
+  5 ≤ q ≤ 200; four dual pairs, not the three stated here originally — q = 5 was
+  missing). Its only non-split factor is a quadratic of multiplicity 2, so
+  s = χ_197(7) = +1 identically, with no reference to L or any 2-Sylow.
 * **q = 109 and q = 181: not explained, and NOT "proved chance".** They sit at
   M = 8 and M = 4 prime-admissible classes against a generic 2(q−1) ≈ 216–392.
   Summing 2^{−M} over every exactly-measured interior fibre at the 33 primes

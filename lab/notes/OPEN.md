@@ -32,12 +32,14 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 4. **`r ≥ 2`: no structural results.** `04_r2.py` opened this. The Kummer
    structure is gone; the only handle is `g(β) = m0 / H_r(β)` with
    `H_r = Σ_{k<r} 1/(x−k)`. Literature for this lives in
-   `paper/13-r2-rational-frobenius/` (empty of PDFs until B5); do not mix
-   into `05-kummer-character-sums`.
-5. **Does the `ρ`-stratification survive past `r = 1`?** i.e. does
-   `s(m) = χ_q(1 − α^ρ)` have an analogue when `h` is not a Kummer equation?
-   Cheapest generalisation question available; decides how much (C8) is worth.
-   First check: is `φ(u)/u` a scalar in `F_q` for `r=2`? Prediction: no.
+   `paper/13-r2-rational-frobenius/` — 26 PDFs on disk, and the gate is now
+   **"do not open"**, not "unfetched": B5 closed the line they were for. Do not
+   mix into `05-kummer-character-sums`.
+5. **ANSWERED — NO. See "B5 result (settled)" below; do not re-run this.**
+   The `ρ`-stratification does not survive past `r = 1`. `φ(u)/u` is a scalar in
+   `F_q` on `r=1` 624/624 fibres, `r=2` **1**/684, `r=3` **6**/708 (degrees > 2).
+   The prediction was no and the data was no, so Step 1, the `ρ`-stratification
+   and `s(m) = χ_q(1 − α^ρ)` — and therefore C8 — are Kummer/`r = 1` only.
 6. **ANSWERED — YES, and the earlier "no" was measuring classes.** Non-split
    fibres identically `+1` **among primes** exist: q=37 (1,10), (1,26), (1,9)
    and q=13 (1,3), (1,9). Confirmed against ground truth — 4000 actual primes
@@ -239,6 +241,13 @@ needs all roots of one degree d (Kummer). New item:
     invariant for a pairing argument is **L_odd = lcm of n_i over roots of odd
     multiplicity**, not core's lcm over all non-split γ_i. This is reported to
     explain several otherwise anomalous fibres.
+
+    The case in which *every* non-split factor has even multiplicity is
+    stronger and is now a theorem: `pairing_lemma.md` PART 3. That is a
+    **density** statement (s collapses to the archimedean factor times χ_q(r)),
+    not a pairing-invariant statement. L_odd remains open as the invariant for
+    pairing when some but not all non-split factors have even multiplicity.
+    Do not mark this item closed by the PART 3 theorem.
 
 24. **CLOSED — transfer to primes proved.** The referee was right that the
     stated reason was false (gcd(q,L) = 1 shows admissible m cover every class
