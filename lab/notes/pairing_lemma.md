@@ -35,8 +35,9 @@ Status, three separate items — the first two are densities, the third is not:
 
       density(q,d) = #{ γ ∈ F_q^× : ord(γ) = d, χ_q(1 − γ) = −1 } / φ(d)
 
-  depending on (q,d) alone — no j, no ρ, no fibre machinery. Verified, not
-  proved: three F_q^× steps are owed. **See Part 4.**
+  depending on (q,d) alone — no j, no ρ, no fibre machinery. **All three
+  F_q^× steps are now proved** (Part 4): over primes α^n = c^{m+1}, it is a
+  generator, and the generators are hit uniformly.
 
 * Beyond r = 1: the fibre-theoretic **infimum route is closed** (c_band = 0,
   Part 6), while the total prime-density-0 mass measures o(1/q) on the range
@@ -44,14 +45,6 @@ Status, three separate items — the first two are densities, the third is not:
 
 No Weil, no character-sum estimate, no `E_q`, no CFSG. Verified computationally
 for q ≤ 139.
-
-Two things any identification of {α^ρ} must accommodate: the lists are **not
-always balanced** (q = 17, d = 2 freezes at density 0; q = 113, ρ = 14 sits at
-density 1 on 384 points, every point a certificate), and j-freeness is
-**stratum-local**, not fibre-local (q = 97: ρ = 6 frozen at 3/4 across all four
-j-classes while ρ = 2 splits; q = 73 the reverse). The q = 113 slice is the
-first r = 1 piece that raises ε_q rather than pinning it at 1/2 — but one
-stratum of one fibre is still O(1/q) and cannot move the covering.
 
 ---
 
@@ -63,8 +56,7 @@ where it is the odd part of q−1. **β** is the root of h everywhere EXCEPT in 
 proof of (★), where c^β u uses β as an exponent.
 
 **How to read this.** Parts 1-3 are the mathematics: setup, traps, and the
-proved results with their hypotheses. Part 4 is a verified formula that is not
-yet a theorem. Part 5 is measurement. Part 6 records routes that are closed.
+proved results with their hypotheses. Part 4 proves the r = 1 density formula. Part 5 is measurement. Part 6 records routes that are closed.
 Part 7 is the correction history -- kept, but out of the way.
 
 ---
@@ -771,11 +763,11 @@ prime-admissible — luck, a property of P there, not a theorem.
 *Scope: r = 1 throughout. ρ is an r = 1 object and nothing here constrains
 r ≠ 1.*
 
-# PART 4 — C8: a description, not a theorem
+# PART 4 — C8: the r = 1 density, proved
 
-*A closed form for the r = 1 prime density, verified and not proved.*
+*A closed form for the r = 1 prime density, and its proof.*
 
-## C8 CLOSED (as a closed form): the prime density is a count of generators
+## C8 CLOSED: the prime density is a count of generators
 
 
 For q ≡ 1 (mod 4), r = 1, c = 1 + m_0, d = ord(c): over prime-admissible m the
@@ -793,22 +785,157 @@ was *forced* the moment the list was identified as that set. Written without c:
 
 No fibre machinery, no c, no m_0.
 
-**Status: density formula verified; identification observed; proof open.**
-The 69 fibres (q = 13, 17, 29, 37, 41, L ≤ 420, 0 mismatches, 23 (q,d) rows
-none carrying two densities) compared **ratios** — measured density against the
-generator count. That does not establish the identification: *a proper subset of
-(Z/d)^× with the same residue / non-residue ratio would give the same number*,
-and TRAP 5 inside ρ = n (82 of 178 fibres) is exactly where such a subset could
-hide. The set-level evidence is the smaller exponent table below — {1,2} mod 3,
-{1,3} mod 4, units mod 8, 14, 18, 20, 26, 30 — which is stronger but a smaller
-sample.
+**Why ratios were never going to settle it.** The 69 fibres (q = 13, 17, 29,
+37, 41, L ≤ 420, 0 mismatches, 23 (q,d) rows, none carrying two densities)
+compared **ratios** — measured density against the generator count. That cannot
+establish the identification: *a proper subset of (Z/d)^× with the same
+residue / non-residue ratio gives the same number*, and so does an unequal
+weighting of the generators. Uniformity is not a density statement. The argument
+below is therefore a set-and-multiset argument throughout; the measurements at
+the end confirm it and are not what proves it.
 
-So the proof debt is all three steps, none discharged:
-  (1) α^n ∈ ⟨c⟩;  (2) it is a *generator*;  (3) each generator equally often.
+### Lemma 1 (primality forces g = 1)
 
-The exponent sets are visibly the units: {1,2} mod 3, {1,3} mod 4, {1,3,5,7}
-mod 8, {1,3,5,9,11,13} mod 14, {1,5,7,11,13,17} mod 18, {1,7,11,13,17,19,23,29}
-mod 30.
+At r = 1 with c ∉ {0,1} — so d > 1 and L = d(q−1) by Step 0 — and P = lcm(L, 4):
+
+    gcd(qm + 1, P) = 1   ⟺   gcd(m + 1, q − 1) = 1.
+
+The hypothesis is not decoration: at d = 1 Step 0 gives L = 1, hence P = 4, and
+the lemma is false (q = 13, m = 2: gcd(27,4) = 1 while gcd(3,12) = 3).
+
+*Proof.* Since d | q−1, the primes dividing L = d(q−1) are exactly those
+dividing q−1; the factor 4 in P adds only the prime 2, which already divides
+q−1. So P and q−1 have the same prime support. For any prime ℓ | q−1 we have
+q ≡ 1 (mod ℓ), hence qm + 1 ≡ m + 1 (mod ℓ), so ℓ | qm+1 ⟺ ℓ | m+1. Taking this
+over all ℓ | q−1 gives the equivalence. ∎
+
+This is an equivalence of coprimality, **not an equality of gcds**: q ≡ 1
+(mod ℓ) does not give q ≡ 1 (mod ℓ²). Measured over 1,688,776 classes
+(q ≤ 113): the equality `gcd(qm+1,P) = gcd(m+1,q−1)` fails 49,376 times — first
+at q = 13, m₀ = 1, d = 12, m = 92, where the left side is 9 and the right 3 —
+while the equivalence fails **0** times.
+
+Because d | q−1 and n | q−1, Lemma 1 delivers in one line everything the older
+arguments obtained separately:
+
+    g := gcd(m+1, d) = 1,   M := d/g = d,   k := (m+1)/g = m + 1,
+    gcd(m+1, n) = 1, hence ρ = n/gcd(k,n) = n,
+    ℓ = 2 (2 | q−1): m+1 odd, i.e. m even — the parity condition.
+
+The ρ = n theorem of Part 3 is the special case ℓ | n, and the earlier ℓ | d
+argument is the special case ℓ | d. They are one fact.
+
+### Steps (1) and (2): α^n = c^(m+1)
+
+Every root of h = x^{q−1} − c satisfies β^q = cβ, so δ := β^d is Frobenius-fixed
+(φ(δ) = c^d δ = δ), lies in F_q^×, and δ^n = β^{dn} = β^{q−1} = c. Taking orbit
+representatives η_i β with η_i a transversal of ⟨c⟩ in F_q^×, and using that
+η ↦ η^d has kernel ⟨c⟩ and so induces an **isomorphism** F_q^×/⟨c⟩ → μ_n,
+
+    w_i = (−u_i)^M = (−1)^M m₀^{mM} δ^k ζ_i^k,   {ζ_i} = μ_n, each exactly once.
+
+So the w-values form the coset A·μ_ρ with A = (−1)^M m₀^{mM} δ^k, and α^ρ = A^ρ.
+By Lemma 1, M = d and k = m+1, so
+
+    α^n = A^n = (−1)^{dn} · m₀^{m·dn} · (δ^n)^{m+1}
+              = (−1)^{q−1} · (m₀^{q−1})^m · c^{m+1}
+              = c^{m+1},
+
+using dn = q−1 even, and m₀ ≠ 0 (m₀ = 0 would mean c = 1, excluded). Since
+gcd(m+1, d) = g = 1 and F_q^× is cyclic with a unique subgroup of order d,
+c^{m+1} has order exactly d. That is **(1) and (2) together**. ∎
+
+### Step (3): two statements, not one
+
+**(3a) Classes — elementary.** The exponent is j = (m+1) mod d, and since
+d | q−1 we have q ≡ 1 (mod d), so p = qm+1 ≡ m+1 ≡ j (mod d): the exponent is a
+congruence on *p*. At r = 1, p is odd ⟺ m is even, and the admissible m cover
+every even residue mod P (gcd(2q, P) = 2). As q is invertible mod P, the map
+m ↦ qm+1 is a bijection from even to odd residues mod P, and gcd(p, P) = 1 then
+selects exactly the φ(P) units. Since d | P, reduction (Z/P)^× → (Z/d)^× is a
+surjective group homomorphism, so all of its fibres have the same size. **Each
+generator is attained exactly φ(P)/φ(d) times per period.** ∎
+
+**(3b) Primes — needs Dirichlet.** The modulus is **q²P, not qP**. The fibre
+condition is m ≡ m₀ (mod q), i.e. p ≡ q·m₀ + 1 (mod q²) — *not* p ≡ 1 (mod q),
+which would union the q fibres (1, m₀′) across which c, d and P all vary. Since
+gcd(q, P) = 1, CRT splits a class mod q²P into independent q²- and P-parts, so
+conditioning on the fibre does not bias p mod P, hence does not bias its
+reduction to (Z/d)^×: that is still p mod P reduced, exactly the map of (3a).
+Dirichlet in **equidistribution** form (not mere infinitude) gives each reduced
+class mod q²P prime density 1/φ(q²P), so each of the φ(d) generators receives an
+equal share of the primes of the fibre. ∎
+
+*Do not reduce p ≡ q·m₀ + 1 (mod q²) modulo d.* gcd(d, q) = 1, so the two
+congruences are independent and no constraint on p mod d follows from the fibre
+condition; reading one off would falsely force p into a single class mod d.
+
+**Corollary (this family only: r = 1, q ≡ 1 (mod 4), d > 1, prime-admissible).**
+χ_q(1 − c^j) = 0 would need c^j = 1, impossible for gcd(j,d) = 1 with d > 1. So
+no prime-admissible class of such a fibre ramifies, and **BAL = EPS here** —
+TRAP 4 is vacuous on this family. The scope is part of the statement: it says
+nothing about other r, about q ≡ 3, or about d = 1.
+
+### Extra: the unsquared residue
+
+The product over the n orbits collapses to a single binomial — not merely to its
+class mod squares. **For prime-admissible m** (equivalently gcd(m+1, q−1) = 1,
+which is the full conclusion of Lemma 1, not just g = 1):
+
+    residue(q, 1, m₀, m) = 1 − c^{m+1}    in F_q.
+
+The hypothesis is essential — see the negative control below, where a quarter of
+the admissible classes violate it.
+
+Checked against `core.residue_from_fibre` itself, not only against the symbol
+(density agreement with χ_q would not prove the unsquared value): **7034
+prime-admissible classes** (q ≤ 61) and **2157 actual primes**, 0 failures, 0
+ramified. The prime sweep includes q ≡ 3 (mod 4), so the residue identity is not
+an artefact of χ_q(−1) = +1; only the passage to s(p) = χ_q(1 − c^{m+1}) needs
+q ≡ 1 (mod 4).
+
+### What is imported, and how much of it is needed
+
+`L = d(q−1)` is **Step 0 of this note; it is not reproved on this page.** The
+proof above uses it only through P, and the two uses cost differently:
+
+* **(3a) needs only `d | P`.** That is all the counting argument consumes.
+* **Lemma 1 needs Step 0 itself**, for the prime support of P. `(q−1) | P` gives
+  one inclusion; the other — that P carries *no* prime beyond those of q−1 — is
+  exactly the statement that the primes of L divide q−1, i.e. `L = d(q−1)`. The
+  proof of Lemma 1 already leans on it, so it cannot be traded for `d | P`.
+
+### The negative control
+
+Lemma 1 is load-bearing, not decorative. Over **all** admissible m of a full
+period — dropping only the prime-admissibility filter — the identity
+α^n = c^{m+1} **fails 5760 times out of 24762** (5 ≤ q ≤ 31), and **0 of those
+failures are prime-admissible**. First failure in the scan: q = 7, m₀ = 1,
+c = 2, d = 3, m = 50, g = 3, where α^n = 4 against a predicted 1. Without
+Lemma 1 the identity is false on roughly a quarter of the classes.
+
+(The companion residue identity fails 6230 times over the same 24762 classes,
+counting a vanishing residue as 0. The two counts differ — 5760 against 6230 —
+because α^ρ can survive where the residue does not; quote each against its own
+identity.)
+
+### Measurement — confirmation, not evidence
+
+* g = 1, α^n = c^{m+1}, and multiplicity φ(P)/φ(d): **949,644 prime-admissible
+  m over 699 fibres**, q ≤ 109. 0 failures.
+* multiset {(m+1) mod d} equal to (Z/d)^× with equal multiplicities: **1076
+  fibres**, q ≤ 149, 0 failures. **992 of them are ratio-blind** — φ(d) > 1 with
+  generators on both sides of χ_q, where dropping some generators, or weighting
+  them unequally, would leave the density unchanged. That is precisely the case
+  the 69-fibre ratio test could not see. It confirms (3a); (3a) is what proves
+  it.
+* the formula against `core.fibre_counts_primes`: **130 fibres**, 0 density
+  mismatches, 0 fibres with ramified classes, and 0 (q,d) pairs where two
+  different c of the same order gave different densities.
+
+The exponent sets are visibly the units, as the proof requires: {1,2} mod 3,
+{1,3} mod 4, {1,3,5,7} mod 8, {1,3,5,9,11,13} mod 14, {1,5,7,11,13,17} mod 18,
+{1,7,11,13,17,19,23,29} mod 30.
 
 **It reproduces every hard case, from the formula alone:**
 
@@ -854,25 +981,28 @@ theorem, not this count. d = 1 skipped (c = 1, split). φ(d) fibres per d,
 divided by q(q−1). **r = q−1 counted separately, never doubled**: its duals are
 copies at q = 13 and mirrors at q = 109.
 
-**Contingent on C8**, which is verified and not proved: formula-0 is a
-sufficient condition for a genuine zero only if {α^n} really is the generator
-set. That rests on the 69-fibre ratio match and the 14-row set identification.
+**No longer contingent.** C8 is proved above, so {α^n} *is* the generator set
+and formula-0 is a sufficient condition for a genuine zero. (When this census
+was run the dependence was live and rested on the 69-fibre ratio match.)
 
-Result, q ≡ 1 (mod 4) up to 677 (60 primes, 15 s, no fibre machinery):
+Result, q ≡ 1 (mod 4) up to 677 (59 primes, 15 s, no fibre machinery):
 
     q        13      37      73     137     241     409     673
     mass   .0128   .0030   .0013  .00016  .00012  .000054 .000011
     x q     .167    .111    .097    .022    .029    .022    .007
 
 **The edge zero mass decays faster than 1/q** — mass·q falls from 0.167 to
-0.007 — and is exactly 0 at 14 of the 60 primes. The reason is that the freeze
+0.007 — and is exactly 0 at 14 of the 59 primes. The reason is that the freeze
 lives on **small d**, so φ(d) is bounded and the edge contribution is
 O(φ(d)/q²), which is why mass·q itself decays. The 14 zero-mass primes are the
 same fact. **This cannot decide total zero mass**; it shows only that the edge is
 not where a growing dent would come from (q = 5, 29, 53, 149, 173, 197,
 269, 293, 317, 389, 509, 557, 653, 677). The mechanism is visible in the data:
-the freezing d are always **small** (2, 3, 4, 6, 8, 10, 12), so φ(d) is small
-and the frozen part is a shrinking fraction of the edge's own 1/q.
+the freezing d are always **small** — over this range exactly
+(2, 3, 4, 5, 6, 8, 10, 12, 18), the two largest being d = 5 at q = 461, 541 and
+d = 18 at q = 541 — so φ(d) is small and the frozen part is a shrinking fraction
+of the edge's own 1/q. (45 of the 59 primes carry a frozen d; the other 14 are
+the zero-mass ones above.)
 
 *This says nothing about the interior zeros at q = 109, 181, 197, which are what
 c_band = 0 was about. Those are measurement 2.*
@@ -885,16 +1015,17 @@ sparse as q grows is a different measurement from c_band**, and it has not been
 made. Until that mass is shown to grow, the sweep remains the evidence and the
 infimum route is closed.
 
-**The live object.** After C8's zeros are priced in, a fibre-theoretic bound
-would have to take the form
+**SUPERSEDED — see PART 6.** After C8's zeros are priced in, a fibre-theoretic
+bound would have to take the form
 
     ε_q ≥ (1 − O(1/q)) · c_band,
 
 with c_band the infimum of prime-EPS over **non-split** fibres with
-2 ≤ r ≤ q−2. Today c_band = 1/4 on the enumerated small-L part and is unproved
-on the rest. **That is the live object** — not H_r, not item 22, not q = 43.
-The measurement that would move it is whether small-L band minima stay ≥ 1/4 as
-q grows; the tail having a −1 does not bear on it.
+2 ≤ r ≤ q−2. When this paragraph was written c_band looked like 1/4 on the
+enumerated small-L part, and that was called the live object. **It is 0** — the
+interior zeros at q = 109, 181, 197 — so the displayed bound is empty and the
+fibre-theoretic infimum route is closed, not open. Σ ε_q = ∞ is untouched and
+still rests on the prime sweep.
 
 *Also observed, beyond the v₂(L) ≤ 1 theorem: at q ≡ 3 (mod 4) a shift with
 Δ ≡ 0 (mod lcm(L,q)) and Δ ≡ 2 (mod 4) preserves m mod q, parity, every γ_i^m,
@@ -977,8 +1108,9 @@ exactly 1/2 rise from 118 to 140.
 ## The r >= 2 prime floor: no non-split zeros in the band
 
 
-The strategic measurement. ε_q is the mean over all q(q−1) fibres; r = 1 is only
-φ(q−1) of them and is now known to contain genuine zeros. The mass is at r ≥ 2.
+The strategic measurement. ε_q is the mean over all q(q−1) fibres; fixing r = 1
+leaves m₀ free, so r = 1 is only q of them — mass 1/(q−1) — and it is now known
+to contain genuine zeros. The mass is at r ≥ 2.
 **Report r = q−1 separately: it is the dual of r = 1, not part of the bulk.**
 
 **3,774 fibres with 2 ≤ r ≤ q−2 at q = 13, 19, 23, 29, 31, 37.** 534 enumerated

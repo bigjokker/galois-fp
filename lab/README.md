@@ -28,11 +28,15 @@ irreducibles of degree `d`.
 |---|---|
 | `q ≡ 3 (mod 4)`, every `c` | density exactly 1/2 — **proved** |
 | `q ≡ 1 (mod 4)`, `c` primitive | density exactly 1/2 — **proved** |
-| `q ≡ 1 (mod 4)`, `c` arbitrary | `s(m) = χ_q(1 − α^ρ)` — **formula proved, density open** |
+| `q ≡ 1 (mod 4)`, `c` arbitrary | `s(p) = χ_q(1 − c^{m+1})`, density = a generator count — **proved** |
 
-The third is a reduction, not a density: it removes the product over the `n`
-orbits, but the proportion of `−1` on the resulting list `{α^ρ}` — which depends
-on the stratum `ρ` and on a class in `(Z/d)^×/{±1}` — has not been identified.
+The third was long only a reduction. It is now a density: over primes
+`gcd(m+1, q−1) = 1`, so `α^n = c^{m+1}` runs over exactly the `φ(d)` generators
+of `⟨c⟩`, uniformly, and
+
+    density(q, d) = #{ γ : ord(γ) = d, χ_q(1 − γ) = −1 } / φ(d)
+
+depending on `(q,d)` alone. Proof in `notes/pairing_lemma.md`, PART 4.
 
 **RETRACTED — see TRAP 5.** This said: no non-split fibre is identically `+1`
 at `q = 19, 23, 29, 37` (on-fibre witness search, 2716/2716 tail fibres), and
@@ -47,8 +51,10 @@ reported, not smaller.
 What survives: the `{0, 1/2, 1}` trichotomy refutation. `q=11 (3,6)` is `1/4`
 over classes and over primes alike (4000 primes, measured 0.2437).
 
-**None of this bounds `ε_q` below.** All of it is `r = 1`, which is `φ(q−1)` of
-`q(q−1)` fibres — mass `~1/q`. `ε_q ≥ c` still lives in the other `r`.
+**None of this bounds `ε_q` below.** All of it is `r = 1`: fixing `r` leaves
+`m0` free, so that is `q` of the `q(q−1)` fibres — mass `1/(q−1)`, i.e. `~1/q`.
+(`φ(q−1)` counts the primitive-`c` fibres only, not the `r = 1` family.)
+`ε_q ≥ c` still lives in the other `r`.
 
 Full write-up with proofs: `notes/pairing_lemma.md`. Open items:
 `notes/OPEN.md`.

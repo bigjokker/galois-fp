@@ -55,7 +55,7 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
 
 ## C. r = 1, q ≡ 1 (mod 4), general c
 
-8. **CLOSED as a closed form; open as a proof.** Over primes
+8. **CLOSED — proved.** See `pairing_lemma.md`, PART 4. Over primes
     {α^n} = the φ(d) generators of ⟨c⟩, so
 
         density(q,d) = #{ j in (Z/d)^x : chi_q(1 - c^j) = -1 } / phi(d)
@@ -63,9 +63,11 @@ Legend: **[A]** the actual question · **[B]** ε_q ≥ c · **[C]** r=1 leftove
     depending on (q,d) alone, with no fibre machinery. Verified on 69 fibres,
     0 mismatches; reproduces every hard case (113/8 → 1, 101/10 → 0, 97/16 →
     3/4, 29/7 → 1/3, 17/2 → 0) and gives 1/2 for d = q−1 at every q ≡ 1 up to
-    149, independently re-deriving the primitive theorem. **A proof owes:**
-    α^n ∈ ⟨c⟩; it is a generator; each generator is hit equally often. That is
-    now the whole remaining r = 1 question.
+    149, independently re-deriving the primitive theorem. **All three steps
+    are now proved**: primality forces gcd(m+1, q−1) = 1, whence α^n = c^(m+1),
+    a generator; and the units mod P reduce onto (Z/d)^× with equal fibres
+    φ(P)/φ(d). The prime-level form uses Dirichlet mod q²P. The r = 1 family is
+    closed; ε_q ≥ c still lives in r ≥ 2.
 
 9. **ANSWERED BY DELETION.** The question was whether different ρ give different
     prime densities. Neither: **every stratum but ρ = n is empty of primes.**
@@ -295,8 +297,11 @@ needs all roots of one degree d (Kummer). New item:
 
 ## F. Literature — paused
 
-17. **Resume only after (C8).** The remaining question is which `α^ρ` arise,
-    which is cyclic-group arithmetic, not a table lookup.
+17. **No longer gated on (C8) — C8 is proved** (`pairing_lemma.md`, PART 4).
+    Which `α^n` arise is settled: over primes they are exactly the `φ(d)`
+    generators of `⟨c⟩`, uniformly. The literature is now *optional*, and wanted
+    for one thing only — a closed form for `Σ_{j ∈ (Z/d)^×} χ_q(1 − c^j)`, which
+    would evaluate the density rather than merely identify it.
 18. **Then:** Jacobi sums of order 32 and 36 (no `(i,j)_e` tables exist —
     Evans–Hill 1979; van Wamelen 2002 computes the sums).
 19. **Still paywalled:** Osada 1987 I (JNT), Guralnick 1983 (J. Algebra 81),

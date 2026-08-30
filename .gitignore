@@ -3,3 +3,6 @@
 *.out
 *.synctex.gz
 __pycache__/
+
+# Subagent scratch directories (matches lab/.gitignore).
+.scratch/
