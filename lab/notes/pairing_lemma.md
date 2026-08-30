@@ -882,16 +882,27 @@ Not established, without softening:
 
 ## c_band = 0. The fibre-theoretic route to ε_q ≥ c is DEAD.
 
-**Six non-split fibres strictly inside the band have prime density exactly 0.**
+**FIVE non-split fibres strictly inside the band have prime density exactly 0.**
 
-    q     (r,m0)              L    non-split degs  prime-adm cls  (neg,pos,zero)
-    109   (103,108)          24    2                     8        (0,   8, 0)
-    181   (8,0), (173,180)    8    2+2                   4        (0,   4, 0)
-    197   (7,0), (190,196)  392    2^2                 168        (0, 168, 0)
+    q     (r,m0)              L   v2(L)  non-split degs  prime-adm  (neg,pos,zero)
+    109   (103,108)          24     3    2                    8     (0,   8, 0)
+    181   (8,0)               8     3    2+2                  4     (0,   4, 0)
+    181   (173,180)           8     3    2+2                  4     (0,   4, 0)
+    197   (7,0)             392     3    2                  168     (0, 168, 0)
+    197   (190,196)         392     3    2                  168     (0, 168, 0)
 
-All have 2 ≤ r ≤ q−2, all are genuinely non-split. These are **not** the
+All have 2 ≤ r ≤ q−2, all genuinely non-split. These are **not** the
 r = 1 / r = q−1 edge fibres already known to be identically +1. q = 197 is not
 small-sample noise: 168 distinct prime-carrying classes, every one +1.
+
+*The count is five, not six.* A sixth fibre, q = 109 (6,0), is the r ↔ q−r dual
+of (103,108) and has density **1** — a mirror, not a copy. The q = 181 and
+q = 197 duals *are* copies, both zero.
+
+**The arithmetic is the d = 2 arithmetic, now in the interior.** All three q are
+≡ 1 (mod 4); every L has **v₂(L) = 3**; every non-split part is quadratic. That
+is the same shape as the r = 1, d = 2 zeros (q = 17, d = 2 freezing at 0), moved
+off the edge.
 
 Confirmed four independent ways per fibre — resultant form, explicit per-root
 norms, `core.fibre_counts_primes`, and **`fpcore.symbol` evaluating disc(f_p)
@@ -912,14 +923,28 @@ sequence of minima does not trend — it is erratic, and it is not bounded below
     q     73    109   181   197
     c_b  5/12    0     0     0
 
-(q = 17 at 1/4 was a gap in every previous run and is new here.) Nothing in the
-sweep lies strictly between 0 and 1/3.
+(q = 17 at 1/4 was a gap in every previous run and is new here.)
 
-**What this does not touch.** Positivity per fibre was never claimed to be
-universal — it was measured on 3,774 band fibres at q ≤ 37, and those
-measurements stand. What dies is the inference from them to a uniform c. The
-prime sweep remains the evidence for Σ ε_q = ∞; ε_q ≥ c > 0 does not follow from
-any fibre-level infimum, because that infimum is 0.
+*An agent line saying "nothing lies strictly between 0 and 1/3" was copied into
+an earlier draft and is **false**: 1/4 is strictly inside that interval and
+occurs at q = 11, 13, 17. The accurate statement is narrower — after 1/4 stops
+appearing, the sampled values are ≥ 1/3 or exactly 0. That is a description of
+this sample, not a gap law.*
+
+**What this does NOT kill: Σ ε_q = ∞.** ε_q is a *mean*, and a handful of zero
+fibres at three q is a small dent in a mean, not a collapse — the mean can sit
+near 1/2 while the infimum is 0. This is TRAP 5 at the strategic level: the mean
+never saw these fibres, and the infimum is exactly what was just measured. The
+10^7 prime sweep is unaffected; per-fibre positivity at q ≤ 37 stands as a
+measurement of that range.
+
+**What is left for ε_q ≥ c.** Not an infimum over fibres — that door is shut.
+Either (i) a theorem that the *mass* of prime-density-0 fibres stays o(1), or
+(ii) the sweep. The known zeros are sparse and structured (a few fibres, small
+L, q ≡ 1 (mod 4), quadratic factors, v₂(L) = 3). **Whether that class stays
+sparse as q grows is a different measurement from c_band**, and it has not been
+made. Until that mass is shown to grow, the sweep remains the evidence and the
+infimum route is closed.
 
 **The live object.** After C8's zeros are priced in, a fibre-theoretic bound
 would have to take the form
