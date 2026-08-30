@@ -42,7 +42,28 @@ j-classes while ρ = 2 splits; q = 73 the reverse). The q = 113 slice is the
 first r = 1 piece that raises ε_q rather than pinning it at 1/2 — but one
 stratum of one fibre is still O(1/q) and cannot move the covering.
 
+---
+
+**Notation collisions, unresolved.** Three symbols do double duty; not worth
+renaming mid-proof, but a reader should know. **r** is the residue class
+p ≡ r (mod q) everywhere EXCEPT inside the Step 0 proof, where it is briefly
+ind_g(δ). **s** is the Kronecker symbol s(m) everywhere EXCEPT in the j rule,
+where it is the odd part of q−1. **β** is the root of h everywhere EXCEPT in the
+proof of (★), where c^β u uses β as an exponent.
+
+**How to read this.** Parts 1-3 are the mathematics: setup, traps, and the
+proved results with their hypotheses. Part 4 is a verified formula that is not
+yet a theorem. Part 5 is measurement. Part 6 records routes that are closed.
+Part 7 is the correction history -- kept, but out of the way.
+
+---
+
+# PART 1 — Setup
+
+*The object, stated for general r.*
+
 ## Setup
+
 
 q an odd prime, r = 1. Then B_1 = x, B_1′ = 1, u_1 = C_1 = x^{q-1} − 1, so the
 fibre polynomial is the Kummer equation
@@ -69,6 +90,7 @@ without subscripts for that case.
 
 ## The symbol (S)
 
+
 Stickelberger reads the Kronecker symbol of the discriminant, and
 disc f_p ≡ (−1)^{(p−1)/2}·R (mod q) with R the unsigned residue. What survives
 is χ_q of that sign, **not the sign itself**:
@@ -90,7 +112,71 @@ For q ≡ 1 there is **no archimedean factor**: the discriminant sign is
 invisible to the symbol. The identity (−1)^{(p−1)/2} = (−1)^{m/2} is true and
 irrelevant; the coefficient of (p−1)/2 in s is χ_q(−1), not −1.
 
+# PART 2 — Traps
+
+*Read these before any number below. Each cost real time.*
+
+## TRAP 5: class density is not prime density
+
+
+**Independent PARI/GP verification (15,931 (p,q) pairs, disc(f_p) built from the
+definition, 0 disagreements) confirmed the fibre machinery — and exposed a
+measurement error in this project's own tooling.**
+
+`core.fibre_counts` / `period_m` average over **every** admissible class mod
+P = lcm(L,4). Only the classes with gcd(qm + r, P) = 1 carry primes. Averaging
+over all of them is a different quantity:
+
+    eps_7 over all classes       = 3541/7182 = 0.49304    WRONG
+    eps_7 over prime-admissible  =  323/648  = 0.498457   the published value,
+                                   and 0.498554 ± 0.0002 over 5.76M real primes
+
+**eps_3 and eps_5 agree under both conventions**, which is exactly why the
+anchor check on q = 3, 5 passed earlier in this session and gave false
+confidence. Sharper still: q = 13, fibre (12,1) has BAL = 2/3 over all classes,
+while **all 37,011 primes p < 10^8 in that fibre have symbol −1** (density 1).
+
+Use `core.fibre_counts_primes` for anything about primes. It reproduces
+eps_3 = 1/2, eps_5 = 11/20 and eps_7 = 323/648 exactly.
+
+**A HEADLINE FINDING IS REVERSED.** The witness search concluded "no non-split
+fibre is identically +1 at q = 19, 23, 29, 37". It sampled admissible m, i.e.
+**classes**, not prime-admissible classes, so it found its −1 witnesses in
+classes that carry no primes. Over primes the conclusion is false:
+
+    q=37 (1,10)  classes: 1/27   primes: 0   — 4000 actual primes, ALL +1
+    q=37 (1,26)  classes: 1/27   primes: 0
+    q=37 (1, 9)  classes: 2/27   primes: 0
+    q=13 (1, 3)  classes: 1/9    primes: 0
+    q=13 (1, 9)  classes: 1/9    primes: 0
+
+These are **non-split fibres, identically +1 among primes**. So "split is the
+only density-0 family" is false, the census floors (1/9, 1/27, 2/27) are not
+floors but **zeros**, and the density-0 population is larger than reported, not
+smaller. That is the direction that hurts ε_q ≥ c.
+
+**What survives.** The {0, 1/2, 1} trichotomy refutation stands: q = 11, (3,6)
+is 1/4 over classes AND over primes (4000 actual primes, measured 0.2437). The
+published `../NOTES.md` is unaffected.
+
+**And uniformity breaks.** The four q = 11 fibres that all read 7/15 over
+classes split over primes into 13/32 at (3,1) and (8,9) versus 15/32 at (5,9)
+and (6,1). Equal class densities are not equal prime densities.
+
+**Scope of the damage.** Every density reported in this note from
+`fibre_counts` — the census, the j-class tables (16/49, 1/27, 29/54, 43/90,
+681/1330, 7/15, 1/4), the v₂(L) verifications — is a **class** density. As a
+statement about integers m each is correct; as a statement about primes none has
+been re-derived. The pairing theorems are unaffected in substance, because the
+lemma below shows the maps preserve prime-carrying classes, so a BAL of 1/2 over
+all classes restricts to 1/2 over the prime-carrying ones.
+
+# PART 3 — Proved, by hypothesis
+
+*Each result is scoped by the hypothesis it needs, not by the case it was found in.*
+
 ## Step 0 — **n = 1 only**. ord(γ) = ord(β) = (q−1)²
+
 
 **This is the primitive-c statement.** For general c the correct statement is
 L = d(q−1), and it is an lcm over the n orbits, not a single order — see
@@ -103,6 +189,7 @@ so gcd(e, q−1) = q−1 and **L := ord(γ) = (q−1)² = 4k²**, k := (q−1)/2
 identical argument applied to β^{q−1} = c gives **ord(β) = (q−1)²**.
 
 ## Step 1. Frobenius acts on u by a scalar
+
 
 β^q = cβ and m_0^q = m_0, so φ(u) = c^{m+1} u; since d | q−1 gives q ≡ 1 (mod d)
 and c has order d, this holds for **every c and every root** (write u_i, γ_i,
@@ -131,6 +218,7 @@ the derivation does not use it.)
 
 ## Step 2 — stated here for n = 1; holds for every even d
 
+
 **Primitive form.** Put i = d/2 = (q−1)/2 in (1). As m is even, m+1 is odd, so
 (m+1)(q−1)/2 ≡ (q−1)/2 (mod q−1), and c primitive gives c^{(q−1)/2} = −1:
 
@@ -143,6 +231,7 @@ square in 218 of 218 cases, against ~50/50 for random u.
 of 1 + u, not as −(u−1). That is separate from its appearance in (S).
 
 ## Two facts about χ_{q^d}
+
 
 **(F1) — needs d even, not d = q−1.** For x ∈ F_q^× every conjugate of x is x,
 so N(x) = x^d and
@@ -157,7 +246,9 @@ not use F1 — it preserves each u_i outright — so this is a scoping fix, not 
 gap. (Verified: 0 non-squares out of q−1 at q = 13, 17, 29, all with d = q−1.)
 
 **(F2) — n = 1 only.** χ_{q^d}(β) = −1 exactly when q ≡ 1 (mod 4). β is a square
-iff (q^d − 1)/ord(β) is even, and ord(β) = (q−1)² by the **n = 1** Step 0 — so
+iff (q^d − 1)/ord(β) is even — *the 'iff' uses ord(β) EVEN, which holds here
+because ord(β) = (q−1)²; without it, writing β = g^{(N/e)v}, one gets only
+"square iff v even" and the parity of v is undetermined*, and ord(β) = (q−1)² by the **n = 1** Step 0 — so
 this is a primitive-c statement, used only in the q ≡ 1 inversion pairing. LTE,
 applicable since the exponent q−1 is even, gives
 
@@ -203,251 +294,8 @@ q ≡ 1 (mod 4): (a) χ_q(−1) = +1, no sign factor to flip; (b) k even, so
 predict b ≡ 2 (mod 4) is *necessary*; under (S) it is not — it only looks so
 because b ≡ −2 (mod q−1) with 4 | q−1 already forces it.
 
-## The map
-
-    a := k − 1 = (q−3)/2,      b := (q−1)j − 2,   with   2j ≡ 4ι + 1 (mod s),
-
-where q − 1 = 2^e·s with s odd; b is then lifted by CRT to satisfy
-b ≡ (1−a)m_0 (mod q). Set T : m ↦ am + b.
-
-**T is admissible.** b ≡ (1−a)m_0 (mod q) gives Tm ≡ m_0 (mod q); a is odd
-(k even) and b is even, so Tm is even. **T is a bijection on even classes mod
-L**: gcd(k−1, 4k²) = 1, since gcd(k−1, k) = 1 and k−1 is odd.
-
-## The identity u′·u = λ ∈ F_q^×
-
-With u′ := u(Tm) and a + 1 = k, using km = 2kt = (q−1)t and b + 2 = (q−1)j:
-
-    u′u = γ^{(a+1)m+b} β² = γ^{km+b} β² = m_0^{km+b} β^{km+b+2}
-        = m_0^b · c^{t+j}                                       (3)
-
-since m_0^{(q−1)t} = 1 and β^{(q−1)(t+j)} = c^{t+j}. As m_0^b = c^{ιb} = c^{−2ι},
-
-    **λ = c^{m/2} · c^{j−2ι} = c^{α},   α := t + j − 2ι ∈ Z/(q−1).**
-
-So the map is **inversion composed with an F_q^×-scalar**, u ↦ λ/u. Note λ is
-*not* a constant shift: it moves with m through the factor c^{m/2}. Verified on
-2288 (q, m_0, m) triples, zero failures.
-
-## (★) and its proof
-
-Since 1 + u′ = 1 + λ/u = (u+λ)/u, and χ(u) = χ(γ)^m χ(β) = χ(β) = −1 for m even
-by (F2),
-
-    χ(1 + u′) = χ(u + λ)·χ(u) = −χ(u + λ),
-
-so the flip χ(1+u′) = −χ(1+u) is **equivalent** to
-
-    **χ_{q^d}(u + λ) = χ_{q^d}(1 + u).**                        (★)
-
-*Proof of (★).* We seek i with u + λ = c^α·φ^i(1+u). By (1), c^α(1 + c^β u)
-equals c^α + c^{α+β}u, so we need c^α = λ ✓ and α + β ≡ 0, with β ≡ (m+1)i
-(mod q−1). That is the congruence
-
-    (m+1)·i ≡ −α   (mod q−1),
-
-solvable iff g := gcd(m+1, q−1) divides α. Now m+1 = 2t+1 is odd, so g | s; the
-j rule gives 2(j−2ι) ≡ 1 (mod s), hence mod g; and g | 2t+1. Therefore
-
-    2α = 2t + 2(j−2ι) = (2t+1) + [2(j−2ι) − 1] ≡ 0   (mod g),
-
-and g is odd, so g | α. Solvable. Then u + λ = c^α·φ^i(1+u), and χ kills the
-F_q^× factor by (F1) and the Frobenius by χ∘φ = χ. Hence (★). ∎
-
-*(Verified: 75 200 checks of g | α over all primitive r = 1 fibres for q ≤ 97,
-zero failures; and u+λ ∝ φ^i(1+u) confirmed directly at q = 13, 17, 29.)*
-
-**The index i depends on m** — measured i ∈ {0,1,2,3,4,7,10} at q = 13. This is
-the crux. Requiring one i uniformly in t forces the coefficient of t to vanish,
-2i + 1 ≡ 0 (mod q−1), impossible since 2i+1 is odd and q−1 even: u + λ is *not*
-a global Galois conjugate of 1+u. But χ ∘ φ^i = χ for every i, so per-m
-solvability is all that is needed, and that is what the j rule delivers.
-
-## Conclusion (q ≡ 1 mod 4)
-
-s(Tm) = −s(m) for every admissible m. T is a bijection of the even classes mod
-L, so it injects {s = +1} into {s = −1} and back; hence the two are equinumerous
-and the density is 1/2. **No involution is needed** — bijectivity suffices, which
-matters because T is not an involution (5² = 25 ≢ 1 mod 144). ∎
-
-*Two bookkeeping points.* (i) (★) lives on exponents mod L, and gcd(q, L) = 1
-already identifies the exponent-class density with the fibre density; the CRT
-lift of b is needed only to realise T as a map on the integers m of the fibre,
-not for the counting. (ii) The ramified locus u = −1 is at most one class mod L
-and cannot move a Dirichlet density; empirically it did not intervene at all —
-the direct counts came out 400/800 (q = 41) and 676/1352 (q = 53), so either it
-was absent or it fell in a pair.
-
-## Where the j rule comes from
-
-The rule is exactly the solvability condition, not a fit. Necessity: choose t
-with s | 2t+1, so t ≡ −2^{-1} (mod s); then g = s and s | α forces
-j ≡ 2ι − t ≡ 2ι + 2^{-1} (mod s), i.e. **2j ≡ 4ι + 1 (mod s)**. Sufficiency is
-the proof above. So
-
-    j satisfies the rule  ⟺  (★) holds by Galois matching for every even m.
-
-Such a t exists because s is odd, so 2 is invertible mod s.
-
-**The 2-Sylow is matched, and matched trivially.** m + 1 = 2t + 1 is odd, hence
-a 2-adic unit, so (m+1)i ≡ −α (mod 2^e) is solvable for *every* α. The entire
-obstruction lives mod s, which is why the rule does. Three distinct 2-adic
-objects are in play and should not be conflated:
-
-* the 2-part of the congruence — no constraint at all (m+1 is a unit);
-* (F2), χ(β) = −1 — supplies the **flip** in χ(1+u′) = χ(u+λ)·χ(u), and no part
-  of the congruence;
-* the 2^e free values of j — the lifts of one odd class mod s, which is why
-  s = 1 (q = 17) made every j look admissible.
-
-The constant is 2(j−2ι) ≡ 1 (mod s): in the odd-order component, c^{j−2ι} is a
-square root of c.
-
-## Empirical status of the map
-
-    q     q-1 = 2^e·s    fibres   |pred| = |actual| = 2^e
-    13    12 = 4·3          4       4
-    17    16 = 16·1         8      16      (s = 1, so 2^e = q-1: every j)
-    29    28 = 4·7         12       4
-    37    36 = 4·9         12       4
-    41    40 = 8·5         16       8      first e = 3
-    53    52 = 4·13        24       4
-    61    60 = 4·15        16       4      first composite s
-
-The last column is exactly 2^e, the number of lifts of the single odd class
-j ≡ 2ι + 2^{-1} (mod s) — so q = 17 is not a separate phenomenon.
-
-**All 92 fibres exhaustive**, predicted set = actual set, zero mismatches
-(`_q1f.py`, `_q1k.py`, `results/exhaustive_53_61.txt`). q = 41 is the first
-e = 3 (8 values of j, not 4 or 16); q = 61 the first composite s = 15, where a
-congruence mod s is a genuine constraint. The 53 and 61 runs take 4 s each
-using `fastsym.py`; with `core.norm` they were hours.
-
-Two scope limits, neither affecting the proof (which needs only sufficiency).
-(i) This is the complete set of working b **of this shape** — a = k−1 with
-b ≡ −2 (mod q−1) — not the complete set of pairings; other multipliers a exist,
-and k−1 is merely the smallest. (ii) Irreducible h means c primitive; reducible
-r = 1 fibres are outside the lemma entirely.
-
----
-
-## Census re-derived over primes (266 fibres, q = 13, 19, 29, 37)
-
-The exactly-enumerated fibres of `06_small_L.txt` and `census_q29_q37.txt`, put
-through `fibre_counts_primes`. **130 of 266 fibres change — 48.9%.** All 36
-split fibres are unchanged; every change is non-split (130/230 = 56.5% of them).
-
-**16/49 was never a density.** The census advertised it as the minimum at
-q = 29. It is EPS_class on the twelve L = 196 (7+7+7+7) fibres, produced by two
-ramified classes per period. BAL_class was already 1/3, both ramified classes
-are prime-free, so over primes those fibres are exactly **1/3**. The advertised
-minimum was a bookkeeping artifact and vanishes.
-
-**1/3 survives and is the new floor** (12 fibres → 14; q=29 (6,0) and (23,28)
-fall onto it from 3/7). **2/3 survives** and becomes the dominant non-half
-value, 36 fibres.
-
-**22 fibres collapse to an endpoint.** "Small rational" is not the predictor;
-every collapse in this sample has **uniform root degree d ∈ {2,3,6}**, and the
-q = 29 values that do not move sit on d ∈ {7,14}. **State that as a pattern in
-this sample, not a cause** — it has not been tested off this fibre list. It
-would be falsified by a uniform-degree d ∈ {2,3,6} fibre whose prime density
-stays strictly inside (0,1), or by a collapse at some other d. Until such a
-check exists it is a description of 22 rows:
-
-    1/9   → 0   4 fibres   q=13 (1,3)(1,9)(12,3)(12,9)   6+6
-    1/27  → 0   4          q=37 (1,10)(1,26)(36,10)(36,26)  6×6
-    2/27  → 0   4          q=37 (1,9)(1,25)(36,11)(36,27)   3×12
-    2/3   → 1   2          q=13 (1,11)(12,1)   2×6
-    5/6   → 1   2          q=13 (2,11)(11,1)   2×6
-    8/9   → 1   4          q=13  3×4, L=36
-    7/9   → 1   2          q=37 (1,35)(36,1)  2×18
-
-**Twelve non-split fibres are identically +1 over primes; the census said zero.**
-4 at q=13, 8 at q=37 — 5.2% of all non-split fibres, 9.5% at q=13 and 10.0% at
-q=37. Class-side there are 20 density-0 fibres, all split; over primes there are
-32, of which **12 are non-split**. Each is an arithmetic progression on which the
-q-test provably never yields a −1 certificate. Twelve more are identically −1
-(10 of them new).
-
-**EPS_prime = BAL_prime identically here** — no prime-admissible class is
-ramified anywhere in the 266 fibres, so within this sample the BAL/EPS
-distinction is entirely a class-side artifact. **This is a fact about the
-sample, not a theorem**, and the caveat belongs in the same breath: at q = 7,
-8 of 2568 prime-admissible classes ARE ramified, and (2677,7) is a real
-ramified prime.
-
-**Why nobody would have caught this from the aggregate.** The per-fibre mean
-moves by under 0.016 at every q, and q = 19's non-split mean lands on exactly
-1/2:
-
-    q     mean EPS_class    mean EPS_prime
-    13      0.491587          0.507535
-    19      0.494513          0.500000
-    29      0.470238          0.467593
-    37      0.497531          0.501852
-    pooled  0.488413          0.493271
-
-Half the individual fibres change, 22 go to an endpoint, and the aggregate barely
-moves. That is exactly why the ε_3 / ε_5 anchor check passed earlier and gave
-false confidence. Distinct values in the spectrum drop from 27 to 17; fibres at
-exactly 1/2 rise from 118 to 140.
-
-*Ground truth: the agent also checked 21 fibres against actual primes below
-3·10^6. Every empirical density matched BAL_prime, never BAL_class — e.g. q=13
-(12,1) measured 1.000000 against BAL_class 2/3, and q=13 (5,12) measured
-0.243553 against BAL_prime 1/4, BAL_class 1/3.*
-
-## Census facts (q = 29, 37; L ≤ 2000) — CLASS densities, superseded above
-
-Every density-0 fibre found is **split**: 8 at q = 29, 6 at q = 37, and **zero
-non-split fibres with L ≤ 2000 are identically +1**. For split h the residue is
-just r^p, so with p odd, s = χ_q(−1)^{(p−1)/2}·χ_q(r): constant χ_q(r) for
-q ≡ 1 (mod 4), while for q ≡ 3 Dirichlet on modulus 4q splits p mod 4 evenly and
-the density is exactly 1/2. About 10 split fibres per prime, mass O(1/q),
-harmless for ε_q ≥ c. Two non-split always-−1 fibres at q = 29, both L = 56.
-Mixed floors 16/49 (q=29) and 1/27 (q=37) are real and cheap.
-
-## Witness search on the large-L tail (`08_witness.py`)
-
-Identically +1 is disproved by one s(m) = −1 and proved only by a full period,
-so the tail is not worth O(L) per fibre for an exact fraction. Instead: evaluate
-s at on-fibre m = m_0 + qt of the right parity (step 2q) until a −1 appears or
-K = 64 misses.
-
-    q    fibres   split   exact L<=2000   tail    witnessed -1    evals
-    19     342      8          46          288     288 / 288       582
-    23     506      8          52          446     446 / 446       856
-    29     812     10          62          740     740 / 740      1519
-    37    1332     10          80         1242    1242 / 1242     2545
-
-**No budget hits at any q**, so the K = 256 rerun never triggered. Mean
-evaluations per fibre 2.02, 1.92, 2.05, 2.05 — a geometric variable with
-p = 1/2 has mean 2, so the tail behaves like a fair coin, not a rare event.
-
-**Corrected.** At q = **29, 37** the density-0 population is exactly the split
-fibres, and at all four q no non-split fibre is identically +1 at any L. The
-sentence previously said this held at q = 19 and 23 as well. It does not: for
-q ≡ 3 (mod 4) a split fibre ALTERNATES, so BAL = EPS = 1/2, not 0 — as this
-note's own split analysis says. Re-measured: all 8 split fibres at q = 19 and
-all 8 at q = 23 give BAL = 1/2 with zero ramified. Density-0 split fibres are a
-q ≡ 1 (mod 4) phenomenon only.
-
-Two limits. Four primes is not a theorem. And the search is one-sided by
-construction — it can only settle "not identically +1" and can never bound a
-density below, so a 1/27 fibre passes on its second evaluation while
-contributing almost nothing to the mean. What is removed is the one scenario
-that would have made ε_q ≥ c impossible: a positive fraction of non-split
-fibres at exactly 0. The remaining obstruction is the mass and floor of the
-mixed small-density fibres.
-
-*Method note.* An earlier version of `probe` stepped m by 2 from `want`,
-never enforcing m ≡ m_0 (mod q) — the same off-fibre evaluation as Δm = L/2.
-For q ≡ 1 it is harmless (χ_q(−1) = +1, so s depends only on m mod L, and
-gcd(q, L) = 1), but for q ≡ 3 the symbol also sees (p−1)/2, so the control had
-to be re-run on-fibre rather than argued. It was; same verdicts, different m.
-
 ## q ≡ 3 (mod 4): the extension to ALL c, by two translations
+
 
 For q ≡ 3 (mod 4), v₂(q−1) = 1, so every d | q−1 is **odd or ≡ 2 (mod 4)** —
 never ≡ 0 (mod 4). The two cases take different translations, both on-fibre,
@@ -540,7 +388,180 @@ are superseded by the on-fibre run above.*
 — q = 7, d = 3 at 4/9 is 8:8 plus 2 ramified; q = 11, d = 5 at 12/25 is 24:24
 plus 2; q = 19, d = 9 at 40/81 is 80:80 plus 2 — all give BAL = 1/2.*
 
+## The map (q ≡ 1 mod 4, r = 1, c primitive)
+
+
+    a := k − 1 = (q−3)/2,      b := (q−1)j − 2,   with   2j ≡ 4ι + 1 (mod s),
+
+where q − 1 = 2^e·s with s odd; b is then lifted by CRT to satisfy
+b ≡ (1−a)m_0 (mod q). Set T : m ↦ am + b.
+
+**T is admissible.** b ≡ (1−a)m_0 (mod q) gives Tm ≡ m_0 (mod q); a is odd
+(k even) and b is even, so Tm is even. **T is a bijection on even classes mod
+L**: gcd(k−1, 4k²) = 1, since gcd(k−1, k) = 1 and k−1 is odd.
+
+## The identity u′·u = λ ∈ F_q^× (q ≡ 1, r = 1, c primitive)
+
+
+With u′ := u(Tm) and a + 1 = k, using km = 2kt = (q−1)t and b + 2 = (q−1)j:
+
+    u′u = γ^{(a+1)m+b} β² = γ^{km+b} β² = m_0^{km+b} β^{km+b+2}
+        = m_0^b · c^{t+j}                                       (3)
+
+since m_0^{(q−1)t} = 1 and β^{(q−1)(t+j)} = c^{t+j}. As m_0^b = c^{ιb} = c^{−2ι},
+
+    **λ = c^{m/2} · c^{j−2ι} = c^{α},   α := t + j − 2ι ∈ Z/(q−1).**
+
+So the map is **inversion composed with an F_q^×-scalar**, u ↦ λ/u. Note λ is
+*not* a constant shift: it moves with m through the factor c^{m/2}. Verified on
+2288 (q, m_0, m) triples, zero failures.
+
+## (★) and its proof (q ≡ 1, r = 1, c primitive)
+
+
+Since 1 + u′ = 1 + λ/u = (u+λ)/u, and χ(u) = χ(γ)^m χ(β) = χ(β) = −1 for m even
+by (F2),
+
+    χ(1 + u′) = χ(u + λ)·χ(u) = −χ(u + λ),
+
+so the flip χ(1+u′) = −χ(1+u) is **equivalent** to
+
+    **χ_{q^d}(u + λ) = χ_{q^d}(1 + u).**                        (★)
+
+*Proof of (★).* We seek i with u + λ = c^α·φ^i(1+u). By (1), c^α(1 + c^β u)
+equals c^α + c^{α+β}u, so we need c^α = λ ✓ and α + β ≡ 0, with β ≡ (m+1)i
+(mod q−1). That is the congruence
+
+    (m+1)·i ≡ −α   (mod q−1),
+
+solvable iff g := gcd(m+1, q−1) divides α. Now m+1 = 2t+1 is odd, so g | s; the
+j rule gives 2(j−2ι) ≡ 1 (mod s), hence mod g; and g | 2t+1. Therefore
+
+    2α = 2t + 2(j−2ι) = (2t+1) + [2(j−2ι) − 1] ≡ 0   (mod g),
+
+and g is odd, so g | α. Solvable. Then u + λ = c^α·φ^i(1+u), and χ kills the
+F_q^× factor by (F1) and the Frobenius by χ∘φ = χ. Hence (★). ∎
+
+*(Verified: 75 200 checks of g | α over all primitive r = 1 fibres for q ≤ 97,
+zero failures; and u+λ ∝ φ^i(1+u) confirmed directly at q = 13, 17, 29.)*
+
+**The index i depends on m** — measured i ∈ {0,1,2,3,4,7,10} at q = 13. This is
+the crux. Requiring one i uniformly in t forces the coefficient of t to vanish,
+2i + 1 ≡ 0 (mod q−1), impossible since 2i+1 is odd and q−1 even: u + λ is *not*
+a global Galois conjugate of 1+u. But χ ∘ φ^i = χ for every i, so per-m
+solvability is all that is needed, and that is what the j rule delivers.
+
+## Conclusion (q ≡ 1 mod 4)
+
+
+s(Tm) = −s(m) for every admissible m. T is a bijection of the even classes mod
+L, so it injects {s = +1} into {s = −1} and back; hence the two are equinumerous
+and the density is 1/2. **No involution is needed** — bijectivity suffices, which
+matters because T is not an involution (5² = 25 ≢ 1 mod 144). ∎
+
+*Two bookkeeping points.* (i) (★) lives on exponents mod L, and gcd(q, L) = 1
+already identifies the exponent-class density with the fibre density; the CRT
+lift of b is needed only to realise T as a map on the integers m of the fibre,
+not for the counting. (ii) The ramified locus u = −1 is at most one class mod L
+and cannot move a Dirichlet density; empirically it did not intervene at all —
+the direct counts came out 400/800 (q = 41) and 676/1352 (q = 53), so either it
+was absent or it fell in a pair.
+
+## Where the j rule comes from (q ≡ 1, r = 1, c primitive)
+
+
+The rule is exactly the solvability condition, not a fit. Necessity: choose t
+with s | 2t+1, so t ≡ −2^{-1} (mod s); then g = s and s | α forces
+j ≡ 2ι − t ≡ 2ι + 2^{-1} (mod s), i.e. **2j ≡ 4ι + 1 (mod s)**. Sufficiency is
+the proof above. So
+
+    j satisfies the rule  ⟺  (★) holds by Galois matching for every even m.
+
+Such a t exists because s is odd, so 2 is invertible mod s.
+
+**The 2-Sylow is matched, and matched trivially.** m + 1 = 2t + 1 is odd, hence
+a 2-adic unit, so (m+1)i ≡ −α (mod 2^e) is solvable for *every* α. The entire
+obstruction lives mod s, which is why the rule does. Three distinct 2-adic
+objects are in play and should not be conflated:
+
+* the 2-part of the congruence — no constraint at all (m+1 is a unit);
+* (F2), χ(β) = −1 — supplies the **flip** in χ(1+u′) = χ(u+λ)·χ(u), and no part
+  of the congruence;
+* the 2^e free values of j — the lifts of one odd class mod s, which is why
+  s = 1 (q = 17) made every j look admissible.
+
+The constant is 2(j−2ι) ≡ 1 (mod s): in the odd-order component, c^{j−2ι} is a
+square root of c.
+
+## Theorem (r = 1 only): the q ≡ 1 fibre symbol is one quadratic character
+
+
+Let q ≡ 1 (mod 4), r = 1, **c ∉ {0, 1}**, d = ord(c), n = (q−1)/d.
+(**c ≠ 1 is required and was missing.** At c = 1 every γ_i = 0, so every
+u_i = 0 and every w_i = 0: the w take ONE value, not ρ, and {0} is not a
+μ_ρ coset. Verified at q = 13, 17, 29. c = 0 is outside the framework.) For an
+admissible m put g := gcd(m+1, d), k := (m+1)/g, and
+
+    **ρ := n / gcd(k, n)**.
+
+Then the w_i take exactly ρ distinct values, forming a coset αμ_ρ each hit n/ρ
+times, and
+
+    **s(m) = χ_q(1 − α^ρ).**
+
+*Proof.* m even ⟹ m+1 odd ⟹ g and k are both odd. The ratios
+w_i/w_1 = (η_i/η_1)^{kd} are the image of F_q^× under x ↦ x^{kd}, of order
+
+    (q−1)/gcd(kd, q−1) = dn/(d·gcd(k,n)) = n/gcd(k,n) = ρ,
+
+so the distinct values are αμ_ρ, each with multiplicity n/ρ. The αζ (ζ^ρ = 1)
+are exactly the roots of Y^ρ = α^ρ, so ∏_{ζ^ρ=1}(X − αζ) = X^ρ − α^ρ — **no
+sign, for even ρ as well** — and at X = 1,
+
+    ∏_i (1 − w_i) = (1 − α^ρ)^{n/ρ}.
+
+And n/ρ = gcd(k, n) divides k, which is **odd**; so the exponent is odd and
+χ_q kills it. ∎
+
+*Two cautions.* (i) The sign (−1)^{ρ+1} appears only when *recovering* α^ρ from
+the data, since ∏_{ζ^ρ=1} ζ = (−1)^{ρ+1} gives α^ρ = (−1)^{ρ+1}∏(distinct w).
+It is not part of the product identity. (ii) When gcd(d,n) > 1 the count is
+still ρ = n/gcd(k,n), **not** n/gcd(kd,n): at q = 97 (n = 6, d = 16) the latter
+would predict ρ ∈ {1,3}, while the truth is ρ ∈ {2,6}. The even part of n is
+forced into ρ, never into the multiplicity — which is why n/ρ stays odd.
+
+Both earlier regimes are special cases: ρ = n is the "coset/collapse" case,
+ρ = 1 is the "all w_i equal" case. **There are no tuples, ever** — the earlier
+note calling the non-coset strata "genuine tuples" was wrong.
+
+*Verified, 0 failures on every count* (#distinct = ρ, μ_ρ-coset, and
+χ_q(1−α^ρ) = s(m)) at q = 37, 41, 61 (n prime) and the composite-n splits
+q = 73 (n = 9), 97 (n = 6), 109 (n = 6), 113 (n = 14). The composite cases are a
+real test: the **intermediate ρ = 3 does occur** at q = 73, n = 9, alongside
+ρ = 1 and 9.
+
+So the whole q ≡ 1 reducible object is: stratify m by ρ, and on each stratum the
+density is that of χ_q(1 − α^ρ) as α^ρ runs an explicit short list. The j-class
+dependence is which list. Sample strata (ρ: size, density per j-class):
+
+    q=97,  d=16, n=6 :  ρ=2  256  1/4,1/4,3/4,1/4     ρ=6  512  3/4 (j-free)
+    q=109, d=18, n=6 :  ρ=2   36  4/9,4/9,5/9         ρ=6  936  17/26,17/26,2/3
+    q=113, d=8,  n=14:  ρ=2   64  1/2,3/4             ρ=14 384  1 (j-free, all −1)
+    q=73,  d=8,  n=9 :  ρ=1   32  1/2,1/4             ρ=3,9  1/2 (j-free)
+
+**Shelf notes.** Folder 10 has the split-half orders: Dickson 1935 / Lehmer 1955
+/ Evans 1983 (e = 8), Whiteman 1960 (e = 12), Whiteman 1957 + Evans–Hill 1979
+(e = 16), Baumert–Fredricksen 1967 (e = 18), Muskat–Whiteman 1970 (e = 20),
+Evans–Van Veen 2016 (e = 24), Katre–Rajwade 1985 (prime ℓ), Katre–Rajwade 1987
+Math. Scand. (e = 4 with the sign of t fixed by q = s²+t², s ≡ 1 mod 4, and
+v^{(q−1)/4} ≡ s/t — the cyclotomic form of the j-class). Ahmed–Tanti 2019
+(arXiv:1906.09960) maps the shelf. Orders 32 and 36 have no table (Evans–Hill
+1979); for q = 97, d = 32 use Jacobi sums of order 32 (van Wamelen 2002), not
+(i,j)_32. The scanned `…order-4-Jacobsthal.pdf` has no text layer — skip it, the
+Math. Scand. sibling is the usable one.
+
 ## Theorem (any r): q ≡ 3 (mod 4) and v₂(L) ≤ 1 ⟹ BAL = 1/2
+
 
 Let q ≡ 3 (mod 4) and let (r, m_0) be **any** fibre — any r, any degree pattern,
 split or not — with L := lcm of orders of the *non-split* γ_i satisfying
@@ -599,61 +620,8 @@ q ≡ 3, where Step 2 was the r = 1 tool and is no longer available. Item 20
 (equal-degree ⇒ BAL = 1/2) is not subsumed — 2+2+2+2+2 has L = 20, v₂ = 2,
 BAL = 1/2, which this theorem does not reach.
 
-## TRAP 5: class density is not prime density
-
-**Independent PARI/GP verification (15,931 (p,q) pairs, disc(f_p) built from the
-definition, 0 disagreements) confirmed the fibre machinery — and exposed a
-measurement error in this project's own tooling.**
-
-`core.fibre_counts` / `period_m` average over **every** admissible class mod
-P = lcm(L,4). Only the classes with gcd(qm + r, P) = 1 carry primes. Averaging
-over all of them is a different quantity:
-
-    eps_7 over all classes       = 3541/7182 = 0.49304    WRONG
-    eps_7 over prime-admissible  =  323/648  = 0.498457   the published value,
-                                   and 0.498554 ± 0.0002 over 5.76M real primes
-
-**eps_3 and eps_5 agree under both conventions**, which is exactly why the
-anchor check on q = 3, 5 passed earlier in this session and gave false
-confidence. Sharper still: q = 13, fibre (12,1) has BAL = 2/3 over all classes,
-while **all 37,011 primes p < 10^8 in that fibre have symbol −1** (density 1).
-
-Use `core.fibre_counts_primes` for anything about primes. It reproduces
-eps_3 = 1/2, eps_5 = 11/20 and eps_7 = 323/648 exactly.
-
-**A HEADLINE FINDING IS REVERSED.** The witness search concluded "no non-split
-fibre is identically +1 at q = 19, 23, 29, 37". It sampled admissible m, i.e.
-**classes**, not prime-admissible classes, so it found its −1 witnesses in
-classes that carry no primes. Over primes the conclusion is false:
-
-    q=37 (1,10)  classes: 1/27   primes: 0   — 4000 actual primes, ALL +1
-    q=37 (1,26)  classes: 1/27   primes: 0
-    q=37 (1, 9)  classes: 2/27   primes: 0
-    q=13 (1, 3)  classes: 1/9    primes: 0
-    q=13 (1, 9)  classes: 1/9    primes: 0
-
-These are **non-split fibres, identically +1 among primes**. So "split is the
-only density-0 family" is false, the census floors (1/9, 1/27, 2/27) are not
-floors but **zeros**, and the density-0 population is larger than reported, not
-smaller. That is the direction that hurts ε_q ≥ c.
-
-**What survives.** The {0, 1/2, 1} trichotomy refutation stands: q = 11, (3,6)
-is 1/4 over classes AND over primes (4000 actual primes, measured 0.2437). The
-published `../NOTES.md` is unaffected.
-
-**And uniformity breaks.** The four q = 11 fibres that all read 7/15 over
-classes split over primes into 13/32 at (3,1) and (8,9) versus 15/32 at (5,9)
-and (6,1). Equal class densities are not equal prime densities.
-
-**Scope of the damage.** Every density reported in this note from
-`fibre_counts` — the census, the j-class tables (16/49, 1/27, 29/54, 43/90,
-681/1330, 7/15, 1/4), the v₂(L) verifications — is a **class** density. As a
-statement about integers m each is correct; as a statement about primes none has
-been re-derived. The pairing theorems are unaffected in substance, because the
-lemma below shows the maps preserve prime-carrying classes, so a BAL of 1/2 over
-all classes restricts to 1/2 over the prime-carrying ones.
-
 ## Transfer to primes: the pairing maps preserve prime-carrying classes
+
 
 Every pairing in this note proves BAL over **admissible integers m**. What ε_q
 needs is a density over the **primes** of the fibre, and those are not the same
@@ -718,98 +686,276 @@ that those classes contain primes. For ℓ | q−1 one has p = qm + 1 ≡ m + 1
 (mod ℓ), so every m with gcd(m+1, q−1) > 1 gives a composite p. The conclusion
 survives; the reason given for it did not.*
 
-## Beyond primitive c: the reducible r = 1 family
+## Theorem (r = 1): every PRIME has ρ = n. The stratification is trivial over primes.
 
-The census floors are **not** unequal-degree "mixed" fibres — those sit near
-1/2. They are reducible r = 1. For h = x^{q-1} − c with d := ord(c), h factors
-into (q−1)/d irreducibles of degree d, and
 
-    **L = d(q−1)**   in every row checked (q = 5, 13, 17, 29, 37; no exceptions),
+Let q ≡ 1 (mod 4), r = 1, d = ord(c), n = (q−1)/d, and for an admissible m put
+g = gcd(m+1, d), k = (m+1)/g, ρ = n/gcd(k, n).
 
-with primitive c the case d = q−1 already proved. The r = q−1 dual copies each
-row. The observed floors:
+**For every prime p = qm + 1 of the fibre, ρ = n.**
 
-    q    d   degrees        L      density
-    13   6   6+6            72     1/9
-    13   4   4+4+4          48     1/3
-    29   7   7+7+7+7       196    16/49     <- census min at q=29
-    37   6   6x6           216     1/27     <- census min at q=37
-    37   3   12x3          108     2/27
+*Proof.* Suppose ρ < n. Then some prime ℓ divides gcd(k, n). Since k | m+1 we
+get ℓ | m+1; and ℓ | n | q−1 gives q ≡ 1 (mod ℓ). Hence
+p = qm + 1 ≡ m + 1 ≡ 0 (mod ℓ). As ℓ ≤ n < q < p, p is composite. ∎
 
-A uniform "density 1/2 for every d" is **false**, and the same table gives
-non-split fibres at 0 and at 1:
+So **every stratum but ρ = n is prime-free** — not "collapses to the same
+value", but empty. For primes the whole stratification disappears and
 
-    q=17, m_0=15, c=−1, d=2, eight quadratics, L=32   density 0
-    q=17, m_0=3, 12,        d=4, L=64                 density 1
-    q=5,  m_0=3,            d=2                       density 1
+    s(p) = χ_q(1 − α^n)
 
-So "split is the only density-0 family" holds at q = 29, 37 (NOT at 19, 23 —
-there split fibres are 1/2) and is
-**false in general**: q = 17, m_0 = 15 is non-split and identically +1. It has
-L = 32 ≤ 2000, so it is exact, and no witness search would ever have reached it.
-Some d flip, some cancel, some freeze.
+with no case analysis. Verified: 49,440 genuine primes across 824 r = 1 fibres
+for q ∈ {5,13,17,29,37,41,53,61,73,89,97,101,109,113} — **primes with ρ ≠ n:
+zero**, including the degenerate m0 = 0 fibres.
 
-**Two densities, not one.** For reducible h the ramified locus is *not*
-negligible: each of the (q−1)/d factors can contribute a vanishing class, so up
-to (q−1)/d classes mod L give symbol 0 (at q = 31, d = 6 factors, 6 and 4 of
-them). Two quantities then differ:
+    q=73  d=8  n=9   ρ=1: 0 prime-adm | ρ=3: 0 | ρ=9: 192, density 1/2
+    q=97  d=16 n=6   ρ=2: 0           | ρ=6: 512, density 3/4
+    q=97  d=32 n=3   ρ=1: 0           | ρ=3: 1024, density 1/2
+    q=113 d=8  n=14  ρ=2: 0           | ρ=14: 384, density **1**
+    q=113 d=16 n=7   ρ=1: 0           | ρ=7: 768, density 1/2
 
-    BAL  the -1 : +1 balance, ramified m excluded -- the structural object
-    EPS  fraction of primes of the fibre giving a -1 certificate; a ramified p
-         certifies nothing, so it belongs in the denominator -- what eps_q needs
+Every class-level split chased earlier sits entirely in the dead strata:
+q=73 ρ=1 gives 1/2,1/2,1/4,1/4; q=97 d=16 ρ=2 gives 1/4 and 3/4; q=113 d=8 ρ=2
+gives 1/2,1/2,3/4,3/4. **None of it is realised by a prime.**
 
-They agree iff no m ramifies. The primitive case has at most one such class, so
-the lemma is unaffected; but conflating them is a trap. At q = 31, d = 5 the
-four fibres look like a 12/25 vs 73/150 split under EPS, while BAL is exactly
-1/2 for all four (counts 72:72 and 73:73) — the whole difference is 6 versus 4
-ramified m. That is a split in EPS and no split at all in structure.
+**This is a worse artefact than the j-class one, with a different cause.** The
+j-classes dissolved by *averaging* — prime-free classes were scattered through
+all of them and removing them equalised the densities. The ρ strata are
+*annihilated*: ρ < n is literally the same set as "p divisible by some ℓ | n".
 
-**Density is not a function of d alone**, and the governing invariant is the
-class of j in **(Z/d)^×/{±1}**, where c = (g^{(q−1)/d})^j for a fixed primitive
-root g. Inverse pairs always share a density (c ↦ c^{-1} is j ↦ −j).
+**q = 113, d = 8 survives at density 1.** The one observed slice that would
+*raise* ε_q rather than pin it is intact: all 384 ρ=14 classes prime-admissible
+and all −1, in each of m0 = 17,43,68,94; 2000 real primes to 1.14·10^8, all −1,
+two re-derived from the raw discriminant with `fpcore.symbol` and no fibre
+machinery. Since ρ=2 is prime-free, the *whole fibre* is identically −1 over
+primes.
 
-Systematic scan (`09_jclass.py`, q ≤ 150, every d | q−1 with 2 < d < q−1 and
-φ(d) > 2; 89 (q,d) pairs, `results/jclass_scan.txt`). The picture is a q mod 4
-dichotomy, not the v₂ rule first guessed:
+**What survives as a prime-level invariant is (q, d).** In every row computed
+the live density is constant across all fibres and all j-classes of that row.
+The remaining r = 1 question is therefore a statement about one list, indexed by
+(q, d) alone.
 
-**q ≡ 3 (mod 4): BAL = 1/2, always.** All 36 pairs across 15 primes
-(11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 127, 131, 139) give exactly
-1/2, for *every* d — as the two translations above prove. (That scan was
-off-fibre; the on-fibre rerun covers 70 pairs, same verdict.)
+**Caveat, and it is the one place the collapse does not help.** ρ = n being the
+only live stratum does *not* make class counts safe inside it. Over the 178
+fibres with 2 ≤ d ≤ 12, class and prime density of the ρ=n stratum differ in
+**82**: q=13 d=6 class 1/9 → prime 0; q=29 d=7 class 16/49 → 1/3; q=37 d=9
+class 52/81 → 2/3. In the five rows above every ρ=n class happens to be
+prime-admissible — luck, a property of P there, not a theorem.
 
-**q ≡ 1 (mod 4): no uniformity.** 53 pairs, 47 distinct BAL values, 18 splits.
-Here v₂ is a sufficient condition:
+**The identically-+1 list is therefore larger than the census reported**, at
+(q,d) level: q=13 d=6, 17 d=2, 37 d=3, 37 d=6, 41 d=2, 41 d=4, 61 d=3, 61 d=6,
+73 d=2, 73 d=6, 73 d=12, 89 d=2, 97 d=2, 97 d=6, 101 d=10, 109 d=6, 113 d=2,
+113 d=4. Identically −1: q=5 d=2, 13 d=2, 13 d=3, 17 d=4, 29 d=2, 37 d=2,
+41 d=10, 53 d=2, 61 d=2, 61 d=10, 73 d=3, 73 d=4, 89 d=4, 97 d=3, 97 d=4,
+97 d=12, 101 d=2, 101 d=5, 109 d=2, 109 d=3, 113 d=8.
 
-    v₂(d) = v₂(q−1)  ⟹  splits.      13 of 13, no exceptions.
+*Scope: r = 1 throughout. ρ is an r = 1 object and nothing here constrains
+r ≠ 1.*
 
-It is not necessary — five further splits have v₂(d) ≠ v₂(q−1) (q = 97 d = 16,
-q = 109 d = 18, q = 113 d = 8, and the two ramified cases q = 61 d = 5,
-q = 101 d = 5). The original v₂ rule failed because every one of its 12
-false-positive predictions was at q ≡ 3 (mod 4), where nothing splits at all:
-it was reading a q mod 4 effect as a v₂ effect.
+# PART 4 — C8: a description, not a theorem
 
-Shape of the splits, where ram = 0: **j-classes pair up complementarily and
-self-paired classes sit at exactly 1/2**. Two-class examples with sum 1:
-q = 37 d = 12 (25/54, 29/54), q = 41 d = 8 (9/20, 11/20), q = 61 d = 12,
-q = 109 d = 12, q = 113 d = 16. Four- and eight-class examples show the
-self-paired classes explicitly:
+*A closed form for the r = 1 prime density, verified and not proved.*
 
-    q = 61,  d = 20:  ±1 -> 38/75,  ±7 -> 37/75,   ±3, ±9 -> 1/2
-    q = 109, d = 36:  ±1,±7 -> 79/162, ±11,±13 -> 83/162, ±5,±17 -> 1/2
-    q = 97,  d = 32:  ±7 -> 11/24, ±3,±13,±15 -> 13/24, ±1,±5,±9,±11 -> 1/2
+## C8 CLOSED (as a closed form): the prime density is a count of generators
 
-So the answer to "two complementary densities or a full j-class formula" is the
-latter: the involution acts on j-classes, complementary values on paired
-classes, 1/2 forced on fixed ones. Not universal, though — q = 101 d = 20 has
-three classes at 121/250 and one at 119/250 (sum 24/25), and q = 73 d = 24 has
-1/2 and 14/27 (sum 55/54).
 
-Structurally the extension is the same Kummer field, not a new family: Step 0
-generalises (γ^{q−1} = c of order d gives L = d(q−1)), but the pairing must act
-on a product of (q−1)/d character values, one per orbit, instead of the single
-u of the primitive case — and j is exactly the scalar permuting those orbits.
+For q ≡ 1 (mod 4), r = 1, c = 1 + m_0, d = ord(c): over prime-admissible m the
+value α^n ranges over **exactly the φ(d) generators of ⟨c⟩**, uniformly —
+
+    {α^n} = { c^j : gcd(j, d) = 1 }
+
+**and that set does not depend on c.** F_q^× is cyclic, so it has a *unique*
+subgroup of order d, and every c of order d generates it. Hence
+{c^j : gcd(j,d) = 1} is simply **the set of all elements of order d**,
+independent of m_0, of j, and of the fibre. That is why one density per (q,d)
+was *forced* the moment the list was identified as that set. Written without c:
+
+    **density(q, d) = #{ γ ∈ F_q^× : ord(γ) = d, χ_q(1 − γ) = −1 } / φ(d).**
+
+No fibre machinery, no c, no m_0.
+
+**Status: density formula verified; identification observed; proof open.**
+The 69 fibres (q = 13, 17, 29, 37, 41, L ≤ 420, 0 mismatches, 23 (q,d) rows
+none carrying two densities) compared **ratios** — measured density against the
+generator count. That does not establish the identification: *a proper subset of
+(Z/d)^× with the same residue / non-residue ratio would give the same number*,
+and TRAP 5 inside ρ = n (82 of 178 fibres) is exactly where such a subset could
+hide. The set-level evidence is the smaller exponent table below — {1,2} mod 3,
+{1,3} mod 4, units mod 8, 14, 18, 20, 26, 30 — which is stronger but a smaller
+sample.
+
+So the proof debt is all three steps, none discharged:
+  (1) α^n ∈ ⟨c⟩;  (2) it is a *generator*;  (3) each generator equally often.
+
+The exponent sets are visibly the units: {1,2} mod 3, {1,3} mod 4, {1,3,5,7}
+mod 8, {1,3,5,9,11,13} mod 14, {1,5,7,11,13,17} mod 18, {1,7,11,13,17,19,23,29}
+mod 30.
+
+**It reproduces every hard case, from the formula alone:**
+
+    q=113 d=8   -> 1      whole fibre identically −1 (2000 real primes)
+    q=101 d=10  -> 0      identically +1 (0 of 1119 primes)
+    q=73  d=12  -> 0      identically +1
+    q=97  d=16  -> 3/4    the C9 example
+    q=29  d=7   -> 1/3    the census's "16/49"
+    q=17  d=2   -> 0      the freeze
+    q=37  d=6   -> 0
+
+and d = q−1 gives exactly 1/2 at every q ≡ 1 (mod 4) up to 149, 0 deviations.
+That is **consistency with** the inversion theorem — a count of primitive roots
+γ with χ_q(1−γ) = −1 coming out at half — **not a second proof of it**.
+
+**C11 is answered in passing.** There is no two-translation analogue yielding
+1/2 for general c, because this count simply is not 1/2: d = 2 and d = 8 at
+q = 113, d = 7 at q = 29.
+
+So the identically-+1 rows are exactly those where 1 − γ is a residue for every
+generator γ of the order-d subgroup, and identically-−1 those where it is a
+non-residue for all of them. C10's requirement that the list permit 0 and 1 is
+satisfied structurally.
+
+**The literature pause no longer applies to C8.** Its original reason was that
+the (i,j)_e tables count over a *full* cyclotomic class while our objects ran
+proper subsets. The list here is a complete set — all elements of order d — so
+the tables are now aimed at the object we actually have. That is not a reason to
+fetch folder 10 tonight; it is a reason to resume *if* a closed form for
+Σ_{j ∈ (Z/d)^×} χ_q(1 − c^j) is wanted, which would **prove** the density rather
+than verify it.
+
+## Run 1: C8-formula census of the r = 1 EDGE (not a bound on total zero mass)
+
+
+**Label this correctly.** r = 1 together with r = q−1 has mass 2/q whatever
+their densities, so no census of the edge can decide whether *total* zero mass
+is o(1). What this measures is which d | q−1 freeze, and what fraction of the
+edge that is. The interior (2 ≤ r ≤ q−2) is a separate measurement.
+
+**Scope:** q ≡ 1 (mod 4) only — at q ≡ 3 the r = 1 family is the two-translation
+theorem, not this count. d = 1 skipped (c = 1, split). φ(d) fibres per d,
+divided by q(q−1). **r = q−1 counted separately, never doubled**: its duals are
+copies at q = 13 and mirrors at q = 109.
+
+**Contingent on C8**, which is verified and not proved: formula-0 is a
+sufficient condition for a genuine zero only if {α^n} really is the generator
+set. That rests on the 69-fibre ratio match and the 14-row set identification.
+
+Result, q ≡ 1 (mod 4) up to 677 (60 primes, 15 s, no fibre machinery):
+
+    q        13      37      73     137     241     409     673
+    mass   .0128   .0030   .0013  .00016  .00012  .000054 .000011
+    x q     .167    .111    .097    .022    .029    .022    .007
+
+**The edge zero mass decays faster than 1/q** — mass·q falls from 0.167 to
+0.007 — and is exactly 0 at 14 of the 60 primes. The reason is that the freeze
+lives on **small d**, so φ(d) is bounded and the edge contribution is
+O(φ(d)/q²), which is why mass·q itself decays. The 14 zero-mass primes are the
+same fact. **This cannot decide total zero mass**; it shows only that the edge is
+not where a growing dent would come from (q = 5, 29, 53, 149, 173, 197,
+269, 293, 317, 389, 509, 557, 653, 677). The mechanism is visible in the data:
+the freezing d are always **small** (2, 3, 4, 6, 8, 10, 12), so φ(d) is small
+and the frozen part is a shrinking fraction of the edge's own 1/q.
+
+*This says nothing about the interior zeros at q = 109, 181, 197, which are what
+c_band = 0 was about. Those are measurement 2.*
+
+**What is left for ε_q ≥ c.** Not an infimum over fibres — that door is shut.
+Either (i) a theorem that the *mass* of prime-density-0 fibres stays o(1), or
+(ii) the sweep. The known zeros are sparse and structured (a few fibres, small
+L, q ≡ 1 (mod 4), quadratic factors, v₂(L) = 3). **Whether that class stays
+sparse as q grows is a different measurement from c_band**, and it has not been
+made. Until that mass is shown to grow, the sweep remains the evidence and the
+infimum route is closed.
+
+**The live object.** After C8's zeros are priced in, a fibre-theoretic bound
+would have to take the form
+
+    ε_q ≥ (1 − O(1/q)) · c_band,
+
+with c_band the infimum of prime-EPS over **non-split** fibres with
+2 ≤ r ≤ q−2. Today c_band = 1/4 on the enumerated small-L part and is unproved
+on the rest. **That is the live object** — not H_r, not item 22, not q = 43.
+The measurement that would move it is whether small-L band minima stay ≥ 1/4 as
+q grows; the tail having a −1 does not bear on it.
+
+*Also observed, beyond the v₂(L) ≤ 1 theorem: at q ≡ 3 (mod 4) a shift with
+Δ ≡ 0 (mod lcm(L,q)) and Δ ≡ 2 (mod 4) preserves m mod q, parity, every γ_i^m,
+**and prime-admissibility**, while flipping the sign factor — giving exactly 1/2.
+It also held on every v₂(L) = 2 fibre tested (48/48 at q = 23, 20/20 at q = 31),
+which the theorem does not cover. First departure from 1/2 is at v₂(L) = 4.*
+
+# PART 5 — Measurements
+
+*In the order they bear on eps_q. All are class-vs-prime corrected; none is a theorem.*
+
+## Census re-derived over primes (266 fibres, q = 13, 19, 29, 37)
+
+
+The exactly-enumerated fibres of `06_small_L.txt` and `census_q29_q37.txt`, put
+through `fibre_counts_primes`. **130 of 266 fibres change — 48.9%.** All 36
+split fibres are unchanged; every change is non-split (130/230 = 56.5% of them).
+
+**16/49 was never a density.** The census advertised it as the minimum at
+q = 29. It is EPS_class on the twelve L = 196 (7+7+7+7) fibres, produced by two
+ramified classes per period. BAL_class was already 1/3, both ramified classes
+are prime-free, so over primes those fibres are exactly **1/3**. The advertised
+minimum was a bookkeeping artifact and vanishes.
+
+**1/3 survives and is the new floor** (12 fibres → 14; q=29 (6,0) and (23,28)
+fall onto it from 3/7). **2/3 survives** and becomes the dominant non-half
+value, 36 fibres.
+
+**22 fibres collapse to an endpoint.** "Small rational" is not the predictor;
+every collapse in this sample has **uniform root degree d ∈ {2,3,6}**, and the
+q = 29 values that do not move sit on d ∈ {7,14}. **State that as a pattern in
+this sample, not a cause** — it has not been tested off this fibre list. It
+would be falsified by a uniform-degree d ∈ {2,3,6} fibre whose prime density
+stays strictly inside (0,1), or by a collapse at some other d. Until such a
+check exists it is a description of 22 rows:
+
+    1/9   → 0   4 fibres   q=13 (1,3)(1,9)(12,3)(12,9)   6+6
+    1/27  → 0   4          q=37 (1,10)(1,26)(36,10)(36,26)  6×6
+    2/27  → 0   4          q=37 (1,9)(1,25)(36,11)(36,27)   3×12
+    2/3   → 1   2          q=13 (1,11)(12,1)   2×6
+    5/6   → 1   2          q=13 (2,11)(11,1)   2×6
+    8/9   → 1   4          q=13  3×4, L=36
+    7/9   → 1   2          q=37 (1,35)(36,1)  2×18
+
+**Twelve non-split fibres are identically +1 over primes; the census said zero.**
+4 at q=13, 8 at q=37 — 5.2% of all non-split fibres, 9.5% at q=13 and 10.0% at
+q=37. Class-side there are 20 density-0 fibres, all split; over primes there are
+32, of which **12 are non-split**. Each is an arithmetic progression on which the
+q-test provably never yields a −1 certificate. Twelve more are identically −1
+(10 of them new).
+
+**EPS_prime = BAL_prime identically here** — no prime-admissible class is
+ramified anywhere in the 266 fibres, so within this sample the BAL/EPS
+distinction is entirely a class-side artifact. **This is a fact about the
+sample, not a theorem**, and the caveat belongs in the same breath: at q = 7,
+8 of 2568 prime-admissible classes ARE ramified, and (2677,7) is a real
+ramified prime.
+
+**Why nobody would have caught this from the aggregate.** The per-fibre mean
+moves by under 0.016 at every q, and q = 19's non-split mean lands on exactly
+1/2:
+
+    q     mean EPS_class    mean EPS_prime
+    13      0.491587          0.507535
+    19      0.494513          0.500000
+    29      0.470238          0.467593
+    37      0.497531          0.501852
+    pooled  0.488413          0.493271
+
+Half the individual fibres change, 22 go to an endpoint, and the aggregate barely
+moves. That is exactly why the ε_3 / ε_5 anchor check passed earlier and gave
+false confidence. Distinct values in the spectrum drop from 27 to 17; fibres at
+exactly 1/2 rise from 118 to 140.
+
+*Ground truth: the agent also checked 21 fibres against actual primes below
+3·10^6. Every empirical density matched BAL_prime, never BAL_class — e.g. q=13
+(12,1) measured 1.000000 against BAL_class 2/3, and q=13 (5,12) measured
+0.243553 against BAL_prime 1/4, BAL_class 1/3.*
 
 ## The r >= 2 prime floor: no non-split zeros in the band
+
 
 The strategic measurement. ε_q is the mean over all q(q−1) fibres; r = 1 is only
 φ(q−1) of them and is now known to contain genuine zeros. The mass is at r ≥ 2.
@@ -880,74 +1026,8 @@ Not established, without softening:
 * **Any fibre-theoretic bound must hypothesise away the split family**, or it is
   simply false at q = 13, 17, 29, 37, 41.
 
-## c_band = 0. The fibre-theoretic route to ε_q ≥ c is DEAD.
-
-**FIVE non-split fibres strictly inside the band have prime density exactly 0.**
-
-    q     (r,m0)              L   v2(L)  non-split degs  prime-adm  (neg,pos,zero)
-    109   (103,108)          24     3    2                    8     (0,   8, 0)
-    181   (8,0)               8     3    2+2                  4     (0,   4, 0)
-    181   (173,180)           8     3    2+2                  4     (0,   4, 0)
-    197   (7,0)             392     3    2                  168     (0, 168, 0)
-    197   (190,196)         392     3    2                  168     (0, 168, 0)
-
-All have 2 ≤ r ≤ q−2, all genuinely non-split. These are **not** the
-r = 1 / r = q−1 edge fibres already known to be identically +1. q = 197 is not
-small-sample noise: 168 distinct prime-carrying classes, every one +1.
-
-*The count is five, not six.* A sixth fibre, q = 109 (6,0), is the r ↔ q−r dual
-of (103,108) and has density **1** — a mirror, not a copy. So at q = 109 the
-pair is **mean-neutral**: the zero is exactly offset by its dual. At q = 181 and
-q = 197 both duals are 0, so those **four** fibres genuinely dent ε_q.
-
-**The arithmetic is the d = 2 arithmetic, now in the interior.** All three q are
-≡ 1 (mod 4); every L has **v₂(L) = 3**; every non-split part is quadratic. That
-is the same shape as the r = 1, d = 2 zeros (q = 17, d = 2 freezing at 0), moved
-off the edge.
-
-Sharper, and attached to the class rather than offered as a theorem: all three
-are **q ≡ 5 (mod 8)**, so v₂(q−1) = 2, v₂(q+1) = 1 and **v₂(q² − 1) = 3**.
-
-**TESTED, AND THE CLASS IS NOT REAL — see "Run 2" below.** v₂(L) = 3 is
-*forced* for any quadratic non-split root, not selected; two of the five zeros
-have a completely different (and deterministic) cause; the remaining three are
-consistent with chance. The 2-Sylow story is dead.
-
-Confirmed four independent ways per fibre — resultant form, explicit per-root
-norms, `core.fibre_counts_primes`, and **`fpcore.symbol` evaluating disc(f_p)
-mod q directly from f_p on real primes with no fibre machinery at all** (14
-primes at q = 181, 197 between 77,611 and 2,250,929; 15 at q = 109; plus 20,000
-fibre-formula primes at q = 109 up to 5·10^9). Zero disagreements.
-
-**So the conjectural bound ε_q ≥ (1 − O(1/q))·c_band is worthless: c_band = 0.**
-Excising the split family is not enough; excising the two edges r = 1, q−1 is
-not enough. Genuine non-split zeros occur in the interior of the band.
-
-**The earlier optimism was a range artefact.** The q = 41…89 sweep found nothing
-below 3/8 and read as strong support. It simply had not reached 109. The full
-sequence of minima does not trend — it is erratic, and it is not bounded below:
-
-    q     11    13    17    19     23     29    31     37    41    53    61
-    c_b   1/4   1/4   1/4  15/32  15/32  1/3  31/64  5/12  3/8  11/24 7/16
-    q     73    109   181   197
-    c_b  5/12    0     0     0
-
-(q = 17 at 1/4 was a gap in every previous run and is new here.)
-
-*An agent line saying "nothing lies strictly between 0 and 1/3" was copied into
-an earlier draft and is **false**: 1/4 is strictly inside that interval and
-occurs at q = 11, 13, 17. The accurate statement is narrower — after 1/4 stops
-appearing, the sampled values are ≥ 1/3 or exactly 0. That is a description of
-this sample, not a gap law.*
-
-**What this does NOT kill: Σ ε_q = ∞.** ε_q is a *mean*, and a handful of zero
-fibres at three q is a small dent in a mean, not a collapse — the mean can sit
-near 1/2 while the infimum is 0. This is TRAP 5 at the strategic level: the mean
-never saw these fibres, and the infimum is exactly what was just measured. The
-10^7 prime sweep is unaffected; per-fibre positivity at q ≤ 37 stands as a
-measurement of that range.
-
 ## Run 2: the interior zero class is NOT real, and the interior mass decays like 1/q²
+
 
 Complete interior census (2 ≤ r ≤ q−2) at 13 primes q ≡ 5 (mod 8) below 200,
 11 primes q ≡ 5 (mod 8) in (200,500), and 19 primes q ≡ 1 (mod 8) up to 449 —
@@ -1042,256 +1122,100 @@ for all q and all L. And the bound it would feed is no longer of the form
 a spurious −1. It could only ever have destroyed a zero, not created one, and
 was proved never to have entered a sweep.*
 
-## Run 1: C8-formula census of the r = 1 EDGE (not a bound on total zero mass)
+## Beyond primitive c: the reducible r = 1 family
 
-**Label this correctly.** r = 1 together with r = q−1 has mass 2/q whatever
-their densities, so no census of the edge can decide whether *total* zero mass
-is o(1). What this measures is which d | q−1 freeze, and what fraction of the
-edge that is. The interior (2 ≤ r ≤ q−2) is a separate measurement.
 
-**Scope:** q ≡ 1 (mod 4) only — at q ≡ 3 the r = 1 family is the two-translation
-theorem, not this count. d = 1 skipped (c = 1, split). φ(d) fibres per d,
-divided by q(q−1). **r = q−1 counted separately, never doubled**: its duals are
-copies at q = 13 and mirrors at q = 109.
+The census floors are **not** unequal-degree "mixed" fibres — those sit near
+1/2. They are reducible r = 1. For h = x^{q-1} − c with d := ord(c), h factors
+into (q−1)/d irreducibles of degree d, and
 
-**Contingent on C8**, which is verified and not proved: formula-0 is a
-sufficient condition for a genuine zero only if {α^n} really is the generator
-set. That rests on the 69-fibre ratio match and the 14-row set identification.
+    **L = d(q−1)**   in every row checked (q = 5, 13, 17, 29, 37; no exceptions),
 
-Result, q ≡ 1 (mod 4) up to 677 (60 primes, 15 s, no fibre machinery):
+with primitive c the case d = q−1 already proved. The r = q−1 dual copies each
+row. The observed floors:
 
-    q        13      37      73     137     241     409     673
-    mass   .0128   .0030   .0013  .00016  .00012  .000054 .000011
-    x q     .167    .111    .097    .022    .029    .022    .007
+    q    d   degrees        L      density
+    13   6   6+6            72     1/9
+    13   4   4+4+4          48     1/3
+    29   7   7+7+7+7       196    16/49     <- census min at q=29
+    37   6   6x6           216     1/27     <- census min at q=37
+    37   3   12x3          108     2/27
 
-**The edge zero mass decays faster than 1/q** — mass·q falls from 0.167 to
-0.007 — and is exactly 0 at 14 of the 60 primes. The reason is that the freeze
-lives on **small d**, so φ(d) is bounded and the edge contribution is
-O(φ(d)/q²), which is why mass·q itself decays. The 14 zero-mass primes are the
-same fact. **This cannot decide total zero mass**; it shows only that the edge is
-not where a growing dent would come from (q = 5, 29, 53, 149, 173, 197,
-269, 293, 317, 389, 509, 557, 653, 677). The mechanism is visible in the data:
-the freezing d are always **small** (2, 3, 4, 6, 8, 10, 12), so φ(d) is small
-and the frozen part is a shrinking fraction of the edge's own 1/q.
+A uniform "density 1/2 for every d" is **false**, and the same table gives
+non-split fibres at 0 and at 1:
 
-*This says nothing about the interior zeros at q = 109, 181, 197, which are what
-c_band = 0 was about. Those are measurement 2.*
+    q=17, m_0=15, c=−1, d=2, eight quadratics, L=32   density 0
+    q=17, m_0=3, 12,        d=4, L=64                 density 1
+    q=5,  m_0=3,            d=2                       density 1
 
-**What is left for ε_q ≥ c.** Not an infimum over fibres — that door is shut.
-Either (i) a theorem that the *mass* of prime-density-0 fibres stays o(1), or
-(ii) the sweep. The known zeros are sparse and structured (a few fibres, small
-L, q ≡ 1 (mod 4), quadratic factors, v₂(L) = 3). **Whether that class stays
-sparse as q grows is a different measurement from c_band**, and it has not been
-made. Until that mass is shown to grow, the sweep remains the evidence and the
-infimum route is closed.
+So "split is the only density-0 family" holds at q = 29, 37 (NOT at 19, 23 —
+there split fibres are 1/2) and is
+**false in general**: q = 17, m_0 = 15 is non-split and identically +1. It has
+L = 32 ≤ 2000, so it is exact, and no witness search would ever have reached it.
+Some d flip, some cancel, some freeze.
 
-**The live object.** After C8's zeros are priced in, a fibre-theoretic bound
-would have to take the form
+**Two densities, not one.** For reducible h the ramified locus is *not*
+negligible: each of the (q−1)/d factors can contribute a vanishing class, so up
+to (q−1)/d classes mod L give symbol 0 (at q = 31, d = 6 factors, 6 and 4 of
+them). Two quantities then differ:
 
-    ε_q ≥ (1 − O(1/q)) · c_band,
+    BAL  the -1 : +1 balance, ramified m excluded -- the structural object
+    EPS  fraction of primes of the fibre giving a -1 certificate; a ramified p
+         certifies nothing, so it belongs in the denominator -- what eps_q needs
 
-with c_band the infimum of prime-EPS over **non-split** fibres with
-2 ≤ r ≤ q−2. Today c_band = 1/4 on the enumerated small-L part and is unproved
-on the rest. **That is the live object** — not H_r, not item 22, not q = 43.
-The measurement that would move it is whether small-L band minima stay ≥ 1/4 as
-q grows; the tail having a −1 does not bear on it.
+They agree iff no m ramifies. The primitive case has at most one such class, so
+the lemma is unaffected; but conflating them is a trap. At q = 31, d = 5 the
+four fibres look like a 12/25 vs 73/150 split under EPS, while BAL is exactly
+1/2 for all four (counts 72:72 and 73:73) — the whole difference is 6 versus 4
+ramified m. That is a split in EPS and no split at all in structure.
 
-*Also observed, beyond the v₂(L) ≤ 1 theorem: at q ≡ 3 (mod 4) a shift with
-Δ ≡ 0 (mod lcm(L,q)) and Δ ≡ 2 (mod 4) preserves m mod q, parity, every γ_i^m,
-**and prime-admissibility**, while flipping the sign factor — giving exactly 1/2.
-It also held on every v₂(L) = 2 fibre tested (48/48 at q = 23, 20/20 at q = 31),
-which the theorem does not cover. First departure from 1/2 is at v₂(L) = 4.*
+**Density is not a function of d alone**, and the governing invariant is the
+class of j in **(Z/d)^×/{±1}**, where c = (g^{(q−1)/d})^j for a fixed primitive
+root g. Inverse pairs always share a density (c ↦ c^{-1} is j ↦ −j).
 
-## C8 CLOSED (as a closed form): the prime density is a count of generators
+Systematic scan (`09_jclass.py`, q ≤ 150, every d | q−1 with 2 < d < q−1 and
+φ(d) > 2; 89 (q,d) pairs, `results/jclass_scan.txt`). The picture is a q mod 4
+dichotomy, not the v₂ rule first guessed:
 
-For q ≡ 1 (mod 4), r = 1, c = 1 + m_0, d = ord(c): over prime-admissible m the
-value α^n ranges over **exactly the φ(d) generators of ⟨c⟩**, uniformly —
+**q ≡ 3 (mod 4): BAL = 1/2, always.** All 36 pairs across 15 primes
+(11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 127, 131, 139) give exactly
+1/2, for *every* d — as the two translations above prove. (That scan was
+off-fibre; the on-fibre rerun covers 70 pairs, same verdict.)
 
-    {α^n} = { c^j : gcd(j, d) = 1 }
+**q ≡ 1 (mod 4): no uniformity.** 53 pairs, 47 distinct BAL values, 18 splits.
+Here v₂ is a sufficient condition:
 
-**and that set does not depend on c.** F_q^× is cyclic, so it has a *unique*
-subgroup of order d, and every c of order d generates it. Hence
-{c^j : gcd(j,d) = 1} is simply **the set of all elements of order d**,
-independent of m_0, of j, and of the fibre. That is why one density per (q,d)
-was *forced* the moment the list was identified as that set. Written without c:
+    v₂(d) = v₂(q−1)  ⟹  splits.      13 of 13, no exceptions.
 
-    **density(q, d) = #{ γ ∈ F_q^× : ord(γ) = d, χ_q(1 − γ) = −1 } / φ(d).**
+It is not necessary — five further splits have v₂(d) ≠ v₂(q−1) (q = 97 d = 16,
+q = 109 d = 18, q = 113 d = 8, and the two ramified cases q = 61 d = 5,
+q = 101 d = 5). The original v₂ rule failed because every one of its 12
+false-positive predictions was at q ≡ 3 (mod 4), where nothing splits at all:
+it was reading a q mod 4 effect as a v₂ effect.
 
-No fibre machinery, no c, no m_0.
+Shape of the splits, where ram = 0: **j-classes pair up complementarily and
+self-paired classes sit at exactly 1/2**. Two-class examples with sum 1:
+q = 37 d = 12 (25/54, 29/54), q = 41 d = 8 (9/20, 11/20), q = 61 d = 12,
+q = 109 d = 12, q = 113 d = 16. Four- and eight-class examples show the
+self-paired classes explicitly:
 
-**Status: density formula verified; identification observed; proof open.**
-The 69 fibres (q = 13, 17, 29, 37, 41, L ≤ 420, 0 mismatches, 23 (q,d) rows
-none carrying two densities) compared **ratios** — measured density against the
-generator count. That does not establish the identification: *a proper subset of
-(Z/d)^× with the same residue / non-residue ratio would give the same number*,
-and TRAP 5 inside ρ = n (82 of 178 fibres) is exactly where such a subset could
-hide. The set-level evidence is the smaller exponent table below — {1,2} mod 3,
-{1,3} mod 4, units mod 8, 14, 18, 20, 26, 30 — which is stronger but a smaller
-sample.
+    q = 61,  d = 20:  ±1 -> 38/75,  ±7 -> 37/75,   ±3, ±9 -> 1/2
+    q = 109, d = 36:  ±1,±7 -> 79/162, ±11,±13 -> 83/162, ±5,±17 -> 1/2
+    q = 97,  d = 32:  ±7 -> 11/24, ±3,±13,±15 -> 13/24, ±1,±5,±9,±11 -> 1/2
 
-So the proof debt is all three steps, none discharged:
-  (1) α^n ∈ ⟨c⟩;  (2) it is a *generator*;  (3) each generator equally often.
+So the answer to "two complementary densities or a full j-class formula" is the
+latter: the involution acts on j-classes, complementary values on paired
+classes, 1/2 forced on fixed ones. Not universal, though — q = 101 d = 20 has
+three classes at 121/250 and one at 119/250 (sum 24/25), and q = 73 d = 24 has
+1/2 and 14/27 (sum 55/54).
 
-The exponent sets are visibly the units: {1,2} mod 3, {1,3} mod 4, {1,3,5,7}
-mod 8, {1,3,5,9,11,13} mod 14, {1,5,7,11,13,17} mod 18, {1,7,11,13,17,19,23,29}
-mod 30.
-
-**It reproduces every hard case, from the formula alone:**
-
-    q=113 d=8   -> 1      whole fibre identically −1 (2000 real primes)
-    q=101 d=10  -> 0      identically +1 (0 of 1119 primes)
-    q=73  d=12  -> 0      identically +1
-    q=97  d=16  -> 3/4    the C9 example
-    q=29  d=7   -> 1/3    the census's "16/49"
-    q=17  d=2   -> 0      the freeze
-    q=37  d=6   -> 0
-
-and d = q−1 gives exactly 1/2 at every q ≡ 1 (mod 4) up to 149, 0 deviations.
-That is **consistency with** the inversion theorem — a count of primitive roots
-γ with χ_q(1−γ) = −1 coming out at half — **not a second proof of it**.
-
-**C11 is answered in passing.** There is no two-translation analogue yielding
-1/2 for general c, because this count simply is not 1/2: d = 2 and d = 8 at
-q = 113, d = 7 at q = 29.
-
-So the identically-+1 rows are exactly those where 1 − γ is a residue for every
-generator γ of the order-d subgroup, and identically-−1 those where it is a
-non-residue for all of them. C10's requirement that the list permit 0 and 1 is
-satisfied structurally.
-
-**The literature pause no longer applies to C8.** Its original reason was that
-the (i,j)_e tables count over a *full* cyclotomic class while our objects ran
-proper subsets. The list here is a complete set — all elements of order d — so
-the tables are now aimed at the object we actually have. That is not a reason to
-fetch folder 10 tonight; it is a reason to resume *if* a closed form for
-Σ_{j ∈ (Z/d)^×} χ_q(1 − c^j) is wanted, which would **prove** the density rather
-than verify it.
-
-## Theorem (r = 1): every PRIME has ρ = n. The stratification is trivial over primes.
-
-Let q ≡ 1 (mod 4), r = 1, d = ord(c), n = (q−1)/d, and for an admissible m put
-g = gcd(m+1, d), k = (m+1)/g, ρ = n/gcd(k, n).
-
-**For every prime p = qm + 1 of the fibre, ρ = n.**
-
-*Proof.* Suppose ρ < n. Then some prime ℓ divides gcd(k, n). Since k | m+1 we
-get ℓ | m+1; and ℓ | n | q−1 gives q ≡ 1 (mod ℓ). Hence
-p = qm + 1 ≡ m + 1 ≡ 0 (mod ℓ). As ℓ ≤ n < q < p, p is composite. ∎
-
-So **every stratum but ρ = n is prime-free** — not "collapses to the same
-value", but empty. For primes the whole stratification disappears and
-
-    s(p) = χ_q(1 − α^n)
-
-with no case analysis. Verified: 49,440 genuine primes across 824 r = 1 fibres
-for q ∈ {5,13,17,29,37,41,53,61,73,89,97,101,109,113} — **primes with ρ ≠ n:
-zero**, including the degenerate m0 = 0 fibres.
-
-    q=73  d=8  n=9   ρ=1: 0 prime-adm | ρ=3: 0 | ρ=9: 192, density 1/2
-    q=97  d=16 n=6   ρ=2: 0           | ρ=6: 512, density 3/4
-    q=97  d=32 n=3   ρ=1: 0           | ρ=3: 1024, density 1/2
-    q=113 d=8  n=14  ρ=2: 0           | ρ=14: 384, density **1**
-    q=113 d=16 n=7   ρ=1: 0           | ρ=7: 768, density 1/2
-
-Every class-level split chased earlier sits entirely in the dead strata:
-q=73 ρ=1 gives 1/2,1/2,1/4,1/4; q=97 d=16 ρ=2 gives 1/4 and 3/4; q=113 d=8 ρ=2
-gives 1/2,1/2,3/4,3/4. **None of it is realised by a prime.**
-
-**This is a worse artefact than the j-class one, with a different cause.** The
-j-classes dissolved by *averaging* — prime-free classes were scattered through
-all of them and removing them equalised the densities. The ρ strata are
-*annihilated*: ρ < n is literally the same set as "p divisible by some ℓ | n".
-
-**q = 113, d = 8 survives at density 1.** The one observed slice that would
-*raise* ε_q rather than pin it is intact: all 384 ρ=14 classes prime-admissible
-and all −1, in each of m0 = 17,43,68,94; 2000 real primes to 1.14·10^8, all −1,
-two re-derived from the raw discriminant with `fpcore.symbol` and no fibre
-machinery. Since ρ=2 is prime-free, the *whole fibre* is identically −1 over
-primes.
-
-**What survives as a prime-level invariant is (q, d).** In every row computed
-the live density is constant across all fibres and all j-classes of that row.
-The remaining r = 1 question is therefore a statement about one list, indexed by
-(q, d) alone.
-
-**Caveat, and it is the one place the collapse does not help.** ρ = n being the
-only live stratum does *not* make class counts safe inside it. Over the 178
-fibres with 2 ≤ d ≤ 12, class and prime density of the ρ=n stratum differ in
-**82**: q=13 d=6 class 1/9 → prime 0; q=29 d=7 class 16/49 → 1/3; q=37 d=9
-class 52/81 → 2/3. In the five rows above every ρ=n class happens to be
-prime-admissible — luck, a property of P there, not a theorem.
-
-**The identically-+1 list is therefore larger than the census reported**, at
-(q,d) level: q=13 d=6, 17 d=2, 37 d=3, 37 d=6, 41 d=2, 41 d=4, 61 d=3, 61 d=6,
-73 d=2, 73 d=6, 73 d=12, 89 d=2, 97 d=2, 97 d=6, 101 d=10, 109 d=6, 113 d=2,
-113 d=4. Identically −1: q=5 d=2, 13 d=2, 13 d=3, 17 d=4, 29 d=2, 37 d=2,
-41 d=10, 53 d=2, 61 d=2, 61 d=10, 73 d=3, 73 d=4, 89 d=4, 97 d=3, 97 d=4,
-97 d=12, 101 d=2, 101 d=5, 109 d=2, 109 d=3, 113 d=8.
-
-*Scope: r = 1 throughout. ρ is an r = 1 object and nothing here constrains
-r ≠ 1.*
-
-## The j-class density structure is a CLASS ARTEFACT, end to end
-
-All 92 (q,d) rows of `results/jclass_scan.txt`, 980 r = 1 fibres, q = 11..149,
-re-derived with `fibre_counts_primes`.
-
-**Zero of 18 j-class splits survive over primes.** Every one of the 92 rows has
-**exactly one** BAL_prime, shared by all its j-classes. The class of j in
-(Z/d)^×/{±1} has **no effect on the density over primes anywhere in the scan**,
-and no row that was uniform over classes acquires a split over primes. This is
-not "mostly artefactual"; it is artefactual end to end.
-
-    dissolved: (37,12) (41,8) (61,5) (61,12) (61,20) (73,8) (73,24) (89,8)
-               (97,16) (97,32) (101,5) (101,20) (109,12) (109,18) (109,36)
-               (113,8) (113,16) (137,8)
-
-**(41,8) is the row `09_jclass.py` named in advance** as the out-of-sample
-confirmation of the v₂(d) = e prediction. 11/20 vs 9/20 over classes; over
-primes (64,64,0) on all four fibres — 1/2 and 1/2. The predicted split is real
-about integer residue classes and empty about primes.
-
-**58 distinct class values collapse to 13 prime values.** (The "47" recorded
-earlier was an undercount.) Over primes only the denominators 1,2,3,4,5,8,9
-survive: 0, 1/4, 1/3, 3/8, 2/5, 4/9, 1/2, 5/9, 3/5, 2/3, 3/4, 4/5, 1 — with
-1/2 taking 652 of 980 fibres. Only 7 of the 58 class values are prime values at
-all, and 6 of the 13 prime values never appear in the class table. Every exotic
-denominator — 49, 54, 73, 81, 121, 169, 243, 250, 289, 625, 729, 1014 — is
-manufactured by counting prime-free classes: 5/27 → 0, 7/125 → 0, 62/75 → 1,
-373/625 → 3/5, 325/729 → 4/9, 144/289 → 1/2, 11/36 → 1/4, 101/182 → 5/9.
-
-**16/49 appears twice — (29,7) and (113,28) — and is 1/3 both times.**
-
-Two mechanisms, both fatal: prime-free *ramified* classes (the 16/49 failure
-mode) and prime-free *unramified* classes — (37,12), (41,8), (61,12), (61,20),
-(73,8), (73,24) have no ramified m at all, and their splits are created purely
-by classes with gcd(qm+1, P) > 1.
-
-**EPS_prime = BAL_prime in all 980 fibres**: the ramified count over
-prime-admissible classes is 0 in every one. Every "(EPS differs only via
-ramification)" note in the scan file is ramification carrying no primes.
-
-**Eight more fibres are identically +1 over primes**, on top of the census's 12:
-(73,12) at m0 = 2,23,48,69 with class 5/27, and (101,10) at m0 = 5,13,16,64
-with class 7/125 — prime counts (0,288,0) and (0,400,0). Real primes: 0 of 1080
-and 0 of 1119 give −1 below 2·10^8.
-
-**What this does NOT touch.** The ρ theorem s(m) = χ_q(1 − α^ρ) is an identity
-at each individual m, proved, and independent of any density.
-
-The pairing theorems are untouched, but **not "vindicated"** — they were never
-at war with these splits. The splits live at q ≡ 1 with general c, where there
-has never been a pairing proof of 1/2; they were never a counterexample to
-anything proved. And 652/980 fibres at 1/2 is the *typical prime value*, not a
-theorem for general c. The remaining 328 are the live empirical object — now
-j-free, with small denominators.
-
-What dissolves is the density structure built on top: the j-class dependence,
-the v₂(d) = e split criterion, and the spectrum of exotic rationals. **Item 22
-is not in this table** — q = 11 is ≡ 3 (mod 4) and the unclassified T : u ↦ −iu
-sits on a different fibre. It stays parked.
+Structurally the extension is the same Kummer field, not a new family: Step 0
+generalises (γ^{q−1} = c of order d gives L = d(q−1)), but the pairing must act
+on a product of (q−1)/d character values, one per orbit, instead of the single
+u of the primitive case — and j is exactly the scalar permuting those orbits.
 
 ## The q ≡ 1 table: what the right contraction is
+
 
 `paper/10-cyclotomic-numbers/AcharyaKatre1995` defines, for q ≡ 1 (mod e) and γ
 a generator of F_q^×, the e² **cyclotomic numbers**
@@ -1481,73 +1405,37 @@ intermediate image sizes 1 < n/gcd(k,n) < n, and those would be genuine partial
 tuples. Splits with composite n exist and are untested: q = 73 d = 8 (n = 9),
 q = 97 d = 16 (n = 6), q = 109 d = 18 (n = 6), q = 113 d = 8 (n = 14).
 
-## Theorem: the q ≡ 1 fibre symbol is ALWAYS one quadratic character
+## Empirical status of the map
 
-Let q ≡ 1 (mod 4), r = 1, **c ∉ {0, 1}**, d = ord(c), n = (q−1)/d.
-(**c ≠ 1 is required and was missing.** At c = 1 every γ_i = 0, so every
-u_i = 0 and every w_i = 0: the w take ONE value, not ρ, and {0} is not a
-μ_ρ coset. Verified at q = 13, 17, 29. c = 0 is outside the framework.) For an
-admissible m put g := gcd(m+1, d), k := (m+1)/g, and
 
-    **ρ := n / gcd(k, n)**.
+    q     q-1 = 2^e·s    fibres   |pred| = |actual| = 2^e
+    13    12 = 4·3          4       4
+    17    16 = 16·1         8      16      (s = 1, so 2^e = q-1: every j)
+    29    28 = 4·7         12       4
+    37    36 = 4·9         12       4
+    41    40 = 8·5         16       8      first e = 3
+    53    52 = 4·13        24       4
+    61    60 = 4·15        16       4      first composite s
 
-Then the w_i take exactly ρ distinct values, forming a coset αμ_ρ each hit n/ρ
-times, and
+The last column is exactly 2^e, the number of lifts of the single odd class
+j ≡ 2ι + 2^{-1} (mod s) — so q = 17 is not a separate phenomenon.
 
-    **s(m) = χ_q(1 − α^ρ).**
+**All 92 fibres exhaustive**, predicted set = actual set, zero mismatches
+(`_q1f.py`, `_q1k.py`, `results/exhaustive_53_61.txt`). q = 41 is the first
+e = 3 (8 values of j, not 4 or 16); q = 61 the first composite s = 15, where a
+congruence mod s is a genuine constraint. The 53 and 61 runs take 4 s each
+using `fastsym.py`; with `core.norm` they were hours.
 
-*Proof.* m even ⟹ m+1 odd ⟹ g and k are both odd. The ratios
-w_i/w_1 = (η_i/η_1)^{kd} are the image of F_q^× under x ↦ x^{kd}, of order
+Two scope limits, neither affecting the proof (which needs only sufficiency).
+(i) This is the complete set of working b **of this shape** — a = k−1 with
+b ≡ −2 (mod q−1) — not the complete set of pairings; other multipliers a exist,
+and k−1 is merely the smallest. (ii) Irreducible h means c primitive; reducible
+r = 1 fibres are outside the lemma entirely.
 
-    (q−1)/gcd(kd, q−1) = dn/(d·gcd(k,n)) = n/gcd(k,n) = ρ,
-
-so the distinct values are αμ_ρ, each with multiplicity n/ρ. The αζ (ζ^ρ = 1)
-are exactly the roots of Y^ρ = α^ρ, so ∏_{ζ^ρ=1}(X − αζ) = X^ρ − α^ρ — **no
-sign, for even ρ as well** — and at X = 1,
-
-    ∏_i (1 − w_i) = (1 − α^ρ)^{n/ρ}.
-
-And n/ρ = gcd(k, n) divides k, which is **odd**; so the exponent is odd and
-χ_q kills it. ∎
-
-*Two cautions.* (i) The sign (−1)^{ρ+1} appears only when *recovering* α^ρ from
-the data, since ∏_{ζ^ρ=1} ζ = (−1)^{ρ+1} gives α^ρ = (−1)^{ρ+1}∏(distinct w).
-It is not part of the product identity. (ii) When gcd(d,n) > 1 the count is
-still ρ = n/gcd(k,n), **not** n/gcd(kd,n): at q = 97 (n = 6, d = 16) the latter
-would predict ρ ∈ {1,3}, while the truth is ρ ∈ {2,6}. The even part of n is
-forced into ρ, never into the multiplicity — which is why n/ρ stays odd.
-
-Both earlier regimes are special cases: ρ = n is the "coset/collapse" case,
-ρ = 1 is the "all w_i equal" case. **There are no tuples, ever** — the earlier
-note calling the non-coset strata "genuine tuples" was wrong.
-
-*Verified, 0 failures on every count* (#distinct = ρ, μ_ρ-coset, and
-χ_q(1−α^ρ) = s(m)) at q = 37, 41, 61 (n prime) and the composite-n splits
-q = 73 (n = 9), 97 (n = 6), 109 (n = 6), 113 (n = 14). The composite cases are a
-real test: the **intermediate ρ = 3 does occur** at q = 73, n = 9, alongside
-ρ = 1 and 9.
-
-So the whole q ≡ 1 reducible object is: stratify m by ρ, and on each stratum the
-density is that of χ_q(1 − α^ρ) as α^ρ runs an explicit short list. The j-class
-dependence is which list. Sample strata (ρ: size, density per j-class):
-
-    q=97,  d=16, n=6 :  ρ=2  256  1/4,1/4,3/4,1/4     ρ=6  512  3/4 (j-free)
-    q=109, d=18, n=6 :  ρ=2   36  4/9,4/9,5/9         ρ=6  936  17/26,17/26,2/3
-    q=113, d=8,  n=14:  ρ=2   64  1/2,3/4             ρ=14 384  1 (j-free, all −1)
-    q=73,  d=8,  n=9 :  ρ=1   32  1/2,1/4             ρ=3,9  1/2 (j-free)
-
-**Shelf notes.** Folder 10 has the split-half orders: Dickson 1935 / Lehmer 1955
-/ Evans 1983 (e = 8), Whiteman 1960 (e = 12), Whiteman 1957 + Evans–Hill 1979
-(e = 16), Baumert–Fredricksen 1967 (e = 18), Muskat–Whiteman 1970 (e = 20),
-Evans–Van Veen 2016 (e = 24), Katre–Rajwade 1985 (prime ℓ), Katre–Rajwade 1987
-Math. Scand. (e = 4 with the sign of t fixed by q = s²+t², s ≡ 1 mod 4, and
-v^{(q−1)/4} ≡ s/t — the cyclotomic form of the j-class). Ahmed–Tanti 2019
-(arXiv:1906.09960) maps the shelf. Orders 32 and 36 have no table (Evans–Hill
-1979); for q = 97, d = 32 use Jacobi sums of order 32 (van Wamelen 2002), not
-(i,j)_32. The scanned `…order-4-Jacobsthal.pdf` has no text layer — skip it, the
-Math. Scand. sibling is the usable one.
+---
 
 ## Size of the claim
+
 
 Primitive r = 1 fibres number φ(q−1) of q(q−1), i.e. **mass ~ 1/q**. This does
 **not** give ε_q ≥ c > 0 and no strengthening within r = 1 could. It removes one
@@ -1555,7 +1443,196 @@ infinite family from the "maybe density 0" column — now for *every* odd q, not
 only q ≡ 3 — pinning every primitive r = 1 fibre to exactly 1/2. That is the
 right size of claim.
 
+# PART 6 — Closed routes
+
+*Directions that are shut, with the reason.*
+
+## c_band = 0. The fibre-theoretic route to ε_q ≥ c is DEAD.
+
+
+**FIVE non-split fibres strictly inside the band have prime density exactly 0.**
+
+    q     (r,m0)              L   v2(L)  non-split degs  prime-adm  (neg,pos,zero)
+    109   (103,108)          24     3    2                    8     (0,   8, 0)
+    181   (8,0)               8     3    2+2                  4     (0,   4, 0)
+    181   (173,180)           8     3    2+2                  4     (0,   4, 0)
+    197   (7,0)             392     3    2                  168     (0, 168, 0)
+    197   (190,196)         392     3    2                  168     (0, 168, 0)
+
+All have 2 ≤ r ≤ q−2, all genuinely non-split. These are **not** the
+r = 1 / r = q−1 edge fibres already known to be identically +1. q = 197 is not
+small-sample noise: 168 distinct prime-carrying classes, every one +1.
+
+*The count is five, not six.* A sixth fibre, q = 109 (6,0), is the r ↔ q−r dual
+of (103,108) and has density **1** — a mirror, not a copy. So at q = 109 the
+pair is **mean-neutral**: the zero is exactly offset by its dual. At q = 181 and
+q = 197 both duals are 0, so those **four** fibres genuinely dent ε_q.
+
+**The arithmetic is the d = 2 arithmetic, now in the interior.** All three q are
+≡ 1 (mod 4); every L has **v₂(L) = 3**; every non-split part is quadratic. That
+is the same shape as the r = 1, d = 2 zeros (q = 17, d = 2 freezing at 0), moved
+off the edge.
+
+Sharper, and attached to the class rather than offered as a theorem: all three
+are **q ≡ 5 (mod 8)**, so v₂(q−1) = 2, v₂(q+1) = 1 and **v₂(q² − 1) = 3**.
+
+**TESTED, AND THE CLASS IS NOT REAL — see "Run 2" below.** v₂(L) = 3 is
+*forced* for any quadratic non-split root, not selected; two of the five zeros
+have a completely different (and deterministic) cause; the remaining three are
+consistent with chance. The 2-Sylow story is dead.
+
+Confirmed four independent ways per fibre — resultant form, explicit per-root
+norms, `core.fibre_counts_primes`, and **`fpcore.symbol` evaluating disc(f_p)
+mod q directly from f_p on real primes with no fibre machinery at all** (14
+primes at q = 181, 197 between 77,611 and 2,250,929; 15 at q = 109; plus 20,000
+fibre-formula primes at q = 109 up to 5·10^9). Zero disagreements.
+
+**So the conjectural bound ε_q ≥ (1 − O(1/q))·c_band is worthless: c_band = 0.**
+Excising the split family is not enough; excising the two edges r = 1, q−1 is
+not enough. Genuine non-split zeros occur in the interior of the band.
+
+**The earlier optimism was a range artefact.** The q = 41…89 sweep found nothing
+below 3/8 and read as strong support. It simply had not reached 109. The full
+sequence of minima does not trend — it is erratic, and it is not bounded below:
+
+    q     11    13    17    19     23     29    31     37    41    53    61
+    c_b   1/4   1/4   1/4  15/32  15/32  1/3  31/64  5/12  3/8  11/24 7/16
+    q     73    109   181   197
+    c_b  5/12    0     0     0
+
+(q = 17 at 1/4 was a gap in every previous run and is new here.)
+
+*An agent line saying "nothing lies strictly between 0 and 1/3" was copied into
+an earlier draft and is **false**: 1/4 is strictly inside that interval and
+occurs at q = 11, 13, 17. The accurate statement is narrower — after 1/4 stops
+appearing, the sampled values are ≥ 1/3 or exactly 0. That is a description of
+this sample, not a gap law.*
+
+**What this does NOT kill: Σ ε_q = ∞.** ε_q is a *mean*, and a handful of zero
+fibres at three q is a small dent in a mean, not a collapse — the mean can sit
+near 1/2 while the infimum is 0. This is TRAP 5 at the strategic level: the mean
+never saw these fibres, and the infimum is exactly what was just measured. The
+10^7 prime sweep is unaffected; per-fibre positivity at q ≤ 37 stands as a
+measurement of that range.
+
+## The j-class density structure is a CLASS ARTEFACT, end to end
+
+
+All 92 (q,d) rows of `results/jclass_scan.txt`, 980 r = 1 fibres, q = 11..149,
+re-derived with `fibre_counts_primes`.
+
+**Zero of 18 j-class splits survive over primes.** Every one of the 92 rows has
+**exactly one** BAL_prime, shared by all its j-classes. The class of j in
+(Z/d)^×/{±1} has **no effect on the density over primes anywhere in the scan**,
+and no row that was uniform over classes acquires a split over primes. This is
+not "mostly artefactual"; it is artefactual end to end.
+
+    dissolved: (37,12) (41,8) (61,5) (61,12) (61,20) (73,8) (73,24) (89,8)
+               (97,16) (97,32) (101,5) (101,20) (109,12) (109,18) (109,36)
+               (113,8) (113,16) (137,8)
+
+**(41,8) is the row `09_jclass.py` named in advance** as the out-of-sample
+confirmation of the v₂(d) = e prediction. 11/20 vs 9/20 over classes; over
+primes (64,64,0) on all four fibres — 1/2 and 1/2. The predicted split is real
+about integer residue classes and empty about primes.
+
+**58 distinct class values collapse to 13 prime values.** (The "47" recorded
+earlier was an undercount.) Over primes only the denominators 1,2,3,4,5,8,9
+survive: 0, 1/4, 1/3, 3/8, 2/5, 4/9, 1/2, 5/9, 3/5, 2/3, 3/4, 4/5, 1 — with
+1/2 taking 652 of 980 fibres. Only 7 of the 58 class values are prime values at
+all, and 6 of the 13 prime values never appear in the class table. Every exotic
+denominator — 49, 54, 73, 81, 121, 169, 243, 250, 289, 625, 729, 1014 — is
+manufactured by counting prime-free classes: 5/27 → 0, 7/125 → 0, 62/75 → 1,
+373/625 → 3/5, 325/729 → 4/9, 144/289 → 1/2, 11/36 → 1/4, 101/182 → 5/9.
+
+**16/49 appears twice — (29,7) and (113,28) — and is 1/3 both times.**
+
+Two mechanisms, both fatal: prime-free *ramified* classes (the 16/49 failure
+mode) and prime-free *unramified* classes — (37,12), (41,8), (61,12), (61,20),
+(73,8), (73,24) have no ramified m at all, and their splits are created purely
+by classes with gcd(qm+1, P) > 1.
+
+**EPS_prime = BAL_prime in all 980 fibres**: the ramified count over
+prime-admissible classes is 0 in every one. Every "(EPS differs only via
+ramification)" note in the scan file is ramification carrying no primes.
+
+**Eight more fibres are identically +1 over primes**, on top of the census's 12:
+(73,12) at m0 = 2,23,48,69 with class 5/27, and (101,10) at m0 = 5,13,16,64
+with class 7/125 — prime counts (0,288,0) and (0,400,0). Real primes: 0 of 1080
+and 0 of 1119 give −1 below 2·10^8.
+
+**What this does NOT touch.** The ρ theorem s(m) = χ_q(1 − α^ρ) is an identity
+at each individual m, proved, and independent of any density.
+
+The pairing theorems are untouched, but **not "vindicated"** — they were never
+at war with these splits. The splits live at q ≡ 1 with general c, where there
+has never been a pairing proof of 1/2; they were never a counterexample to
+anything proved. And 652/980 fibres at 1/2 is the *typical prime value*, not a
+theorem for general c. The remaining 328 are the live empirical object — now
+j-free, with small denominators.
+
+What dissolves is the density structure built on top: the j-class dependence,
+the v₂(d) = e split criterion, and the spectrum of exotic rationals. **Item 22
+is not in this table** — q = 11 is ≡ 3 (mod 4) and the unclassified T : u ↦ −iu
+sits on a different fibre. It stays parked.
+
+# PART 7 — Log
+
+*Superseded sections, wrong inferences, and write-up debt. History lives here, not in the spine.*
+
+## Census facts (q = 29, 37; L ≤ 2000) — CLASS densities, superseded above
+
+
+Every density-0 fibre found is **split**: 8 at q = 29, 6 at q = 37, and **zero
+non-split fibres with L ≤ 2000 are identically +1**. For split h the residue is
+just r^p, so with p odd, s = χ_q(−1)^{(p−1)/2}·χ_q(r): constant χ_q(r) for
+q ≡ 1 (mod 4), while for q ≡ 3 Dirichlet on modulus 4q splits p mod 4 evenly and
+the density is exactly 1/2. About 10 split fibres per prime, mass O(1/q),
+harmless for ε_q ≥ c. Two non-split always-−1 fibres at q = 29, both L = 56.
+Mixed floors 16/49 (q=29) and 1/27 (q=37) are real and cheap.
+
+## Witness search on the large-L tail (`08_witness.py`)
+
+
+Identically +1 is disproved by one s(m) = −1 and proved only by a full period,
+so the tail is not worth O(L) per fibre for an exact fraction. Instead: evaluate
+s at on-fibre m = m_0 + qt of the right parity (step 2q) until a −1 appears or
+K = 64 misses.
+
+    q    fibres   split   exact L<=2000   tail    witnessed -1    evals
+    19     342      8          46          288     288 / 288       582
+    23     506      8          52          446     446 / 446       856
+    29     812     10          62          740     740 / 740      1519
+    37    1332     10          80         1242    1242 / 1242     2545
+
+**No budget hits at any q**, so the K = 256 rerun never triggered. Mean
+evaluations per fibre 2.02, 1.92, 2.05, 2.05 — a geometric variable with
+p = 1/2 has mean 2, so the tail behaves like a fair coin, not a rare event.
+
+**Corrected.** At q = **29, 37** the density-0 population is exactly the split
+fibres, and at all four q no non-split fibre is identically +1 at any L. The
+sentence previously said this held at q = 19 and 23 as well. It does not: for
+q ≡ 3 (mod 4) a split fibre ALTERNATES, so BAL = EPS = 1/2, not 0 — as this
+note's own split analysis says. Re-measured: all 8 split fibres at q = 19 and
+all 8 at q = 23 give BAL = 1/2 with zero ramified. Density-0 split fibres are a
+q ≡ 1 (mod 4) phenomenon only.
+
+Two limits. Four primes is not a theorem. And the search is one-sided by
+construction — it can only settle "not identically +1" and can never bound a
+density below, so a 1/27 fibre passes on its second evaluation while
+contributing almost nothing to the mean. What is removed is the one scenario
+that would have made ε_q ≥ c impossible: a positive fraction of non-split
+fibres at exactly 0. The remaining obstruction is the mass and floor of the
+mixed small-density fibres.
+
+*Method note.* An earlier version of `probe` stepped m by 2 from `want`,
+never enforcing m ≡ m_0 (mod q) — the same off-fibre evaluation as Δm = L/2.
+For q ≡ 1 it is harmless (χ_q(−1) = +1, so s depends only on m mod L, and
+gcd(q, L) = 1), but for q ≡ 3 the symbol also sees (p−1)/2, so the control had
+to be re-run on-fibre rather than argued. It was; same verdicts, different m.
+
 ## Corrections to earlier drafts
+
 
 1. Δm = L/2 does not preserve the fibre (L ≡ 1 mod q); fixed to Δm = qL/2.
 2. Formula (S) had (−1)^{(p−1)/2} where Stickelberger gives χ_q(−1)^{(p−1)/2}.
@@ -1582,3 +1659,4 @@ right size of claim.
    (★) for that explicit λ *is* the pairing. The gap was why (★) holds — now
    closed by the Galois matching above. ord(β) = (q−1)² was used in (F2) without
    being stated; it is now in Step 0.
+
