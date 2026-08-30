@@ -957,10 +957,17 @@ Complete interior census (2 ≤ r ≤ q−2) at 13 primes q ≡ 5 (mod 8) below 
 (i) A factorisation-free symbol: γ_β = β^q − β is a *polynomial* in β, so the
 whole product over the roots of h is one resultant,
 Res(h_monic, (G^m·B_r + 1) mod h) with G = x^q − x mod h — no factoring, no root
-data, no L. ~1 ms against 2–13 s. (ii) **A prime-density-0 fibre can never
-exhibit a −1 at any prime.** So a bounded scan over *actual primes* has no false
-negatives: it can over-flag, never under-flag. That makes a bounded scan a
-complete census of the extremes, independent of L.
+data, no L. ~1 ms against 2–13 s. (ii) A prime-density-0 fibre can never exhibit a −1 at any prime, so **seeing a
+−1 PROVES the fibre is not a zero**. That direction is airtight and L-free.
+
+**The converse is not.** A bounded scan that fails to find a −1 proves nothing —
+recording such a miss as density 0 would manufacture false zeros. Density 0 is
+established only by a **full prime-admissible period** (as at M = 4, 8, 168) or
+by a **structural collapse** (even multiplicity). So the 1,336,166 figure is
+"this many fibres exhibited an explicit prime with symbol −1" — a *lower bound
+on the positive count*, not a completed zero census. In this run nothing was
+left dangling: 128 fibres got an exact full-period density, 50 were split, and
+the remaining 1,335,988 each showed both an explicit −1 and an explicit +1.
 
 **Control passed**: all five known zeros reproduced by three separately written
 pipelines, verified on 4,000 actual primes each to p = 3.2·10^9 and through
@@ -983,16 +990,24 @@ No actual prime ever produced a −1.
   quadratic of **multiplicity 2**, so every exponent in the residue is even, the
   product is a perfect square, and the symbol collapses to χ_q(r) = χ_197(7)
   = +1 identically — on all 196 classes, with no reference to L or any 2-Sylow.
-  This *is* a real family: **non-split part a perfect square, q ≡ 1 (mod 4),
-  χ_q(r) = +1 ⟹ density exactly 0**, period-independent. An exhaustive scan over
+  This *is* a **theorem, not a class**: if every non-split factor has even
+  multiplicity, each N(z)^mult is a square, the character product is identically
+  +1 on unramified m, and s = χ_q(r). At q ≡ 1 (mod 4) that is constant —
+  density 0 when χ_q(r) = +1, 1 when −1. At q ≡ 3 the archimedean factor still
+  alternates and gives 1/2, which is why the family is harmless there. The duals
+  are copies rather than mirrors because χ_q(−r) = χ_q(r) when χ_q(−1) = +1. An exhaustive scan over
   all 123 primes 5 ≤ q ≤ 691 finds exactly three such dual pairs: q = 31 and
   q = 59 (both ≡ 3 mod 4, hence 1/2, harmless) and q = 197. This is item 23
   (even multiplicity is invisible to χ_q) surfacing as a density mechanism.
-* **q = 109 and q = 181 are consistent with chance.** They sit at M = 8 and
-  M = 4 prime-admissible classes against a generic 2(q−1) ≈ 216–392. Summing
-  2^{−M} over every exactly-measured interior fibre at the 33 primes q ≡ 5
-  (mod 8) up to 719 predicts 0.414 constant dual pairs; observed 2 (excluding
-  the deterministic q = 197). Poisson p = 0.065. Not significant.
+* **q = 109 and q = 181: not explained, and NOT "proved chance".** They sit at
+  M = 8 and M = 4 prime-admissible classes against a generic 2(q−1) ≈ 216–392.
+  Summing 2^{−M} over every exactly-measured interior fibre at the 33 primes
+  q ≡ 5 (mod 8) up to 719 predicts 0.414 constant dual pairs; observed 2
+  (excluding the deterministic q = 197), Poisson p = 0.065. **That is compatible
+  with noise and equally compatible with a thin subclass not yet isolated.** All
+  the out-of-sample null establishes is that this pair did not recur among the
+  fibres actually finished — weaker than "chance", and enough only to stop
+  calling q ≡ 5 (mod 8) a mechanism.
 
 **The q ≡ 1 (mod 8) control found nothing, and has no power.** 353,630 fibres,
 0 zeros — but the expected count under a fair-sign null is ~0.016, so 0 is what
@@ -1009,10 +1024,12 @@ one. A factor of 2 in an exponent, not a mechanism.
     mass  8.5e−5   6.1e−5   5.2e−5   0
     ·q    1/108    1/90     1/98     0
 
-So the interior contributes O(1/q²), against the edge's own 2/q. **On this
-evidence the total prime-density-0 mass is o(1/q)** — which is what a bound of
-the form ε_q ≥ (1 − o(1))·(something) would need, though the "something" is no
-longer an infimum, since that is 0.
+So the interior contributes O(1/q²) **if the only recurring interior mechanism
+is even multiplicity** — plus the two unrecaptured small-A fibres. Against the
+edge's own 2/q, **total prime-density-0 mass is o(1/q) on this range and this
+search**. That is the o(1) question answered where it was looked, not a theorem
+for all q and all L. And the bound it would feed is no longer of the form
+(1 − o(1))·inf, since the infimum is 0.
 
 *A real bug was found and fixed during the run: a p < q prime at q = 197 giving
 a spurious −1. It could only ever have destroyed a zero, not created one, and
@@ -1041,7 +1058,11 @@ Result, q ≡ 1 (mod 4) up to 677 (60 primes, 15 s, no fibre machinery):
     x q     .167    .111    .097    .022    .029    .022    .007
 
 **The edge zero mass decays faster than 1/q** — mass·q falls from 0.167 to
-0.007 — and is exactly 0 at 14 of the 60 primes (q = 5, 29, 53, 149, 173, 197,
+0.007 — and is exactly 0 at 14 of the 60 primes. The reason is that the freeze
+lives on **small d**, so φ(d) is bounded and the edge contribution is
+O(φ(d)/q²), which is why mass·q itself decays. The 14 zero-mass primes are the
+same fact. **This cannot decide total zero mass**; it shows only that the edge is
+not where a growing dent would come from (q = 5, 29, 53, 149, 173, 197,
 269, 293, 317, 389, 509, 557, 653, 677). The mechanism is visible in the data:
 the freezing d are always **small** (2, 3, 4, 6, 8, 10, 12), so φ(d) is small
 and the frozen part is a shrinking fraction of the edge's own 1/q.
