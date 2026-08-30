@@ -906,9 +906,12 @@ is the same shape as the r = 1, d = 2 zeros (q = 17, d = 2 freezing at 0), moved
 off the edge.
 
 Sharper, and attached to the class rather than offered as a theorem: all three
-are **q ≡ 5 (mod 8)**, so v₂(q−1) = 2, v₂(q+1) = 1 and **v₂(q² − 1) = 3**. With
-v₂(L) = 3 the γ here exhaust the **full 2-Sylow of F_{q²}^×**. Whether that is
-the mechanism or a coincidence of five fibres is untested.
+are **q ≡ 5 (mod 8)**, so v₂(q−1) = 2, v₂(q+1) = 1 and **v₂(q² − 1) = 3**.
+
+**TESTED, AND THE CLASS IS NOT REAL — see "Run 2" below.** v₂(L) = 3 is
+*forced* for any quadratic non-split root, not selected; two of the five zeros
+have a completely different (and deterministic) cause; the remaining three are
+consistent with chance. The 2-Sylow story is dead.
 
 Confirmed four independent ways per fibre — resultant form, explicit per-root
 norms, `core.fibre_counts_primes`, and **`fpcore.symbol` evaluating disc(f_p)
@@ -943,6 +946,77 @@ near 1/2 while the infimum is 0. This is TRAP 5 at the strategic level: the mean
 never saw these fibres, and the infimum is exactly what was just measured. The
 10^7 prime sweep is unaffected; per-fibre positivity at q ≤ 37 stands as a
 measurement of that range.
+
+## Run 2: the interior zero class is NOT real, and the interior mass decays like 1/q²
+
+Complete interior census (2 ≤ r ≤ q−2) at 13 primes q ≡ 5 (mod 8) below 200,
+11 primes q ≡ 5 (mod 8) in (200,500), and 19 primes q ≡ 1 (mod 8) up to 449 —
+**1.87 million fibres, every one resolved**.
+
+**Two methodological moves make this a census rather than a capped sweep.**
+(i) A factorisation-free symbol: γ_β = β^q − β is a *polynomial* in β, so the
+whole product over the roots of h is one resultant,
+Res(h_monic, (G^m·B_r + 1) mod h) with G = x^q − x mod h — no factoring, no root
+data, no L. ~1 ms against 2–13 s. (ii) **A prime-density-0 fibre can never
+exhibit a −1 at any prime.** So a bounded scan over *actual primes* has no false
+negatives: it can over-flag, never under-flag. That makes a bounded scan a
+complete census of the extremes, independent of L.
+
+**Control passed**: all five known zeros reproduced by three separately written
+pipelines, verified on 4,000 actual primes each to p = 3.2·10^9 and through
+`fpcore.symbol` (which builds f_p from scratch and knows nothing of fibres).
+No actual prime ever produced a −1.
+
+**Out of sample: ZERO.** At the 11 primes q ≡ 5 (mod 8) in (200,500), all
+1,336,166 interior fibres resolved — no density-0 fibre, none of density 1.
+
+**The class dissolves into three unrelated things:**
+
+* **v₂(L) = 3 is forced, not selected.** For a degree-2 non-split root
+  γ^{q−1} = −1, so ord(γ) | 2(q−1) but not (q−1), giving
+  v₂ = v₂(q−1) + 1 = 3 exactly at q ≡ 5 (mod 8). Verified on 416 quadratic
+  roots over 21 primes, 0 failures. **Every** quadratic-part fibre at
+  q ≡ 5 (mod 8) has v₂(L) = 3 — 114 of them below q = 200 (10 extreme), 84 out
+  of sample (**0** extreme). The five zeros agreeing on v₂(L) = 3 was a forced
+  invariant agreeing with itself.
+* **q = 197 is a different theorem entirely.** Its only non-split factor is a
+  quadratic of **multiplicity 2**, so every exponent in the residue is even, the
+  product is a perfect square, and the symbol collapses to χ_q(r) = χ_197(7)
+  = +1 identically — on all 196 classes, with no reference to L or any 2-Sylow.
+  This *is* a real family: **non-split part a perfect square, q ≡ 1 (mod 4),
+  χ_q(r) = +1 ⟹ density exactly 0**, period-independent. An exhaustive scan over
+  all 123 primes 5 ≤ q ≤ 691 finds exactly three such dual pairs: q = 31 and
+  q = 59 (both ≡ 3 mod 4, hence 1/2, harmless) and q = 197. This is item 23
+  (even multiplicity is invisible to χ_q) surfacing as a density mechanism.
+* **q = 109 and q = 181 are consistent with chance.** They sit at M = 8 and
+  M = 4 prime-admissible classes against a generic 2(q−1) ≈ 216–392. Summing
+  2^{−M} over every exactly-measured interior fibre at the 33 primes q ≡ 5
+  (mod 8) up to 719 predicts 0.414 constant dual pairs; observed 2 (excluding
+  the deterministic q = 197). Poisson p = 0.065. Not significant.
+
+**The q ≡ 1 (mod 8) control found nothing, and has no power.** 353,630 fibres,
+0 zeros — but the expected count under a fair-sign null is ~0.016, so 0 is what
+you get either way. **Do not read it as confirming q ≡ 5 (mod 8).** The variable
+that actually predicts zeros is **A, the number of prime-admissible classes**:
+q = 41 and 313 (both ≡ 1 mod 8) have min A = 8, same as q = 109, and produce
+nothing. q mod 8 enters only through min A ≥ 2^{v₂(q−1)}, minimised at
+v₂(q−1) = 2 — so q ≡ 5 (mod 8) is the *most favourable* class, not the causal
+one. A factor of 2 in an exponent, not a mechanism.
+
+**Interior zero mass decays faster than 1/q, by a factor of about q/2:**
+
+    q     109      181      197      all other q < 500 (q ≡ 5 mod 8)
+    mass  8.5e−5   6.1e−5   5.2e−5   0
+    ·q    1/108    1/90     1/98     0
+
+So the interior contributes O(1/q²), against the edge's own 2/q. **On this
+evidence the total prime-density-0 mass is o(1/q)** — which is what a bound of
+the form ε_q ≥ (1 − o(1))·(something) would need, though the "something" is no
+longer an infimum, since that is 0.
+
+*A real bug was found and fixed during the run: a p < q prime at q = 197 giving
+a spurious −1. It could only ever have destroyed a zero, not created one, and
+was proved never to have entered a sweep.*
 
 ## Run 1: C8-formula census of the r = 1 EDGE (not a bound on total zero mass)
 
