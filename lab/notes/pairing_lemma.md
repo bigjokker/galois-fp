@@ -880,6 +880,47 @@ Not established, without softening:
 * **Any fibre-theoretic bound must hypothesise away the split family**, or it is
   simply false at q = 13, 17, 29, 37, 41.
 
+## c_band = 0. The fibre-theoretic route to ε_q ≥ c is DEAD.
+
+**Six non-split fibres strictly inside the band have prime density exactly 0.**
+
+    q     (r,m0)              L    non-split degs  prime-adm cls  (neg,pos,zero)
+    109   (103,108)          24    2                     8        (0,   8, 0)
+    181   (8,0), (173,180)    8    2+2                   4        (0,   4, 0)
+    197   (7,0), (190,196)  392    2^2                 168        (0, 168, 0)
+
+All have 2 ≤ r ≤ q−2, all are genuinely non-split. These are **not** the
+r = 1 / r = q−1 edge fibres already known to be identically +1. q = 197 is not
+small-sample noise: 168 distinct prime-carrying classes, every one +1.
+
+Confirmed four independent ways per fibre — resultant form, explicit per-root
+norms, `core.fibre_counts_primes`, and **`fpcore.symbol` evaluating disc(f_p)
+mod q directly from f_p on real primes with no fibre machinery at all** (14
+primes at q = 181, 197 between 77,611 and 2,250,929; 15 at q = 109; plus 20,000
+fibre-formula primes at q = 109 up to 5·10^9). Zero disagreements.
+
+**So the conjectural bound ε_q ≥ (1 − O(1/q))·c_band is worthless: c_band = 0.**
+Excising the split family is not enough; excising the two edges r = 1, q−1 is
+not enough. Genuine non-split zeros occur in the interior of the band.
+
+**The earlier optimism was a range artefact.** The q = 41…89 sweep found nothing
+below 3/8 and read as strong support. It simply had not reached 109. The full
+sequence of minima does not trend — it is erratic, and it is not bounded below:
+
+    q     11    13    17    19     23     29    31     37    41    53    61
+    c_b   1/4   1/4   1/4  15/32  15/32  1/3  31/64  5/12  3/8  11/24 7/16
+    q     73    109   181   197
+    c_b  5/12    0     0     0
+
+(q = 17 at 1/4 was a gap in every previous run and is new here.) Nothing in the
+sweep lies strictly between 0 and 1/3.
+
+**What this does not touch.** Positivity per fibre was never claimed to be
+universal — it was measured on 3,774 band fibres at q ≤ 37, and those
+measurements stand. What dies is the inference from them to a uniform c. The
+prime sweep remains the evidence for Σ ε_q = ∞; ε_q ≥ c > 0 does not follow from
+any fibre-level infimum, because that infimum is 0.
+
 **The live object.** After C8's zeros are priced in, a fibre-theoretic bound
 would have to take the form
 
