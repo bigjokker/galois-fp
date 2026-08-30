@@ -960,14 +960,21 @@ Res(h_monic, (G^m·B_r + 1) mod h) with G = x^q − x mod h — no factoring, no
 data, no L. ~1 ms against 2–13 s. (ii) A prime-density-0 fibre can never exhibit a −1 at any prime, so **seeing a
 −1 PROVES the fibre is not a zero**. That direction is airtight and L-free.
 
-**The converse is not.** A bounded scan that fails to find a −1 proves nothing —
-recording such a miss as density 0 would manufacture false zeros. Density 0 is
-established only by a **full prime-admissible period** (as at M = 4, 8, 168) or
-by a **structural collapse** (even multiplicity). So the 1,336,166 figure is
-"this many fibres exhibited an explicit prime with symbol −1" — a *lower bound
-on the positive count*, not a completed zero census. In this run nothing was
-left dangling: 128 fibres got an exact full-period density, 50 were split, and
-the remaining 1,335,988 each showed both an explicit −1 and an explicit +1.
+**The converse is not**, and the slogan "a bounded scan is a complete census of
+the extremes" is false as stated: a scan that fails to find a −1 proves nothing,
+and recording such a miss as density 0 would manufacture false zeros — the
+witness-search error in new clothes. Density 0 is established only by a **full
+prime-admissible period** (M = 4, 8, 168 here) or by a **structural collapse**
+(even multiplicity).
+
+**This run did not rely on the broken half.** Its bookkeeping is a complete
+classification, not a capped scan: 128 fibres got an exact full-period density,
+50 were fully split, and the remaining **1,335,988 each exhibited BOTH an
+explicit −1 and an explicit +1** — and exhibiting both proves a fibre is not an
+extreme in either direction. Nothing was left dangling, so **for this search the
+extremes are finished**. Read 1,336,166 as a lower bound on the positive count
+if the number is ever quoted outside this bookkeeping; within it, the census is
+complete.
 
 **Control passed**: all five known zeros reproduced by three separately written
 pipelines, verified on 4,000 actual primes each to p = 3.2·10^9 and through
