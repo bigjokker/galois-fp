@@ -944,6 +944,37 @@ never saw these fibres, and the infimum is exactly what was just measured. The
 10^7 prime sweep is unaffected; per-fibre positivity at q ≤ 37 stands as a
 measurement of that range.
 
+## Run 1: C8-formula census of the r = 1 EDGE (not a bound on total zero mass)
+
+**Label this correctly.** r = 1 together with r = q−1 has mass 2/q whatever
+their densities, so no census of the edge can decide whether *total* zero mass
+is o(1). What this measures is which d | q−1 freeze, and what fraction of the
+edge that is. The interior (2 ≤ r ≤ q−2) is a separate measurement.
+
+**Scope:** q ≡ 1 (mod 4) only — at q ≡ 3 the r = 1 family is the two-translation
+theorem, not this count. d = 1 skipped (c = 1, split). φ(d) fibres per d,
+divided by q(q−1). **r = q−1 counted separately, never doubled**: its duals are
+copies at q = 13 and mirrors at q = 109.
+
+**Contingent on C8**, which is verified and not proved: formula-0 is a
+sufficient condition for a genuine zero only if {α^n} really is the generator
+set. That rests on the 69-fibre ratio match and the 14-row set identification.
+
+Result, q ≡ 1 (mod 4) up to 677 (60 primes, 15 s, no fibre machinery):
+
+    q        13      37      73     137     241     409     673
+    mass   .0128   .0030   .0013  .00016  .00012  .000054 .000011
+    x q     .167    .111    .097    .022    .029    .022    .007
+
+**The edge zero mass decays faster than 1/q** — mass·q falls from 0.167 to
+0.007 — and is exactly 0 at 14 of the 60 primes (q = 5, 29, 53, 149, 173, 197,
+269, 293, 317, 389, 509, 557, 653, 677). The mechanism is visible in the data:
+the freezing d are always **small** (2, 3, 4, 6, 8, 10, 12), so φ(d) is small
+and the frozen part is a shrinking fraction of the edge's own 1/q.
+
+*This says nothing about the interior zeros at q = 109, 181, 197, which are what
+c_band = 0 was about. Those are measurement 2.*
+
 **What is left for ε_q ≥ c.** Not an infimum over fibres — that door is shut.
 Either (i) a theorem that the *mass* of prime-density-0 fibres stays o(1), or
 (ii) the sweep. The known zeros are sparse and structured (a few fibres, small
