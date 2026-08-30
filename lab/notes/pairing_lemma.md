@@ -1,4 +1,6 @@
-# The r = 1 family: fibre densities
+# Fibre densities for the certificate
+
+*Parts 1-4 are r = 1; Parts 5-6 cover all r.*
 
 Status, three separate items — the first two are densities, the third is not:
 
@@ -25,11 +27,20 @@ Status, three separate items — the first two are densities, the third is not:
 * **q ≡ 1 (mod 4), c primitive** (h irreducible): density exactly 1/2.
   **Proved.** Inversion times an F_q-scalar, with the j rule 2j ≡ 4ι+1 (mod s)
   derived as the solvability condition.
-* **q ≡ 1 (mod 4), every c ∉ {0,1}**: s(m) = χ_q(1 − α^ρ) on each ρ-stratum.
-  **The formula is proved; the density is not.** The density is the proportion
-  of −1 on the short list {α^ρ}, which depends on the ρ-stratum and on the
-  j-class and **has not been identified**. This is a reduction, not a closed
-  density.
+* **q ≡ 1 (mod 4), every c ∉ {0,1}**: s(m) = χ_q(1 − α^ρ), an identity at each
+  m. **The formula is proved; the density is not — but it is now identified.**
+  Over PRIMES ρ = n always (every other stratum is empty of primes), so
+  s(p) = χ_q(1 − α^n) with no case analysis, and the density is a **count of
+  generators**:
+
+      density(q,d) = #{ γ ∈ F_q^× : ord(γ) = d, χ_q(1 − γ) = −1 } / φ(d)
+
+  depending on (q,d) alone — no j, no ρ, no fibre machinery. Verified, not
+  proved: three F_q^× steps are owed. **See Part 4.**
+
+* Beyond r = 1: the fibre-theoretic **infimum route is closed** (c_band = 0,
+  Part 6), while the total prime-density-0 mass measures o(1/q) on the range
+  searched (Part 5). Σ ε_q = ∞ is untouched and still rests on the prime sweep.
 
 No Weil, no character-sum estimate, no `E_q`, no CFSG. Verified computationally
 for q ≤ 139.
@@ -115,6 +126,15 @@ irrelevant; the coefficient of (p−1)/2 in s is χ_q(−1), not −1.
 # PART 2 — Traps
 
 *Read these before any number below. Each cost real time.*
+
+**Traps 1-4 live in `core.py`'s header, not here**, and are as load-bearing as
+TRAP 5. In brief: **(1)** the sign (−1)^{(p−1)/2} multiplies the *residue*, so
+what survives is χ_q(−1)^{(p−1)/2} — negating the symbol instead is wrong
+exactly when q ≡ 1 (mod 4); **(2)** orders come from factoring q^d − 1 through
+cyclotomic *values*, never Möbius inversion with division; **(3)** on-fibre
+sampling — a map on m must shift by a multiple of q, and a truncated scan must
+too; **(4)** BAL (ramified excluded) is not EPS (ramified in the denominator).
+TRAP 5 below is the one that invalidated the most measurements.
 
 ## TRAP 5: class density is not prime density
 
