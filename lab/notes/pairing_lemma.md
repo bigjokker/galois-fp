@@ -800,8 +800,10 @@ At r = 1 with c ∉ {0,1} — so d > 1 and L = d(q−1) by Step 0 — and P = lc
 
     gcd(qm + 1, P) = 1   ⟺   gcd(m + 1, q − 1) = 1.
 
-The hypothesis is not decoration: at d = 1 Step 0 gives L = 1, hence P = 4, and
-the lemma is false (q = 13, m = 2: gcd(27,4) = 1 while gcd(3,12) = 3).
+The hypothesis is not decoration: at d = 1 (c = 1, i.e. m₀ = 0) Step 0 gives
+L = 1, hence P = 4, and the lemma is false — q = 13, m₀ = 0, m = 26, which is
+on-fibre (m ≡ 0 mod 13, m even): gcd(339, 4) = 1 while gcd(27, 12) = 3.
+Admitting d = 1 into the scan below turns its 0 equivalence failures into 12.
 
 *Proof.* Since d | q−1, the primes dividing L = d(q−1) are exactly those
 dividing q−1; the factor 4 in P adds only the prime 2, which already divides
