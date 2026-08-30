@@ -837,12 +837,19 @@ q = 19, 23, 31): there the sign factor alternates, so split fibres sit at exactl
     min      1/4    15/32   15/32    1/3    31/64    5/12
     at L      24     720    1056      56    1920      72
 
-No monotone trend and never below 1/4 from q = 13 to 37. The reason is
-structural: every minimum sits at the **smallest non-split L available at that
-q**, and deviation from 1/2 collapses like L^{−1/2} (measured at q = 29:
-max |δ − 1/2| = 1/6 for L ≤ 100, 1/24 for L ≤ 10^4, 0.0045 for L ≤ 10^6,
-0.0010 for L ≤ 6·10^8). **The floor is a function of L, not of q** — growing q
-pushes fibres toward 1/2, not toward 0.
+**The honest claim is "the floor does not decay to 0 on this range", and no
+more.** The sequence is not drifting up: q = 29 at 1/3 is *worse* than q = 19
+and 23 at 15/32, and the record low is still 1/4, at q = 11 (3,6) and q = 13.
+
+Every minimum sits at the **smallest non-split L available at that q**, and
+deviation from 1/2 collapses like L^{−1/2} (at q = 29: max |δ − 1/2| = 1/6 for
+L ≤ 100, 1/24 for L ≤ 10^4, 0.0045 for L ≤ 10^6, 0.0010 for L ≤ 6·10^8). So the
+floor is a **small-L phenomenon**. Large L is the *safe* end.
+
+**"Growing q pushes the floor up" would be the mean talking, and is wrong.**
+Growing q adds large-L fibres, which pull the *mean* toward 1/2; it does not
+remove small-L fibres. A uniform c lives or dies on whether small-L band fibres
+like q = 11 (3,6) persist at 1/4 — not on the tail.
 
 **The dangerous zeros are confined to the two edges.** Genuine non-split
 prime-density-0 fibres occur only at r = 1 and r = q−1, and only at q ≡ 1
@@ -863,12 +870,26 @@ Not established, without softening:
 * **Positivity per fibre is proved; a uniform c is not.** The bound extractable
   from a single witness is 1/N with N the number of prime-admissible classes;
   for L ~ 10^28 that is vacuous. 3,240 of 3,774 have proved positivity and an
-  *estimated* value only.
+  *estimated* value only. **This is a different hole from the L^{−1/2}
+  concentration**: witnessed positivity is not a floor independent of L. A
+  fibre-theoretic c needs densities on the small-L band — where the minimum
+  actually sits — or a theorem, not 1,982 first hits.
 * The minima are over the 534 enumerated fibres (14% of the band). That the
   other 86% cannot go lower rests on the empirical L^{−1/2} concentration, not
   on a theorem.
 * **Any fibre-theoretic bound must hypothesise away the split family**, or it is
   simply false at q = 13, 17, 29, 37, 41.
+
+**The live object.** After C8's zeros are priced in, a fibre-theoretic bound
+would have to take the form
+
+    ε_q ≥ (1 − O(1/q)) · c_band,
+
+with c_band the infimum of prime-EPS over **non-split** fibres with
+2 ≤ r ≤ q−2. Today c_band = 1/4 on the enumerated small-L part and is unproved
+on the rest. **That is the live object** — not H_r, not item 22, not q = 43.
+The measurement that would move it is whether small-L band minima stay ≥ 1/4 as
+q grows; the tail having a −1 does not bear on it.
 
 *Also observed, beyond the v₂(L) ≤ 1 theorem: at q ≡ 3 (mod 4) a shift with
 Δ ≡ 0 (mod lcm(L,q)) and Δ ≡ 2 (mod 4) preserves m mod q, parity, every γ_i^m,
