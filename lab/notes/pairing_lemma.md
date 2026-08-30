@@ -896,13 +896,19 @@ r = 1 / r = q−1 edge fibres already known to be identically +1. q = 197 is not
 small-sample noise: 168 distinct prime-carrying classes, every one +1.
 
 *The count is five, not six.* A sixth fibre, q = 109 (6,0), is the r ↔ q−r dual
-of (103,108) and has density **1** — a mirror, not a copy. The q = 181 and
-q = 197 duals *are* copies, both zero.
+of (103,108) and has density **1** — a mirror, not a copy. So at q = 109 the
+pair is **mean-neutral**: the zero is exactly offset by its dual. At q = 181 and
+q = 197 both duals are 0, so those **four** fibres genuinely dent ε_q.
 
 **The arithmetic is the d = 2 arithmetic, now in the interior.** All three q are
 ≡ 1 (mod 4); every L has **v₂(L) = 3**; every non-split part is quadratic. That
 is the same shape as the r = 1, d = 2 zeros (q = 17, d = 2 freezing at 0), moved
 off the edge.
+
+Sharper, and attached to the class rather than offered as a theorem: all three
+are **q ≡ 5 (mod 8)**, so v₂(q−1) = 2, v₂(q+1) = 1 and **v₂(q² − 1) = 3**. With
+v₂(L) = 3 the γ here exhaust the **full 2-Sylow of F_{q²}^×**. Whether that is
+the mechanism or a coincidence of five fibres is untested.
 
 Confirmed four independent ways per fibre — resultant form, explicit per-root
 norms, `core.fibre_counts_primes`, and **`fpcore.symbol` evaluating disc(f_p)
