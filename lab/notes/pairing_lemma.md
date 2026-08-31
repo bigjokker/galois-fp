@@ -52,9 +52,12 @@ Status, three separate items — the first two are densities, the third is not:
   `E_q = {(disc f_p / q) = −1}`. Uncovered density for finite `Q` is that joint
   law (`thm:dens`), not `∏(1−ε_q)`: `{3,5}` independent, `{3,7}` not.
   `Σ ε_q = ∞` is **proved** (PART 4, from r = 1 at q ≡ 3 (mod 4)) and does not
-  by itself force uncovered density → 1 — that needs `S = o((Σ ε_q)²)`, which is
-  measured over one octave and unproved. lab/ via the infimum proxy does not
-  approach A.2.
+  by itself force uncovered density → 1 — that needs `S = o((Σ ε_q)²)`, i.e.
+  (since `2S/(Σ ε_q)² → 4c`) that the **mean** pairwise excess `c` tend to 0.
+  Unproved, and **not reachable by measurement**: a uniform 10⁻⁴ floor is 0.1σ
+  per pair at any `p`. What is measured is the large-pair count — identically 1
+  across a full doubling, `|Q| = 3…37` at `q ≤ 163`, with `{3,7}` the only real
+  pair. See "Gap (ii)". lab/ via the infimum proxy does not approach A.2.
 
   Pairwise excess at `p < 10^7` (odd `q ≤ 31`): `{3,5}` and `{3,7}` match
   `thm:dens`; the three pre-specified candidates were noise; `{3,13}` is

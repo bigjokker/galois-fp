@@ -41,10 +41,19 @@ tend to 1. Divergence of the *marginals* (`Σ ε_q = ∞`) is **PROVED** — see
 force that limit: strong enough dependence leaves uncovered density bounded
 away from 0.
 
-**LIVE.** Pairwise correlations of the `E_q`. At `p < 10^7` the pre-specified
-candidates died; `{3,5}` and `{3,7}` match `thm:dens`; `{3,13}` is a post-hoc
-4.8σ. The 45-pair table measures **alignment of class sets, not structural
-independence**. Proof by example: `ε_5` **restricted to the 12 unit classes mod 36** is a
+**LIVE — restated.** The target is **not** the pairwise table any more. Since
+`2S/(Σ ε_q)² → 4c` with `c` the **mean** pairwise excess, gap (ii) is exactly
+`c → 0`. That is a statement about all pairs at once and is **invisible
+pair-by-pair**: a uniform 10⁻⁴ floor is 0.1σ per pair at any `p`. **corr163 is
+the last measurement** — large-pair count identically 1 across `|Q| = 3…37`
+(`q ≤ 163`, 666 pairs, a full doubling, where Θ(|Q|²) predicted ≈ 4), `{3,7}`
+alone at 11.3σ, the rest a zero-mean cloud. Further sweeps are not indicated;
+closing (ii) needs an idea. See `pairing_lemma.md`, "Gap (ii)".
+
+*Superseded context, kept because it explains the table.* At `p < 10^7` the
+pre-specified candidates died; `{3,5}` and `{3,7}` match `thm:dens`; `{3,13}` is
+a post-hoc 4.8σ. The 45-pair table measures **alignment of class sets, not
+structural independence**. Proof by example: `ε_5` **restricted to the 12 unit classes mod 36** is a
 function of `p mod 4` (levels ≈ 0.475 and 0.625, within-group 1.2σ, mean
 11/20) with per-class spread 0.15, and its inner product with `s_3` is
 exactly 0 because E₃'s good classes are 3+3 balanced mod 4. (The q=5 symbol
@@ -364,6 +373,18 @@ needs all roots of one degree d (Kummer). New item:
 
 ## Done
 
+- **`Σ ε_q = ∞` — PROVED.** From `r = 1` at `q ≡ 3 (mod 4)` alone: `v₂(L) = 1 ⟺
+  d odd ⟺ c a square`, giving `(q−3)/2` fibres at BAL = 1/2 by the translation
+  theorem, no ramification by the residue corollary (so EPS = BAL), hence
+  `ε_q ≥ (q−3)/(4q(q−1)) ~ 1/(4q)` and `Σ 1/q` over `q ≡ 3 (mod 4)` diverges.
+  Assembled from pieces already on the page; the enabling step was that `(1′)`
+  (Lemma 2) and the product collapse are **field identities with no q mod 4
+  hypothesis**. `pairing_lemma.md`, "Σ ε_q = ∞ from r = 1 alone".
+- **Gap (ii) measured, and restated.** `2S/(Σ ε_q)² → 4c`, so the condition is
+  `c → 0` on the **mean**, not on the large pairs. corr163: large-pair count
+  identically 1 across a doubling. Not a theorem, and not reachable by
+  measurement. Do **not** quote `4c ≲ 0.0004` — the iid SE is optimistic since
+  each `q` sits in 36 pairs.
 - **`q ≡ 3 (mod 4)`, every `c` with `d > 1`: BAL exactly 1/2** (plus the split
   case by Δm = 2qL). NOT "every c" — c = 1 and c = 0 are excluded. **BAL = EPS
   here:** the 4/9, 12/25, 40/81 figures are CLASS EPS, counting prime-free
