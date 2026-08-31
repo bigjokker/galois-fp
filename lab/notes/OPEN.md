@@ -36,18 +36,19 @@ Not progress toward A.2. For a *fixed* finite `Q`, uncovered density is the
 **joint law** of the events `E_q = {(disc f_p / q) = −1}` (`thm:dens`), not
 `∏(1−ε_q)`. `{3,5}` is exactly independent; `{3,7}` is not. As more `q` are
 adjoined, uncovered density → 0 if and only if those finite-union densities
-tend to 1. Divergence of the *marginals* (`Σ ε_q = ∞`) is well supported by
-the sweep (every measured `ε_q` near 1/2, no drift) and does **not** by itself
+tend to 1. Divergence of the *marginals* (`Σ ε_q = ∞`) is **PROVED** — see
+`pairing_lemma.md`, "Σ ε_q = ∞ from r = 1 alone" — and does **not** by itself
 force that limit: strong enough dependence leaves uncovered density bounded
 away from 0.
 
 **LIVE.** Pairwise correlations of the `E_q`. At `p < 10^7` the pre-specified
 candidates died; `{3,5}` and `{3,7}` match `thm:dens`; `{3,13}` is a post-hoc
 4.8σ. The 45-pair table measures **alignment of class sets, not structural
-independence**. Proof by example: `ε_5` is a function of `p mod 4` (levels
-≈ 0.475 and 0.625, within-group 1.2σ, mean 11/20) with per-class spread 0.15,
-and its inner product with `s_3` is exactly 0 because E₃'s good classes are
-3+3 balanced mod 4. Near-zero excess is that alignment, not "no structure".
+independence**. Proof by example: `ε_5` **restricted to the 12 unit classes mod 36** is a
+function of `p mod 4` (levels ≈ 0.475 and 0.625, within-group 1.2σ, mean
+11/20) with per-class spread 0.15, and its inner product with `s_3` is
+exactly 0 because E₃'s good classes are 3+3 balanced mod 4. (The q=5 symbol
+has period 600; this measurement cannot see the rest of that period.) Near-zero excess is that alignment, not "no structure".
 `{3,q}` excesses are decided on **modulus 36** (where E₃ is a class function),
 which is a different question from where `ε_q` itself lives.
 
@@ -300,9 +301,11 @@ needs all roots of one degree d (Kummer). New item:
     ℓ | qb + r(1−a), which holds because b ≡ −2 and a ≡ −1 mod every ℓ | q−1.
     Verified on 169,320 classes, 0 failures — corroboration of a two-line
     argument, in the same role as the 70 (q,d) pairs. Written up in
-    pairing_lemma.md. **Reach: BAL among integers = BAL among UNRAMIFIED primes.
-    Still not EPS** — ramified classes carry primes too, and those primes are in
-    the EPS denominator (odd d: 4/9, 12/25, unchanged).
+    pairing_lemma.md. **Reach: BAL among integers = BAL among UNRAMIFIED primes.**
+    Pairing alone is not EPS, but the PART 4 residue corollary now closes it for
+    r = 1: nothing ramifies over prime-admissible classes, so BAL = EPS = 1/2.
+    The 4/9 and 12/25 figures are CLASS EPS (prime-free classes in the
+    denominator); do not quote them as what `ε_q` consumes.
 
 25. **`10_onfibre_q3.py` does not test what the note claims.** It contains
     `if d < 2 or d == q-1: continue` plus an L cutoff, so the primitive case
@@ -362,9 +365,11 @@ needs all roots of one degree d (Kummer). New item:
 ## Done
 
 - **`q ≡ 3 (mod 4)`, every `c` with `d > 1`: BAL exactly 1/2** (plus the split
-  case by Δm = 2qL). NOT "every c" — c = 1 and c = 0 are excluded — and BAL,
-  not the EPS that ε_q consumes: odd d ramifies, contributing 4/9, 12/25, 40/81
-  rather than 1/2. Two translations
+  case by Δm = 2qL). NOT "every c" — c = 1 and c = 0 are excluded. **BAL = EPS
+  here:** the 4/9, 12/25, 40/81 figures are CLASS EPS, counting prime-free
+  classes in the denominator. Over prime-admissible classes no r = 1 fibre
+  ramifies (residue = 1 − c^{m+1} vanishes only if d | m+1, impossible under
+  Lemma 1), so ε_q consumes 1/2 on these, not 4/9. Two translations
   (`Δm = qL/2` for even `d` via Step 2; `Δm = qL` for odd `d`, no Step 2), with
   `L = d(q−1)` proved as an lcm over the `n` orbits. `notes/pairing_lemma.md`.
 - **`q ≡ 1 (mod 4)`, `c` primitive: density exactly 1/2.** Inversion times an

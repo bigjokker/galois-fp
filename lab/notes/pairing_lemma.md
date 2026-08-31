@@ -51,8 +51,10 @@ Status, three separate items — the first two are densities, the third is not:
   statement about the mean and the joint law of the events
   `E_q = {(disc f_p / q) = −1}`. Uncovered density for finite `Q` is that joint
   law (`thm:dens`), not `∏(1−ε_q)`: `{3,5}` independent, `{3,7}` not.
-  `Σ ε_q = ∞` is well supported by the sweep and does not by itself force
-  uncovered density → 1. lab/ via the infimum proxy does not approach A.2.
+  `Σ ε_q = ∞` is **proved** (PART 4, from r = 1 at q ≡ 3 (mod 4)) and does not
+  by itself force uncovered density → 1 — that needs `S = o((Σ ε_q)²)`, which is
+  measured over one octave and unproved. lab/ via the infimum proxy does not
+  approach A.2.
 
   Pairwise excess at `p < 10^7` (odd `q ≤ 31`): `{3,5}` and `{3,7}` match
   `thm:dens`; the three pre-specified candidates were noise; `{3,13}` is
@@ -240,8 +242,11 @@ scalars c^{(m+1)i} sweep the group ⟨c^g⟩ = μ_{d/g}, each value g times, so 
     N(1 + u) = [ ∏_{ζ^{d/g}=1} (1 + ζu) ]^g = [ 1 − (−u)^{d/g} ]^g,    (1′)
 
 an equality in F_q: g | m+1 makes (m+1)(d/g) a multiple of d, so (−u)^{d/g} is
-Frobenius-fixed. Since g is odd, χ_q(N(1+u)) = χ_q(1 − (−u)^{d/g}); for
-q ≡ 1 (mod 4) that *is* s(m). This replaces `core.norm`'s powmod with exponent
+Frobenius-fixed. **Call this Lemma 2.** The identity above is field arithmetic
+and uses **no hypothesis on q mod 4 and no parity of g**; it is proved from (1)
+and ∏_{ζ^M=1}(1 − wζ) = 1 − w^M alone. Only the passage to the *symbol* needs
+more: since g is odd, χ_q(N(1+u)) = χ_q(1 − (−u)^{d/g}); for q ≡ 1 (mod 4) that
+*is* s(m). PART 4 uses Lemma 2 in its unsigned form, off this header. This replaces `core.norm`'s powmod with exponent
 (q^d−1)/(q−1) — about 300 squarings of degree-52 polynomials at q = 53 — by
 log₂(d/g) squarings. Implemented in `fastsym.py`; it is what makes the
 exhaustive q = 53, 61 searches run in 4 s each instead of hours. (Checked
@@ -552,6 +557,11 @@ sign, for even ρ as well** — and at X = 1,
 
     ∏_i (1 − w_i) = (1 − α^ρ)^{n/ρ}.
 
+**This product identity is field arithmetic** — a factorisation of X^ρ − α^ρ,
+with no character and no hypothesis on q mod 4. It is stated under the q ≡ 1
+header only because the *symbol* statement s(m) = χ_q(1 − α^ρ) needs the
+archimedean factor to be +1. PART 4 uses the product identity at every odd q.
+
 And n/ρ = gcd(k, n) divides k, which is **odd**; so the exponent is odd and
 χ_q kills it. ∎
 
@@ -777,13 +787,17 @@ pair with zeros. Therefore
 
     **BAL among integers = BAL among the UNRAMIFIED primes of the fibre.**
 
-**This is still not EPS.** Ramified classes can carry primes, and those primes
-sit in the EPS denominator. For odd d ramification is a positive fraction of the
-period, so the earlier figures stand unchanged: EPS = 4/9 (q=7, m_0=1), 12/25
-(q=31, m_0=1), and so on, every one with BAL = 1/2. Pairing never claimed to
-kill ramification, and this lemma does not either. It licenses the pairing
-theorems to speak about primes; it does not convert BAL into the quantity ε_q
-consumes.
+**Pairing alone is still not EPS** — but the residue theorem now closes the
+gap for r = 1. Pairing never claimed to kill ramification and this lemma does
+not either; it licenses the pairing theorems to speak about primes. What
+converts BAL into the quantity ε_q consumes is the corollary in PART 4: at r = 1
+with d > 1, residue = 1 − c^{m+1} vanishes only if d | m+1, which Lemma 1
+forbids on prime-admissible classes. **So no r = 1 fibre ramifies over primes,
+and BAL = EPS = 1/2 there.**
+
+The figures EPS = 4/9 (q=7, m_0=1), 12/25 (q=31, m_0=1) are **CLASS EPS**: they
+count prime-free classes in the denominator. Over prime-admissible classes the
+same fibres are exactly 1/2. Do not quote them as what ε_q consumes.
 
 *Verified: 141,736 classes (translations, q = 7, 11, 19, 23, 31, all r, all m_0
 with L ≤ 3000) and 27,584 classes (affine map, q = 13, 17, 29, 37, primitive
@@ -969,29 +983,50 @@ equal share of the primes of the fibre. ∎
 congruences are independent and no constraint on p mod d follows from the fibre
 condition; reading one off would falsely force p into a single class mod d.
 
-**Corollary (this family only: r = 1, q ≡ 1 (mod 4), d > 1, prime-admissible).**
-χ_q(1 − c^j) = 0 would need c^j = 1, impossible for gcd(j,d) = 1 with d > 1. So
-no prime-admissible class of such a fibre ramifies, and **BAL = EPS here** —
-TRAP 4 is vacuous on this family. The scope is part of the statement: it says
-nothing about other r, about q ≡ 3, or about d = 1.
+**Corollary (non-vanishing).** χ_q(1 − c^j) = 0 would need c^j = 1, impossible
+for gcd(j,d) = 1 with d > 1. So no prime-admissible class of such a fibre
+ramifies, and **BAL = EPS here** — TRAP 4 is vacuous on this family.
+**Scope: r = 1 and d > 1, at every odd q** — not only q ≡ 1. The q ≡ 3 half is
+the residue theorem below (residue = 1 − c^{m+1} vanishes only if d | m+1, which
+Lemma 1 forbids); see *The unsquared residue*. It still says nothing about other
+r or about d = 1.
 
-### Extra: the unsquared residue
+### The unsquared residue: a theorem, at every odd q
 
-The product over the n orbits collapses to a single binomial — not merely to its
-class mod squares. **For prime-admissible m** (equivalently gcd(m+1, q−1) = 1,
-which is the full conclusion of Lemma 1, not just g = 1):
+**Theorem.** At r = 1 with c ∉ {0,1}, on prime-admissible m (equivalently
+gcd(m+1, q−1) = 1, the full conclusion of Lemma 1, not just g = 1), for
+**every odd q**:
 
     residue(q, 1, m₀, m) = 1 − c^{m+1}    in F_q.
+
+*Proof.* Lemma 1 forces g = gcd(m+1, d) = 1 and ρ = n. Lemma 2 (PART 3, (1′))
+then reads N(1 + u_i) = 1 − w_i per root, and the collapse
+∏_i(1 − w_i) = (1 − α^ρ)^{n/ρ} has exponent n/ρ = 1. Both are field
+identities; neither uses q mod 4. h = x^{q−1} − c is squarefree for c ≠ 0, so
+every multiplicity is 1 and none is carried, and r^p = 1. Hence
+residue = ∏_i N(1 + u_i) = 1 − α^n = 1 − c^{m+1}, the last step by
+α^n = c^{m+1} above — whose derivation (β^q = cβ, Lemma 1, dn = q−1 even,
+m₀ ≠ 0) is likewise free of any q mod 4 hypothesis. ∎
 
 The hypothesis is essential — see the negative control below, where a quarter of
 the admissible classes violate it.
 
-Checked against `core.residue_from_fibre` itself, not only against the symbol
-(density agreement with χ_q would not prove the unsquared value): **7034
+**Corollary (TRAP 4 is vacuous on this family, at every odd q).** residue = 0
+would force c^{m+1} = 1, i.e. d | m+1. But Lemma 1 gives gcd(m+1, q−1) = 1, and
+d | q−1 with d > 1, so d ∤ m+1. **No prime-admissible class of an r = 1 fibre
+ramifies, and EPS = BAL there.**
+
+This rescopes the C8 non-vanishing corollary from q ≡ 1 to every odd q. It does
+**not** rescope the generator-count density formula: at q ≡ 3 the archimedean
+factor alternates, and the density is 1/2 by translation rather than a count of
+χ_q(1 − γ).
+
+Corroboration (the derivation does not use it): checked against
+`core.residue_from_fibre` itself, not only against the symbol — **7034
 prime-admissible classes** (q ≤ 61) and **2157 actual primes**, 0 failures, 0
-ramified. The prime sweep includes q ≡ 3 (mod 4), so the residue identity is not
-an artefact of χ_q(−1) = +1; only the passage to s(p) = χ_q(1 − c^{m+1}) needs
-q ≡ 1 (mod 4).
+ramified; and per-root at q ≡ 3 (mod 4) only, q = 7, 11, 19, 23, 31, 43, all
+c ∉ {0,1}: 122 fibres, **51 188 per-root checks**, 0 failures on Lemma 2, 0 on
+the residue identity, 0 ramified.
 
 ### What is imported, and how much of it is needed
 
@@ -1067,6 +1102,65 @@ fetch folder 10 tonight; it is a reason to resume *if* a closed form for
 Σ_{j ∈ (Z/d)^×} χ_q(1 − c^j) is wanted, which would **prove** the density rather
 than verify it.
 
+## Σ ε_q = ∞ from r = 1 alone, at q ≡ 3 (mod 4)
+
+*Assembled from pieces already proved. This gives divergence, not ε_q ≥ c.*
+
+Fix q ≡ 3 (mod 4). Then v₂(q−1) = 1, and by Step 0, L = d(q−1) for c ∉ {0,1},
+so v₂(L) = v₂(d) + 1 and
+
+    v₂(L) = 1  ⟺  d odd.
+
+F_q^× has order 2·(odd), so its unique odd-order subgroup is the squares:
+**d odd ⟺ c is a square.** Excluding c = 1 (where d = 1, Step 0 does not apply,
+and L = 1) leaves exactly
+
+    (q−1)/2 − 1 = (q−3)/2   fibres at r = 1 with v₂(L) = 1.
+
+Each is BAL = 1/2 by the translation theorem (any r, q ≡ 3, v₂(L) ≤ 1), and by
+item 24 the pairing preserves prime-carrying classes, so the 1/2 is among primes
+and not merely among integers. By the corollary above none of them ramifies, so
+**EPS = BAL = 1/2** on each.
+
+The q(q−1) fibres are the reduced classes mod q², of equal prime density
+1/φ(q²), and every other fibre contributes ≥ 0, so
+
+    ε_q  ≥  ½ · (q−3)/2 / (q(q−1))  =  (q−3)/(4q(q−1))  ~  1/(4q).
+
+Since Σ 1/q over primes q ≡ 3 (mod 4) diverges,
+
+    **Σ_q ε_q = ∞.**
+
+**Why the weaker count.** This route uses the *any-r* translation theorem
+(v₂(L) ≤ 1), which is why it needs d odd and lands on (q−3)/2 fibres. The
+r = 1 two-translation theorem is stronger at q ≡ 3: it gives BAL = 1/2 for
+**every** c ∉ {0,1}, and the corollary above kills ramification on all of them,
+so EPS = 1/2 on q−2 fibres and ε_q ≥ (q−2)/(2q(q−1)) ~ 1/(2q) — a factor 2
+better. Divergence does not need it, and the v₂(L) route is kept because it
+makes the 2-adic structure explicit; the even-d fibres are discarded for
+economy, not because they fail.
+
+(q = 3 contributes 0 to the bound — the count (q−3)/2 is empty — so the sum
+starts at 7. Measured: the v₂(L) = 1 count at r = 1 is exactly (q−3)/2 and the
+m₀-set is exactly the squares minus {1}, at q = 7, 11, 19, 23, 31, with BAL = 1/2
+and zero ramified prime-admissible classes on every one.)
+
+**Scope.** This is Σ ε_q = ∞, the condition the second-moment bound actually
+consumes — *not* ε_q ≥ c > 0, which c_band = 0 and the (SQ) work showed is
+unavailable and which nothing here needs. It is also not density 1: that needs
+
+    P(no q ∈ Q covers p)  ≤  [Σ ε_q(1−ε_q) + 2S] / (Σ ε_q)²
+                           ≤  1/Σ ε_q  +  2S/(Σ ε_q)²,
+    S = Σ_{q<q′} excess(q,q′),
+
+whose first term this kills. The second needs **S = o((Σ ε_q)²)** — that is the
+condition, not the corr71 display 8S/|Q|², which is its specialisation under
+ε_q ≈ 1/2 (making Σ ε_q ≈ |Q|/2). The two coincide on the sweep and not on the
+proved lower bound ~1/(4q), so the obstruction must be stated in the Σ ε_q form.
+It is **measured favourable and unproved** — one large pair ({3,7}) constant across
+nested |Q| = 3…19 at q ≤ 71, one octave, no proof route. That is now the sole
+obstruction to density 1, and density 1 still does not give A.2.
+
 ## Run 1: C8-formula census of the r = 1 EDGE (not a bound on total zero mass)
 
 
@@ -1123,8 +1217,9 @@ with c_band the infimum of prime-EPS over **non-split** fibres with
 2 ≤ r ≤ q−2. When this paragraph was written c_band looked like 1/4 on the
 enumerated small-L part, and that was called the live object. **It is 0** — the
 interior zeros at q = 109, 181, 197 — so the displayed bound is empty and the
-fibre-theoretic infimum route is closed, not open. Σ ε_q = ∞ is untouched and
-still rests on the prime sweep.
+fibre-theoretic infimum route is closed, not open. Σ ε_q = ∞ is **no longer
+untouched**: it is proved in PART 4 from r = 1 at q ≡ 3 (mod 4), and the
+infimum being 0 does not bear on it — divergence is a statement about the mean.
 
 *Also observed, beyond the v₂(L) ≤ 1 theorem: at q ≡ 3 (mod 4) a shift with
 Δ ≡ 0 (mod lcm(L,q)) and Δ ≡ 2 (mod 4) preserves m mod q, parity, every γ_i^m,
@@ -1841,7 +1936,7 @@ measurement of that range.
 
 **What it also does not kill, because it was never on that path: density 1 of
 covered primes.** `ε_q ≥ c` is stronger than density 1 needs (divergence of
-the means suffices, and the sweep supports it) and weaker than A.2 needs
+the means suffices, and it is now **proved** in PART 4) and weaker than A.2 needs
 (witnesses are `q < p`; a density statement at modulus `Π(Q) > p` cannot empty
 the exceptional set). The fibre infimum was the barrier for a *chosen proxy*,
 not for covering. Density 1 lives on the joint law of the `E_q`; `{3,5}`
