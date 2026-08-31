@@ -216,7 +216,9 @@ needs all roots of one degree d (Kummer). New item:
 
     And the taxonomy is **not exhaustive**, which is the important part:
 
-22. **The third mechanism, IDENTIFIED.** q = 11, fibres (5,10) and (6,0) — the
+22. **The third PAIRING mechanism, IDENTIFIED.** *(Distinct from the constant-fibre
+    count in `pairing_lemma.md`, "One-signed-over-primes fibres", which finds no
+    third cause of class-constant fibres. Different objects, same adjective.)* q = 11, fibres (5,10) and (6,0) — the
     r <-> q-r copies of one another (5+6 = 11). Structure, all verified:
 
     The fibre is 1^5 + 4 with multiplicities 1,1,1,1,2,1: four simple linears

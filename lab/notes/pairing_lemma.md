@@ -1525,7 +1525,7 @@ not L = 16**. On that domain D = 2, so D/√N = 1. Using the P-window as N
 (N = 8, D = 4) inflates D/√N to √2. Using L = 16 with the P-window D mixes
 two windows.
 
-## One-signed-over-primes fibres: the classification, and no third mechanism
+## One-signed-over-primes fibres: no third constant-fibre mechanism
 
 A fibre can be one-signed over primes (BAL_prime ∈ {0,1}) two ways:
 
@@ -1553,12 +1553,21 @@ evidence against PART 3: over 5 ≤ q ≤ 200 that family is exactly q = 5, 31, 
 197, none of which is in this scan's q-list.
 
 **So the structural bucket is C8 ∪ even-multiplicity, with nothing left over.**
-No fibre is constant on every class for a reason neither theorem supplies — the
-third mechanism that would have complicated the classification does not exist on
-this range.
+No fibre is constant on every class for a reason neither theorem supplies:
+there is **no third constant-fibre mechanism** on this range. (That phrase is
+narrow on purpose. OPEN item 22, "the third mechanism", is a different object —
+a *pairing* map at q = 11, (5,10)/(6,0). Nothing here bears on it.)
 
-**Manufactured: 18 fibres, 16 of them edge.** r = 1 or r = q−1 at q = 13, 37 —
-C8 / ρ = n territory, where over primes only generators survive. The **band**
+**Manufactured: 18 fibres, 16 of them edge.** r = 1 or r = q−1 at q = 13, 37.
+
+It is worth seeing that **C8 explains the edge members of *both* buckets**, and
+that the two differ only in how far the constancy reaches. A C8 fibre whose
+generator count is 0 or φ(d) is one-signed over primes either way; if the
+symbol is also constant on the prime-free classes it lands in *structural*, and
+if it is not — the +1 classes existing but carrying no primes — it lands in
+*manufactured*. The identically-+1-over-primes rows of item 6 are the latter:
+(13; 1, 3), (13; 1, 9), (37; 1, 9), (37; 1, 10), (37; 1, 26). Same formula,
+TRAP 5 supplying the constant. The **band**
 members are two: (13; 2, 11) and its dual (11, 1), a single dual pair, and
 nothing at q = 29 or 37 joins them.
 
