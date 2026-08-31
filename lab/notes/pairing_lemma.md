@@ -1157,9 +1157,78 @@ whose first term this kills. The second needs **S = o((Σ ε_q)²)** — that is
 condition, not the corr71 display 8S/|Q|², which is its specialisation under
 ε_q ≈ 1/2 (making Σ ε_q ≈ |Q|/2). The two coincide on the sweep and not on the
 proved lower bound ~1/(4q), so the obstruction must be stated in the Σ ε_q form.
-It is **measured favourable and unproved** — one large pair ({3,7}) constant across
-nested |Q| = 3…19 at q ≤ 71, one octave, no proof route. That is now the sole
-obstruction to density 1, and density 1 still does not give A.2.
+It is **measured favourable and unproved**: the count of pairs above 0.005 is
+identically 1 across nested |Q| = 3…37 at q ≤ 163 — a full doubling, where
+Θ(|Q|²) predicted ≈ 4 — with {3,7} the only real pair. But that tests large
+pairs only; the actual condition is that the **mean** pairwise excess tend to 0,
+which no pair-by-pair measurement can reach. See "Gap (ii)" below. That is the
+sole obstruction to density 1, and density 1 still does not give A.2 — which
+wants non-square **and** simple ramification, or a nonresidue q < p.
+
+## Gap (ii): the obstruction is the MEAN pairwise excess, not the large pairs
+
+*The last measurement on the second term of the density-1 bound. Not a theorem.*
+
+With E_q = {(disc f_p/q) = −1} and S = Σ_{q<q′} excess(q,q′), the second-moment
+bound is
+
+    P(no q ∈ Q covers p) ≤ [Σ ε_q(1−ε_q) + 2S] / (Σ ε_q)²
+                          ≤ 1/Σ ε_q + 2S/(Σ ε_q)².
+
+The divergence theorem above kills the first term. This section measures the
+second.
+
+**The run (corr163).** 78 460 primes (163 < p < 10⁶), q the 37 odd primes ≤ 163,
+666 pairs, median SE 0.00089. Resolution was traded for range on purpose: the
+statistic is a **count above a fixed threshold**, not a precision measurement,
+so p < 10⁶ buys |Q| = 37 where p < 10⁷ would have bought only |Q| ≈ 25.
+
+*Controls.* {3,5} = −0.000368, −0.4σ from its exact 0. {3,7} = +0.010128 against
+its exact +0.011023, −1.0 SE, and it clears 0.005 — so the trade is legitimate
+and the table is readable.
+
+**Result: the count of pairs with excess > 0.005 is identically 1 at every
+k from 3 to 37.** Across the doubling from |Q| = 19, Θ(|Q|²) predicted ≈ 4 and
+O(|Q|) predicted ≈ 2; the observed count is 1. At k = 19 it is still 1,
+reproducing corr71 at the coarser resolution.
+
+{3,7} stands alone at 11.3σ. The next pair is {67,79} at 3.6σ, and among 666
+pairs ≈ 0.9 one-sided 3σ flukes are expected. {3,13} (+0.00238, 2.7σ) is below
+both thresholds, as the trade required.
+
+The 666 excesses are a **zero-mean cloud plus that one pair**: sample sd
+0.000969 against median SE 0.00089, with {3,7}'s own (0.010)²/666 accounting for
+the 9% excess; signs 352/314 against an expected 333/333 (+1.5σ); mean
++0.000047, or +0.000032 with {3,7} removed. S_signed is 0.0135 at k = 5 and
+0.0313 at k = 37 while the pair count runs 10 → 666 — strip {3,7} and the
+remaining 0.0212 sits inside the random-walk scale SE·√666 ≈ 0.023.
+
+### What this does not establish
+
+Under ε_q ≈ 1/2 we have S ≈ c·k²/2 and (Σ ε_q)² ≈ k²/4, so
+
+    2S / (Σ ε_q)²  ⟶  4c,      c := the MEAN pairwise excess.
+
+So **S = o((Σ ε_q)²) iff c → 0**, and that — not the large pairs — is the
+obstruction. {3,7} by itself is harmless: a single pair of size 0.011
+contributes O(1/k²) to the second term.
+
+Two limits, and both are permanent:
+
+* **Visible O(1) does not imply c → 0.** A uniform floor of size 10⁻⁴ is 0.1σ
+  per pair and will never clear any threshold at any p. The threshold count
+  rules out a proliferation of *large* pairs; only the mean tests the invisible
+  floor. **Pair-by-pair measurement cannot close (ii)**, at any resolution.
+* **The mean's error bar is not a theorem.** Treating the 666 excesses as
+  independent gives SE(mean) ≈ 0.000035 and c ≲ 10⁻⁴ at 2σ — but each q sits in
+  36 pairs, so they are heavily dependent and that iid SE is optimistic. Do not
+  quote 4c ≲ 0.0004 as a bound. Note also that at k = 37 the Chebyshev bound is
+  still ≤ 0.054, dominated by 1/Σ ε_q; the 0.0004 is only what would remain
+  *after* divergence has killed that term, if the mean refused to die.
+
+**The failure direction is not symmetric.** Chebyshev → 0 is sufficient for
+density 1, not necessary. A frozen c > 0 stops *this* argument; it does not
+prove the uncovered density is positive.
 
 ## Run 1: C8-formula census of the r = 1 EDGE (not a bound on total zero mass)
 
