@@ -1525,6 +1525,54 @@ not L = 16**. On that domain D = 2, so D/√N = 1. Using the P-window as N
 (N = 8, D = 4) inflates D/√N to √2. Using L = 16 with the P-window D mixes
 two windows.
 
+## One-signed-over-primes fibres: the classification, and no third mechanism
+
+A fibre can be one-signed over primes (BAL_prime ∈ {0,1}) two ways:
+
+* **structural** — s is constant on *every* class;
+* **manufactured** — s takes both values, but the minority sign sits inside the
+  prime-free classes. TRAP 5 running the other way: the filter *creates* a
+  constant.
+
+Both break any bound of the form D ≤ C·√N, since folded D = N. That is why (SQ)
+has no statable hypothesis: the set it must exclude is not the PART 3 family.
+
+**Scan.** q ∈ {13, 17, 29, 37}, all r, non-split, L ≤ 2000, full periods, class
+counts and prime-admissible counts separately.
+
+**Structural: 12 fibres, and all of them are C8.** Every one sits at r = 1 or
+r = q−1 and at q ≡ 1 (mod 4), and **none is even-multiplicity**. They are the
+C8 constants — fibres where the generator count
+`#{γ : ord γ = d, χ_q(1−γ) = −1}` is 0 or φ(d), forcing density 0 or 1.
+Verified: the C8 formula reproduces BAL exactly on all six r = 1 rows
+(q=13 d=3 → 1 twice; q=17 d=4 → 1 twice; q=17 d=2 → 0, the freeze; q=29 d=2 → 1),
+and the six r = q−1 rows mirror them.
+
+That even-multiplicity contributes **zero** here is not a surprise and not
+evidence against PART 3: over 5 ≤ q ≤ 200 that family is exactly q = 5, 31, 59,
+197, none of which is in this scan's q-list.
+
+**So the structural bucket is C8 ∪ even-multiplicity, with nothing left over.**
+No fibre is constant on every class for a reason neither theorem supplies — the
+third mechanism that would have complicated the classification does not exist on
+this range.
+
+**Manufactured: 18 fibres, 16 of them edge.** r = 1 or r = q−1 at q = 13, 37 —
+C8 / ρ = n territory, where over primes only generators survive. The **band**
+members are two: (13; 2, 11) and its dual (11, 1), a single dual pair, and
+nothing at q = 29 or 37 joins them.
+
+On that pair the minority is ℓ = 3 and a single class mod trueP = 12 — but that
+is a description of one fibre, not a family. The two tests that could have made
+it arithmetic both fail: "minority is one class mod trueP" is **false** on the
+edge rows (q=37 gives two classes), and the single responsible prime ℓ = 3 is
+**confounded**, since both productive q have 3 | q−1 while q = 17 and 29 produce
+no manufactured fibre at all. No arithmetic classification is available.
+
+*Process note.* The structural bucket was invisible in the first reading of this
+scan: the run was piped through `tail -60`, which cut the head of the output.
+The count was recovered only by re-running to a file.
+
 ## Run 2: the interior zero class is NOT real, and the interior mass decays like 1/q²
 
 

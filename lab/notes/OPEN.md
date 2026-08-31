@@ -144,15 +144,31 @@ question (`q=19` has `lcm(4,18)=36` and spread 0.015, not 0.15).
 `u^(q-1) in F_q`: `r=1` 624/624, `r=2` 1/684, `r=3` 6/708 (degrees > 2; the
 `d=2` rows are the `N(u)/u^2` artefact and are not evidence). So Step 1 — and
 with it (1'), the rho-stratification and `s(m) = chi_q(1 - a^rho)` — is
-**specific to r = 1**. Folder `paper/13-r2-rational-frobenius/` has 26 PDFs on
+**specific to r = 1**. *Read that as r, not as q mod 4*: (1') is Lemma 2, and it
+and the product collapse are **field identities valid at every odd q** — that is
+what made `Σ ε_q = ∞` provable at `q ≡ 3`. Only the passage to the symbol
+`s(m) = χ_q(1 − α^ρ)` needs `q ≡ 1`. Folder `paper/13-r2-rational-frobenius/` has 26 PDFs on
 disk; B5 closed the line, so they stay unread. The gate is "do not open", not
 "unfetched".
 
 **REFUTED: "BAL = 1/2 for every fibre at q = 3 (mod 4)".** Fails at q = 11 on
 six fibres of degree pattern 2+4+4: `(3,1),(5,9),(6,1),(8,9)` at L=240 give
 BAL = 7/15, and `(3,6),(8,4)` at L=16 give BAL = 1/4. BAL = EPS on all six, so
-it is not ramification. Holds at q = 3, 7 (all fibres) and at q = 19, 23
-(within L <= 2000, i.e. 16% and 12% of fibres — weak).
+it is not ramification.
+
+**The correct positive statement arrived later, and this entry should be read
+through it.** All six failures have `v₂(L) = 4`; the theorem is *any r*,
+`q ≡ 3 (mod 4)` **and `v₂(L) ≤ 1`** ⟹ BAL = 1/2, proved by the translation
+`Δm = qL` (or `2qL` for odd L). It is **sharp for translations**: the sign flip
+needs `v₂(Δm) = 1` while `L | Δm` forces `v₂(Δm) ≥ v₂(L)`, so `v₂(L) ≥ 2` is
+out of reach that way. The old "holds at q = 3, 7; weak at 19, 23 within
+L ≤ 2000" reading is superseded for the `v₂(L) ≤ 1` part — that half is now a
+theorem, not a sample.
+
+`(3,6)` and its dual `(8,4)` are analysed in full in `pairing_lemma.md`,
+"(11; 3, 6): the smallest band fibre no theorem reaches" — true period 8 via the
+on-fibre shift `Δm = 88`, `s = −1` exactly at `m ≡ 2 (mod 8)`, and the halving
+is **synchrony** (the two quartics share a translation ratio), not cancellation.
 
 *Process note: the (3,6) fibre at 1/4 was already in `README.md` and
 `../NOTES.md` as the counterexample to the {0,1/2,1} trichotomy. The prediction
