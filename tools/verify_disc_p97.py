@@ -1,4 +1,4 @@
-"""Verify the discriminant data behind the closed-routes section (Sec. 5):
+"""Verify the discriminant data behind the closed-routes section (closed-routes section):
 for every odd prime p <= 97,
   * disc f_p (computed EXACTLY by CRT over word-size primes) is not a square;
   * every ramified prime l <= 10^6 divides disc f_p exactly once and

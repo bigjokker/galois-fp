@@ -1,30 +1,20 @@
-"""Verify rows of ancillary/witnesses.txt independently of the search.
+"""Validate complete prime coverage and Frobenius certificates.
 
-A row "p q" (odd primes, q < p) is checked by computing
-    D = disc f_p mod q = (-1)^((p-1)/2) Res(f_p', f_p) in F_q
-from the closed-form reduction of f_p mod q, and confirming the Legendre
-symbol (D/q) = -1.  By Theorem 2 + Corollary of the note this certifies
-Gal(f_p/Q) = S_p.  The row p=5 (q=19) is a strict witness instead: f_5 mod 19
-factors as (irreducible quadratic)(irreducible cubic).
-
-Usage:
-  python verify_witnesses.py            sample mode (minutes, via the direct
-                                        O(p^2) resultant): all rows with
-                                        p < 2000, 100 random rows, the largest
-                                        least-witness (q=73 at p=9683099), the
-                                        old record (p=31511), and p=5
-  python verify_witnesses.py --all      full audit of all 664,577 rows via the
-                                        Section 6 evaluation (about a minute)
-  python verify_witnesses.py --all --direct   same, but with the O(p^2)
-                                        resultant; infeasible at 10^7
-  python verify_witnesses.py --p 9683099   one row
+Default: deterministic reduced-evaluation sample, including records and the
+last degree. --all checks all rows; --least also checks smaller candidates.
+--direct uses the slow degree-p resultant. --p P requires a stored row.
+The exceptional p=5 row is a quadratic/cubic factorization at q=19.
 """
+import argparse
 import os
+from pathlib import Path
 import random
 import sys
 import time
 import numpy as np
 from fpcore import (I64, fp_coeffs, pgcd, powmod_naive, psub, symbol, trim)
+from fpcore import primes_upto
+from certificates import load_witnesses
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WITNESS = os.path.join(HERE, "..", "ancillary", "witnesses.txt")
@@ -52,13 +42,13 @@ def check_row(p, q):
 
 
 def check_row_reduced(p, q):
-    """Same test by the Section 6 evaluation, O(q^2 log p) instead of O(p^2).
+    """Same test by the reduced-resultant section evaluation, O(q^2 log p) instead of O(p^2).
 
     `reduced.symbol_reduced` is cross-validated against `fpcore.symbol` by
     `verify_reduced.py`, at every scale up to 10^7, so this is the same
     claim by a faster route -- which is what makes a full audit of all
     664,577 rows feasible at all.  Note that it IS the faster route: the
-    resultant actually evaluated is the Section 6 one, not Res(f_p', f_p).
+    resultant actually evaluated is the reduced-resultant section one, not Res(f_p', f_p).
     """
     if p == 5:
         assert q == 19
@@ -67,48 +57,55 @@ def check_row_reduced(p, q):
     return symbol_reduced(p, q) == -1
 
 
-def main():
-    rows = []
-    for line in open(WITNESS):
-        if line.startswith("#"):
-            continue
-        p, q = map(int, line.split())
-        rows.append((p, q))
-    rows.sort()
-    print(f"{len(rows)} rows loaded")
+def check_least(p, q):
+    from reduced import symbol_reduced
+    if p == 5:
+        return symbol_reduced(5, 3) == 1
+    return all(symbol_reduced(p, candidate) != -1
+               for candidate in primes_upto(q - 1) if candidate >= 3)
 
-    if "--p" in sys.argv:
-        p0 = int(sys.argv[sys.argv.index("--p") + 1])
-        sel = [r for r in rows if r[0] == p0]
-    elif "--all" in sys.argv:
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="Validate coverage and witness certificates.")
+    parser.add_argument("--data", type=Path, default=Path(WITNESS))
+    parser.add_argument("--limit", type=int, default=10**7, help="exclusive degree bound")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--all", action="store_true")
+    selection.add_argument("--p", type=int)
+    parser.add_argument("--direct", action="store_true", help="degree-p resultant (slow)")
+    parser.add_argument("--least", action="store_true", help="also reject smaller candidate primes")
+    args = parser.parse_args(argv)
+    rows = load_witnesses(args.data, args.limit)
+    print(f"coverage validated: {len(rows):,} primes 5 <= p < {args.limit:,}", flush=True)
+    if args.p is not None:
+        sel = [row for row in rows if row[0] == args.p]
+        if not sel:
+            raise ValueError(f"p={args.p} is absent from the certificate data")
+    elif args.all:
         sel = rows
     else:
-        random.seed(0)
-        sel = [r for r in rows if r[0] < 2000]
-        sel += random.sample([r for r in rows if r[0] >= 2000], 100)
-        sel += [r for r in rows if r[0] in (5, 31511, 9683099)]
-        sel = sorted(set(sel))
-
-    # The direct O(p^2) resultant is the primary check, but at 10^7 it is
-    # about 0.9 s per row, so a full audit needs the reduced evaluation.
-    fast = "--all" in sys.argv and "--direct" not in sys.argv
-    checker = check_row_reduced if fast else check_row
-    if fast:
-        print("full audit via the Section 6 reduced evaluation "
-              "(pass --direct to force the O(p^2) resultant)")
-
-    t0 = time.time()
-    bad = 0
-    for i, (p, q) in enumerate(sel):
+        rng = random.Random(0)
+        sel = sorted(set(rows[:24] + rng.sample(rows, min(24, len(rows)))
+                         + [row for row in rows if row[0] in (31511, 9683099)] + rows[-1:]))
+    checker = check_row if args.direct else check_row_reduced
+    start = time.monotonic()
+    for number, (p, q) in enumerate(sel, 1):
         if not checker(p, q):
-            bad += 1
-            print(f"FAILED: p={p} q={q}")
-        if (i + 1) % 200 == 0:
-            print(f"  ...{i+1}/{len(sel)} checked ({time.time()-t0:.0f}s)",
-                  flush=True)
-    print(f"checked {len(sel)} rows in {time.time()-t0:.0f}s: "
-          f"{'ALL VERIFIED' if bad == 0 else f'{bad} FAILURES'}")
+            raise ValueError(f"certificate failed: p={p}, q={q}")
+        if args.least and not check_least(p, q):
+            raise ValueError(f"q is not the least witness: p={p}, q={q}")
+        if number % 50000 == 0:
+            print(f"  {number:,}/{len(sel):,} checked", flush=True)
+    print(f"ALL VERIFIED: {len(sel):,} rows, "
+          f"{'direct' if args.direct else 'reduced'} evaluation, "
+          f"least-witness check={'yes' if args.least else 'no'}, "
+          f"{time.monotonic() - start:.1f}s")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        sys.exit(main())
+    except (ValueError, OSError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        sys.exit(1)

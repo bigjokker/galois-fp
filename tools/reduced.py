@@ -1,6 +1,6 @@
 """Reduced evaluation of the Stickelberger symbol (disc f_p / q).
 
-Implements Section 6 of the note.  With p = mq + r, 0 < r < q,
+Implements the reduced-resultant formula in the paper.  With p = mq + r, 0 < r < q,
 
     psi = g*B_r' - m*B_r = B_r*(u_r - m),      u_r = C_r*B_r',  deg u_r = q-1,
 

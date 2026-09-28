@@ -24,12 +24,17 @@ Usage:
     python verify_jordan.py --all        # every row
     python verify_jordan.py --p 37       # one row
 """
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 import sys
 import os
+import subprocess
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from jordancore import fp_mod_any, degree_pattern, jordan_ok       # noqa: E402
 from fpcore import primes_upto                                      # noqa: E402
+from certificates import load_jordan                               # noqa: E402
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                     "..", "ancillary", "jordan_witnesses.txt")
@@ -75,10 +80,21 @@ def verify(p, q, l_claim=None, degs_claim=None, verbose=False):
 
 
 def main():
-    args = sys.argv[1:]
-    if "--p" in args:
-        p = int(args[args.index("--p") + 1])
-        found = [r for r in rows() if r[0] == p]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--data", type=Path, default=Path(DATA))
+    parser.add_argument("--limit", type=int, default=1500)
+    parser.add_argument("--jobs", type=int, help="worker count; full mode defaults to at most four")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--p", type=int)
+    selection.add_argument("--all", action="store_true")
+    args = parser.parse_args()
+    if args.jobs is not None and args.jobs < 1:
+        parser.error("jobs must be positive")
+    allrows = load_jordan(args.data, args.limit)
+    print(f"complete prime coverage validated: {len(allrows)} rows", flush=True)
+    if args.p is not None:
+        p = args.p
+        found = [r for r in allrows if r[0] == p]
         if not found:
             print(f"p = {p} is not in {os.path.basename(DATA)}")
             return 1
@@ -87,15 +103,21 @@ def main():
         print("ALL VERIFIED")
         return 0
 
-    allrows = list(rows())
-    if not allrows:
-        print("no rows found -- run tools/_sweep_jordan.py first")
-        return 1
-    sel = allrows if "--all" in args else allrows[::max(1, len(allrows) // 12)]
+    sel = allrows if args.all else allrows[::max(1, len(allrows) // 12)]
     print(f"verifying {len(sel)} of {len(allrows)} rows "
           f"(p from {allrows[0][0]} to {allrows[-1][0]})")
-    for r in sel:
-        verify(*r, verbose=True)
+    jobs = args.jobs or (min(4, os.cpu_count() or 1) if args.all else 1)
+    if jobs == 1:
+        for r in sel:
+            verify(*r, verbose=True)
+    else:
+        print(f"independent row checks using {jobs} workers", flush=True)
+        with ThreadPoolExecutor(max_workers=jobs) as workers:
+            # map preserves dataset order; exceptions fail the whole audit.
+            for row, result in zip(sel, workers.map(
+                    lambda row: check_stored_row(row, args.data, args.limit), sel)):
+                ell, degrees = result
+                print(f"  p={row[0]} q={row[1]} ell={ell} type={degrees}: verified", flush=True)
 
     # independent sanity checks on the group theory the certificate uses
     for p in [7, 11, 13, 17, 19, 23, 29, 31]:
@@ -113,6 +135,16 @@ def main():
     print("affine cycle types rejected for every p <= 43: OK")
     print("ALL VERIFIED")
     return 0
+
+
+def check_stored_row(row, data, limit):
+    """Use isolated CLI workers and standard subprocess pipes on both platforms."""
+    command = [sys.executable, str(Path(__file__).resolve()), "--data", str(data.resolve()),
+               "--limit", str(limit), "--p", str(row[0])]
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode:
+        raise ValueError(f"Jordan worker failed for p={row[0]}:\n{result.stdout}{result.stderr}")
+    return row[2], row[3]
 
 
 if __name__ == "__main__":

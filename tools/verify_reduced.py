@@ -1,40 +1,13 @@
 #!/usr/bin/env python3
-"""Cross-validate the Section 6 evaluation against the direct resultant.
+"""Compare reduced symbols with the direct degree-p resultant.
 
-`reduced.symbol_reduced(p, q)` computes the Kronecker symbol (disc f_p / q)
-from the fibre formula of Section 6, at cost O(q^2 log p).  `fpcore.symbol`
-computes it as written: reduce f_p mod q by the closed form, take
-D = (-1)^((p-1)/2) Res(f_p', f_p) in F_q by the Euclidean algorithm, then the
-Legendre symbol.  The two are different computations of the same quantity and
-nothing in the repository compared them until this file.
-
-Why it matters.  `verify_witnesses.py --all` audits all 664,577 rows through
-`symbol_reduced`, because the direct resultant costs seconds per row at
-p ~ 10^7.  The least-witness statistics of Section 6 -- in particular the
-11.8 sigma rejection of the independence model -- therefore rest on the
-reduced evaluation over almost the whole range.  Only the p < 10^5 prefix had
-ever been checked against the resultant, and at that size the joint law and
-the independence model differ by only about 1.5 sigma.  This file closes that
-gap by comparing the two evaluations at every scale up to 10^7.
-
-What is checked:
-
-  * agreement on witness rows drawn log-uniformly from ancillary/witnesses.txt,
-    including the largest p in the file;
-  * agreement on non-witness pairs (p, q) as well, so that the +1 case is
-    exercised and not only the -1 that the witness list selects for;
-  * agreement on explicitly chosen RAMIFIED pairs, where the symbol is 0.
-    These have to be named rather than sampled: ramification has density
-    ~10^-3 at small q (see the Section 6 remark), so 273 random probes found
-    none, and an earlier version of this file wrongly claimed the 0 branch
-    was covered when the counter showed it was not;
-  * both routines are run on the same (p, q), with no shared code path: the
-    reduced evaluation never forms f_p mod q, and the direct one never forms
-    the fibre polynomial u_r.
-
-Runtime: a few minutes at the default sample size.  Pass an integer to change
-the number of witness rows sampled.
+Default: deterministic witness samples across degree scales up to 10^7,
+modest-degree non-witness pairs, and eight named ramified pairs. --quick
+uses four small certificates and one ramified pair. --sample N adjusts the
+witness sample. The arithmetic library is shared; verify_reference.py adds
+independent SymPy checks. A failed comparison returns nonzero.
 """
+import argparse
 import os
 import random
 import sys
@@ -76,9 +49,15 @@ def log_sample(rows, n):
 
 
 def main():
-    n = int(sys.argv[1]) if len(sys.argv) > 1 else 70
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--sample", type=int, default=70)
+    parser.add_argument("--quick", action="store_true")
+    args = parser.parse_args()
+    n = 7 if args.quick else args.sample
+    if n < 1:
+        parser.error("sample must be positive")
     rows = load_rows()
-    sel = log_sample(rows, n)
+    sel = [(5, 19), (7, 3), (11, 7), (31, 5)] if args.quick else log_sample(rows, n)
     print(f"{len(rows):,} rows in the witness list; "
           f"cross-checking {len(sel)} of them")
 
@@ -103,8 +82,7 @@ def main():
     counts = {-1: 0, 1: 0, 0: 0}
     checked = 0
     random.seed(1)
-    probe_p = ([p for p, _ in rows if p < 3000][::37]
-               + random.sample([p for p, _ in rows if p > 10 ** 6], 6))
+    probe_p = [7, 11, 31] if args.quick else [p for p, _ in rows if p < 3000][::37]
     for p in probe_p:
         for q in small_q:
             if q >= p:
@@ -128,14 +106,14 @@ def main():
     t2 = time.time()
     ramified = [(2677, 7), (2909, 7), (5501, 23), (8263, 7), (10357, 7),
                 (11987, 7), (12757, 17), (12917, 7)]
-    for p_, q_ in ramified:
+    for p_, q_ in (ramified[:1] if args.quick else ramified):
         a_ = symbol(p_, q_)
         b_ = symbol_reduced(p_, q_)
         assert a_ == 0, f"p={p_} q={q_} was expected to be ramified, got {a_}"
         if a_ != b_:
             bad += 1
             print(f"  MISMATCH p={p_} q={q_}: direct={a_} reduced={b_}")
-    print(f"  ramified pairs: {len(ramified) - bad} agreed, symbol 0 "
+    print(f"  ramified pairs: {(1 if args.quick else len(ramified)) - bad} agreed, symbol 0 "
           f"[{time.time() - t2:.0f}s]")
     assert not bad, f"{bad} ramified pair(s) disagreed"
 

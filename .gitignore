@@ -1,8 +1,20 @@
-﻿*.aux
+# Generated computations and TeX intermediates.
+.build/
+*.aux
 *.log
 *.out
 *.synctex.gz
+*.xdv
+*.toc
+*.fls
+*.fdb_latexmk
 __pycache__/
-
-# Subagent scratch directories (matches lab/.gitignore).
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
 .scratch/

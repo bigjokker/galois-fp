@@ -1,4 +1,4 @@
-"""Verify the periodicity section (Sec. 6) of the note.
+"""Verify the periodicity section (reduced-resultant section) of the note.
 
 Checks, in default mode (~1 minute):
   (a) q=3: the symbol (disc f_n/3) on odd n coprime to 3 satisfies

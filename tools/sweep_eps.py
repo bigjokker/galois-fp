@@ -1,70 +1,107 @@
-"""Measure eps_q, the proportion of primes p with (disc f_p / q) = -1.
+"""Measure certificate density and conditional unramified balance separately.
 
-Uses the reduced evaluator of Section 6 (reduced.py), whose cost is
-O(q^2 log p) rather than the O(p^2) of a direct resultant, so the whole
-sweep over odd q <= 199 against every prime p < 10^5 is minutes, not days.
-
-Usage:
-  python sweep_eps.py             q <= 47  against p < 10^5   (~1 min)
-  python sweep_eps.py --full      q <= 199 against p < 10^5   (~18 min),
-                                  reproducing ../ancillary/sweep_results.txt
-  python sweep_eps.py --check     compare the stored table against a
-                                  recomputation of its first few rows
-
-Reported: eps_q, its binomial standard error, and (eps_q - 1/2)/SE.  The
-exact values eps_3 = 1/2, eps_5 = 11/20, eps_7 = 323/648 of Section 6 are
-the ones this samples.
+All eligible primes 5 <= p < limit with p > q enter the certificate
+population, including ramified rows (symbol zero).
 """
-import os
+import argparse
+from pathlib import Path
 import sys
 import time
+
 from fpcore import primes_upto
-import reduced
+from reduced import clear_cache, symbol_reduced
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-STORED = os.path.join(HERE, "..", "ancillary", "sweep_results.txt")
+STORED = Path(__file__).resolve().parents[1] / "ancillary" / "sweep_results.txt"
 
 
-def eps(q, primes):
-    good = tot = 0
+def measure(q, primes):
+    good = eligible = ramified = 0
     for p in primes:
         if p <= q:
             continue
-        s = reduced.symbol_reduced(p, q)
-        if s == 0:
+        eligible += 1
+        value = symbol_reduced(p, q)
+        ramified += value == 0
+        good += value == -1
+    if not eligible:
+        raise ValueError(f"q={q}: empty eligible population")
+    return q, good, eligible, ramified
+
+
+def format_row(row):
+    q, good, eligible, ramified = row
+    nonramified = eligible - ramified
+    balance = good / nonramified if nonramified else float("nan")
+    return f"{q} {good} {eligible} {ramified} {good / eligible:.9f} {balance:.9f}"
+
+
+def stored_rows(path):
+    result = []
+    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip() or line.startswith(("#", "q ")):
             continue
-        tot += 1
-        good += (s == -1)
-    return good / tot, tot
+        parts = line.split()
+        if len(parts) != 6:
+            raise ValueError(f"{path}:{number}: expected six columns")
+        row = tuple(map(int, parts[:4]))
+        if parts[4:] != format_row(row).split()[4:]:
+            raise ValueError(f"{path}:{number}: displayed densities disagree with the counts")
+        result.append(row)
+    if not result:
+        raise ValueError("stored table has no rows")
+    if [row[0] for row in result] != [q for q in primes_upto(199) if q >= 3]:
+        raise ValueError("stored table must contain every odd prime q <= 199 exactly once")
+    return result
 
 
-def main():
-    primes = [p for p in primes_upto(10 ** 5) if p >= 5]
-    qmax = 199 if "--full" in sys.argv else 47
-    if "--check" in sys.argv:
-        rows = [l.split() for l in open(STORED)
-                if l.strip() and not l.startswith(("#", "q "))]
-        bad = 0
-        for q, e, n in rows[:6]:
-            reduced.clear_cache()
-            got, tot = eps(int(q), primes)
-            if abs(got - float(e)) > 1e-6 or tot != int(n):
-                bad += 1
-                print(f"MISMATCH q={q}: stored {e} ({n}), recomputed {got:.6f} ({tot})")
-        print("stored table:", "OK" if bad == 0 else f"{bad} MISMATCHES")
-        return
-    print(f"{len(primes)} primes p < 1e5\n")
-    print(f"{'q':>4} {'n':>6} {'eps_q':>8} {'SE':>7} {'dev/SE':>7}")
-    t0 = time.time()
-    for q in primes_upto(qmax + 1):
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--limit", type=int, default=10**5)
+    parser.add_argument("--full", action="store_true", help="measure q through 199 instead of 47")
+    parser.add_argument("--check", action="store_true", help="recompute the first six stored rows")
+    parser.add_argument("--check-all", action="store_true", help="recompute all stored rows")
+    parser.add_argument("--data", type=Path, default=STORED)
+    parser.add_argument("--output", type=Path, help="write a new table, without replacing an existing file")
+    args = parser.parse_args(argv)
+    if args.limit <= 7:
+        raise ValueError("limit must be greater than 7")
+    if args.output and (args.check or args.check_all):
+        raise ValueError("--output cannot be combined with a check mode")
+    primes = [p for p in primes_upto(args.limit - 1) if p >= 5]
+    start = time.monotonic()
+    if args.check or args.check_all:
+        expected = stored_rows(args.data)
+        if not args.check_all:
+            expected = expected[:6]
+        for row in expected:
+            clear_cache()
+            actual = measure(row[0], primes)
+            if actual != row:
+                raise ValueError(f"q={row[0]}: stored {row}, recomputed {actual}")
+            print(f"q={row[0]} counts verified", flush=True)
+        print(f"ALL VERIFIED: {len(expected)} stored rows, {time.monotonic()-start:.1f}s")
+        return 0
+    results = []
+    for q in primes_upto(199 if args.full else 47):
         if q < 3:
             continue
-        reduced.clear_cache()
-        e, n = eps(q, primes)
-        se = (e * (1 - e) / n) ** 0.5
-        print(f"{q:>4} {n:>6} {e:>8.4f} {se:>7.4f} {(e-0.5)/se:>7.2f}"
-              f"   [{time.time()-t0:.0f}s]", flush=True)
+        clear_cache()
+        row = measure(q, primes)
+        results.append(row)
+        print(format_row(row), flush=True)
+    if args.output:
+        with args.output.open("x", encoding="utf-8", newline="\n") as output:
+            output.write(f"# Eligible population: primes 5 <= p < {args.limit}, with p > q.\n")
+            output.write("# epsilon_q includes symbol-zero rows; balance_q excludes them.\n")
+            output.write("q good eligible ramified epsilon_q balance_q\n")
+            for row in results:
+                output.write(format_row(row) + "\n")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        sys.exit(main())
+    except (ValueError, OSError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        sys.exit(1)

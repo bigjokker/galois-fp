@@ -29,6 +29,10 @@ def pmul(a, b, q):
     """Product in F_q[x] via Kronecker substitution (exact big-int multiply)."""
     if len(a) == 0 or len(b) == 0:
         return np.zeros(0, dtype=I64)
+    # Each packed coefficient must fit the signed decoding type, without
+    # carries into adjacent 64-bit digits. Inputs are residues in [0, q).
+    if min(len(a), len(b)) * (q - 1) ** 2 >= 2 ** 63:
+        raise ValueError("polynomial product exceeds the exact int64 packing bound")
     n = len(a) + len(b) - 1
     ia = int.from_bytes(a.astype('<u8').tobytes(), 'little')
     ib = int.from_bytes(b.astype('<u8').tobytes(), 'little')

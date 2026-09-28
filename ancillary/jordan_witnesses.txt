@@ -1,5 +1,5 @@
 # Jordan-certificate witnesses for Gal(f_p/Q) = S_p,  f_p = x(x-1)...(x-p+1)+1.
-# Rows 'p q l degs': q is the least prime for which f_p mod q is squarefree,
+# Rows 'p q l degs': q is the least odd prime (q != p) for which f_p mod q is squarefree,
 # its factor-degree multiset 'degs' isolates a cycle of PRIME length l with
 # 3 <= l <= p-3 coprime to every other degree, and sgn(Frob_q) = -1.
 # Then Jordan (1873) gives A_p <= Gal, and the odd sign gives S_p.

@@ -1,4 +1,4 @@
-"""Verify the structural claims of Section 6 (periodicity of the discriminant).
+"""Verify the structural claims of reduced-resultant section (periodicity of the discriminant).
 
 Checks:
   (a) B_r divides g = x^q - x, and psi = g*B_r' - m*B_r = B_r*(u_r - m) with
@@ -9,13 +9,10 @@ Checks:
       ord(gamma) | 2(q-1) and does not divide q-1.               [q <= 29]
       (Checked in F_q[x]/(D_2) where D_2 is the degree-2 part of u_r - m,
       obtained by distinct-degree factorisation -- no factoring required.)
-  (c) The period bounds Pi(3) = 72 and, using (b) together with the fact that
-      the fibres of u_r for q = 5 have coprime-to-g degrees in {0,2,4},
-      Pi(5) = lcm(4, 5^2, 5^4-1) = 15600.
-  (d) The exact density eps_7 = 323/648: period 134064 is verified on a
-      window, and the good units modulo 134064 are counted.
+  (c) General Pi(3)=72 and a refined q=5 bound of 15600.
 
-Runtime ~2 minutes.  Requires numpy; no sympy.
+The complete positive/minimal q=7 period certificate is checked separately
+by verify_periods.py. No finite-window test is used as a proof of periodicity.
 """
 import sys
 from math import gcd, lcm
@@ -126,25 +123,9 @@ def check_c():
             degs.add(len(hm) - 1)
     assert degs <= {0, 2, 4}, degs
     assert lcm(4, 25, lcm(4, 2 * (q - 1), 5 ** 4 - 1)) == 15600
-    print(f"(c) Pi(3) = 72; q=5 fibre degrees {sorted(degs)} give Pi(5) = 15600")
-
-
-def check_d():
-    q, P = 7, 134064
-    for n in range(9, 9 + 2 * 4000, 2):
-        if n % q and symbol_reduced(n, q) != symbol_reduced(n + P, q):
-            raise AssertionError(f"period {P} fails at n={n}")
-    good = tot = 0
-    for a in range(P):
-        if gcd(a, P) != 1:
-            continue
-        s = symbol_reduced(a if a > q else a + P, q)
-        tot += 1; good += (s == -1)
-    assert (good, tot) == (18088, 36288), (good, tot)
-    print(f"(d) q=7: period {P} verified on a window; {good}/{tot} good units "
-          f"= 323/648 = eps_7")
+    print(f"(c) Pi(3) = 72; q=5 fibre degrees {sorted(degs)} give refined q=5 bound = 15600")
 
 
 if __name__ == "__main__":
-    check_a(); check_b(); check_c(); check_d()
+    check_a(); check_b(); check_c()
     print("ALL CHECKS PASSED")

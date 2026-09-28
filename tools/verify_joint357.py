@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the joint law of the symbols at q = 3, 5, 7 (Section 6 of the note).
+"""Verify the joint law of the symbols at q = 3, 5, 7 (reduced-resultant section of the note).
 
 Claims checked, all by exact enumeration over the odd unit classes modulo
 
@@ -20,7 +20,7 @@ of which there are 725,760:
     s_3 = 0 or s_5 = 0.
 
 Each class is evaluated by `reduced.symbol_reduced`, the O(q^2 log p)
-Section 6 formula, which is cross-validated against the direct resultant
+reduced-resultant section formula, which is cross-validated against the direct resultant
 of `fpcore.symbol` by `verify_reduced.py`.  Nothing is read from a data
 file.
 

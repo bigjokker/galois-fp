@@ -3,7 +3,7 @@ Copyright (c) 2026. Released under CC BY 4.0.
 
 # Cycle structure of the affine group `AGL(1, p)`
 
-Layer 2 of the formalisation plan in `paper/notes/07_lean.md`.
+Affine fixed-point supplement; see `formal/README.md`.
 
 This file formalises the group-theoretic half of the certificate of the note
 ("A general certificate"): the step that rules out the *solvable* case, and
@@ -36,7 +36,7 @@ classification: the whole file is elementary.
 
 ## Status
 
-**Complete.**  Builds against mathlib master on `leanprover/lean4:v4.34.0-rc2`
+**Complete.**  Builds against the pinned mathlib revision on `leanprover/lean4:v4.34.0-rc2`
 with no `sorry`.  Every theorem above depends only on the three standard
 axioms `propext`, `Classical.choice`, `Quot.sound`; in particular none of them
 depends on `sorryAx` or on any axiom added here.

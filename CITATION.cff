@@ -1,43 +1,42 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below."
-title: "The Galois group of x(x-1)...(x-p+1)+1"
-abstract: >-
-  A Frobenius certificate for the symmetric group in odd prime degree: a monic
-  irreducible whose Frobenius at an odd unramified prime q is both odd
-  (Stickelberger) and fixed-point-free has Galois group S_p. For
-  f_p = x(x-1)...(x-p+1)+1 the fixed-point-free condition is automatic at every
-  q <= p, so the question reduces to a single Kronecker symbol
-  (disc f_p / q) = -1 with q < p. That symbol is periodic in p, giving a
-  computer-free proof that Gal(f_p/Q) = S_p for all primes p congruent to
-  7, 13, 17, 19, 23, 29 mod 36 (Dirichlet density 1/2), raised to density 31/40
-  using q = 5, together with verification for every odd prime p < 10^7. A second certificate, using Dedekind and Jordan alone and no classification, covers every prime p < 1500; and for the family (x)_p + c a critical-window theorem settles every prime p unconditionally.
+message: "Please cite the paper; specify the Git commit for this unreleased revision."
+title: "Frobenius certificates for the Galois group of x(x-1)...(x-p+1)+1"
 authors:
-  - name: "Claude (Anthropic)"
+  - name: "Open"
 type: software
 license: CC-BY-4.0
-version: 1.2.0
-date-released: "2026-08-27"
 repository-code: "https://github.com/bigjokker/galois-fp"
-doi: 10.5281/zenodo.22135245
+abstract: >-
+  Certificates for the symmetric Galois group of a prime-degree falling
+  factorial plus one, reduced discriminants, periodic congruence coverage,
+  finite certificate data, and a critical-window theorem for (x)_p+c.
+  The all-prime identification remains a conjecture. This is an unreleased
+  working revision, distinct from the historical archived versions.
+preferred-citation:
+  type: unpublished
+  authors:
+    - name: "Open"
+  title: "Frobenius certificates for the Galois group of x(x-1)...(x-p+1)+1"
+  year: 2026
+  url: "https://github.com/bigjokker/galois-fp"
+  notes: "Working revision, September 2026; specify the Git commit used."
 identifiers:
   - type: doi
     value: 10.5281/zenodo.22135245
-    description: "Concept DOI (all versions)"
+    description: "Historical concept DOI; this revision has not been deposited"
   - type: doi
     value: 10.5281/zenodo.22150227
-    description: "Version 1.2.0"
+    description: "Historical v1.2.0 archive"
   - type: doi
     value: 10.5281/zenodo.22136373
-    description: "Version 1.1.0"
+    description: "Historical v1.1.0 archive"
   - type: doi
     value: 10.5281/zenodo.22135246
-    description: "Version 1.0.0"
+    description: "Historical v1.0.0 archive"
 keywords:
   - Galois theory
-  - symmetric group
+  - Frobenius certificates
   - falling factorial
-  - Frobenius element
-  - Stickelberger's theorem
   - discriminant
-  - permutation groups of prime degree
-  - number theory
+  - symmetric group
+  - prime degree

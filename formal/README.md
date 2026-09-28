@@ -1,66 +1,39 @@
-# Lean formalisation
+# Lean supplement: affine fixed points
 
-Layer-by-layer formalisation of the group theory behind *The Galois group of
-x(x-1)···(x-p+1)+1*. The plan, with the mathlib inventory and the reasoning
-for the layer order, is `../paper/notes/07_lean.md`.
+This supplement covers the affine step of the odd-Frobenius certificate:
+an odd permutation `x -> a*x+b` of `F_p`, with `p` odd prime, has exactly one
+fixed point. Translations have odd order and are even; when `a != 1`, the
+fixed point is `b/(1-a)`.
 
-## Status
+[AGLCycleTypes.lean](Formal/AGLCycleTypes.lean) contains the proof.
+It has no `sorry` placeholders and introduces no custom axioms.
+It does **not** formalize Dedekind, Stickelberger, the classification lemma,
+the arithmetic family, or the full paper.
 
-| Layer | File | State |
-|---|---|---|
-| 2 — `AGL(1,p)` cycle structure | `Formal/AGLCycleTypes.lean` | **complete, builds, no `sorry`** |
-| 1 — Theorem 2, Dedekind + Stickelberger as axioms | — | not started |
-| 3 — Lemma 3 via an axiomatised Guralnick list | — | not started |
-| 4 — the family `f_p` | — | not started |
+The environment is pinned to `leanprover/lean4:v4.34.0-rc2` and mathlib commit
+`8ce5b6b7138056305fda15c8360749f8a6b22c71`, with the transitive dependency
+commits in `lake-manifest.json`. This preserves the recorded development
+baseline; it is not a claim that these are the newest versions.
 
-Layer 2 builds against mathlib master on `leanprover/lean4:v4.34.0-rc2`.
-`#print axioms` on all five results gives only `propext`, `Classical.choice`,
-`Quot.sound` — no `sorryAx`, and no axiom is introduced in this file. So the
-weakening of hypothesis (1) of Theorem 2 is now machine-checked, not prose.
+## Build and inspect
 
-One repair was needed on the first build: `Odd.of_dvd_right` does not exist.
-The fix is better than the original anyway — the order of a translation
-divides the *prime* `p`, so it is `1` or `p`, and both are odd.
+Install [elan](https://github.com/leanprover/elan). From `formal/`:
 
-## Why Layer 2 first
-
-It is the only part of the certificate that is both *original to this note*
-and *free of any classification theorem*. The remark weakening hypothesis (1)
-of Theorem 2 — that an odd element of `AGL(1,p)` has exactly one fixed point,
-so the root count need only differ from `1` — is currently one paragraph of
-prose. Layer 2 is that paragraph, in full.
-
-Layers 1 and 3 need Dedekind, Stickelberger and Guralnick as axioms; Layer 4
-needs the family. Starting there would put the unverifiable parts first.
-
-## Building
-
-Requires a Lean toolchain (`elan`), which pins itself from `lean-toolchain`:
-
-```bash
-curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
-```
-
-Then, from this directory:
-
-```bash
+```sh
 lake exe cache get
-```
-
-```bash
 lake build
+lake env lean Formal/AxiomAudit.lean
 ```
 
-`lake exe cache get` downloads prebuilt mathlib `.olean` files (several GB);
-without it, `lake build` compiles mathlib from source, which takes hours.
+The first command downloads pinned dependencies and a compiled mathlib cache;
+it needs network access and substantial disk space. The toolchain is selected
+by `lean-toolchain`. Source imports and caches stay ignored under `.lake/`.
 
-## The mathematical content, in one paragraph
+[AxiomAudit.lean](Formal/AxiomAudit.lean) prints dependencies of the translation
+and fixed-point results. Check the actual output for proof dependencies;
+standard Lean axioms such as `propext`, `Classical.choice`, and `Quot.sound`
+are distinct from a proof placeholder such as `sorryAx`. Absence of placeholders
+in a file is not a substitute for compiling and inspecting its proofs.
 
-A non-identity element of `AGL(1,p)` is either a translation `x ↦ x + b`,
-whose order divides the odd prime `p` and which is therefore an even
-permutation, or has `a ≠ 1` and then fixes exactly the point `b/(1-a)`. Hence
-an odd element of `AGL(1,p)` fixes exactly one point. Dually, an element whose
-fixed-point count is anything other than `1` is even. Applied to
-`σ = Frob_q` acting on the roots of `f`, this is what rules out the solvable
-case of the certificate, and it shows the hypothesis "`f` has no root in
-`𝔽_q`" can be relaxed to "`f` has a number of roots in `𝔽_q` other than one".
+The optional formal build is separate from `tools/verify.py`. A failed or
+unavailable Lean build must not be reported as a successful formal audit.

@@ -1,109 +1,121 @@
-# The Galois group of x(x−1)···(x−p+1)+1
+# Frobenius certificates for falling factorials
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22135245.svg)](https://doi.org/10.5281/zenodo.22135245)
+**Author: Open.** Working revision, September 2026.
 
-Let p be an odd prime and f_p(x) = x(x−1)···(x−p+1) + 1. This repository
-contains a research note on Gal(f_p/Q), together with the data and standalone
-verification tools for every computational claim in it.
+[Read the paper](galois_fp.pdf) | [TeX source](galois_fp.tex) | [Verification guide](tools/README.md) | [Data](ancillary/README.md)
 
-**Main results.**
+This paper studies `f_p(x) = x(x-1)...(x-p+1) + 1` for odd primes `p`.
+It develops certificates for `Gal(f_p/Q) = S_p`, a periodic discriminant
+calculation, and applications to `(x)_p+c`. The identification for **every**
+odd prime remains a conjecture.
 
-* A general certificate: a monic irreducible of odd prime degree p whose
-  Frobenius at an odd unramified prime q is both odd (Stickelberger) and
-  fixed-point-free has Galois group S_p. The group theory behind it: every
-  transitive nonsolvable subgroup of S_p is S_p or lies inside A_p
-  (CFSG only through Guralnick's theorem).
-* For f_p the fixed-point-free condition is automatic at every q ≤ p, so a
-  single Kronecker symbol (disc f_p / q) = −1 with q < p proves
-  Gal(f_p/Q) = S_p.
-* The symbol is **periodic in p** for fixed q. For q = 3 the period is 36 and
-  the good classes are p ≡ 7, 13, 17, 19, 23, 29 (mod 36): a computer-free
-  proof that Gal(f_p/Q) = S_p on a set of primes of Dirichlet density 1/2.
-  Adding q = 5 (period 600) raises the density to 31/40, and q = 7 to
-  **7117/8064**. The symbols are *not* independent — {3,5} is, {3,7} is not —
-  so the covered density is a joint law, not 1 − prod(1 − eps_q).
-* Exact eps_q **stops at q = 7**: the sharp period is governed by
-  E_q = lcm of the orders of g(beta), which is 4, 48, 5472, 6.3e10, 5.1e13
-  for q = 3, 5, 7, 11, 13. Pi(7) = 134064 is exactly minimal.
-* Gal(f_p/Q) = S_p is verified for **every odd prime p < 10^7** (664,577 of
-  them), each by a witness q ≤ 73 recorded in `ancillary/witnesses.txt`.
-  The least-witness statistics test the *joint* law of the symbols, not just
-  the marginals: they match it to 0.3 sigma and exclude the independence
-  model at 11.8 sigma.
-* A **second certificate needs no classification at all**: if f_p mod q has an
-  isolated irreducible factor of prime degree ℓ in [3, p−3] and Frobenius is
-  odd, then Dedekind and Jordan (1873) alone give S_p. A witness q ≤ 61 exists
-  for every prime p < 1500 (`ancillary/jordan_witnesses.txt`, 236 rows; largest least-witness q = 61 at p = 1301). On that range the
-  identification is free of CFSG, Stickelberger and reciprocity.
-* For the family **(x)_p + c** (p not dividing c) both certificates persist,
-  and a **critical-window theorem** settles every prime p unconditionally:
-  if mu_{m-1} < |c| < mu_{m-2}, where mu_k are the critical magnitudes of
-  phi, then f_{p,c} has exactly two non-real roots and complex conjugation
-  alone gives S_p. The number of such c grows superexponentially in p.
-  c = 1 is hard precisely because it lies below every critical magnitude.
-* What remains open for all p is a covering question: do the periodic good
-  classes, as q varies, cover every prime?
+- An odd Frobenius with a fixed-point count different from one certifies `S_p`
+  in odd prime degree, using classification of transitive groups.
+  Every `q <= p` supplies the no-root condition for this family.
+- Exact congruence coverage has Dirichlet density `1/2` using `q=3`,
+  `31/40` using `q=3,5`, and `7117/8064` using `q=3,5,7`.
+  The last two involve finite enumeration. The three events are dependent.
+- Certificates cover the **664,577 primes `5 <= p < 10^7`**.
+  The special row `(5,19)` uses a quadratic/cubic factorization.
+  The separate cubic discriminant argument handles `p=3`, completing all
+  **664,578 odd primes** below the bound. The largest least smaller-prime
+  witness is `q=73` at `p=9683099`.
+- A classical Jordan and Dedekind certificate, without classification, covers
+  the **236 primes `7 <= p < 1500`**, using witnesses `q <= 61`.
+- For `(x)_p+c`, prime `p >= 5`, `p` not dividing `c`, and
+  `mu_(m-1) < |c| < mu_(m-2)` with `m=(p-1)/2`, exactly two roots are
+  non-real and complex conjugation gives `S_p`. The paper proves a
+  superexponential lower bound on the number of admissible integer constants.
+  The value `c=1` lies below this window.
 
-## Layout
+Finite computations do not prove the all-prime conjecture. Divergent marginal
+densities alone do not prove density-one coverage. Dependencies and open
+questions are stated in the manuscript.
 
-```
-galois_fp.tex / .pdf       the note
-ancillary/                 data: witness list (664,577 rows), exact-discriminant
-                           data for p ≤ 97, good-class tables for q = 3, 5
-NOTES.md                   hypotheses the data suggested that turned out
-                           false, recorded so they are not rediscovered
-tools/                     one self-contained checker per computational claim
-                           (see tools/README.md for the claim ↔ tool map)
-formal/                    Lean 4 formalisation of the AGL(1,p) step
-                           (see formal/README.md); builds, no sorry
-lab/                       work in progress on fibre densities, NOT part of
-                           the paper (see lab/README.md)
+## Reproduce the computations
+
+Use Python 3.11 and run from the repository root:
+
+```sh
+python -m pip install -r requirements.txt
+python tools/verify.py --quick
+python tools/verify.py --full
 ```
 
-## Verify everything
+The pinned dependencies were tested with Python 3.11.9 on Windows.
+Linux and Windows quick checks are configured in CI.
+Quick mode validates complete data coverage and runs deterministic certificate
+samples, independent SymPy comparisons, small group and root-count checks,
+and failure regressions. Full mode additionally checks every main witness
+and its minimality, every Jordan certificate, complete period and joint-class
+computations, discriminants through degree 97, ramification, and all stored
+density counts.
 
-Requires Python 3.9+ and numpy (`verify_group_facts.py` is stdlib-only).
+Expect seconds for quick mode and tens of minutes for full mode; Jordan
+factorizations and the density sweep dominate. Full Jordan checks use up to
+four isolated workers; pass `--jobs 1` to its standalone command for serial execution. Timings, environment, hashes,
+exit codes and logs are saved in `.build/verification/`. Failures return
+nonzero. Run without `python -O` or `PYTHONOPTIMIZE`: several checks use assertions.
+Individual checks and safe data regeneration are described in
+[tools/README.md](tools/README.md). [Data schemas](ancillary/README.md) specify
+populations and the treatment of ramification.
 
+## Build the PDF
+
+Install [Tectonic 0.17.0](https://github.com/tectonic-typesetting/tectonic/releases/tag/tectonic%400.17.0)
+and put it on `PATH`:
+
+```sh
+python tools/build_paper.py
 ```
-cd tools
-python verify_group_facts.py          # finite group facts        (seconds)
-python verify_disc_p97.py             # discriminants, p ≤ 97     (~15 s)
-python verify_classes.py              # periodicity, q = 3 and 5  (seconds)
-python verify_classes.py --full       # full 15600-class check    (~1 min)
-python verify_periodicity.py          # section 6 structure       (~2 min)
-python sweep_eps.py --check           # stored eps_q table        (~30 s)
-python verify_witnesses.py            # witness sample            (seconds)
-python verify_witnesses.py --all      # all 664,577 rows          (~1 min)
-python verify_reduced.py              # reduced vs direct resultant (~5 min)
-python verify_jordan.py               # CFSG-free certificate     (~30 s)
-python verify_jordan.py --all         # every Jordan row
-python verify_window.py               # critical windows, p <= 19  (~1 min)
-python verify_joint357.py             # joint law at q=3,5,7      (~4 min)
-python verify_fibre_orders.py         # periods, E_q, fibre sizes (~5 min)
+
+The PDF and build record are in `.build/paper/`. Use `--update-pdf` to
+replace the repository PDF after a successful build, `--tectonic PATH` for
+an explicit executable, and `--only-cached` with an existing TeX resource cache.
+The first build may download TeX resources. Standard LaTeX can also compile
+this AMS article.
+
+## Contents
+
+```text
+galois_fp.tex / galois_fp.pdf  Paper source and matching working-revision PDF
+ancillary/                   Certificate and measurement data
+tools/                       Verification, regeneration and build commands
+tests/                       Certificate-validation regressions
+formal/                      Optional Lean affine fixed-point lemma
+.github/workflows/           Quick checks, PDF build and manual full audit
+CITATION.cff / .zenodo.json   Citation and prospective archive metadata
+LICENSE / CHANGELOG.md       License notice and revision history
 ```
 
-Every certificate is verifiable row by row, independently of the searches
-that produced the data: each witness row is one resultant and one Legendre
-symbol over F_q.
+The [Lean supplement](formal/README.md) covers only the affine fixed-point
+step. It is not a formalization of the full paper. Its toolchain and mathlib
+commit are pinned, with a separate build and axiom-inspection procedure.
+Exploratory experiments and reference PDFs are outside this publication repository.
 
-## Citation
+## Cite this revision
 
-Archived on Zenodo. Cite the concept DOI to refer to the work in general, or
-the version DOI to pin a specific release.
-
-* All versions: [10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245)
-* v1.2.0: [10.5281/zenodo.22150227](https://doi.org/10.5281/zenodo.22150227)
-* v1.1.0: [10.5281/zenodo.22136373](https://doi.org/10.5281/zenodo.22136373)
-* v1.0.0: [10.5281/zenodo.22135246](https://doi.org/10.5281/zenodo.22135246)
+This is an **unreleased working revision**. Grok's AI-assisted mathematical
+and bibliography review has been incorporated; the paper has not been
+independently refereed. It is not the previously archived v1.2.0. Specify a Git commit when
+citing the working source; `CITATION.cff` supplies the author and title.
 
 ```bibtex
-@misc{galois_fp,
-  title  = {The Galois group of $x(x-1)\cdots(x-p+1)+1$},
-  author = {Claude (Anthropic)},
-  year   = {2026},
-  doi    = {10.5281/zenodo.22135245},
-  url    = {https://github.com/bigjokker/galois-fp}
+@misc{open_frobenius_certificates,
+  author = {Open},
+  title = {Frobenius certificates for the Galois group of
+           x(x-1)...(x-p+1)+1},
+  year = {2026},
+  note = {Working revision; specify the Git commit used},
+  url = {https://github.com/bigjokker/galois-fp}
 }
 ```
 
-Licensed CC BY 4.0.
+Historical identifiers recorded in the project are
+[concept DOI](https://doi.org/10.5281/zenodo.22135245),
+[v1.2.0](https://doi.org/10.5281/zenodo.22150227),
+[v1.1.0](https://doi.org/10.5281/zenodo.22136373), and
+[v1.0.0](https://doi.org/10.5281/zenodo.22135246).
+They are retained as historical references; this local revision has not been
+deposited or assigned a new DOI. Licensed under [CC BY 4.0](LICENSE).
+AI assistance is acknowledged in the paper.

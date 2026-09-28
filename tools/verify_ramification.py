@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the ramification density bound of Section 6.
+"""Verify the ramification density bound of reduced-resultant section.
 
 Claim (Remark, "ramification is rare, and computable").  Write p = m*l + r with
 0 < r < l.  A factor of the product in (1) vanishes exactly when

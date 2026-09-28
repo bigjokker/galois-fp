@@ -1,34 +1,10 @@
 #!/usr/bin/env python3
-"""Verify the period and fibre-subgroup claims of Sections 6 and 7.
+"""Verify finite fibre degrees, multiplicative orders and measured ratios.
 
-Claims checked:
-
-  (a) Pi(7) = 134064 is the EXACT minimal period of (disc f_p / 7) in p:
-      no even divisor of 134064 is a period.  (The collapses Pi(3) = 72 -> 36
-      and Pi(5) = 15600 -> 600 are therefore accidents, not a pattern.)
-
-  (b) D_q = q - 1 for every q >= 5 tested: the part of u_r - m coprime to
-      g = x^q - x attains the maximal degree q - 1.  So it is not the fibre
-      degrees that control the sharp modulus.
-
-  (c) E_q = lcm over all fibres of ord(g(beta)) equals
-      4, 48, 5472, 62716735200, 50777730551520 for q = 3, 5, 7, 11, 13,
-      and the sharp period divides lcm(4, q^2, E_q), with equality at q = 3
-      and index 2 at q = 5 and q = 7.
-
-  (d) The per-fibre ratio rho = log_q(lcm of orders in the fibre) / sum of
-      degrees has the worst / median / best values tabulated in Section 7.
-      In particular the median is below 1/2 (Weil fails on a typical fibre)
-      and the worst tends to 0 (no uniform Bourgain-Glibichuk-Konyagin
-      exponent), while the median stays well above 0 (BGK does apply to
-      most fibres -- the failure is uniformity, not applicability).
-
-  (e) The fibres are strongly correlated: the product of per-fibre orders
-      exceeds E_q by a factor 9 to 48 in the exponent, so the etale-algebra
-      character sum does not split into independent one-variable sums.
-
-Requires sympy (and numpy, via fpcore/reduced).  Runtime a few minutes;
-`--fast` drops q = 13 from (c)-(e) and shortens (a).
+E_q is checked for q=3,5,7,11,13; --fast omits q=13. The refined period
+bound is lcm(4,q^2,q-1,E_q). Full positive/minimal q=7 period verification
+is in verify_periods.py. Finite ratios describe the tested fibres and do
+not prove asymptotic limits or applicability of character-sum theorems.
 """
 import sys
 import os
@@ -119,28 +95,9 @@ def divisors(n):
     return sorted(d)
 
 
-def is_period(q, P, N):
-    n = q + 2 if (q + 2) % 2 else q + 3
-    c = 0
-    while c < N:
-        if n % q and symbol_reduced(n, q) != symbol_reduced(n + P, q):
-            return False
-        n += 2
-        c += 1
-    return True
-
-
 def main():
     fast = "--fast" in sys.argv
     qs = [3, 5, 7, 11] if fast else [3, 5, 7, 11, 13]
-
-    # (a) minimal period at q = 7
-    N = 400 if fast else 1500
-    print(f"(a) minimal period of (disc f_p / 7), among even divisors of 134064")
-    ok = [d for d in divisors(134064) if d % 2 == 0 and is_period(7, d, N)]
-    assert ok == [134064], f"periods found: {ok[:5]}, expected only [134064]"
-    print(f"    only 134064 is a period ({len(divisors(134064))} divisors "
-          f"tested, {N} classes each): Pi(7) is sharp")
 
     # (b)-(e)
     print("(b-e) fibre degrees, orders, ratios")
@@ -175,16 +132,15 @@ def main():
                     f"q={q}: {nm} rho = {got:.4f}, expected {want}"
         # q = 3 is excluded: its only fibres are quadratic, and Remark 2's
         # ceiling 2(q-1) = 4 is half of F_9^*, so rho = log_3(4)/2 = 0.631.
-        # The obstruction is asymptotic, which is why the Section 7 table
-        # starts at q = 5.
+        # These are finite measurements; the comparison starts at q = 5.
         if q >= 5:
             assert md < 0.5, \
                 f"q={q}: median rho = {md:.3f} is not below the Weil threshold"
             assert md > 0.3, \
-                f"q={q}: median rho = {md:.3f}; BGK would not apply either"
+                f"q={q}: median rho = {md:.3f} outside measured range"
 
         if q in SHARP:
-            bound = math.lcm(4, q * q, Eq)
+            bound = math.lcm(4, q * q, q - 1, Eq)
             assert bound % SHARP[q] == 0, f"q={q}: sharp period does not divide the bound"
             idx = bound // SHARP[q]
             assert idx == (1 if q == 3 else 2), \
@@ -193,16 +149,14 @@ def main():
         print(f"    {q:>3} {Dq:>4} {Eq:>18,} {w:>7.3f} {md:>7.3f} {b:>7.3f} "
               f"{logprod / math.log(Eq):>19.1f}")
         # again q = 3 is excluded: it has only two fibres with a nonlinear
-        # part, so there is nothing for them to correlate.  The Section 7
+        # part, so there is nothing for them to correlate.  The historical measurement
         # claim ("a factor 9 to 48") is stated for q = 5, 7, 11, 13.
         if q >= 5:
             assert 9 <= logprod / math.log(Eq) <= 48, \
                 f"q={q}: correlation factor {logprod / math.log(Eq):.1f} " \
                 f"outside the claimed range 9..48"
 
-    print("    median rho < 1/2 for every q >= 5: Weil fails on the typical fibre")
-    print("    median rho > 0.3 for every q >= 5: BGK applies to most fibres; "
-          "only uniformity fails")
+    print("    finite fibre measurements verified; no asymptotic inference")
     print("ALL VERIFIED")
     return 0
 
