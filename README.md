@@ -1,5 +1,7 @@
 # Frobenius certificates for falling factorials
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22135245.svg)](https://doi.org/10.5281/zenodo.22135245)
+
 **Author: Open.** Working revision, September 2026.
 
 [Read the paper](galois_fp.pdf) | [TeX source](galois_fp.tex) | [Verification guide](tools/README.md) | [Data](ancillary/README.md)
