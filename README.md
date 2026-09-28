@@ -95,10 +95,12 @@ Exploratory experiments and reference PDFs are outside this publication reposito
 
 ## Cite this revision
 
-This is an **unreleased working revision**. Grok's AI-assisted mathematical
-and bibliography review has been incorporated; the paper has not been
-independently refereed. It is not the previously archived v1.2.0. Specify a Git commit when
-citing the working source; `CITATION.cff` supplies the author and title.
+**v1.3.0** (September 2026) is the current archived revision. An AI-assisted
+mathematical and bibliography review has been incorporated; the paper has not
+been independently refereed. It supersedes the claims in the archived v1.2.0.
+The concept DOI always resolves to the latest Zenodo version:
+
+[10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245)
 
 ```bibtex
 @misc{open_frobenius_certificates,
@@ -106,16 +108,17 @@ citing the working source; `CITATION.cff` supplies the author and title.
   title = {Frobenius certificates for the Galois group of
            x(x-1)...(x-p+1)+1},
   year = {2026},
-  note = {Working revision; specify the Git commit used},
-  url = {https://github.com/bigjokker/galois-fp}
+  version = {v1.3.0},
+  doi = {10.5281/zenodo.22135245},
+  url = {https://github.com/bigjokker/galois-fp},
+  note = {Concept DOI; resolves to the latest archived version}
 }
 ```
 
-Historical identifiers recorded in the project are
-[concept DOI](https://doi.org/10.5281/zenodo.22135245),
+Earlier version records remain available:
 [v1.2.0](https://doi.org/10.5281/zenodo.22150227),
 [v1.1.0](https://doi.org/10.5281/zenodo.22136373), and
 [v1.0.0](https://doi.org/10.5281/zenodo.22135246).
-They are retained as historical references; this local revision has not been
-deposited or assigned a new DOI. Licensed under [CC BY 4.0](LICENSE).
+Zenodo assigns a separate DOI to v1.3.0 when it archives the GitHub release.
+Licensed under [CC BY 4.0](LICENSE).
 AI assistance is acknowledged in the paper.

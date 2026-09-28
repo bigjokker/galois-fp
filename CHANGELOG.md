@@ -1,6 +1,6 @@
 # Revision history
 
-## Unreleased - September 2026 working revision
+## v1.3.0 - 2026-09-28
 
 - Revise the title, abstract, introduction, author, and paper order;
   separate proved results, finite certificates, and the all-prime conjecture.
@@ -19,5 +19,7 @@
   add Burnside, locate the classical group list, and make the critical-value
   ordering explicit with a uniform ratio bound.
 
-This revision has not been tagged or deposited. Existing archive
-DOIs refer to earlier versions; they do not identify this working revision.
+Archived as GitHub release v1.3.0. The concept DOI
+[10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245) resolves to
+the latest Zenodo version. The records for v1.2.0, v1.1.0, and v1.0.0 remain
+the earlier archives.

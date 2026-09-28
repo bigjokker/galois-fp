@@ -7,6 +7,7 @@
       "name": "Open"
     }
   ],
+  "version": "v1.3.0",
   "license": "cc-by-4.0",
   "description": "<p>A working research paper on f_p(x)=x(x-1)...(x-p+1)+1 for odd primes p. An odd Frobenius with a fixed-point count different from one certifies S_p, using a classification result in prime degree. The no-root condition is automatic at q&lt;p for this family.</p><p>A reduced resultant proves periodicity. Exact congruence coverage has Dirichlet densities 1/2, 31/40, and 7117/8064 using q=3, q=3,5, and q=3,5,7. The joint events are dependent. Explicit certificates cover all 664,577 primes 5&lt;=p&lt;10^7, including a special p=5 factorization; a separate p=3 proof completes all 664,578 odd primes below the bound. Classical Jordan certificates cover the 236 primes 7&lt;=p&lt;1500 without classification.</p><p>For (x)_p+c, prime p&gt;=5, p not dividing c, and |c| strictly between the two smallest critical magnitudes, exactly two roots are non-real and the group is S_p. The paper proves a lower bound for the number of such constants. The all-prime conjecture and limiting coverage remain unresolved. The optional Lean supplement proves only the affine fixed-point step.</p>",
   "keywords": [
@@ -19,5 +20,5 @@
     "permutation groups of prime degree",
     "number theory"
   ],
-  "notes": "Unreleased September 2026 working revision. An AI-assisted mathematical and bibliography review has been incorporated; the paper has not been independently refereed. Companion certificate data and verification tools are in ancillary/ and tools/. No new DOI or archive deposit is implied by this metadata. Historical identifiers are recorded in README.md and CITATION.cff."
+  "notes": "Version v1.3.0, September 2026. An AI-assisted mathematical and bibliography review has been incorporated; the paper has not been independently refereed. This release corrects and supersedes the claims archived as v1.2.0. Companion certificate data and verification tools are in ancillary/ and tools/. The concept DOI 10.5281/zenodo.22135245 resolves to the latest version. Earlier version DOIs are recorded in README.md and CITATION.cff."
 }
