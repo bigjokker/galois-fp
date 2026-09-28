@@ -19,7 +19,8 @@
   add Burnside, locate the classical group list, and make the critical-value
   ordering explicit with a uniform ratio bound.
 
-Archived as GitHub release v1.3.0. The concept DOI
-[10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245) resolves to
-the latest Zenodo version. The records for v1.2.0, v1.1.0, and v1.0.0 remain
-the earlier archives.
+Published as GitHub release v1.3.0. Zenodo has not yet archived that
+release, so the concept DOI
+[10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245) still
+resolves to v1.2.0. The records for v1.2.0, v1.1.0, and v1.0.0 remain the
+earlier archives.

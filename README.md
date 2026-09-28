@@ -95,10 +95,12 @@ Exploratory experiments and reference PDFs are outside this publication reposito
 
 ## Cite this revision
 
-**v1.3.0** (September 2026) is the current archived revision. An AI-assisted
+**v1.3.0** (September 2026) is the current GitHub release. An AI-assisted
 mathematical and bibliography review has been incorporated; the paper has not
-been independently refereed. It supersedes the claims in the archived v1.2.0.
-The concept DOI always resolves to the latest Zenodo version:
+been independently refereed. It supersedes the claims in archived v1.2.0.
+Zenodo archives GitHub releases, not ordinary pushes. The concept DOI still
+resolves to the latest Zenodo version, which remains v1.2.0 until Zenodo
+archives this release:
 
 [10.5281/zenodo.22135245](https://doi.org/10.5281/zenodo.22135245)
 
@@ -119,6 +121,6 @@ Earlier version records remain available:
 [v1.2.0](https://doi.org/10.5281/zenodo.22150227),
 [v1.1.0](https://doi.org/10.5281/zenodo.22136373), and
 [v1.0.0](https://doi.org/10.5281/zenodo.22135246).
-Zenodo assigns a separate DOI to v1.3.0 when it archives the GitHub release.
+Zenodo has not yet archived v1.3.0, so that release does not have its own DOI.
 Licensed under [CC BY 4.0](LICENSE).
 AI assistance is acknowledged in the paper.
